@@ -1,0 +1,7 @@
+company,product_series,model,rated_torque_nm,peak_torque_nm,weight_kg,torque_density_nm_kg,efficiency_pct,backlash_arcsec,lifetime_h,max_input_speed_rpm,source_url,notes
+绿的谐波,CSD,示例型号,50,100,2.5,20,80,30,10000,6000,https://www.leaderdrive.com,待填写
+绿的谐波,人形机器人专用,示例型号,80,160,3.2,25,82,25,12000,6500,,待填写
+Harmonic Drive,CSF,CSF-20,45,90,2.2,20.5,78,30,10000,6500,https://www.harmonicdrive.net,待填写
+来福谐波,LCS,示例型号,40,80,2.1,19,79,35,8000,6000,https://www.laifuxiebo.com,待填写
+Nidec-Shimpo,WPU,示例型号,42,84,2.3,18.3,77,32,9000,6000,https://www.nidec-shimpo.com,待填写
+大族传动,谐波减速器,示例型号,38,76,2.0,19,76,40,8000,5500,,待填写

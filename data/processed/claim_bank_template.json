@@ -1,0 +1,53 @@
+[
+  {
+    "claim_id": "GH_001",
+    "claim_text": "绿的谐波2025年发布的新一代谐波减速器关节模组扭矩密度较上一代提升30%",
+    "subject": "绿的谐波",
+    "product": "新一代谐波减速器关节模组",
+    "metric": "扭矩密度",
+    "value": "+30%",
+    "baseline": "上一代产品",
+    "source_text": "公司2025世界机器人大会发布资料",
+    "source_url": "",
+    "claim_type": "技术性能",
+    "verification_status": "待验证",
+    "confidence": null,
+    "definition_issues": [],
+    "evidence_list": [],
+    "notes": "需要确认：30%是额定扭矩密度还是峰值扭矩密度？质量定义是否一致？"
+  },
+  {
+    "claim_id": "GH_002",
+    "claim_text": "绿的谐波已进入特斯拉Optimus供应链",
+    "subject": "绿的谐波",
+    "product": "谐波减速器",
+    "metric": "客户认证",
+    "value": "特斯拉Optimus",
+    "baseline": "",
+    "source_text": "市场传闻/券商研报",
+    "source_url": "",
+    "claim_type": "客户合作",
+    "verification_status": "待验证",
+    "confidence": null,
+    "definition_issues": [],
+    "evidence_list": [],
+    "notes": "需要官方公告或权威媒体报道验证"
+  },
+  {
+    "claim_id": "GH_003",
+    "claim_text": "绿的谐波2027年谐波减速器年产能将达到100万台",
+    "subject": "绿的谐波",
+    "product": "谐波减速器",
+    "metric": "产能",
+    "value": "100万台/年",
+    "baseline": "当前产能",
+    "source_text": "募投项目公告",
+    "source_url": "",
+    "claim_type": "产能",
+    "verification_status": "待验证",
+    "confidence": null,
+    "definition_issues": [],
+    "evidence_list": [],
+    "notes": "需要确认募投金额、建设进度、达产时间"
+  }
+]
