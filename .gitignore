@@ -1,0 +1,72 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+PIPFILE.lock
+poetry.lock
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets.yaml
+secrets.json
+config.local.yaml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Node
+node_modules/
+package-lock.json
+yarn.lock
+
+# Excel / Office temp files
+~$*
+*.xlk
+
+# Large research materials (teammates should run setup_research_env.bat to download)
+research_materials/papers/*.pdf
+research_materials/github_repos/*/
+!research_materials/github_repos/.gitkeep
+
+# Nested other projects
+hoi4-mod-workbench/
+
+# Logs
+*.log
+logs/
