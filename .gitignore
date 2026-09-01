@@ -70,3 +70,13 @@ hoi4-mod-workbench/
 # Logs
 *.log
 logs/
+
+# Derived text extraction from PDFs (regenerable via src/data_tools/)
+data/raw/**/*.txt
+
+# Intermediate extraction candidates (keep only filled/structured outputs)
+data/processed/*_candidates.csv
+data/processed/*_candidates_filtered.csv
+data/processed/*_param_lines.txt
+data/processed/huandong_patents.csv
+data/processed/huandong_patents.json

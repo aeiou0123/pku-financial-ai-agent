@@ -1,0 +1,278 @@
+{
+  "metadata": {
+    "collection_date": "2026-09-01",
+    "collector": "Claude Code via WebSearch",
+    "note": "本文件汇总三家公司核心专利信息，来源于公开招股说明书、审核问询回复、新闻报道及券商研报。部分专利号需通过 CNIPA 或 Google Patents 二次核对。"
+  },
+  "companies": {
+    "绿的谐波": {
+      "stock_code": "688017.SH",
+      "total_patents_2025": "国内专利216项，其中发明专利62项、实用新型145项、外观设计4项；境外专利6项；软件著作权5项",
+      "core_technology": [
+        "P型齿谐波啮合齿形数学模型",
+        "Y系列全新结构谐波减速器",
+        "自制柔性轴承技术",
+        "密封/轴承一体化设计"
+      ],
+      "patents": [
+        {
+          "patent_no": "ZL201210205955.1",
+          "title": "一种带柔性外轮的谐波减速器",
+          "type": "发明专利",
+          "acquisition": "继受取得",
+          "application_date": "2012-06-21",
+          "relation_to_claim": "整机结构核心专利"
+        },
+        {
+          "patent_no": "ZL201410120010.9",
+          "title": "带U形凹槽键的谐波减速器",
+          "type": "发明专利",
+          "acquisition": "原始取得",
+          "application_date": "2014-03-28",
+          "relation_to_claim": "结构/连接设计"
+        },
+        {
+          "patent_no": "ZL201510357524.0",
+          "title": "一种分离式锥面连接装置",
+          "type": "发明专利",
+          "acquisition": "原始取得",
+          "application_date": "2015-06-25",
+          "relation_to_claim": "装配/连接技术"
+        },
+        {
+          "patent_no": "ZL201610916562.X",
+          "title": "一种电磁离合谐波减速器",
+          "type": "发明专利",
+          "acquisition": "原始取得",
+          "application_date": "2016-10-21",
+          "relation_to_claim": "谐波减速器整机"
+        },
+        {
+          "patent_no": "ZL201610916631.7",
+          "title": "一种视觉引导机器人自动螺纹检测系统",
+          "type": "发明专利",
+          "acquisition": "原始取得",
+          "application_date": "2016-10-21",
+          "relation_to_claim": "检测/工艺"
+        },
+        {
+          "patent_no": "CN109185424B / ZL201821926183.X",
+          "title": "带密封性深沟球轴承的新型谐波减速器",
+          "type": "发明专利",
+          "acquisition": "原始取得",
+          "application_date": "2018-11-21",
+          "relation_to_claim": "轴承密封一体化，提升效率"
+        },
+        {
+          "patent_no": "CN110332229B",
+          "title": "一种复合型密封结构的十字交叉滚子轴承",
+          "type": "发明专利",
+          "acquisition": "原始取得",
+          "application_date": null,
+          "relation_to_claim": "轴承/密封"
+        }
+      ],
+      "search_links": [
+        "https://patents.google.com/?q=%22%E7%BB%BF%E7%9A%84%E8%B0%90%E6%B3%A2%22&language=CHINESE"
+      ]
+    },
+    "环动科技": {
+      "stock_code": "子公司 of 002472.SZ",
+      "total_patents": "截至招股书签署日，累计拥有66项专利权，其中发明专利31项",
+      "core_technology": [
+        "RV减速器摆线针轮设计",
+        "高刚性、高精度摆线针轮行星传动",
+        "谐波减速器波发生器柔性轴承装配"
+      ],
+      "patents": [
+        {
+          "patent_no": "CN2014105944495",
+          "title": "RV减速器传动特性测试系统",
+          "type": "发明专利",
+          "acquisition": "继受取得",
+          "relation_to_claim": "测试/验证"
+        },
+        {
+          "patent_no": "CN201811574284X",
+          "title": "RV减速器力矩与噪音精密测量装置及其方法",
+          "type": "发明专利",
+          "acquisition": "继受取得",
+          "relation_to_claim": "测试/验证"
+        },
+        {
+          "patent_no": "CN2018116361258",
+          "title": "一种RV减速器倾覆刚性测试装置",
+          "type": "发明专利",
+          "acquisition": "继受取得",
+          "relation_to_claim": "测试/验证"
+        },
+        {
+          "patent_no": "CN2021105646091",
+          "title": "一种机器人用摆线针轮减速器滚针安装的内摩擦力测量装置",
+          "type": "发明专利",
+          "acquisition": "原始取得",
+          "relation_to_claim": "测试/验证"
+        },
+        {
+          "patent_no": "CN2018115742407",
+          "title": "一种RV减速器无污染气密性快速测量装置及其方法",
+          "type": "发明专利",
+          "acquisition": "继受取得",
+          "relation_to_claim": "测试/验证"
+        },
+        {
+          "patent_no": "CN2022108263071",
+          "title": "一种摆线针轮行星减速器",
+          "type": "发明专利",
+          "acquisition": "原始取得",
+          "relation_to_claim": "RV减速器结构"
+        },
+        {
+          "patent_no": "CN2021113371885",
+          "title": "一种超低速比高刚性高精度摆线针轮行星传动减速器",
+          "type": "发明专利",
+          "acquisition": "原始取得",
+          "relation_to_claim": "RV减速器结构/性能"
+        },
+        {
+          "patent_no": "CN2021112690811",
+          "title": "一种偏置型行星减速装置",
+          "type": "发明专利",
+          "acquisition": "原始取得",
+          "relation_to_claim": "行星减速装置"
+        },
+        {
+          "patent_no": "CN2022103431259",
+          "title": "一种摆线齿轮齿廓设计方法",
+          "type": "发明专利",
+          "acquisition": "原始取得",
+          "relation_to_claim": "齿形设计"
+        },
+        {
+          "patent_no": "CN2022107515728",
+          "title": "一种降低振动噪声的摆线针轮行星传动装置的制造方法",
+          "type": "发明专利",
+          "acquisition": "原始取得",
+          "relation_to_claim": "制造工艺/噪声"
+        },
+        {
+          "patent_no": "CN2022107515249",
+          "title": "一种降低效率损失的摆线轮针轮行星传动装置及其制造方法",
+          "type": "发明专利",
+          "acquisition": "原始取得",
+          "relation_to_claim": "效率/制造工艺"
+        },
+        {
+          "patent_no": "CN2018114944219",
+          "title": "一种行星减速装置",
+          "type": "发明专利",
+          "acquisition": "继受取得",
+          "relation_to_claim": "行星减速装置"
+        },
+        {
+          "patent_no": "CN2018115753079",
+          "title": "谐波用波发生器柔性轴承精密装配工装及方法",
+          "type": "发明专利",
+          "acquisition": "继受取得",
+          "relation_to_claim": "谐波减速器装配"
+        },
+        {
+          "patent_no": "CN2018115564293",
+          "title": "一种强制油润滑的谐波减速器及其方法",
+          "type": "发明专利",
+          "acquisition": "继受取得",
+          "relation_to_claim": "谐波减速器润滑"
+        },
+        {
+          "patent_no": "CN2018115254155",
+          "title": "一种紧凑型摆线行星谐波变速装置及其变速方法",
+          "type": "发明专利",
+          "acquisition": "继受取得",
+          "relation_to_claim": "谐波/摆线复合结构"
+        }
+      ],
+      "search_links": [
+        "https://patents.google.com/?q=%22%E7%8E%AF%E5%8A%A8%E7%A7%91%E6%8A%80%22%20RV%E5%87%8F%E9%80%9F%E5%99%A8&language=CHINESE"
+      ]
+    },
+    "步科股份": {
+      "stock_code": "688160.SH",
+      "total_patents": "官网显示在中国拥有17项专利技术（未区分类型）；公开检索以实用新型为主",
+      "core_technology": [
+        "无框灌封工艺",
+        "FMC/FMK系列无框力矩电机",
+        "伺服电机定转子工艺"
+      ],
+      "note": "公开检索未找到步科股份名下以‘无框力矩电机’为主题的明确发明专利号。以下为其子公司常州精纳与无框电机/伺服电机相关的实用新型专利，核心发明专利需进一步通过 CNIPA 或公司招股书核对。",
+      "patents": [
+        {
+          "patent_no": "ZL201821789084.5",
+          "title": "一种无框电机测试设备",
+          "type": "实用新型",
+          "holder": "常州精纳",
+          "application_date": "2018-10-31",
+          "relation_to_claim": "测试设备"
+        },
+        {
+          "patent_no": "ZL201821789207.1",
+          "title": "一种电机热套防歪/防重装置",
+          "type": "实用新型",
+          "holder": "常州精纳",
+          "application_date": "2018-10-31",
+          "relation_to_claim": "装配工艺"
+        },
+        {
+          "patent_no": "ZL201821721561.0",
+          "title": "伺服电机定子铁芯激光焊接工装",
+          "type": "实用新型",
+          "holder": "常州精纳",
+          "application_date": "2018-10-23",
+          "relation_to_claim": "定子工艺"
+        },
+        {
+          "patent_no": "ZL201821721895.8",
+          "title": "一种伺服电机用转子组件",
+          "type": "实用新型",
+          "holder": "常州精纳",
+          "application_date": "2018-10-23",
+          "relation_to_claim": "转子结构"
+        },
+        {
+          "patent_no": "ZL201821789266.9",
+          "title": "伺服电机转子纤维缠绕装置",
+          "type": "实用新型",
+          "holder": "常州精纳",
+          "application_date": "2018-10-31",
+          "relation_to_claim": "转子工艺"
+        },
+        {
+          "patent_no": "ZL201821789046.6",
+          "title": "伺服电机快速……设备",
+          "type": "实用新型",
+          "holder": "常州精纳",
+          "application_date": "2018-10-31",
+          "relation_to_claim": "工艺设备（名称待核对）"
+        },
+        {
+          "patent_no": "ZL201821730676.6",
+          "title": "伺服电机无工装错位转子铁芯",
+          "type": "实用新型",
+          "holder": "常州精纳",
+          "application_date": "2018-10-23",
+          "relation_to_claim": "转子结构"
+        },
+        {
+          "patent_no": "ZL201821789209.0",
+          "title": "伺服电机轴承压装工装",
+          "type": "实用新型",
+          "holder": "常州精纳",
+          "application_date": "2018-10-31",
+          "relation_to_claim": "装配工艺"
+        }
+      ],
+      "search_links": [
+        "https://patents.google.com/?q=%22%E6%AD%A5%E7%A7%91%E8%82%A1%E4%BB%BD%22%20%E6%97%A0%E6%A1%86%E5%8A%9B%E7%9F%A9%E7%94%B5%E6%9C%BA&language=CHINESE"
+      ]
+    }
+  }
+}
