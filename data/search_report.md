@@ -135,13 +135,57 @@
 
 ---
 
-## 五、下一步建议
+## 六、已完成替代方案（2026-09-01）
 
-1. ** datasheet**：团队手动访问绿的谐波官网、步科股份资料下载中心、环动科技官网，获取官方 PDF
-2. **专利**：从环动科技招股书中提取专利清单；用 Google Patents 手动搜索三家公司专利
-3. **Claim 素材**：从已下载的年报/研报中提取技术性能、产能、客户类 claim
+由于 PDF 中文字体编码问题，无法直接用 pdfplumber/PyMuPDF 提取环动科技招股书文字，因此采用以下替代路径：
+
+### 6.1 专利数据
+
+- 通过 WebSearch 整理三家公司核心专利：
+  - 绿的谐波：7 项核心发明专利（含 P 型齿、Y 系列、密封轴承等）
+  - 环动科技：15 项 RV/谐波减速器相关发明专利
+  - 步科股份：8 项常州精纳无框/伺服电机实用新型专利（核心发明专利待核对）
+- 输出文件：
+  - [`data/processed/patent_collection.json`](data/processed/patent_collection.json)
+  - [`data/processed/patent_collection.csv`](data/processed/patent_collection.csv)
+
+### 6.2 产品参数
+
+- 从国金证券《从人形机器人关节设计看待减速器投资机会》提取到：
+  - 绿的谐波 LHS-32：额定扭矩 51–130 Nm，重量 2.5 kg
+  - 双环传动 SHPR-20E：额定扭矩 110–231 Nm，重量 4.7 kg
+  - 纳博特斯克 RV-20E：额定扭矩 412 Nm，重量 2.5 kg
+- WebSearch 补充绿的谐波 LCS-20-100-C-I 与哈默纳科 CSF-20 对比参数
+- 步科 FMK 系列 10 个型号参数已整理（缺重量/扭矩密度）
+- 输出文件：
+  - [`data/processed/parameter_table_filled.csv`](data/processed/parameter_table_filled.csv)
+  - [`data/processed/parameter_table_template.csv`](data/processed/parameter_table_template.csv)
+
+### 6.3 Claim 素材
+
+- 自动扫描 18 份 txt 报告，生成 421 条候选 claim，人工筛选出 18 条：
+  - 绿的谐波 7 条（技术性能 3、产能/需求 2、财务 2）
+  - 步科股份 5 条（技术性能 1、产能/需求 1、客户 1、财务 2）
+  - 双环传动/环动科技 5 条（技术性能 1、产能/需求 2、客户 1、财务 1）
+  - 行业基准 1 条
+- 输出文件：
+  - [`data/processed/claim_bank_filled.json`](data/processed/claim_bank_filled.json)
+  - [`data/processed/claim_bank_template.json`](data/processed/claim_bank_template.json)
+
+### 6.4 行业与竞争数据
+
+- 整理工业机器人销量、减速器需求量、国产化率、市占率等数据
+- 输出文件：
+  - [`data/processed/industry_data_summary.csv`](data/processed/industry_data_summary.csv)
+  - [`data/processed/competitor_market_share.csv`](data/processed/competitor_market_share.csv)
+
+## 七、仍建议手动补充的资料
+
+1. **官方 datasheet**：绿的谐波 LCS/LHS/Y 系列、步科 FMK 完整选型手册、环动科技 RV 减速器样本
+2. **步科核心发明专利**：目前公开检索以实用新型为主，需通过 CNIPA/Google Patents 或招股书核对发明专利
+3. **重大事项公告**：绿的谐波定增/募投/股权激励、步科/双环客户合作公告
 4. **财务模型输入**：基于年报数据填写 `data/processed/financial_model_inputs_template.csv`
-5. **参数对比表**：基于研报和 FMK 参数表填写 `data/processed/parameter_table_template.csv`
+5. **BOM 表**：基于研报和行业数据填写 `data/processed/bom_template.csv`
 
 ---
 
