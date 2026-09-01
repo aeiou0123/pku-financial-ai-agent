@@ -1,74 +1,102 @@
 # Claim2Value — 北大金融 AI 智能体创新大赛
 
-> 工业技术 → 工程证据 → 金融价值的可信映射 Agent
+> 工业技术 Claim → 工程证据 → 经济机制 → 金融价值的可信映射 Agent
 
 ## 项目定位
 
-Claim2Value（Industrial-Tech-to-Finance Agent）面向“产业链技术突破的金融价值评估”场景：把企业/行业关于技术升级、产能扩张、供应链重构的**宣称（Claim）**，通过多源证据（专利、财报、供应链、研报、专家访谈）进行**验证与追溯**，最终输出**可审计、可量化、可复盘**的财务影响分析（DCF / 弹性模型 / 风险传播模型）。
+Claim2Value（Evidence-Grounded Engineering-to-Finance Agent）面向产业链技术突破的金融价值评估：把企业关于技术升级、产能扩张、供应链重构的**宣称（Claim）**，通过多源证据进行**验证与追溯**，输出**可审计、可量化、可复盘**的财务影响分析。
+
+**本次 Demo 聚焦**：机器人关节模组产业链  
+**主案例**：绿的谐波（谐波减速器）  
+**辅助案例**：步科股份（无框力矩电机）、双环传动（RV 减速器）
+
+> 产品不是专用工具，而是通用 Agent。三个案例分别验证**技术性能、产能需求、客户订单**三类典型 claim。
 
 ## 参赛方向
 
 - **赛道一（金融智能体创新应用）**：Claim2Value Agent 的工作流创新
-- **赛道二（量化策略与智能体）**：技术事件驱动的基本面量化/因子挖掘
-- **赛道三（金融行业场景落地）**：聚焦机器人关节减速器 / 绿的谐波等工业场景
+- **赛道二（量化策略与智能体）**：技术事件驱动的基本面分析
+- **赛道三（金融行业场景落地）**：聚焦机器人关节产业链场景
 
 ## 目录结构
 
 ```
 .
-├── README.md                                    # 本文件
-├── 北大金融AI智能体大赛_团队讨论记录.md          # 团队讨论与项目方向
-├── 北大金融AI智能体大赛_核心成员能力画像与项目定位修正版.md
-├── research_materials/
-│   ├── README.md                                # 资料导航
-│   ├── notes/
-│   │   ├── data_sources_and_config.md           # 数据源、API、模型配置
-│   │   └── feasibility_analysis_and_plan.md     # 可行性分析与 14 天执行计划
-│   ├── papers/
-│   │   └── bibliography.md                      # 论文元数据、摘要、链接
-│   └── github_repos/
-│       └── github_reference_notes.md            # 参考 GitHub 项目笔记
-├── setup_research_env.bat                       # 一键下载论文 + 参考仓库
-└── .gitignore
+├── README.md
+├── requirements.txt                  # Python 依赖（待补充）
+├── app.py                            # Streamlit/Gradio Demo
+├── src/                              # 核心代码
+│   ├── case.py                       # 通用案例抽象层
+│   ├── claim_extractor.py            # Claim 提取
+│   ├── evidence_retriever.py         # 证据检索
+│   ├── evidence_ledger.py            # 证据账本
+│   ├── claim_verifier.py             # Claim 验证
+│   ├── engineering_analyzer.py       # 工程分析
+│   ├── economic_mapper.py            # 经济机制映射
+│   ├── financial_model.py            # 财务模型
+│   ├── causal_critic.py              # 因果批判
+│   ├── state_verifier.py             # 状态验证
+│   └── workflow.py                   # LangGraph workflow
+├── data/                             # 数据资料
+│   ├── README.md                     # 数据目录说明
+│   ├── collection_checklist.md       # 数据收集总清单
+│   ├── search_guide.md               # 案例搜索方案
+│   ├── raw/                          # 原始 PDF/资料
+│   └── processed/                    # 结构化数据
+├── benchmarks/                       # 测试基准
+├── tests/                            # 单元测试
+├── notebooks/                        # 分析笔记本
+├── research_materials/               # 研究资料
+│   ├── papers/                       # arXiv 论文（gitignored）
+│   ├── github_repos/                 # 参考仓库（gitignored）
+│   └── notes/                        # 研究笔记
+├── setup_research_env.bat            # 一键下载论文+参考仓库
+└── 北大金融AI智能体大赛_*.md        # 团队讨论记录
 ```
 
 ## 团队快速开始
 
-### 1. Clone 本仓库
+### 1. Clone 仓库
 
 ```bash
-git clone https://github.com/aeiou0123/<仓库名>.git
-cd <仓库名>
+git clone https://github.com/aeiou0123/pku-financial-ai-agent.git
+cd pku-financial-ai-agent
 ```
 
 ### 2. 下载研究资料
 
-双击运行 `setup_research_env.bat`，会自动：
-- 克隆 12 个参考 GitHub 仓库到 `research_materials/github_repos/`
-- 下载 12 篇 arXiv 论文到 `research_materials/papers/`
-
-> 论文和参考仓库体积较大，已加入 `.gitignore`，不进入主仓库。
+双击运行 `setup_research_env.bat`，自动下载：
+- 12 篇 arXiv 论文 → `research_materials/papers/`
+- 12 个参考 GitHub 仓库 → `research_materials/github_repos/`
 
 ### 3. 阅读核心文档
 
-按这个顺序：
-1. `research_materials/notes/feasibility_analysis_and_plan.md` —— 整体计划与分工
-2. `research_materials/notes/data_sources_and_config.md` —— 数据源与配置
-3. `research_materials/papers/bibliography.md` —— 文献库
-4. `research_materials/github_repos/github_reference_notes.md` —— 参考项目笔记
+1. `data/search_guide.md` —— 案例搜索方案
+2. `data/collection_checklist.md` —— 数据收集清单
+3. `research_materials/notes/feasibility_analysis_and_plan.md` —— 执行计划
+4. `src/case.py` —— 通用案例抽象层
+
+## 案例设计
+
+| 公司 | 代码 | 细分 | 核心 Claim | 验证能力 |
+|---|---|---|---|---|
+| 绿的谐波 | 688017 | 谐波减速器 | 新一代关节模组扭矩密度提升 30% | 技术性能 claim |
+| 步科股份 | 688160 | 无框力矩电机 | 第四代 FMK 功率密度提升 20%，出货 8.3 万台（+247%） | 产能/需求 claim |
+| 双环传动 | 002472 | RV 减速器 | RV 扭矩密度 180 N·m/kg，获特斯拉 4000 套订单 | 客户/订单 claim |
 
 ## 协作规范
 
-- **分支**：每人从 `main` 切出自己的分支，例如 `feat/claim-extractor`、`feat/evidence-ledger`
-- **提交**：小步提交，commit message 用中文或英文均可，但要写清楚做了什么
-- **合并**：功能完成后通过 Pull Request 合并到 `main`，不要直接 push
+- **分支**：每人从 `main` 切出功能分支，如 `feat/claim-extractor`
+- **提交**：小步提交，写清楚 commit message
+- **合并**：通过 Pull Request 合并，不要直接 push
 - **不提交**：API key、`.env`、PDF、第三方仓库、Python 缓存
 
-## 核心成员分工
+## 当前任务
 
-详见 `北大金融AI智能体大赛_核心成员能力画像与项目定位修正版.md`。
+见 `data/collection_checklist.md` 中的 48 小时数据目标。
 
 ## 注意事项
 
 - 本仓库仅用于比赛协作学习，不构成投资建议。
-- 第三方代码请遵守各自 LICENSE，比赛作品中明确标注引用来源。
+- 第三方代码请遵守各自 LICENSE。
+- 所有外部数据需标注来源，避免使用未公开内部信息。
