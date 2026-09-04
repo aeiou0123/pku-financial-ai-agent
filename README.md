@@ -86,10 +86,74 @@ cd pku-financial-ai-agent
 
 ## 协作规范
 
-- **分支**：每人从 `main` 切出功能分支，如 `feat/claim-extractor`
-- **提交**：小步提交，写清楚 commit message
-- **合并**：通过 Pull Request 合并，不要直接 push
-- **不提交**：API key、`.env`、PDF、第三方仓库、Python 缓存
+### 团队成员
+
+| GitHub 账号 | 姓名 | 角色 |
+|---|---|---|
+| `aeiou0123` | （仓库所有者） | 项目主导、数据收集、Agent 开发 |
+| `shushuyang231` | Sun Shengyao | 协作者（write 权限） |
+
+### 首次加入（shushuyang231 请按此操作）
+
+1. **接受邀请**：打开 https://github.com/aeiou0123/pku-financial-ai-agent/invitations ，点击 Accept
+   （邀请邮件也可能发到你的 GitHub 注册邮箱，主题含 "You've been invited to collaborate"）
+2. **配置 Git 身份**（如果还没配置过）：
+   ```bash
+   git config --global user.name "你的名字"
+   git config --global user.email "你的GitHub注册邮箱"
+   ```
+3. **克隆仓库**：
+   ```bash
+   git clone https://github.com/aeiou0123/pku-financial-ai-agent.git
+   cd pku-financial-ai-agent
+   ```
+4. 开始工作前，养成习惯先拉取最新代码：
+   ```bash
+   git pull origin main
+   ```
+
+### 日常协作流程（小团队实用版）
+
+我们团队人少，采用**轻量流程**：文档/数据更新可直接推 main，代码功能建议走分支。
+
+**场景 A：改文档、补数据（直接推 main）**
+```bash
+git pull origin main          # 先同步
+# ... 修改文件 ...
+git add .
+git commit -m "docs: 修改说明"
+git push origin main
+```
+
+**场景 B：开发代码功能（走分支 + PR）**
+```bash
+git checkout -b feat/功能名    # 从 main 切分支
+# ... 写代码，多次小提交 ...
+git push -u origin feat/功能名
+gh pr create                  # 发起 Pull Request（可选）
+```
+
+**冲突避免铁律**：每次开工前 `git pull`，推不上去时先 pull 再推。
+
+### Commit Message 规范
+
+```
+type: 简短说明
+
+type 取值：
+- feat   新功能
+- fix    修复 bug
+- docs   文档
+- data   数据文件
+- test   测试
+- refactor 重构
+```
+
+### 不提交的内容
+
+API key、`.env`、`*.pdf`（研究报告类）、第三方仓库代码、Python 缓存（`__pycache__/`）
+
+> 注意：公司公告/研报 PDF 在 `data/raw/` 下是**要提交**的，它们有 `.meta.json` 记录来源。
 
 ## 当前任务
 
