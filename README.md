@@ -92,8 +92,9 @@ cd pku-financial-ai-agent
 |---|---|---|
 | `aeiou0123` | （仓库所有者） | 项目主导、数据收集、Agent 开发 |
 | `shushuyang231` | Sun Shengyao | 协作者（write 权限） |
+| `FeishengLuo` | Feisheng Luo | 协作者（write 权限） |
 
-### 首次加入（shushuyang231 请按此操作）
+### 首次加入（新协作者请按此操作）
 
 1. **接受邀请**：打开 https://github.com/aeiou0123/pku-financial-ai-agent/invitations ，点击 Accept
    （邀请邮件也可能发到你的 GitHub 注册邮箱，主题含 "You've been invited to collaborate"）
