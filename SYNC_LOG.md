@@ -10,6 +10,7 @@
 
 | 日期 | 提交哈希 | 类型 | 一句话说明 | 推送状态 |
 |---|---|---|---|---|
+| 2026-09-04 | `360f68c` | benchmark | Claim 验证 benchmark 全套：mutation 考卷 98 用例 + 双模型评估 + Oracle 自我修正 + 判别力报告 | ✅ 已推送 |
 | 2026-09-01 | `1b13e10` | team | 新增协作者 FeishengLuo（write 权限），团队表更新为 3 人 | ✅ 已推送 |
 | 2026-09-01 | `026afca` | team | 新增协作者 shushuyang231（write 权限）+ 更新 README 协作指南 | ✅ 已推送 |
 | 2026-08-30 | `0e72f01` | init | 项目初始化：README、TODO、研究报告、setup 脚本 | ✅ 已推送 |
@@ -21,6 +22,94 @@
 ---
 
 ## 各次同步明细
+
+### 2026-09-04 `360f68c` benchmark: Claim 验证 benchmark 框架（孙圣尧）
+
+这是**代码层的第一次实质提交**。此前仓库只有数据，没有任何可执行代码；本次建立了
+「用 mutation testing 检验 claim verifier 判别力」的完整评测链路。
+
+**新增目录 `benchmarks/`（9 个文件）：**
+
+| 文件 | 说明 |
+|---|---|
+| `mutate.py` | 6 类扰动生成器：19 条真实 claim → 98 个测试用例 |
+| `fix_oracle.py` | Oracle 修正：从参数表提取真实数值注入 evidence，修正 expected_verdict |
+| `evaluate.py` | LLM-as-judge 评估器：多模型对比、断点续传、超时不计失败 |
+| `report.py` | 报告生成器：判别准确率、按扰动类型分解、失败模式拆解、v1/v2 对比 |
+| `claim_verification.json` | 原始考卷（98 用例） |
+| `claim_verification_v2.json` | Oracle 修正后考卷（推荐用这份） |
+| `report.md` | **判别力评估报告，可直接用于比赛材料** |
+| `results/evaluation_results_v1.jsonl` | 首轮评估结果（69 用例，修正前，作为对照） |
+| `results/evaluation_results_v2.jsonl` | 扩充后双模型评估原始数据（196 次调用） |
+
+#### 核心结果（98 用例 × 2 模型）
+
+| 指标 | claude-sonnet-5 | gpt-5.5 |
+|---|---|---|
+| 判别准确率 | 62.5% | 65.3% |
+| 被骗过（太轻信） | 17 | 17 |
+| 过度拒答（太保守） | 3 | 5 |
+| 错且自信率 | 35% | 35% |
+
+按扰动类型的判别准确率：
+
+| 扰动类型 | sonnet5 | gpt5.5 | 判断 |
+|---|---|---|---|
+| 证据缺失 | 100% (19题) | 100% (19题) | 诚实性满分 |
+| 数值篡改 | 93% (15题) | 88% (16题) | 较强 |
+| 来源降级 | 71% (17题) | 59% (17题) | 中等 |
+| 时间错位 | 70% (10题) | 70% (10题) | 中等 |
+| 限定词删除 | 32% (19题) | 42% (19题) | **系统性盲区** |
+| 口径偷换 | 12% (16题) | 35% (17题) | **系统性盲区** |
+
+#### 三个可直接用于比赛材料的结论
+
+1. **当前最强 LLM 做金融 claim 验证仍不可靠**：能抓明显的假（数值篡改 93%）、
+   能在无证据时拒答（100%），但对**精细的假**几乎无抵抗力——口径偷换只有 12-35%，
+   限定词删除只有 32-42%。
+2. **失败模式以「被骗过」为主而非「过度拒答」**：两个模型各被骗过 17 条，
+   过度拒答仅 3-5 条。模型偏轻信，且判错时置信度仍很高（错且自信率 35%）。
+3. **「口径偷换」是最危险的盲区**：模型分不清额定扭矩/峰值扭矩、毛利率/净利率、
+   归母净利润/扣非净利润。这在金融场景会导致估值量级错误——
+   这正是 Claim2Value 需要独立验证层的理由。
+
+#### Oracle 自我修正（方法论亮点）
+
+首轮评估发现 benchmark 自身的 oracle 存在缺陷：部分用例的 expected_verdict
+假设了模型不可见的证据（只给来源名未给原始数值），导致模型合理拒答被误判为 miss。
+修正后过度拒答从 11-12 条降到 3-5 条。
+
+**这是 Oracle Mutation Testing 方法论的自我应验——benchmark 的评判标准本身也需要被验证。**
+建议在项目书中作为「评测可信度」的论据展示。
+
+#### 给队友的使用方式
+
+- **Chen Luodi**：`claim_verification_v2.json` 可直接当 verifier 模块的验收考卷。
+  跑法：`python benchmarks/evaluate.py --cases benchmarks/claim_verification_v2.json --models <你的verifier>`
+  分数就是代码质量的客观度量，不用等人工评审。
+- **西交经济/金融成员**：`report.md` 里的数字是「落地价值 40%」的弹药，
+  尤其是口径偷换 12-35% 这条——建议配一个真实的财务口径混淆导致估值错误的案例。
+- **电气/机械成员**：请核对工程类用例（额定/峰值扭矩、扭矩密度、LHS-32/SHPR-20E 参数）
+  的 expected_verdict 是否符合工程常识。你们是 ground truth 的裁判。
+
+#### 运行方式
+
+```bash
+# 1. 生成考卷（不需要 API）
+python benchmarks/mutate.py          # 19 claim -> 98 用例
+python benchmarks/fix_oracle.py      # 注入真实参数，修正 oracle
+
+# 2. 跑评估（需要 Prism 网关 key）
+python benchmarks/evaluate.py --models claude-sonnet-5 gpt-5.5
+
+# 3. 出报告（不需要 API）
+python benchmarks/report.py
+```
+
+**注意**：`evaluate.py` 不硬编码任何 API key，运行时从 `~/.workbuddy/models.json`
+或工作区 `prism_config.json` 读取。**密钥不入库**，请勿提交带 key 的配置文件。
+
+---
 
 ### 2026-09-01 `cbff862` docs: 更新清单与搜索报告
 
