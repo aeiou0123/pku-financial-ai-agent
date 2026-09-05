@@ -6,10 +6,46 @@
 
 ---
 
+## 当前工作区同步记录（2026-09-05，待提交）
+
+本次由 Chen Luodi 基于 `main` 的 `42a2e3b` 完成项目状态审计和说明文件同步。工作区开始时与 `origin/main` 一致；本次没有执行 `git commit` 或 `git push`。
+
+### 审计结论
+
+- benchmark、四个核心验证模块和 pipeline 结果已经进入 `main`，可以开始绿的谐波简化财务模型、本地可复现 Demo，以及 StateVerifier 的误判修复。
+- pipeline 的 Claude 83.7%、GPT 82.7% 是 98 个 benchmark 用例上的规则层 + LLM 判别准确率，不应表述为真实业务最终准确率。
+- 财务模型必须区分历史披露数据、人工假设和模型计算结果；首版 Demo 只覆盖绿的谐波单案例和本地 fixture。
+- 官方 datasheet、专利复核、Claim evidence 回填和实时检索属于后续证据增强任务，不阻塞首版 Demo，但不能被标记为已完成。
+
+### 本次修改
+
+- 更新 `README.md`、`data/README.md`、`research_materials/README.md`：同步当前阶段、运行边界和数据事实。
+- 重写 `TODO.md`：以 P0/P1/P2 划分财务模型、Demo、可靠性回归、工程/经济扩展和证据增强任务，并补充验收标准。
+- 更新 `data/collection_checklist.md`、`data/search_guide.md`、`data/search_report.md`：区分已完成资料、待人工补充资料与当前不阻塞项。
+- 更新 `research_materials/notes/feasibility_analysis_and_plan.md`：保留早期研究规划，同时附加当前执行基线，避免过期日期被当作现状。
+- 在仓库外的 `杂项/pku_fin_ai_local.md` 记录本次审计、修改范围、验证结果和未推送状态；该文件不加入项目仓库。
+
+### 后续提交建议
+
+将本次说明文件变更单独作为文档 commit；财务模型、Demo、fixture 和测试分别提交，便于协作审阅和回滚。提交前更新本节的“待提交”状态和实际 commit hash。
+
+### 2026-09-05 开发更新（待提交）
+
+- 新增 `src/financial_model.py`：带来源和输入类型隔离的绿的谐波简化财务模型，输出三情景 DCF 原型。
+- 新增 `data/processed/green_harmonic_model_inputs.csv`、`local_demo_fixture.json` 及模型运行结果文件。
+- 新增 `app.py`：默认无 API 的本地单案例 Demo；规则层无法确定时保守返回 `abstain`。
+- 新增 `tests/`、`requirements.txt`，当前 `unittest` 9 项测试通过。
+- 基准运行结果：base EV `6.0056 bn CNY`、2027 revenue `4.6250 bn CNY`、2027 FCF `0.4703 bn CNY`；这些是原型假设下的计算结果，不是披露事实或投资建议。
+- 已运行：compileall、4 项 unittest、模型 CLI、Demo CLI；均通过。尚未 commit/push。
+
+---
+
 ## 同步总览表
 
 | 日期 | 提交哈希 | 类型 | 一句话说明 | 推送状态 |
 |---|---|---|---|---|
+| 2026-09-05 | 待提交 | feat/test | Feisheng：绿的谐波简化财务模型、本地无 API Demo、模型输入 fixture、结果文件和 4 项回归测试 | ⏳ 工作区修改，未提交 |
+| 2026-09-05 | 待提交 | docs | Feisheng：审计 benchmark/验证引擎/pipeline，确认进入财务模型与本地 Demo 阶段，并同步项目说明文件 | ⏳ 工作区修改，未提交 |
 | 2026-09-05 | `cbc0f1d` | feat | 核心验证引擎：state_verifier + evidence_ledger + claim_verifier + workflow + pipeline 评估报告 | ✅ 已推送 |
 | 2026-09-04 | `360f68c` | benchmark | Claim 验证 benchmark 全套：mutation 考卷 98 用例 + 双模型评估 + Oracle 自我修正 + 判别力报告 | ✅ 已推送 |
 | 2026-09-01 | `1b13e10` | team | 新增协作者 FeishengLuo（write 权限），团队表更新为 3 人 | ✅ 已推送 |

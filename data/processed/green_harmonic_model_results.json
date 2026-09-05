@@ -1,0 +1,320 @@
+{
+  "base": {
+    "model_name": "green_harmonic_simplified_financial_model",
+    "model_status": "prototype_scenario_not_investment_recommendation",
+    "scenario": "base",
+    "currency": "bn_cny",
+    "years": [
+      2025,
+      2026,
+      2027
+    ],
+    "scenario_settings": {
+      "volume_multiplier": 1.0,
+      "asp_multiplier": 1.0,
+      "unit_cost_multiplier": 1.0,
+      "opex_multiplier": 1.0
+    },
+    "projections": [
+      {
+        "year": 2025,
+        "harmonic_units_wan": 130.0,
+        "joint_units_wan": 20.0,
+        "harmonic_revenue_bn": 1.495,
+        "joint_revenue_bn": 0.48,
+        "revenue_bn": 1.975,
+        "harmonic_cogs_bn": 0.754,
+        "joint_cogs_bn": 0.29,
+        "cogs_bn": 1.044,
+        "gross_profit_bn": 0.931,
+        "gross_margin": 0.47139241,
+        "opex_bn": 0.41475,
+        "ebitda_bn": 0.51625,
+        "ebitda_margin": 0.26139241,
+        "depreciation_bn": 0.05925,
+        "ebit_bn": 0.457,
+        "tax_bn": 0.11425,
+        "capex_bn": 0.1185,
+        "change_nwc_bn": 0.09875,
+        "fcf_bn": 0.18475
+      },
+      {
+        "year": 2026,
+        "harmonic_units_wan": 180.0,
+        "joint_units_wan": 50.0,
+        "harmonic_revenue_bn": 1.98,
+        "joint_revenue_bn": 1.1,
+        "revenue_bn": 3.08,
+        "harmonic_cogs_bn": 1.008,
+        "joint_cogs_bn": 0.675,
+        "cogs_bn": 1.683,
+        "gross_profit_bn": 1.397,
+        "gross_margin": 0.45357143,
+        "opex_bn": 0.6468,
+        "ebitda_bn": 0.7502,
+        "ebitda_margin": 0.24357143,
+        "depreciation_bn": 0.0924,
+        "ebit_bn": 0.6578,
+        "tax_bn": 0.16445,
+        "capex_bn": 0.1848,
+        "change_nwc_bn": 0.05525,
+        "fcf_bn": 0.3457
+      },
+      {
+        "year": 2027,
+        "harmonic_units_wan": 250.0,
+        "joint_units_wan": 100.0,
+        "harmonic_revenue_bn": 2.625,
+        "joint_revenue_bn": 2.0,
+        "revenue_bn": 4.625,
+        "harmonic_cogs_bn": 1.35,
+        "joint_cogs_bn": 1.25,
+        "cogs_bn": 2.6,
+        "gross_profit_bn": 2.025,
+        "gross_margin": 0.43783784,
+        "opex_bn": 0.97125,
+        "ebitda_bn": 1.05375,
+        "ebitda_margin": 0.22783784,
+        "depreciation_bn": 0.13875,
+        "ebit_bn": 0.915,
+        "tax_bn": 0.22875,
+        "capex_bn": 0.2775,
+        "change_nwc_bn": 0.07725,
+        "fcf_bn": 0.47025
+      }
+    ],
+    "valuation": {
+      "discount_rate": 0.1,
+      "terminal_growth_rate": 0.03,
+      "discounted_fcfs_bn": [
+        0.16795455,
+        0.28570248,
+        0.35330579
+      ],
+      "terminal_value_bn": 6.91939286,
+      "discounted_terminal_value_bn": 5.19864227,
+      "enterprise_value_bn": 6.00560508
+    },
+    "traceability": {
+      "input_types": {
+        "historical": 2,
+        "assumption": 41,
+        "calculated": 3
+      },
+      "historical_inputs_used_for_forecast": false,
+      "note": "历史披露锚点与人工假设保留在 Inputs 表；预测结果由本模型计算。"
+    }
+  },
+  "upside": {
+    "model_name": "green_harmonic_simplified_financial_model",
+    "model_status": "prototype_scenario_not_investment_recommendation",
+    "scenario": "upside",
+    "currency": "bn_cny",
+    "years": [
+      2025,
+      2026,
+      2027
+    ],
+    "scenario_settings": {
+      "volume_multiplier": 1.1,
+      "asp_multiplier": 1.03,
+      "unit_cost_multiplier": 0.97,
+      "opex_multiplier": 0.98
+    },
+    "projections": [
+      {
+        "year": 2025,
+        "harmonic_units_wan": 143.0,
+        "joint_units_wan": 22.0,
+        "harmonic_revenue_bn": 1.693835,
+        "joint_revenue_bn": 0.54384,
+        "revenue_bn": 2.237675,
+        "harmonic_cogs_bn": 0.804518,
+        "joint_cogs_bn": 0.30943,
+        "cogs_bn": 1.113948,
+        "gross_profit_bn": 1.123727,
+        "gross_margin": 0.50218508,
+        "opex_bn": 0.46051351,
+        "ebitda_bn": 0.66321348,
+        "ebitda_margin": 0.29638508,
+        "depreciation_bn": 0.06713025,
+        "ebit_bn": 0.59608323,
+        "tax_bn": 0.14902081,
+        "capex_bn": 0.1342605,
+        "change_nwc_bn": 0.11188375,
+        "fcf_bn": 0.26804843
+      },
+      {
+        "year": 2026,
+        "harmonic_units_wan": 198.0,
+        "joint_units_wan": 55.0,
+        "harmonic_revenue_bn": 2.24334,
+        "joint_revenue_bn": 1.2463,
+        "revenue_bn": 3.48964,
+        "harmonic_cogs_bn": 1.075536,
+        "joint_cogs_bn": 0.720225,
+        "cogs_bn": 1.795761,
+        "gross_profit_bn": 1.693879,
+        "gross_margin": 0.48540222,
+        "opex_bn": 0.71816791,
+        "ebitda_bn": 0.97571109,
+        "ebitda_margin": 0.27960222,
+        "depreciation_bn": 0.1046892,
+        "ebit_bn": 0.87102189,
+        "tax_bn": 0.21775547,
+        "capex_bn": 0.2093784,
+        "change_nwc_bn": 0.06259825,
+        "fcf_bn": 0.48597897
+      },
+      {
+        "year": 2027,
+        "harmonic_units_wan": 275.0,
+        "joint_units_wan": 110.0,
+        "harmonic_revenue_bn": 2.974125,
+        "joint_revenue_bn": 2.266,
+        "revenue_bn": 5.240125,
+        "harmonic_cogs_bn": 1.44045,
+        "joint_cogs_bn": 1.33375,
+        "cogs_bn": 2.7742,
+        "gross_profit_bn": 2.465925,
+        "gross_margin": 0.47058515,
+        "opex_bn": 1.07841772,
+        "ebitda_bn": 1.38750728,
+        "ebitda_margin": 0.26478515,
+        "depreciation_bn": 0.15720375,
+        "ebit_bn": 1.23030353,
+        "tax_bn": 0.30757588,
+        "capex_bn": 0.3144075,
+        "change_nwc_bn": 0.08752425,
+        "fcf_bn": 0.67799964
+      }
+    ],
+    "valuation": {
+      "discount_rate": 0.1,
+      "terminal_growth_rate": 0.03,
+      "discounted_fcfs_bn": [
+        0.24368039,
+        0.40163551,
+        0.50939117
+      ],
+      "terminal_value_bn": 9.97628047,
+      "discounted_terminal_value_bn": 7.49532718,
+      "enterprise_value_bn": 8.65003424
+    },
+    "traceability": {
+      "input_types": {
+        "historical": 2,
+        "assumption": 41,
+        "calculated": 3
+      },
+      "historical_inputs_used_for_forecast": false,
+      "note": "历史披露锚点与人工假设保留在 Inputs 表；预测结果由本模型计算。"
+    }
+  },
+  "downside": {
+    "model_name": "green_harmonic_simplified_financial_model",
+    "model_status": "prototype_scenario_not_investment_recommendation",
+    "scenario": "downside",
+    "currency": "bn_cny",
+    "years": [
+      2025,
+      2026,
+      2027
+    ],
+    "scenario_settings": {
+      "volume_multiplier": 0.9,
+      "asp_multiplier": 0.97,
+      "unit_cost_multiplier": 1.05,
+      "opex_multiplier": 1.03
+    },
+    "projections": [
+      {
+        "year": 2025,
+        "harmonic_units_wan": 117.0,
+        "joint_units_wan": 18.0,
+        "harmonic_revenue_bn": 1.305135,
+        "joint_revenue_bn": 0.41904,
+        "revenue_bn": 1.724175,
+        "harmonic_cogs_bn": 0.71253,
+        "joint_cogs_bn": 0.27405,
+        "cogs_bn": 0.98658,
+        "gross_profit_bn": 0.737595,
+        "gross_margin": 0.4277959,
+        "opex_bn": 0.37293905,
+        "ebitda_bn": 0.36465595,
+        "ebitda_margin": 0.2114959,
+        "depreciation_bn": 0.05172525,
+        "ebit_bn": 0.3129307,
+        "tax_bn": 0.07823267,
+        "capex_bn": 0.1034505,
+        "change_nwc_bn": 0.08620875,
+        "fcf_bn": 0.09676402
+      },
+      {
+        "year": 2026,
+        "harmonic_units_wan": 162.0,
+        "joint_units_wan": 45.0,
+        "harmonic_revenue_bn": 1.72854,
+        "joint_revenue_bn": 0.9603,
+        "revenue_bn": 2.68884,
+        "harmonic_cogs_bn": 0.95256,
+        "joint_cogs_bn": 0.637875,
+        "cogs_bn": 1.590435,
+        "gross_profit_bn": 1.098405,
+        "gross_margin": 0.40850515,
+        "opex_bn": 0.58159609,
+        "ebitda_bn": 0.51680891,
+        "ebitda_margin": 0.19220515,
+        "depreciation_bn": 0.0806652,
+        "ebit_bn": 0.43614371,
+        "tax_bn": 0.10903593,
+        "capex_bn": 0.1613304,
+        "change_nwc_bn": 0.04823325,
+        "fcf_bn": 0.19820933
+      },
+      {
+        "year": 2027,
+        "harmonic_units_wan": 225.0,
+        "joint_units_wan": 90.0,
+        "harmonic_revenue_bn": 2.291625,
+        "joint_revenue_bn": 1.746,
+        "revenue_bn": 4.037625,
+        "harmonic_cogs_bn": 1.27575,
+        "joint_cogs_bn": 1.18125,
+        "cogs_bn": 2.457,
+        "gross_profit_bn": 1.580625,
+        "gross_margin": 0.39147395,
+        "opex_bn": 0.87333829,
+        "ebitda_bn": 0.70728671,
+        "ebitda_margin": 0.17517395,
+        "depreciation_bn": 0.12112875,
+        "ebit_bn": 0.58615796,
+        "tax_bn": 0.14653949,
+        "capex_bn": 0.2422575,
+        "change_nwc_bn": 0.06743925,
+        "fcf_bn": 0.25105047
+      }
+    ],
+    "valuation": {
+      "discount_rate": 0.1,
+      "terminal_growth_rate": 0.03,
+      "discounted_fcfs_bn": [
+        0.08796729,
+        0.16380936,
+        0.18861794
+      ],
+      "terminal_value_bn": 3.69402837,
+      "discounted_terminal_value_bn": 2.77537819,
+      "enterprise_value_bn": 3.21577278
+    },
+    "traceability": {
+      "input_types": {
+        "historical": 2,
+        "assumption": 41,
+        "calculated": 3
+      },
+      "historical_inputs_used_for_forecast": false,
+      "note": "历史披露锚点与人工假设保留在 Inputs 表；预测结果由本模型计算。"
+    }
+  }
+}

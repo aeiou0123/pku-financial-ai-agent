@@ -12,6 +12,18 @@ Claim2Value（Evidence-Grounded Engineering-to-Finance Agent）面向产业链�
 
 > 产品不是专用工具，而是通用 Agent。三个案例分别验证**技术性能、产能需求、客户订单**三类典型 claim。
 
+## 当前进展（2026-09-05）
+
+PR #2 已合并到 `main`。Claim benchmark、Evidence Ledger、StateVerifier、ClaimVerifier 和验证 workflow 已可运行；98 个 benchmark 用例的规则层 + LLM pipeline 结果为 Claude 83.7%、GPT 82.7%。这些是测试集判别准确率，不是现实业务最终准确率。
+
+当前已进入下一阶段首个可运行切片：
+
+- 绿的谐波简化财务模型：输出 base/upside/downside 三种情景，并在输入表中区分历史锚点、人工假设和计算结果；
+- 本地单案例 Demo：使用本地 evidence fixture，不调用外部 API；
+- 最小回归测试：覆盖模型可复算性、输入溯源和 Demo 的保守判定。
+
+模型输入、Claim 证据和 Demo 输出仍需人工复核；官方 datasheet、专利核验、全部 Claim evidence 回填和实时检索属于后续证据增强任务。完整状态见 [`TODO.md`](TODO.md) 和 [`SYNC_LOG.md`](SYNC_LOG.md)。
+
 ## 参赛方向
 
 - **赛道一（金融智能体创新应用）**：Claim2Value Agent 的工作流创新
@@ -23,29 +35,24 @@ Claim2Value（Evidence-Grounded Engineering-to-Finance Agent）面向产业链�
 ```
 .
 ├── README.md
-├── requirements.txt                  # Python 依赖（待补充）
-├── app.py                            # Streamlit/Gradio Demo
+├── requirements.txt                  # 模型与可选 Streamlit 依赖
+├── app.py                            # 本地 Demo（默认无 API）
 ├── src/                              # 核心代码
 │   ├── case.py                       # 通用案例抽象层
-│   ├── claim_extractor.py            # Claim 提取
-│   ├── evidence_retriever.py         # 证据检索
 │   ├── evidence_ledger.py            # 证据账本
 │   ├── claim_verifier.py             # Claim 验证
-│   ├── engineering_analyzer.py       # 工程分析
-│   ├── economic_mapper.py            # 经济机制映射
-│   ├── financial_model.py            # 财务模型
-│   ├── causal_critic.py              # 因果批判
-│   ├── state_verifier.py             # 状态验证
-│   └── workflow.py                   # LangGraph workflow
+│   ├── state_verifier.py             # 状态/口径验证
+│   ├── financial_model.py            # 可追溯简化财务模型
+│   ├── workflow.py                   # 验证工作流（当前为纯 Python 函数链）
+│   └── data_tools/                   # PDF/文本候选提取脚本
 ├── data/                             # 数据资料
 │   ├── README.md                     # 数据目录说明
 │   ├── collection_checklist.md       # 数据收集总清单
 │   ├── search_guide.md               # 案例搜索方案
 │   ├── raw/                          # 原始 PDF/资料
 │   └── processed/                    # 结构化数据
-├── benchmarks/                       # 测试基准
-├── tests/                            # 单元测试
-├── notebooks/                        # 分析笔记本
+├── benchmarks/                       # Claim benchmark、pipeline 报告与结果
+├── tests/                            # unittest 回归测试
 ├── research_materials/               # 研究资料
 │   ├── papers/                       # arXiv 论文（gitignored）
 │   ├── github_repos/                 # 参考仓库（gitignored）
@@ -75,6 +82,43 @@ cd pku-financial-ai-agent
 2. `data/collection_checklist.md` —— 数据收集清单
 3. `research_materials/notes/feasibility_analysis_and_plan.md` —— 执行计划
 4. `src/case.py` —— 通用案例抽象层
+
+### 4. 运行当前验证 MVP
+
+规则层和无证据路径不需要 API key：
+
+```bash
+python -m compileall -q src benchmarks
+python -m src.workflow --single --claim "绿的谐波新一代谐波减速器关节模组减重30%以上"
+python -m src.claim_verifier --no-llm --limit 98
+```
+
+完整 LLM 验证需要工作区外部的 Prism 配置或 `~/.workbuddy/models.json`，配置文件和 API key 不得提交。
+
+### 5. 运行财务模型与本地 Demo
+
+安装依赖后，财务模型使用带来源标签的本地输入，输出三种情景：
+
+```bash
+pip install -r requirements.txt
+python -m src.financial_model
+python app.py --json-out data/processed/local_demo_result.json
+python -m unittest discover -s tests -v
+```
+
+模型输出：
+
+- `data/processed/green_harmonic_model.xlsx`：Inputs 溯源表、Summary 和 base/upside/downside 情景；
+- `data/processed/green_harmonic_model_results.json`：同一结果的机器可读版本；
+- `data/processed/local_demo_result.json`：本地 Demo 的证据、规则结论、限制和财务影响。
+
+可选 Streamlit 界面：
+
+```bash
+streamlit run app.py
+```
+
+本地 Demo 不调用外部 API。规则层发现确定性问题时才输出对应结论；否则返回 `abstain`，避免把没有 LLM 语义判断的路径误报为“成立”。财务模型目前是情景原型，Inputs 表会明确区分 `historical`、`assumption` 和运行时 `calculated` 结果，不构成投资建议。
 
 ## 案例设计
 
@@ -158,7 +202,11 @@ API key、`.env`、`*.pdf`（研究报告类）、第三方仓库代码、Python
 
 ## 当前任务
 
-见 `data/collection_checklist.md` 中的 48 小时数据目标。
+1. 由经济金融成员复核简化模型的财务口径、BOM、税率和 DCF 假设；
+2. 修复 StateVerifier 的数值、时间和复合 Claim 误判并补回归 fixture；
+3. 继续补齐主案例可定位 evidence，再推进工程分析、经济映射和因果批判。
+
+首版 Demo 只承诺绿的谐波本地单案例流程，不以实时检索、全行业覆盖或全部 Claim 核验为阻塞条件。
 
 ## 注意事项
 

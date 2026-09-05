@@ -5,6 +5,8 @@
 > 评估模型：claude-sonnet-5, gpt-5.5
 > 含 Oracle 修正前后对比（v1 → v2）
 
+> **当前使用说明（2026-09-05）**：本文是 benchmark 层的变异测试报告；最新的“规则层 + LLM pipeline”对照结果见 [`pipeline_report.md`](pipeline_report.md)。两份报告均衡量既有测试用例上的判别能力，不应解读为现实业务最终准确率，也不替代真实 Claim 的人工证据核验。
+
 ---
 
 ## 一、方法论

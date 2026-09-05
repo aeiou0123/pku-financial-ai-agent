@@ -1,0 +1,19 @@
+{
+  "case_id": "GH_001_LOCAL",
+  "company": "绿的谐波",
+  "claim": "绿的谐波新一代谐波减速器关节模组减重30%以上",
+  "expected_verdict": "partially_supported",
+  "expected_verdict_scope": "fixture_reference_only",
+  "evidence": {
+    "source_text": "国信证券研报：聚焦谐波减速器的轻量小型化技术突破，在同等出力情况下减重30%以上。",
+    "source_type": "analyst_report",
+    "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202504301665112608_1.pdf",
+    "source_locator": "研报页码待人工核验",
+    "extraction_status": "candidate_evidence_not_finally_verified"
+  },
+  "limitations": [
+    "“减重”对象（减速器或完整关节模组）尚未核实",
+    "“同等出力”的测试条件和上一代基准型号尚未核实",
+    "本地无 API 模式只执行确定性规则，不代表完整语义验证"
+  ]
+}
