@@ -6,9 +6,9 @@
 
 ---
 
-## 当前工作区同步记录（2026-09-05，待提交）
+## 当前工作区同步记录（2026-09-05，PR #3）
 
-本次由 Chen Luodi 基于 `main` 的 `42a2e3b` 完成项目状态审计和说明文件同步。工作区开始时与 `origin/main` 一致；本次没有执行 `git commit` 或 `git push`。
+本次由 Chen Luodi 基于 `main` 的 `42a2e3b` 完成项目状态审计、说明文件同步和 P0 首个开发切片。内容已提交为 `c58a7fc`，推送至 `FeishengLuo/pku-financial-ai-agent` 的 `feat/financial-model-local-demo` 分支，并向上游提交 PR #3；本次没有直接推送 `aeiou0123` 的 `main`。
 
 ### 审计结论
 
@@ -23,20 +23,20 @@
 - 重写 `TODO.md`：以 P0/P1/P2 划分财务模型、Demo、可靠性回归、工程/经济扩展和证据增强任务，并补充验收标准。
 - 更新 `data/collection_checklist.md`、`data/search_guide.md`、`data/search_report.md`：区分已完成资料、待人工补充资料与当前不阻塞项。
 - 更新 `research_materials/notes/feasibility_analysis_and_plan.md`：保留早期研究规划，同时附加当前执行基线，避免过期日期被当作现状。
-- 在仓库外的 `杂项/pku_fin_ai_local.md` 记录本次审计、修改范围、验证结果和未推送状态；该文件不加入项目仓库。
+- 在仓库外的 `杂项/pku_fin_ai_local.md` 记录本次审计、修改范围、验证结果和 PR 状态；该文件不加入项目仓库。
 
 ### 后续提交建议
 
-将本次说明文件变更单独作为文档 commit；财务模型、Demo、fixture 和测试分别提交，便于协作审阅和回滚。提交前更新本节的“待提交”状态和实际 commit hash。
+本次财务模型、Demo、fixture、测试及说明文件作为一个 PR 提交，便于一次性审阅；后续功能建议按模型、验证规则和文档分别提交。
 
-### 2026-09-05 开发更新（待提交）
+### 2026-09-05 开发更新（`c58a7fc`，PR #3）
 
 - 新增 `src/financial_model.py`：带来源和输入类型隔离的绿的谐波简化财务模型，输出三情景 DCF 原型。
 - 新增 `data/processed/green_harmonic_model_inputs.csv`、`local_demo_fixture.json` 及模型运行结果文件。
 - 新增 `app.py`：默认无 API 的本地单案例 Demo；规则层无法确定时保守返回 `abstain`。
 - 新增 `tests/`、`requirements.txt`，当前 `unittest` 9 项测试通过。
 - 基准运行结果：base EV `6.0056 bn CNY`、2027 revenue `4.6250 bn CNY`、2027 FCF `0.4703 bn CNY`；这些是原型假设下的计算结果，不是披露事实或投资建议。
-- 已运行：compileall、4 项 unittest、模型 CLI、Demo CLI；均通过。尚未 commit/push。
+- 已运行：compileall、9 项 unittest、模型 CLI、Demo CLI 和 Excel 工作表核验；均通过。已提交并推送到 fork，等待上游审阅。
 
 ---
 
@@ -44,8 +44,7 @@
 
 | 日期 | 提交哈希 | 类型 | 一句话说明 | 推送状态 |
 |---|---|---|---|---|
-| 2026-09-05 | 待提交 | feat/test | Feisheng：绿的谐波简化财务模型、本地无 API Demo、模型输入 fixture、结果文件和 4 项回归测试 | ⏳ 工作区修改，未提交 |
-| 2026-09-05 | 待提交 | docs | Feisheng：审计 benchmark/验证引擎/pipeline，确认进入财务模型与本地 Demo 阶段，并同步项目说明文件 | ⏳ 工作区修改，未提交 |
+| 2026-09-05 | `c58a7fc` | feat/test/docs | Feisheng：审计状态并新增绿的谐波简化财务模型、本地无 API Demo、输入 fixture、结果文件、9 项回归测试和说明同步；PR #3 | ✅ 已推送到 fork，PR 待合并 |
 | 2026-09-05 | `cbc0f1d` | feat | 核心验证引擎：state_verifier + evidence_ledger + claim_verifier + workflow + pipeline 评估报告 | ✅ 已推送 |
 | 2026-09-04 | `360f68c` | benchmark | Claim 验证 benchmark 全套：mutation 考卷 98 用例 + 双模型评估 + Oracle 自我修正 + 判别力报告 | ✅ 已推送 |
 | 2026-09-01 | `1b13e10` | team | 新增协作者 FeishengLuo（write 权限），团队表更新为 3 人 | ✅ 已推送 |
