@@ -1,0 +1,77 @@
+{
+  "demo_status": "local_reproducible_prototype",
+  "claim": {
+    "case_id": "GH_001_LOCAL",
+    "company": "绿的谐波",
+    "text": "绿的谐波新一代谐波减速器关节模组减重30%以上",
+    "fixture_expected_verdict": "partially_supported",
+    "expected_verdict_scope": "fixture_reference_only"
+  },
+  "evidence": {
+    "ledger": {
+      "evidence_count": 1,
+      "trust_score": 0.75,
+      "highest_level": "analyst_report",
+      "has_low_credibility": false,
+      "sources": [
+        {
+          "level": "analyst_report",
+          "trust": 0.75,
+          "text_preview": "国信证券研报：聚焦谐波减速器的轻量小型化技术突破，在同等出力情况下减重30%以上。"
+        }
+      ]
+    },
+    "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202504301665112608_1.pdf",
+    "source_locator": "研报页码待人工核验",
+    "extraction_status": "candidate_evidence_not_finally_verified"
+  },
+  "verification": {
+    "verdict": "partially_supported",
+    "verdict_source": "state_verifier_rule",
+    "reasoning": "限定词缺失：「同等出力情况下」在 source 中存在但 claim 中缺失",
+    "rule_flags": [
+      "限定词缺失：「同等出力情况下」在 source 中存在但 claim 中缺失"
+    ],
+    "rule_result": {
+      "has_definition_mismatch": false,
+      "mismatched_pairs": [],
+      "missing_qualifiers": [
+        "同等出力情况下"
+      ],
+      "value_contradictions": [],
+      "has_source_downgrade": false,
+      "source_note": "",
+      "verdict_override": "partially_supported",
+      "confidence_adjustment": -0.2,
+      "flags": [
+        "限定词缺失：「同等出力情况下」在 source 中存在但 claim 中缺失"
+      ],
+      "has_issues": true
+    }
+  },
+  "financial_impact": {
+    "base": {
+      "enterprise_value_bn": 6.00560508,
+      "2027_revenue_bn": 4.625,
+      "2027_fcf_bn": 0.47025,
+      "model_status": "prototype_scenario_not_investment_recommendation"
+    },
+    "upside": {
+      "enterprise_value_bn": 8.65003424,
+      "2027_revenue_bn": 5.240125,
+      "2027_fcf_bn": 0.67799964,
+      "model_status": "prototype_scenario_not_investment_recommendation"
+    },
+    "downside": {
+      "enterprise_value_bn": 3.21577278,
+      "2027_revenue_bn": 4.037625,
+      "2027_fcf_bn": 0.25105047,
+      "model_status": "prototype_scenario_not_investment_recommendation"
+    }
+  },
+  "limitations": [
+    "“减重”对象（减速器或完整关节模组）尚未核实",
+    "“同等出力”的测试条件和上一代基准型号尚未核实",
+    "本地无 API 模式只执行确定性规则，不代表完整语义验证"
+  ]
+}

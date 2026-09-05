@@ -5,6 +5,8 @@
 > 整理时间：2026-08-29
 > 规划周期：2 周（至 2026-09-10 报名截止）
 
+> **历史规划说明（2026-09-05）**：本文保留项目早期的可行性分析、分工和 Day 1–14 计划，不能单独作为当前进度表。当前基线以根目录 `README.md`、`TODO.md`、`SYNC_LOG.md` 为准：benchmark、四个核心验证模块和 pipeline 评估已经完成；财务模型、本地 Demo、证据 fixture 和测试仍待实现。
+
 ---
 
 # 第一部分：深度可行性分析
@@ -741,6 +743,32 @@ claim2value/
 ---
 
 ## 19. 总结
+
+---
+
+## 20. 2026-09-05 当前执行更新
+
+### 20.1 已完成事项
+
+- 数据基础已形成：18 份 PDF、18 份元数据文件、19 条 Claim、30 条专利记录和 14 条参数记录。
+- 已合并 Claim mutation benchmark、Evidence Ledger、StateVerifier、ClaimVerifier 和当前 Python workflow。
+- 98 个 benchmark 用例已有 pipeline 评估；规则层 + LLM 的 Claude 结果为 83.7%，GPT 结果为 82.7%。该指标只描述 benchmark 判别准确率，不等于真实业务准确率。
+
+### 20.2 当前决策
+
+现阶段可以直接进入绿的谐波简化财务模型、本地可复现 Demo 和 StateVerifier 回归修复。首版采用本地单案例 fixture，不等待全量 datasheet、专利二次核验或全部 Claim evidence 回填。
+
+财务模型的输入必须显式区分历史披露数据、人工假设和模型计算结果；每个金融结论必须能回溯到输入来源或假设。
+
+### 20.3 当前待办映射
+
+| 优先级 | 工作内容 | 主要交付物 |
+|---|---|---|
+| P0 | 财务模型、模型输入、证据 fixture、本地 Demo、核心测试 | `src/financial_model.py`、`app.py`、`tests/`、模型输出 |
+| P1 | 工程分析、经济映射、因果批判、workflow 扩展、Claim evidence 回填 | `src/engineering_analyzer.py`、`src/economic_mapper.py`、`src/causal_critic.py` |
+| P2 | 官方 datasheet、专利/公告/BOM、实时检索和辅助案例扩展 | 见 `data/search_report.md` 第七节 |
+
+详细验收标准和负责人见根目录 `TODO.md`。
 
 **Claim2Value 是可行、创新、且高度匹配团队的。**
 
