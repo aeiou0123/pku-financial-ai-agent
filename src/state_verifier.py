@@ -202,6 +202,8 @@ class StateVerifier:
         提取术语附近的数值。
         优先取术语后面的数值（中文技术文档中数值通常跟在术语后面）。
         排除型号编号（如 LHS-32 中的 32）。
+        窗口边界保护：数值被窗口截断（如 "47.31" 切成 "47"）时丢弃，
+        宁可提取失败也不返回半个数值——半数值会导致数值归属误判。
         """
         idx = text.find(term)
         if idx < 0:
@@ -213,6 +215,11 @@ class StateVerifier:
         after_segment = text[after_start:after_end]
         # 排除连字符后的编号（如 -32, -20E）
         after_segment = re.sub(r'-\w+', '', after_segment)
+        # 边界保护：segment 以数字结尾且原文窗口边界处仍是数字/小数点
+        # → 最后一个数值被截断，不可靠，截掉
+        if after_segment and re.search(r'\d$', after_segment):
+            if after_end < len(text) and (text[after_end].isdigit() or text[after_end] == '.'):
+                after_segment = re.sub(r'\d+\.?\d*$', '', after_segment)
         after_nums = re.findall(r'(?<!\d)(\d+\.?\d*)(?!\d)', after_segment)
         after_nums = [n for n in after_nums if not re.fullmatch(r'(?:19|20)\d{2}', n) and len(n) >= 2]
         if after_nums:
@@ -222,6 +229,11 @@ class StateVerifier:
         before_start = max(0, idx - window_before)
         before_segment = text[before_start:idx]
         before_segment = re.sub(r'-\w+', '', before_segment)
+        # 边界保护：segment 以数字开头且原文窗口边界前是数字/小数点
+        # → 第一个数值被截断，截掉
+        if before_segment and re.match(r'^\d', before_segment):
+            if before_start > 0 and (text[before_start - 1].isdigit() or text[before_start - 1] == '.'):
+                before_segment = re.sub(r'^\d+\.?\d*', '', before_segment)
         before_nums = re.findall(r'(?<!\d)(\d+\.?\d*)(?!\d)', before_segment)
         before_nums = [n for n in before_nums if not re.fullmatch(r'(?:19|20)\d{2}', n) and len(n) >= 2]
         return before_nums[0] if before_nums else None
@@ -278,10 +290,12 @@ class StateVerifier:
                 source_counter_val = self._extract_value_near_term(source, source_counterpart)
                 source_same_val = self._extract_value_near_term(source, claim_term)
 
-                if claim_val and source_counter_val and claim_val == source_counter_val:
-                    # claim 中 claim_term 附近的数值 == source 中对立词附近的数值
-                    # 但 ≠ source 中同名词附近的数值 → 口径偷换
-                    if not source_same_val or claim_val != source_same_val:
+                # 三值齐全才判定（宁缺毋滥）：
+                # - source_same_val 提取不到时（如「A、B、C 分别增长 x%、y%、z%」列举式证据，
+                #   数值集中在句尾，离术语超出窗口），数值归属无法可靠判定，直接跳过。
+                #   此时贸然用对立词的数值匹配会产生系统性误报（GH_006 系列）。
+                if claim_val and source_counter_val and source_same_val:
+                    if claim_val == source_counter_val and claim_val != source_same_val:
                         mismatches.append({
                             "claim_term": claim_term,
                             "source_term": source_counterpart,
@@ -300,6 +314,20 @@ class StateVerifier:
 
     # ── 限定词缺失检测 ──
 
+    # 口径词对中的限定词（如"额定扭矩"）：claim 只要用了对立词对中的
+    # 任何一个（"额定扭矩"或"峰值扭矩"），口径就是明确的，
+    # 不再要求 claim 同时包含另一个（GH_007_VALU 误报修复）。
+    _QUALIFIER_PAIR_EXEMPTION = {
+        "额定扭矩": "峰值扭矩",
+        "峰值扭矩": "额定扭矩",
+        "连续扭矩": "峰值扭矩",
+        "累计出货": "年度出货",
+        "归母净利润": "扣非净利润",
+        "扣非净利润": "归母净利润",
+        "扣非后净利润": "归母净利润",
+        "设计产能": "实际达产产能",
+    }
+
     def _check_qualifier_removal(self, claim: str, source: str) -> List[str]:
         """
         检测 claim 是否删掉了 source 中存在的限定词。
@@ -307,12 +335,18 @@ class StateVerifier:
         逻辑：如果 source 中有某个限定词（如"同等出力情况下"），
         但 claim 中没有，则判定为限定词缺失。
         去重：如果"同等出力情况下"已匹配，不再重复匹配子串"同等出力"。
+        口径对豁免：对立口径词（额定/峰值扭矩等），claim 含其一即不报另一个。
         """
         missing = []
         matched_spans = []  # 已匹配的字符区间 [(start, end), ...]
 
         for qualifier, reason in self.qualifier_library.items():
             if qualifier in source and qualifier not in claim:
+                # 口径对豁免：claim 已包含对立口径词时，口径是明确的，不报
+                counterpart = self._QUALIFIER_PAIR_EXEMPTION.get(qualifier)
+                if counterpart and counterpart in claim:
+                    continue
+
                 # 检查是否是已匹配限定词的子串
                 idx = source.find(qualifier)
                 is_substring = any(
@@ -356,26 +390,56 @@ class StateVerifier:
             return []
 
         # claim 中的数值不在 source 中 → 可能篡改
+        # 约数感知匹配：
+        # - 精确数值（"额定扭矩172"）→ 严格 float 相等。不用容差——
+        #   容差会让不同指标的数值交叉匹配（SH_002_VALU 中 172 与竞对
+        #   扭矩密度 164.8），杀掉真正的矛盾信号。
+        # - 约数数值（"超过100%"）→ ±10% 容差。约数与精确值的差异
+        #   是表述粒度（"超过100%" vs 101.30%），不是篡改（SH_005_QUAL）。
+        source_floats = set()
+        for s in source_nums:
+            try:
+                source_floats.add(float(s))
+            except ValueError:
+                continue
+
         contradictions = []
         for num in claim_nums:
-            if num not in source_nums:
-                # 检查是否有近似值（±10%）
-                try:
-                    val = float(num)
-                    nearby = [
-                        s for s in source_nums
-                        if abs(float(s) - val) / max(val, 0.01) < 0.1
-                    ]
-                    if not nearby:
-                        contradictions.append({
-                            "claim_value": num,
-                            "source_values": sorted(source_nums),
-                            "note": f"claim 中的 {num} 在 source 中未找到匹配值",
-                        })
-                except ValueError:
-                    continue
+            if num in source_nums:
+                continue
+            try:
+                val = float(num)
+            except ValueError:
+                continue
+
+            if self._is_approx_value(claim, num):
+                # 约数：±10% 容差内存在 source 值即视为匹配
+                matched = any(
+                    abs(float(s) - val) / max(val, 0.01) < 0.1
+                    for s in source_nums
+                )
+            else:
+                matched = val in source_floats
+
+            if not matched:
+                contradictions.append({
+                    "claim_value": num,
+                    "source_values": sorted(source_nums),
+                    "note": f"claim 中的 {num} 在 source 中未找到匹配值",
+                })
 
         return contradictions
+
+    # 约数表述的模糊量词
+    APPROX_MARKERS = ("超过", "大约", "左右", "以上", "以下", "约", "近", "超", "余")
+
+    def _is_approx_value(self, text: str, num: str) -> bool:
+        """判断数值在文本中是否为约数表述（前接模糊量词如"超过""约"）"""
+        idx = text.find(num)
+        if idx <= 0:
+            return False
+        prefix = text[max(0, idx - 3):idx]
+        return any(m in prefix for m in self.APPROX_MARKERS)
 
     # ── 来源降级检测 ──
 
@@ -445,7 +509,16 @@ class StateVerifier:
             result.flags.append("无证据，规则层跳过")
             return result
 
-        # 1. 口径偷换
+        # ── 检测顺序即优先级（高 → 低）──
+        # 口径偷换 > 数值矛盾 > 时间错位 > 来源降级 > 限定词缺失
+        #
+        # 限定词缺失放最后的原因：source 中的背景描述词（如"国内""关节模组"）
+        # 不一定是 claim 的限定条件，误报率高且信号弱——任何更强的
+        # 确定性信号（数值矛盾/时间错位/来源降级）都应优先决定 verdict。
+        # 修复前限定词排第 2，会把来源降级该给的 low_confidence
+        # 错误覆盖成 partially_supported（GH_004_SRCD 等误伤根因）。
+
+        # 1. 口径偷换（最高优先级：口径错则一切比较无意义）
         has_mismatch, mismatches = self._check_definition_mismatch(claim, source)
         if has_mismatch:
             result.has_definition_mismatch = True
@@ -458,23 +531,10 @@ class StateVerifier:
                     f"source 用「{m['source_term']}」（{m['category']}）"
                 )
 
-        # 2. 限定词缺失
-        missing = self._check_qualifier_removal(claim, source)
-        if missing:
-            result.missing_qualifiers = missing
-            # 只有当没有口径偷换时才覆盖 verdict
-            # （口径偷换优先级更高）
-            if not result.verdict_override:
-                result.verdict_override = "partially_supported"
-                result.confidence_adjustment = -0.2
-            for q in missing:
-                result.flags.append(f"限定词缺失：「{q}」在 source 中存在但 claim 中缺失")
-
-        # 3. 数值矛盾
+        # 2. 数值矛盾
         contradictions = self._check_value_contradiction(claim, source)
         if contradictions:
             result.value_contradictions = contradictions
-            # 数值矛盾 → refuted（但只有当没有更优先的 verdict 时）
             if not result.verdict_override:
                 result.verdict_override = "refuted"
                 result.confidence_adjustment = -0.4
@@ -483,28 +543,36 @@ class StateVerifier:
                     f"数值矛盾：claim 中的 {c['claim_value']} 在 source 中未找到"
                 )
 
-        # 4. 来源降级
-        is_low, note = self._check_source_downgrade(source)
-        if is_low:
-            result.has_source_downgrade = True
-            result.source_note = note
-            # 来源降级 → low_confidence（但不覆盖已有 verdict）
-            if not result.verdict_override:
-                result.verdict_override = "low_confidence"
-                result.confidence_adjustment = -0.3
-            result.flags.append(note)
-
-        # 5. 时间错位
+        # 3. 时间错位
         has_temporal, temporal_issues = self._check_temporal_shift(claim, source)
         if has_temporal:
             for t in temporal_issues:
                 result.flags.append(
                     f"时间错位：claim 中的 {t['claim_year']} 年在 source 中未找到"
                 )
-            # 时间错位 → refuted（优先级低于口径偷换和数值矛盾）
-            if not result.verdict_override or result.verdict_override == "low_confidence":
+            if not result.verdict_override:
                 result.verdict_override = "refuted"
                 result.confidence_adjustment = -0.3
+
+        # 4. 来源降级（证据不可信时，基于证据的其他判断已无从谈起）
+        is_low, note = self._check_source_downgrade(source)
+        if is_low:
+            result.has_source_downgrade = True
+            result.source_note = note
+            if not result.verdict_override:
+                result.verdict_override = "low_confidence"
+                result.confidence_adjustment = -0.3
+            result.flags.append(note)
+
+        # 5. 限定词缺失（最低优先级：弱信号，只在无任何更强信号时才决定 verdict）
+        missing = self._check_qualifier_removal(claim, source)
+        if missing:
+            result.missing_qualifiers = missing
+            if not result.verdict_override:
+                result.verdict_override = "partially_supported"
+                result.confidence_adjustment = -0.2
+            for q in missing:
+                result.flags.append(f"限定词缺失：「{q}」在 source 中存在但 claim 中缺失")
 
         return result
 
