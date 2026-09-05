@@ -10,7 +10,7 @@
 
 | 日期 | 提交哈希 | 类型 | 一句话说明 | 推送状态 |
 |---|---|---|---|---|
-| 2026-09-05 | `feat/verifier` | feat | 核心验证引擎：state_verifier + evidence_ledger + claim_verifier + workflow + pipeline 评估报告 | ⏳ 待推送 |
+| 2026-09-05 | `cbc0f1d` | feat | 核心验证引擎：state_verifier + evidence_ledger + claim_verifier + workflow + pipeline 评估报告 | ✅ 已推送 |
 | 2026-09-04 | `360f68c` | benchmark | Claim 验证 benchmark 全套：mutation 考卷 98 用例 + 双模型评估 + Oracle 自我修正 + 判别力报告 | ✅ 已推送 |
 | 2026-09-01 | `1b13e10` | team | 新增协作者 FeishengLuo（write 权限），团队表更新为 3 人 | ✅ 已推送 |
 | 2026-09-01 | `026afca` | team | 新增协作者 shushuyang231（write 权限）+ 更新 README 协作指南 | ✅ 已推送 |
