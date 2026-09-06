@@ -1,0 +1,170 @@
+{
+  "ontology_id": "tech_to_economics",
+  "version": "0.1.0",
+  "updated": "2026-09-05",
+  "description": "Claim2Value 规则层第三模块：工程指标 → 经济变量映射规则集。每条规则显式声明触发条件、映射方向、默认弹性系数（带依据注释、可调）与证据强度要求；src/economic_mapper.py 只消费本文件，不在代码中硬编码任何映射。",
+  "target_company_default": "绿的谐波",
+  "baseline_method": {
+    "method": "peer_median",
+    "note": "同业基准 = 同口径（applicable_scopes）下非目标公司、可比性不低于 approximate 的样本中位数；样本 <3 时置信度降级。not_comparable 样本一律排除出基准与目标池。"
+  },
+  "economic_variables": {
+    "sales_volume": {
+      "label": "销量（份额/渗透率）",
+      "unit": "wan_units",
+      "financial_metrics": {"harmonic": "harmonic_units_wan", "joint": "joint_units_wan"},
+      "note": "delta_pct > 0 表示销量假设上调"
+    },
+    "asp": {
+      "label": "平均售价（ASP）",
+      "unit": "yuan_per_unit",
+      "financial_metrics": {"harmonic": "harmonic_asp_yuan", "joint": "joint_asp_yuan"},
+      "note": "delta_pct > 0 表示 ASP 假设上调"
+    },
+    "unit_cost": {
+      "label": "单位成本",
+      "unit": "yuan_per_unit",
+      "financial_metrics": {"harmonic": "harmonic_unit_cost_yuan", "joint": "joint_unit_cost_yuan"},
+      "note": "delta_pct > 0 表示单位成本假设上调"
+    },
+    "addressable_market": {
+      "label": "可服务市场分层（高端/中端）",
+      "qualitative_only": true,
+      "financial_metrics": {},
+      "note": "仅产出定性说明，不直接进入财务模型输入"
+    },
+    "gross_margin": {
+      "label": "毛利率（派生量）",
+      "derived": true,
+      "financial_metrics": {},
+      "note": "毛利率 = (ASP-单位成本)/ASP，由 financial_model 计算得出，任何规则不得直接映射毛利率（避免与 ASP/成本假设重复计算）"
+    }
+  },
+  "industry_data_catalog": {
+    "harmonic_market_share_2021": {
+      "file": "competitor_market_share.csv",
+      "kind": "share",
+      "metric": "中国工业机器人用谐波减速器市占率",
+      "year": "2021",
+      "company": "绿的谐波",
+      "note": "国金证券行业研报；用于销量/份额类假设的市场锚点"
+    },
+    "harmonic_demand_cagr": {
+      "file": "industry_data_summary.csv",
+      "kind": "summary",
+      "metric": "中国工业机器人减速器需求量CAGR",
+      "year": "2019-2023",
+      "note": "环动科技招股书引用 GGII；用于需求天花板校验"
+    },
+    "harmonic_unit_per_robot": {
+      "file": "industry_data_summary.csv",
+      "kind": "summary",
+      "metric": "工业机器人单台谐波减速器用量",
+      "year": "参考",
+      "note": "源达信息研报引用 MIR 睿工业；单台 3.5 台，连接机器人销量与减速器需求"
+    },
+    "optimus_joints": {
+      "file": "industry_data_summary.csv",
+      "kind": "summary",
+      "metric": "Tesla Optimus关节数量",
+      "year": "参考",
+      "note": "国金证券研报；人形机器人单台 40 个关节，新兴需求场景锚点"
+    }
+  },
+  "rules": [
+    {
+      "rule_id": "torque_density_to_share",
+      "name": "扭矩密度→产品竞争力→渗透率/份额",
+      "engineering_metric": "torque_density_nm_kg",
+      "metric_source": "normalized",
+      "applicable_scopes": ["gear_unit", "joint_module"],
+      "trigger": {"kind": "relative_to_peer_median"},
+      "economic_variable": "sales_volume",
+      "direction": "positive",
+      "default_elasticity": 0.30,
+      "elasticity_basis": "扭矩密度是关节轻量化/负载能力的核心代理指标，相对领先支撑新兴场景渗透与份额。无公开实证份额弹性，取保守值 0.30：相对性能差距 10% → 销量/份额假设约 3% 调整。参照 competitor_market_share.csv：绿的谐波 2021 年谐波减速器市占率已达 24.7%，高位份额下边际弹性递减。本系数为显式可调假设，非实证估计。",
+      "evidence_requirement": "approximate",
+      "industry_data_refs": ["harmonic_market_share_2021", "harmonic_unit_per_robot"],
+      "qualitative_note": "扭矩密度领先是人形机器人等新兴场景（industry_data_summary.csv：Optimus 单台 40 关节）渗透的前提条件之一。"
+    },
+    {
+      "rule_id": "power_density_to_share",
+      "name": "功率密度→产品竞争力→渗透率/份额",
+      "engineering_metric": "power_density_w_kg",
+      "metric_source": "normalized",
+      "applicable_scopes": ["motor_body", "joint_module"],
+      "trigger": {"kind": "relative_to_peer_median"},
+      "economic_variable": "sales_volume",
+      "direction": "positive",
+      "default_elasticity": 0.30,
+      "elasticity_basis": "功率密度（W/kg）是无框电机/关节模组动态性能代理指标，弹性取值逻辑与 torque_density_to_share 一致（0.30，可调假设）。注意：parameter_table_filled.csv 当前无功率密度列，多数样本只能产出定性说明，待 P2 补齐官方 datasheet。",
+      "evidence_requirement": "approximate",
+      "industry_data_refs": ["optimus_joints"],
+      "qualitative_note": "功率密度决定关节动态响应能力，直接影响人形机器人等对体积/功耗敏感场景的选型。"
+    },
+    {
+      "rule_id": "efficiency_to_unit_cost",
+      "name": "传动效率→能耗成本差异→客户等效单位成本",
+      "engineering_metric": "efficiency_pct",
+      "metric_source": "raw",
+      "applicable_scopes": ["gear_unit", "joint_module"],
+      "trigger": {"kind": "relative_to_peer_median"},
+      "economic_variable": "unit_cost",
+      "direction": "negative",
+      "default_elasticity": 0.20,
+      "elasticity_basis": "传动效率差直接转化为终端客户能耗成本差：效率 80% vs 90% 时同等输出约多耗 12.5% 电能。能耗占机器人全生命周期 TCO 比例有限，故对客户等效单位成本取保守弹性 0.20：相对效率差距 10% → 等效单位成本约 2%。该差异主要体现为采购议价/让利压力（下调 ASP 假设），映射到 unit_cost 变量时按方向负向处理。依据：parameter_table_filled.csv 谐波减速器典型效率 80%、RV 约 90%。本系数为显式可调假设。",
+      "evidence_requirement": "approximate",
+      "industry_data_refs": ["harmonic_unit_per_robot"],
+      "qualitative_note": "效率劣势会在整机厂 TCO 测算中暴露，长期构成降价压力；效率优势是进入对能耗敏感场景（移动机器人）的门槛。"
+    },
+    {
+      "rule_id": "backlash_to_asp",
+      "name": "背隙/传动精度→可服务市场分层→ASP 溢价",
+      "engineering_metric": "backlash_arcsec",
+      "metric_source": "raw",
+      "applicable_scopes": ["gear_unit"],
+      "trigger": {
+        "kind": "relative_to_peer_median",
+        "quantify_guard": {"max_value": 30, "unit": "arcsec", "note": "背隙 ≤30 arcsec（≤0.5 arcmin）视为高端精密市场门槛；目标样本中位值高于该门槛时不生成定量假设，仅给定性说明"}
+      },
+      "economic_variable": "asp",
+      "direction": "negative",
+      "default_elasticity": 0.15,
+      "elasticity_basis": "背隙/传动精度决定可服务市场分层：达到高端门槛（≤30 arcsec）的产品可进入半导体/精密装配等高毛利场景，支撑 ASP 溢价；方向为负（背隙越小经济价值越高）。弹性取 0.15：达到门槛且相对同业领先 10% → ASP 约 1.5% 溢价，可调。依据：parameter_table_filled.csv 绿的谐波 LHS-32 齿隙精度 ≤1 arcmin（60 arcsec）与国金证券研报对比表。",
+      "evidence_requirement": "approximate",
+      "industry_data_refs": ["harmonic_market_share_2021"],
+      "qualitative_note": "背隙精度未达高端门槛时产品定位中端市场，ASP 上限受中端竞品制约；精度突破门槛是可服务市场扩张（TAM 分层上移）的必要条件。"
+    },
+    {
+      "rule_id": "backlash_to_addressable_market",
+      "name": "背隙/传动精度→可服务市场分层（定性）",
+      "engineering_metric": "backlash_arcsec",
+      "metric_source": "raw",
+      "applicable_scopes": ["gear_unit"],
+      "trigger": {"kind": "relative_to_peer_median"},
+      "economic_variable": "addressable_market",
+      "direction": "negative",
+      "default_elasticity": 0.0,
+      "elasticity_basis": "qualitative_only 规则：可服务市场分层只产出定性说明，不生成定量弹性；弹性字段置 0 仅为满足 schema 完整性。",
+      "evidence_requirement": "not_comparable",
+      "industry_data_refs": [],
+      "qualitative_only": true,
+      "qualitative_note": "按背隙精度把市场分为高端（≤30 arcsec，半导体/精密装配）与中端（>30 arcsec，一般工业机器人）：达标则 TAM 分层上移，不达标则份额竞争集中在中端，价格战风险升高。"
+    },
+    {
+      "rule_id": "weight_to_unit_cost",
+      "name": "重量→材料成本/BOM→单位成本",
+      "engineering_metric": "weight_kg",
+      "metric_source": "raw",
+      "applicable_scopes": ["gear_unit", "joint_module"],
+      "trigger": {"kind": "relative_to_peer_median"},
+      "economic_variable": "unit_cost",
+      "direction": "positive",
+      "default_elasticity": 0.50,
+      "elasticity_basis": "同规格减速器重量差近似材料用量差（柔轮/刚轮/外壳金属件占比高），材料成本占 BOM 主要部分，取弹性 0.50：同扭矩级重量差 10% → 单位材料成本约 5%。依据：parameter_table_filled.csv 同扭矩级（额定 40-110 N·m）产品重量 2.5-4.7kg。注意：轻量化的材料成本优势可能被更高的加工/工艺成本抵消，本系数为显式可调假设，需工程成员复核 BOM。",
+      "evidence_requirement": "approximate",
+      "industry_data_refs": [],
+      "qualitative_note": "重量显著高于同扭矩级同业时，材料成本劣势将压缩毛利空间；反向的轻量化优势是毛利改善的候选来源。"
+    }
+  ]
+}
