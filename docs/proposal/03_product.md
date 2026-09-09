@@ -110,8 +110,9 @@ prototype_scenario_not_investment_recommendation` 限定，任何引用须携带
 降级路径契约）。另有自建 benchmark 98 个判别用例，规则层 + LLM pipeline
 对 Claude **91.8%**、GPT **90.8%**（StateVerifier 误报修复后；修复前为 83.7%/82.7%，
 见 PR #4 及 `benchmarks/pipeline_report.md`；为 benchmark 判别准确率，非业务准确率）。
-产出物示例：三情景估值原型 EV 悲观 32.16 亿 / 基准 60.06 亿 / 乐观 86.50 亿元
-（`data/processed/green_harmonic_model_results.json`）。
+产出物示例：三情景估值原型 EV 悲观 0.94 亿 / 基准 30.78 亿 / 乐观 58.50 亿元
+（`data/processed/green_harmonic_model_results.json`；2026-09-09 参数复核后口径：
+税率改 15% 高新口径、谐波单位成本按 2024 年报毛利率 36.13% 锚定，悲观情景 FCF 转负故 EV 趋零）。
 
 **诚实边界**：实时 Web 检索与 Claim 自动提取（`evidence_retriever.py`）、
 全量官方 datasheet、15 条待验证 Claim 的人工终验、生产级估值模型均未完成，

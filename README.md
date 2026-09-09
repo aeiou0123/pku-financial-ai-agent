@@ -18,9 +18,9 @@ Claim2Value（Evidence-Grounded Engineering-to-Finance Agent）面向产业链�
 
 **1. 多公司证据网络（PR #15/#21）**：Claim Bank 扩展至 **11 家机器人产业链公司 51 条结构化 claim**——36 条已验证（公告原文级，附页码与内容指纹，BK_004 双源逐字、GH_002 双源互证），15 条待验证（带显式定义疑点，终验核对清单 `docs/proposal/appendix_pending_review.md` 由 Phase 3D 新增）；另有 1 条行业市场数据（IND_001）。
 
-**2. 双环传动全链路估值链（PR #20）**：financial_model 泛化到多产品线（rv/gear 自动识别），economic_mapper 支持规则级 `product_line_scope`，ontology 变体 `tech_to_economics_ontology_shuanghuan.json` + `data/processed/shuanghuan_model_inputs.csv`，端到端输出三情景 EV **5.88 / 10.94 / 0.44 亿元**（base/upside/downside），回归覆盖 `tests/test_shuanghuan_chain.py`。
+**2. 双环传动全链路估值链（PR #20）**：financial_model 泛化到多产品线（rv/gear 自动识别），economic_mapper 支持规则级 `product_line_scope`，ontology 变体 `tech_to_economics_ontology_shuanghuan.json` + `data/processed/shuanghuan_model_inputs.csv`，端到端输出三情景 EV **72.66 / 122.89 / 19.04 亿元**（base/upside/downside；PR #28 按环动招股书实际均价校准 RV 参数后），回归覆盖 `tests/test_shuanghuan_chain.py`。
 
-**3. 反向 DCF 视角（PR #19）**：以 2026-09-04 市值 512.96 亿元反推，绿的谐波现价隐含销量倍数 **8.54×**；三情景下市价与内在价值 gap 为 **-88.29% / -83.14% / -93.73%**——"以价换量"放量逻辑与 365 倍 PE 期权定价并存的现象被量化呈现。
+**3. 反向 DCF 视角（PR #19）**：以 2026-09-04 市值 512.96 亿元反推，绿的谐波现价隐含销量倍数 **16.66×**；三情景下市价与内在价值 gap 为 **-94.00% / -88.60% / -99.82%**（PR #28 参数复核后口径）——"以价换量"放量逻辑与 365 倍 PE 期权定价并存的现象被量化呈现。
 
 **4. 工程性能（PR #18）**：规则链延迟基准 N=30 实测 **p50 4.3ms / p95 5.0ms**（同日三次复测 3.7–4.3ms）（`scripts/benchmark_latency.py`，报告 `benchmarks/latency_report.md`）。
 
