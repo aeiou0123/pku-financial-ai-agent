@@ -1,15 +1,15 @@
-﻿metric,year,value,unit,input_type,source,source_locator,notes
+metric,year,value,unit,input_type,source,source_locator,notes
 rv_revenue_h1_bn,2025H1,0.34899008238,bn_cny,historical,双环传动2025年半年度报告,双环传动2025年半年度报告 p14（营业收入构成表）,"减速器及其他业务 2025H1 半年累计收入 348,990,082.38 元（官方口径，与研报'Q2单季3.49亿'标注不同）"
 gear_revenue_h1_bn,2025H1,2.66893281005,bn_cny,historical,双环传动2025年半年度报告,双环传动2025年半年度报告 p14（营业收入构成表）,"乘用车齿轮 2025H1 半年累计收入 2,668,932,810.05 元"
-rv_units_wan,2025,19,wan_units,assumption,建模假设,无官方销量披露,由 2025H1 收入 0.349bn 年化及 RV 减速器 ASP 假设推算；2025 年假设值
-rv_asp_yuan,2025,4300,yuan_per_unit,assumption,建模假设,无官方 ASP 披露,RV 减速器原型假设 ASP（RV 单价高于谐波），逐年微降
-rv_unit_cost_yuan,2025,2900,yuan_per_unit,assumption,建模假设,无官方成本披露,对应毛利率约 27-28% 的原型假设
-rv_units_wan,2026,24,wan_units,assumption,建模假设,无官方销量披露,由 2025H1 收入 0.349bn 年化及 RV 减速器 ASP 假设推算；2026 年假设值
-rv_asp_yuan,2026,4200,yuan_per_unit,assumption,建模假设,无官方 ASP 披露,RV 减速器原型假设 ASP（RV 单价高于谐波），逐年微降
-rv_unit_cost_yuan,2026,2850,yuan_per_unit,assumption,建模假设,无官方成本披露,对应毛利率约 27-28% 的原型假设
-rv_units_wan,2027,30,wan_units,assumption,建模假设,无官方销量披露,由 2025H1 收入 0.349bn 年化及 RV 减速器 ASP 假设推算；2027 年假设值
-rv_asp_yuan,2027,4100,yuan_per_unit,assumption,建模假设,无官方 ASP 披露,RV 减速器原型假设 ASP（RV 单价高于谐波），逐年微降
-rv_unit_cost_yuan,2027,2800,yuan_per_unit,assumption,建模假设,无官方成本披露,对应毛利率约 27-28% 的原型假设
+rv_units_wan,2025,22,wan_units,assumption,建模假设,无官方销量披露,由 2025H1 收入 0.349bn 年化（≈0.698bn）及修正后 RV ASP 3100 元推算（0.698bn/3100≈22.5万台，取 22 万）；产能锚点：环动 2024H1 产能 10.54 万台/利用率 83%（年化约 21 万台），22 万需依赖募投扩产爬坡
+rv_asp_yuan,2025,3100,yuan_per_unit,assumption,环动科技招股说明书（申报稿）2024-11-25,上交所 static.sse.com.cn/stock/disclosure/announcement/c/202411/002040_20241125_ZBJC.pdf,"RV 实际均价锚点：2021-2024H1 为 2,533/3,209/3,065/2,653 元/台；取 3100 元含大负载结构升级溢价，逐年微降"
+rv_unit_cost_yuan,2025,2000,yuan_per_unit,assumption,环动科技招股说明书（申报稿）2024-11-25,同上,"对应毛利率约 35.5%，对齐环动 RV 毛利率区间 35.6-42.4%（2021-2024H1）的下沿；修正前 2900 元与 notes 自述 27-28% 不自洽，已按招股书锚点重定"
+rv_units_wan,2026,27,wan_units,assumption,建模假设,无官方销量披露,2026 年假设值（同比 +22.7%，扩产爬坡）
+rv_asp_yuan,2026,3050,yuan_per_unit,assumption,环动科技招股说明书（申报稿）2024-11-25,同上,RV 均价逐年微降假设（招股书披露主要产品单价逐年下降）
+rv_unit_cost_yuan,2026,1970,yuan_per_unit,assumption,环动科技招股说明书（申报稿）2024-11-25,同上,对应毛利率约 35.4%
+rv_units_wan,2027,33,wan_units,assumption,建模假设,无官方销量披露,2027 年假设值（同比 +22.2%）
+rv_asp_yuan,2027,3000,yuan_per_unit,assumption,环动科技招股说明书（申报稿）2024-11-25,同上,RV 均价逐年微降假设
+rv_unit_cost_yuan,2027,1940,yuan_per_unit,assumption,环动科技招股说明书（申报稿）2024-11-25,同上,对应毛利率约 35.3%
 gear_units_wan,2025,5400,wan_units,assumption,建模假设,无官方销量披露,由 2025H1 收入 2.669bn 年化及齿轮件均 ASP≈100 元假设推算；2025 年假设值
 gear_asp_yuan,2025,100,yuan_per_unit,assumption,建模假设,无官方 ASP 披露,乘用车齿轮件原型假设 ASP
 gear_unit_cost_yuan,2025,72,yuan_per_unit,assumption,建模假设,无官方成本披露,对应毛利率约 28% 的原型假设

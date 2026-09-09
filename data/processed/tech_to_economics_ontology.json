@@ -214,8 +214,8 @@
    },
    "economic_variable": "unit_cost",
    "direction": "positive",
-   "default_elasticity": 0.5,
-   "elasticity_basis": "同规格减速器重量差近似材料用量差（柔轮/刚轮/外壳金属件占比高），材料成本占 BOM 主要部分，取弹性 0.50：同扭矩级重量差 10% → 单位材料成本约 5%。依据：parameter_table_filled.csv 同扭矩级（额定 40-110 N·m）产品重量 2.5-4.7kg。注意：轻量化的材料成本优势可能被更高的加工/工艺成本抵消，本系数为显式可调假设，需工程成员复核 BOM。",
+   "default_elasticity": 0.25,
+   "elasticity_basis": "同规格减速器重量差近似材料用量差，但精密减速器成本中加工/装配/检测占大头、材料占比低：环动科技招股书（2024-11 申报稿）披露钢材采购价 6.14-6.65 元/kg，一台 4.7kg 减速器钢材直接成本仅约 30 元量级（毛坯件 81-119 元/只另计），重量差 10% 对应的纯材料成本差远小于 5%。取弹性 0.25（修正前 0.50 偏高）：同扭矩级重量差 10% → 单位成本约 2.5%，含加工规模效应代理。依据：parameter_table_filled.csv 同扭矩级（额定 40-110 N·m）产品重量 2.5-4.7kg。本系数为显式可调假设。",
    "evidence_requirement": "approximate",
    "industry_data_refs": [],
    "qualitative_note": "重量显著高于同扭矩级同业时，材料成本劣势将压缩毛利空间；反向的轻量化优势是毛利改善的候选来源。"

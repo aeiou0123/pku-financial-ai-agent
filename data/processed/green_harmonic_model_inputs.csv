@@ -13,9 +13,9 @@ harmonic_asp_yuan,2027,1050,yuan_per_unit,assumption,project_scenario_template,d
 joint_asp_yuan,2025,2400,yuan_per_unit,assumption,project_scenario_template,data/processed/financial_model_inputs_template.csv,人工情景假设
 joint_asp_yuan,2026,2200,yuan_per_unit,assumption,project_scenario_template,data/processed/financial_model_inputs_template.csv,人工情景假设
 joint_asp_yuan,2027,2000,yuan_per_unit,assumption,project_scenario_template,data/processed/financial_model_inputs_template.csv,人工情景假设
-harmonic_unit_cost_yuan,2025,580,yuan_per_unit,assumption,bom_template,data/processed/bom_template.csv,BOM模板候选值；待工程成员核验
-harmonic_unit_cost_yuan,2026,560,yuan_per_unit,assumption,bom_template,data/processed/bom_template.csv,BOM模板候选值；待工程成员核验
-harmonic_unit_cost_yuan,2027,540,yuan_per_unit,assumption,bom_template,data/processed/bom_template.csv,BOM模板候选值；待工程成员核验
+harmonic_unit_cost_yuan,2025,730,yuan_per_unit,assumption,green_harmonic_2024_annual_report.pdf,data/raw/company_filings/green_harmonic_2024_annual_report.pdf.meta.json,按 2024 年报谐波减速器及金属件毛利率 36.13% 锚定：1150×(1-36.5%)≈730；修正前 580 元隐含 GM 49.6% 偏乐观
+harmonic_unit_cost_yuan,2026,710,yuan_per_unit,assumption,green_harmonic_2024_annual_report.pdf,data/raw/company_filings/green_harmonic_2024_annual_report.pdf.meta.json,毛利率口径同上（2026 隐含 GM 约 35.5%）
+harmonic_unit_cost_yuan,2027,690,yuan_per_unit,assumption,green_harmonic_2024_annual_report.pdf,data/raw/company_filings/green_harmonic_2024_annual_report.pdf.meta.json,毛利率口径同上（2027 隐含 GM 约 34.3%，含降价压力）
 joint_unit_cost_yuan,2025,1450,yuan_per_unit,assumption,bom_template,data/processed/bom_template.csv,BOM模板候选值；待工程成员核验
 joint_unit_cost_yuan,2026,1350,yuan_per_unit,assumption,bom_template,data/processed/bom_template.csv,BOM模板候选值；待工程成员核验
 joint_unit_cost_yuan,2027,1250,yuan_per_unit,assumption,bom_template,data/processed/bom_template.csv,BOM模板候选值；待工程成员核验
@@ -31,9 +31,9 @@ rd_expense_rate,2027,0.10,ratio,assumption,project_scenario_template,data/proces
 depreciation_rate,2025,0.03,ratio,assumption,project_scenario_template,data/processed/financial_model_inputs_template.csv,简化模型假设
 depreciation_rate,2026,0.03,ratio,assumption,project_scenario_template,data/processed/financial_model_inputs_template.csv,简化模型假设
 depreciation_rate,2027,0.03,ratio,assumption,project_scenario_template,data/processed/financial_model_inputs_template.csv,简化模型假设
-tax_rate,2025,0.25,ratio,assumption,project_scenario_template,data/processed/financial_model_inputs_template.csv,简化模型假设；实际税率待财务成员核对
-tax_rate,2026,0.25,ratio,assumption,project_scenario_template,data/processed/financial_model_inputs_template.csv,简化模型假设；实际税率待财务成员核对
-tax_rate,2027,0.25,ratio,assumption,project_scenario_template,data/processed/financial_model_inputs_template.csv,简化模型假设；实际税率待财务成员核对
+tax_rate,2025,0.15,ratio,assumption,green_harmonic_2024_annual_report.pdf,data/raw/company_filings/green_harmonic_2024_annual_report.pdf.meta.json,2024 年报原文：已取得高新技术企业认定，减按 15%税率缴纳所得税；修正前 25% 偏保守
+tax_rate,2026,0.15,ratio,assumption,green_harmonic_2024_annual_report.pdf,data/raw/company_filings/green_harmonic_2024_annual_report.pdf.meta.json,同上（高新资质有效期内 15%）
+tax_rate,2027,0.15,ratio,assumption,green_harmonic_2024_annual_report.pdf,data/raw/company_filings/green_harmonic_2024_annual_report.pdf.meta.json,同上（高新资质有效期内 15%）
 capex_rate,2025,0.06,ratio,assumption,project_scenario_template,data/processed/financial_model_inputs_template.csv,简化模型假设
 capex_rate,2026,0.06,ratio,assumption,project_scenario_template,data/processed/financial_model_inputs_template.csv,简化模型假设
 capex_rate,2027,0.06,ratio,assumption,project_scenario_template,data/processed/financial_model_inputs_template.csv,简化模型假设
