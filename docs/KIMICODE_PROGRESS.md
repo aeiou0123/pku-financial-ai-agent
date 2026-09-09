@@ -16,7 +16,7 @@
 | 技术管线 | 全链路：engineering_analyzer → economic_mapper → causal_critic → workflow；估值链已移植 2 家公司（绿的、双环）；反向 DCF implied 8.54×（PR #19） |
 | 演示 | 3 分钟口播脚本 + 1 分钟 fallback + 录屏清单（`10_demo_script.md`，PR #24），全部基于 2026-09-07 实跑；延迟 N=30 p50 4.3ms/p95 5.0ms |
 | 测试 | 140 passed，全绿 |
-| **下一步** | **答辩待命**。本地终验已完成；剩余人工项：①15 条待验证 Claim 人工终验（清单已备）②经济金融组复核模型与 RV ontology 口径③演示彩排（脚本已备）④赛后 live 检索（evidence_retriever） |
+| **下一步** | **答辩待命**。剩余人工项：①15 条 Claim 终验（**K3 预检报告已出**：`appendix_precheck_report.md`，10 过/1 修口径/4 维持，人工确认后写回）②经济金融组复核模型（**K3 复核报告已出**：`model_param_review.md`，RV ASP/成本与 weight 弹性建议修正）③演示彩排（脚本已备）④赛后 live 检索（evidence_retriever） |
 
 ## 二、PR 历史（K3 经手的全部提交，倒序）
 
