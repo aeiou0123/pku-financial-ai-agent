@@ -14,9 +14,10 @@
 | 商业潜力（70% 分值载体） | 第 5 章完整（TAM/SAM/SOM 2–6 亿/年、竞争格局、三档定价），素材 C1–C8 齐备；路演大纲 `11_pitch_outline.md`（12 页）已定 |
 | Claim Bank | **51 条 / 11 家公司**：47 条已验证可引用（公告原文级，含 2026-09-09 机器预检+人工确认升级的 11 条）、4 条待验证（BK_001/BK_003/GH_007/SH_002，附驳回路径：`docs/proposal/appendix_pending_review.md`） |
 | 技术管线 | 全链路：engineering_analyzer → economic_mapper → causal_critic → workflow；估值链已移植 2 家公司（绿的、双环）；反向 DCF implied 16.66×（PR #19；PR #28 参数复核后口径） |
-| 演示 | 3 分钟口播脚本 + 1 分钟 fallback + 录屏清单（`10_demo_script.md`，PR #24），全部基于 2026-09-07 实跑；延迟 N=30 p50 4.3ms/p95 5.0ms |
+| 演示 | 3 分钟口播脚本 + 1 分钟 fallback + 录屏清单（`10_demo_script.md`，PR #24），全部基于 2026-09-07 实跑；延迟 N=30 p50 4.3ms/p95 5.0ms；12 页路演 PPT 已生成（`deliverables/Claim2Value_pitch.pptx`，PR #29） |
 | 测试 | 140 passed，全绿 |
-| **下一步** | **答辩待命**。剩余人工项：①15 条 Claim 终验（**K3 预检报告已出**：`appendix_precheck_report.md`，10 过/1 修口径/4 维持，人工确认后写回）②经济金融组复核模型（**K3 复核报告已出**：`model_param_review.md`，RV ASP/成本与 weight 弹性建议修正）③演示彩排（脚本已备）④赛后 live 检索（evidence_retriever） |
+| 提交材料 | **已定稿（2026-09-10）**：表单逐字段可复制版 `deliverables/submission_form.md`、封面/PPT/说明文档 PDF、AIStudio 代码暂存包 `work/code_submission/` |
+| **下一步** | **BigQuant 提交 + 演示视频录屏**。剩余人工项：①按 `submission_form.md` 粘贴提交（含团队展示名称决定）②AIStudio 上传 `work/code_submission/` 并提交代码③按 `10_demo_script.md` 真人彩排录屏并补传视频④赛后 live 检索（evidence_retriever） |
 
 ## 二、PR 历史（K3 经手的全部提交，倒序）
 
