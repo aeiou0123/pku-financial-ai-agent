@@ -4,15 +4,12 @@
 \usepackage{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta,calc}
-\usepackage[most]{tcolorbox}
-\usepackage{fontawesome5}
 \usepackage{booktabs}
 
-% ---------- 品牌色 ----------
+% ---------- 颜色 ----------
 \definecolor{navy}{HTML}{1E2761}
 \definecolor{gold}{HTML}{F0B429}
 \definecolor{ice}{HTML}{CADCFC}
-\definecolor{inkdark}{HTML}{141A3D}
 \definecolor{paper}{HTML}{FBFBF8}
 \definecolor{graytext}{HTML}{5A5F77}
 
@@ -33,466 +30,256 @@
   BoldItalicFont=*-BoldItalic]
 
 % ---------- metropolis 定制 ----------
-\metroset{block=fill,progressbar=frametitle,numbering=fraction,background=light}
+\metroset{progressbar=frametitle,numbering=none,background=light}
 \setbeamercolor{normal text}{fg=navy,bg=paper}
-\setbeamercolor{frametitle}{bg=navy,fg=paper}
+\setbeamercolor{frametitle}{bg=paper,fg=navy}
 \setbeamercolor{title separator}{fg=gold}
 \setbeamercolor{progress bar}{fg=gold,bg=ice}
-\setbeamercolor{alerted text}{fg=gold}
 \setbeamerfont{frametitle}{size=\Large,series=\bfseries}
 
-% 页脚：章节号 + 页码
-\newcommand{\sectiontag}[1]{\def\currenttag{#1}}
-\def\currenttag{}
+% 页脚：仅页码
 \setbeamertemplate{footline}{%
   \hbox to \paperwidth{%
     \hfill
-    {\scriptsize\color{graytext}\currenttag\hspace{1em}\insertframenumber\,/\,\inserttotalframenumber}%
-    \hspace{0.5em}}%
-  \vspace{1.0ex}}
+    {\scriptsize\color{graytext}\insertframenumber}%
+    \hspace{0.8em}}%
+  \vspace{1.2ex}}
 
-% ---------- 组件 ----------
-% 大数字卡 \numcard{宽}{数字}{说明}
-\newcommand{\numcard}[3]{%
-  \begin{tcolorbox}[enhanced,width=#1,colback=white,colframe=navy!18,
-    boxrule=0.8pt,arc=2mm,borderline west={2.2mm}{0mm}{gold},left=2mm,right=2mm,top=1.0mm,bottom=1.0mm]
-    {\huge\bfseries\color{navy}#2}\\[0.2mm]
-    {\scriptsize\color{graytext}#3}
-  \end{tcolorbox}}
-
-% 金色序号徽标（避免 ①②③ 字形缺字）
-\newcommand{\numbadge}[1]{%
-  \tikz[baseline=(x.base)]{\node[circle,fill=gold,text=navy,inner sep=0.8mm,
-    font=\footnotesize\bfseries,minimum size=0.42cm] (x) {#1};}}
+\setlength{\leftmargini}{1.2em}
 
 \begin{document}
 
-% ============ P1 封面 ============
-\sectiontag{}
+% ============ P1 封面（深色） ============
 \begin{frame}[plain]
 \begin{tikzpicture}[remember picture,overlay]
   \fill[navy] (current page.south west) rectangle (current page.north east);
-  \fill[gold] ([xshift=-0.35cm,yshift=-0.35cm]current page.north east)
-              rectangle (current page.north east);
+  \fill[gold] ([xshift=0cm,yshift=1.05cm]current page.south west)
+              rectangle ([xshift=\paperwidth,yshift=0.95cm]current page.south west);
 \end{tikzpicture}
-\vspace{2.2em}
-{\color{gold}\small 北大金融 AI 智能体创新大赛 · 机器人关节模组产业链}\\[1.2em]
-{\color{paper}\Huge\bfseries Claim2Value}\\[0.8em]
-{\color{paper}\LARGE 工业技术 Claim 到金融价值的可信映射 Agent}\\[1.2em]
-{\color{ice}\normalsize 把「公司说自己技术多牛」变成「证据支持的财务影响」}\\[2.4em]
-\begin{tikzpicture}[x=1cm,y=1cm]
-  \node[circle,fill=ice,text=navy,minimum size=0.55cm,inner sep=0] (a) at (0,0) {};
-  \node[circle,fill=gold,text=navy,minimum size=0.75cm,inner sep=0] (b) at (2.6,0) {};
-  \node[circle,fill=ice,text=navy,minimum size=0.55cm,inner sep=0] (c) at (5.2,0) {};
-  \draw[ice,line width=1.2pt] (a) -- (b) -- (c);
-  \node[below=0.25cm of a, text=ice] {\small CLAIM};
-  \node[below=0.25cm of b, text=gold] {\small 证据};
-  \node[below=0.25cm of c, text=ice] {\small 价值};
-\end{tikzpicture}
+\vspace{3.2em}
+{\color{paper}\Huge\bfseries Claim2Value}\\[1.0em]
+{\color{paper}\LARGE 工业技术 Claim 到金融价值的可信映射 Agent}\\[3.2em]
+{\color{ice}\small 北大金融 AI 智能体创新大赛 · 机器人关节模组产业链}
 \end{frame}
 
-% ============ P2 痛点 ============
-\sectiontag{02 痛点}
-\begin{frame}{痛点：工程信号与金融决策之间的信息断层}
-\vspace{0.2em}
+% ============ P2 券商假设被击穿 ============
+\begin{frame}{券商 ASP 假设已被实际数据击穿}
+\vspace{0.3em}
 \begin{columns}[T]
-\column{0.44\textwidth}
-\begin{tcolorbox}[colback=ice!45,colframe=ice!45,arc=2mm,title={\bfseries 产业链技术信号},
-  coltitle=navy,colbacktitle=ice!45,left=2mm,right=2mm,top=1mm,bottom=1mm,fonttitle=\small]
-  \footnotesize
-  \begin{itemize}\setlength{\itemsep}{0.15em}
-    \item 减速器扭矩提升公告
-    \item 丝杠量产订单
-    \item 募投扩产
-    \item 新品参数宣称
-  \end{itemize}
-\end{tcolorbox}
-\column{0.12\textwidth}
-\vspace{2.2em}
+\column{0.54\textwidth}
 \centering
-\begin{tikzpicture}
-  \draw[-{Stealth[length=3mm]},gold,line width=2.4pt] (0,0) -- (1.05,0);
-  \node[above,text=gold,font=\scriptsize\bfseries] at (0.52,0) {断层};
-\end{tikzpicture}
-\column{0.44\textwidth}
-\begin{tcolorbox}[colback=navy!6,colframe=navy!6,arc=2mm,title={\bfseries 金融决策},
-  coltitle=navy,colbacktitle=navy!6,left=2mm,right=2mm,top=1mm,bottom=1mm,fonttitle=\small]
-  \footnotesize
-  \begin{itemize}\setlength{\itemsep}{0.15em}
-    \item 宣称值多少钱？
-    \item 证据够写进报告吗？
-    \item 买 / 卖 / 持有的赔率？
-  \end{itemize}
-\end{tcolorbox}
-\end{columns}
-
-\vspace{1.2em}
-\begin{columns}[T]
-\column{0.32\textwidth}
-\begin{tcolorbox}[colback=white,colframe=navy!15,arc=2mm,boxrule=0.7pt,left=2mm,right=2mm,top=1.4mm,bottom=1.4mm]
-  {\numbadge{1}}\ {\bfseries 人肉翻译}\\[0.2em]
-  {\footnotesize\color{graytext}工程宣称到财务影响靠人工，慢且不可复算}
-\end{tcolorbox}
-\column{0.32\textwidth}
-\begin{tcolorbox}[colback=white,colframe=navy!15,arc=2mm,boxrule=0.7pt,left=2mm,right=2mm,top=1.4mm,bottom=1.4mm]
-  {\numbadge{2}}\ {\bfseries 口径打架}\\[0.2em]
-  {\footnotesize\color{graytext}卖方研报各说各话——券商 ASP 1,500 元假设已被 2024 实际 1,293 元击穿}
-\end{tcolorbox}
-\column{0.32\textwidth}
-\begin{tcolorbox}[colback=white,colframe=navy!15,arc=2mm,boxrule=0.7pt,left=2mm,right=2mm,top=1.4mm,bottom=1.4mm]
-  {\numbadge{3}}\ {\bfseries 真假难辨}\\[0.2em]
-  {\footnotesize\color{graytext}买方无法区分已验证证据与公司话术}
-\end{tcolorbox}
+\includegraphics[width=\linewidth]{../latex/fig_asp.pdf}
+\column{0.46\textwidth}
+\small
+\begin{itemize}\setlength{\itemsep}{0.55em}
+  \item 券商盈利预测按谐波减速器 ASP 1,500 元/台建模。
+  \item 2024 年年报实际为 1,293 元/台，2025 年市场最新口径为 1,099 元/台，较假设低约 27\%；假设被击穿后，估值结论并未同步修正。
+  \item 口径错误同样存在：SH\_003 案例中，券商把双环传动 2025H1 \emph{累计}营收 3.49 亿元（+35.66\%）写成「Q2 单季 3.49 亿元、+35.8\%」，按单季年化会把增速高估约一倍。
+\end{itemize}
 \end{columns}
 \end{frame}
 
-% ============ P3 产品流水线 ============
-\sectiontag{03 产品}
-\begin{frame}{产品：从 Claim 到三情景 EV 的一条流水线}
-\vspace{0.4em}
+% ============ P3 产品链路 ============
+\begin{frame}{一条链路：验证置信度直接进入估值，不是两套数字}
+\vspace{0.8em}
 \centering
 \begin{tikzpicture}[
-  node distance=0.16cm,
-  every node/.style={rounded corners=1.6mm,minimum height=0.85cm,align=center,font=\scriptsize\bfseries},
-  stepbox/.style={fill=navy!8,text=navy,inner xsep=1.8mm},
-  gate/.style={fill=gold,text=navy,inner xsep=1.8mm},
-  arr/.style={-{Stealth[length=2.2mm]},navy!45,line width=1.1pt}]
-  \node[stepbox] (n1) {Claim};
-  \node[gate,right=of n1] (n2) {验证};
-  \node[stepbox,right=of n2] (n3) {门控};
-  \node[stepbox,right=of n3] (n4) {工程\\归一化};
-  \node[stepbox,right=of n4] (n5) {经济\\映射};
+  node distance=0.32cm,
+  every node/.style={font=\scriptsize},
+  box/.style={draw=navy!45,fill=white,rounded corners=0.4mm,
+    minimum width=1.52cm,minimum height=0.85cm,align=center,text=navy},
+  gate/.style={box,draw=gold,fill=gold!22,line width=0.9pt},
+  arr/.style={-{Stealth[length=2.2mm]},navy!60,line width=0.8pt}]
+  \node[box] (n1) {Claim\\提取};
+  \node[gate,right=of n1] (n2) {证据\\验证};
+  \node[box,right=of n2] (n3) {门控\\拦截};
+  \node[box,right=of n3] (n4) {工程\\归一化};
+  \node[box,right=of n4] (n5) {经济\\映射};
   \node[gate,right=of n5] (n6) {因果\\批判};
-  \node[stepbox,right=of n6] (n7) {财务\\三情景};
-  \draw[arr] (n1) -- (n2); \draw[arr] (n2) -- (n3); \draw[arr] (n3) -- (n4);
-  \draw[arr] (n4) -- (n5); \draw[arr] (n5) -- (n6); \draw[arr] (n6) -- (n7);
+  \node[box,right=of n6] (n7) {财务\\三情景};
+  \draw[arr] (n1) -- (n2);
+  \draw[arr] (n2) -- (n3);
+  \draw[arr] (n3) -- (n4);
+  \draw[arr] (n4) -- (n5);
+  \draw[arr] (n5) -- (n6);
+  \draw[arr] (n6) -- (n7);
 \end{tikzpicture}
-
-\vspace{0.1em}
-{\scriptsize\color{graytext} 金色 = 别家没有的两道闸：证据验证 · 因果批判}
-
-\vspace{0.9em}
+\vspace{1.2em}
 \begin{columns}[T]
-\column{0.48\textwidth}
-\begin{tcolorbox}[colback=white,colframe=navy!15,arc=2mm,boxrule=0.7pt,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm]
-  {\bfseries\color{navy} 传导而非并存}\\[0.15em]
-  {\footnotesize\color{graytext} 验证结论直接传导进估值，不是两套数字各说各话}
-\end{tcolorbox}
-\vspace{0.5em}
-\begin{tcolorbox}[colback=white,colframe=navy!15,arc=2mm,boxrule=0.7pt,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm]
-  {\bfseries\color{navy} 透明打折}\\[0.15em]
-  {\footnotesize\color{graytext} 行业 $\beta$ vs 公司 $\alpha$，置信度 0.5 $\to$ 0.32 全程可见}
-\end{tcolorbox}
-\column{0.48\textwidth}
-\begin{tcolorbox}[colback=white,colframe=navy!15,arc=2mm,boxrule=0.7pt,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm]
-  {\bfseries\color{navy} 逐条溯源}\\[0.15em]
-  {\footnotesize\color{graytext} 证据等级 + 置信度 + provenance，回溯到公告页码}
-\end{tcolorbox}
-\vspace{0.5em}
-\begin{tcolorbox}[colback=white,colframe=navy!15,arc=2mm,boxrule=0.7pt,left=2mm,right=2mm,top=1.2mm,bottom=1.2mm]
-  {\bfseries\color{navy} 三栏输入}\\[0.15em]
-  {\footnotesize\color{graytext} 历史锚点 / 人工假设 / 计算结果，分列不混账}
-\end{tcolorbox}
+\column{0.02\textwidth}
+\column{0.9\textwidth}
+\small
+\begin{itemize}\setlength{\itemsep}{0.55em}
+  \item 验证环节输出的置信度直接进入经济映射与财务模型，调整的是同一套假设——不存在「验证一套数字、估值一套数字」。
+  \item 金色标注的验证与因果批判是两个硬门控：证据不足的 Claim 被拦截，不进入估值。
+\end{itemize}
 \end{columns}
 \end{frame}
 
 % ============ P4 证据网络 ============
-\sectiontag{04.1--4.2 证据网络}
-\begin{frame}{证据网络：11 家公司 · 51 条结构化 Claim}
-\vspace{0.2em}
+\begin{frame}{51 条 Claim：47 条验证到公告原文级，4 条写明待验证原因}
+\vspace{0.3em}
 \begin{columns}[T]
-\column{0.31\textwidth}
-\numcard{\linewidth}{51}{结构化 Claim\\（机器人关节模组产业链）}
-\column{0.31\textwidth}
-\numcard{\linewidth}{47}{已验证 · 公告原文级\\页码 + 内容指纹}
-\column{0.31\textwidth}
-\numcard{\linewidth}{4}{待终验 · 显式标注\\疑点与驳回路径}
-\end{columns}
-
-\vspace{0.35em}
-{\small\bfseries\color{navy} 覆盖公司}\\[0.2em]
-{\footnotesize\color{graytext}
-绿的谐波 · 双环传动（环动科技）· 步科股份 · 中大力德 · 鸣志电器 · 柯力传感 · 五洲新春 · 贝斯特 · 恒立液压 · 国茂股份 · 秦川机床}
-
-\vspace{0.35em}
-\begin{tcolorbox}[colback=navy,colframe=navy,arc=2mm,left=2.5mm,right=2.5mm,top=1.2mm,bottom=1.2mm]
-  {\small\bfseries\color{gold} 2026-09-09 终验实证}\\[0.1em]
-  {\footnotesize\color{paper} 11 条经巨潮公告原文逐字核对升级——含 SH\_003：券商研报把半年报累计数误标为单季，被口径审查捕获并以官方原文纠偏}
-\end{tcolorbox}
-\end{frame}
-
-% ============ P5 深度案例 ============
-\sectiontag{04.3--4.4 深度案例}
-\begin{frame}{深度案例：绿的谐波「关节模组减重 30\%」实跑全程}
-\vspace{0.1em}
-\begin{columns}[T]
-\column{0.60\textwidth}
-\footnotesize
-\begin{enumerate}\setlength{\itemsep}{0.35em}
-  \item {\bfseries 输入检出}：限定词缺失——原文「同等出力情况下」被丢 $\to$ {\color{gold}\bfseries 部分成立，置信度 0.3}
-  \item {\bfseries 门控 + 归一化}：14 行参数，4 可比 / 10 不可比——不硬算
-  \item {\bfseries 经济映射}：扭矩密度 $\to$ 渗透率 {\bfseries -10.26\%}（证据 high）；重量 $\to$ BOM 成本 {\bfseries -5.47\%}（弹性经招股书材料成本校准）
-  \item {\bfseries 因果批判}：12 替代解释、14 待补反事实，置信度 0.5 $\to$ {\color{gold}\bfseries 0.32}
-  \item {\bfseries 三情景 EV} $\Rightarrow$ 右栏（原型情景 · 非投资建议）
-\end{enumerate}
-\column{0.36\textwidth}
-\begin{tcolorbox}[colback=navy,colframe=navy,arc=2.5mm,left=3mm,right=3mm,top=2.5mm,bottom=2.5mm]
-  {\scriptsize\color{ice} 三情景 EV（亿元）}\\[0.4em]
-  {\color{ice}\small base}\hfill{\color{paper}\LARGE\bfseries 43.4}\\[0.3em]
-  {\color{ice}\small upside}\hfill{\color{gold}\LARGE\bfseries 69.4}\\[0.3em]
-  {\color{ice}\small downside}\hfill{\color{paper}\LARGE\bfseries 15.8}\\[0.5em]
-  {\scriptsize\color{ice}\itshape 原型情景 · 非投资建议}
-\end{tcolorbox}
-\end{columns}
-
-\vspace{0.8em}
-\begin{center}
-{\small\color{navy} 验证强度决定估值强度——这条链路里没有「无条件相信」这个数字}
-\end{center}
-\end{frame}
-
-% ============ P6 通用性 ============
-\sectiontag{04 通用性}
-\begin{frame}{通用性现场证明：同一链路，换一家公司}
-\vspace{0.2em}
+\column{0.56\textwidth}
 \centering
-\renewcommand{\arraystretch}{1.3}
-\begin{tabular}{@{}p{0.17\textwidth}p{0.33\textwidth}p{0.42\textwidth}@{}}
-\toprule
- & {\bfseries\color{navy} 绿的谐波} & {\bfseries\color{navy} 双环传动} \\
-\midrule
-{\footnotesize\bfseries 输入} & {\footnotesize 绿的 fixture} & {\footnotesize 双环 fixture} \\
-{\footnotesize\bfseries 产品线识别} & {\footnotesize harmonic / joint} & {\footnotesize rv / gear 自动识别} \\
-{\footnotesize\bfseries 映射规则} & {\footnotesize 默认 ontology} & {\footnotesize 双环变体 product\_line\_scope} \\
-{\footnotesize\bfseries 三情景 EV} & {\footnotesize 43.4 / 69.4 / 15.8 亿} & {\footnotesize\bfseries\color{gold} 72.7 / 122.9 / 19.0 亿}{\footnotesize ，RV 按环动招股书实际均价校准} \\
-\bottomrule
-\end{tabular}
+\includegraphics[width=\linewidth]{../latex/fig_claims.pdf}
+\column{0.44\textwidth}
+\small
+\begin{itemize}\setlength{\itemsep}{0.55em}
+  \item 覆盖 11 家机器人关节模组产业链公司，共 51 条技术 Claim。
+  \item 47 条已验证到公告原文级：每条带来源页码与内容指纹，可逐条回查。
+  \item 4 条待验证，原因逐条写明：两条官方尚未披露，两条待厂商手册确认，不混入已验证集合。
+\end{itemize}
+\end{columns}
+\end{frame}
 
-\vspace{0.8em}
-\begin{tcolorbox}[colback=ice!40,colframe=ice!40,arc=2mm,left=2.5mm,right=2.5mm,top=1.2mm,bottom=1.2mm]
-  \centering\small\color{navy}
-  产品线泛化、ontology 变体、规则级 product\_line\_scope {\bfseries 全是代码层实现}，{\color{gold}\bfseries 140 项回归测试}锁定
-\end{tcolorbox}
+% ============ P5 深度案例·绿的谐波 ============
+\begin{frame}{案例实跑：绿的谐波「减重 30\%」，从一句宣传到三情景 EV}
+\vspace{0.3em}
+\begin{columns}[T]
+\column{0.44\textwidth}
+\centering
+\includegraphics[width=\linewidth]{../latex/fig_confidence.pdf}
+\column{0.56\textwidth}
+\small
+\begin{itemize}\setlength{\itemsep}{0.4em}
+  \item Claim 解析：「减重 30\%」缺限定词，判为部分成立，初始置信度 0.3。
+  \item 参数比对：抽取 14 行参数，其中 4 项与既有产品口径可比。
+  \item 经济映射：BOM 成本 -10.26\%，毛利率影响 -5.47\%。
+  \item 因果批判：列 12 条替代解释、14 条反事实检验，两条映射链置信度由 0.80 / 0.50 下修至 0.60 / 0.32。
+  \item 财务三情景：EV 基准 43.4 亿 / 乐观 69.4 亿 / 悲观 15.8 亿元（原型情景，非投资建议）。
+\end{itemize}
+\end{columns}
+\end{frame}
+
+% ============ P6 双环传动 ============
+\begin{frame}{同一套链路换一家公司：双环传动，RV 均价按招股书校准}
+\vspace{0.3em}
+\begin{columns}[T]
+\column{0.54\textwidth}
+\centering
+\includegraphics[width=\linewidth]{../latex/fig_rv_anchor.pdf}
+\column{0.46\textwidth}
+\small
+\begin{itemize}\setlength{\itemsep}{0.55em}
+  \item 输入是同格式 fixture 公告；系统按 ontology 变体自动识别 RV 减速器与齿轮两类业务，无需改代码。
+  \item RV 减速器 ASP 不再拍脑袋取 4,300 元/台，按环动科技招股书披露的实际均价校准为 3,100 元/台。
+  \item 三情景 EV：基准 72.7 亿 / 乐观 122.9 亿 / 悲观 19.0 亿元（原型情景，非投资建议）。
+\end{itemize}
+\end{columns}
 \end{frame}
 
 % ============ P7 反向 DCF ============
-\sectiontag{05.5 反向 DCF}
-\begin{frame}{反向 DCF：市价在为什么定价}
-\vspace{0.2em}
+\begin{frame}{反向 DCF：市价隐含的销量预期是可验证基准的 16.7 倍}
+\vspace{0.3em}
 \begin{columns}[T]
-\column{0.56\textwidth}
-{\footnotesize\bfseries\color{navy} 市价 vs 模型三情景 EV（亿元）}\\[0.4em]
-\begin{tikzpicture}[x=1cm,y=1cm]
-  % 比例尺: 512.96 -> 4.6cm
-  \fill[navy] (0,2.75) rectangle (4.6,3.25);
-  \node[right,text=navy,font=\scriptsize\bfseries,anchor=west] at (4.75,3.0) {市价 512.96};
-  \fill[gold] (0,1.95) rectangle (0.52,2.45);
-  \node[right,text=graytext,font=\scriptsize,anchor=west] at (0.62,2.2) {upside 58.5};
-  \fill[gold!70!navy] (0,1.15) rectangle (0.28,1.65);
-  \node[right,text=graytext,font=\scriptsize,anchor=west] at (0.38,1.4) {base 30.8};
-  \fill[gold!40!gray] (0,0.35) rectangle (0.05,0.85);
-  \node[right,text=graytext,font=\scriptsize,anchor=west] at (0.14,0.6) {downside 0.9};
+\column{0.46\textwidth}
+\centering
+\begin{tikzpicture}[y=0.0075cm,x=0.72cm]
+  \draw[navy!25,line width=0.6pt] (0,0) -- (7.6,0);
+  \fill[navy!45] (0.2,0) rectangle (1.5,512.96);
+  \node[above,font=\scriptsize,text=navy] at (0.85,512.96) {512.96};
+  \node[below,font=\scriptsize,text=navy,align=center] at (0.85,0) {市价\\(亿元)};
+  \fill[navy] (2.2,0) rectangle (3.5,58.5);
+  \node[above,font=\scriptsize,text=navy] at (2.85,58.5) {58.5};
+  \node[below,font=\scriptsize,text=navy,align=center] at (2.85,0) {乐观\\EV};
+  \fill[navy] (4.2,0) rectangle (5.5,30.8);
+  \node[above,font=\scriptsize,text=navy] at (4.85,30.8) {30.8};
+  \node[below,font=\scriptsize,text=navy,align=center] at (4.85,0) {基准\\EV};
+  \fill[navy] (6.2,0) rectangle (7.5,0.9);
+  \node[above,font=\scriptsize,text=navy] at (6.85,0.9) {0.9};
+  \node[below,font=\scriptsize,text=navy,align=center] at (6.85,0) {悲观\\EV};
 \end{tikzpicture}
-\column{0.40\textwidth}
-\begin{tcolorbox}[colback=navy,colframe=navy,arc=2.5mm,left=3mm,right=3mm,top=2.5mm,bottom=2.5mm]
-  {\scriptsize\color{ice} 市价隐含销量预期 $\div$ 可验证 base 假设}\\[0.4em]
-  {\color{gold}\Huge\bfseries 16.7$\times$}\\[0.5em]
-  {\footnotesize\color{paper} 差额 $\approx$ 市场为「人形机器人量产期权」付的价格}
-\end{tcolorbox}
+\column{0.54\textwidth}
+\vspace{0.4em}
+{\huge\bfseries\color{navy}16.7$\times$}\\[-0.1em]
+{\scriptsize\color{graytext}市价隐含销量预期 ÷ 可验证基准情景}\\[1.0em]
+\small
+\begin{itemize}\setlength{\itemsep}{0.5em}
+  \item 当前市值 512.96 亿元，反推其隐含的销量预期约为可验证基准情景 EV（30.8 亿元）的 16.7 倍。
+  \item 参数按年报与招股书校准后，这一倍数由 8.5 倍升至 16.7 倍，说明原关键假设系统性偏乐观。
+  \item 不输出目标价；交付物是「市价隐含预期 ↔ 已验证证据」对照表。
+\end{itemize}
 \end{columns}
-
-\vspace{1.0em}
-\begin{center}
-{\footnotesize\itshape\color{graytext} 参数按年报 / 招股书校准后差距反而更大——原假设其实偏乐观}
-\end{center}
 \end{frame}
 
 % ============ P8 工程可信度 ============
-\sectiontag{06.1 工程可信度}
-\begin{frame}{工程可信度：可信不是口号，是可复算的指标}
-\vspace{0.1em}
-\begin{columns}[T]
-\column{0.235\textwidth}
-\numcard{\linewidth}{140}{回归测试全过\\含 9 项端到端}
-\column{0.235\textwidth}
-\numcard{\linewidth}{0}{提案审校 issue\\跨章锚点机器对账}
-\column{0.235\textwidth}
-\numcard{\linewidth}{4.3ms}{规则链延迟 p50\\p95 5.0ms · N=30}
-\column{0.235\textwidth}
-\numcard{\linewidth}{91.8\%}{判别准确率\\Claude 91.8 / GPT 90.8\\98 用例 benchmark}
-\end{columns}
-
+\begin{frame}{工程可信度：98 用例判别准确率 91.8\%，可离线完整运行}
 \vspace{0.3em}
-\begin{tcolorbox}[colback=white,colframe=navy!15,arc=2mm,boxrule=0.7pt,left=2.5mm,right=2.5mm,top=1.0mm,bottom=1.0mm]
-  {\small\bfseries\color{navy} 可信工程的三层含义}\\[0.1em]
-  \begin{columns}[T]
-  \column{0.32\textwidth}{\footnotesize\color{graytext} 每个数字{\bfseries\color{navy} 可复算}\\golden file 锁定}
-  \column{0.32\textwidth}{\footnotesize\color{graytext} 每个断言{\bfseries\color{navy} 可回溯}\\证据指纹 + 页码}
-  \column{0.32\textwidth}{\footnotesize\color{graytext} 每个边界{\bfseries\color{navy} 如实标注}}
-  \end{columns}
-\end{tcolorbox}
-
-\vspace{0.2em}
-\begin{center}
-{\footnotesize\color{navy} \faPlug\ 离线可复现：{\bfseries 无 API key} 跑完整 Demo}
-\end{center}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\centering
+\includegraphics[width=\linewidth]{../latex/fig_benchmark.pdf}
+\column{0.52\textwidth}
+\small
+\vspace{0.4em}
+\footnotesize
+\begin{tabular}{@{}ll@{}}
+\toprule
+回归测试 & 140 项全部通过，审校 0 issue \\
+\midrule
+规则链延迟 & p50 4.3 ms，p95 5.0 ms（N=30） \\
+\midrule
+判别准确率 & Claude 91.8\%，GPT 90.8\% \\
+\bottomrule
+\end{tabular}
+\vspace{1.0em}
+\begin{itemize}
+  \item 无需 API key，离线即可跑通完整 Demo。
+\end{itemize}
+\end{columns}
 \end{frame}
 
 % ============ P9 商业潜力 ============
-\sectiontag{05 商业潜力}
-\begin{frame}{商业潜力：市场与竞品缺口}
-\vspace{0.1em}
+\begin{frame}{商业潜力：现有工具把验证和估值做成两套数字}
+\vspace{0.3em}
 \begin{columns}[T]
-\column{0.42\textwidth}
-{\footnotesize\bfseries\color{navy} 市场空间漏斗}\\[0.3em]
-\begin{tikzpicture}[x=1cm,y=1cm]
-  \fill[navy] (0,2.5) rectangle (5.9,3.4);
-  \node[text=paper,font=\scriptsize,align=left,anchor=west] at (0.15,2.95)
-    {\bfseries TAM\ \ 谐波环节远期空间 71--603 亿};
-  \fill[navy!70] (0.5,1.35) rectangle (5.4,2.25);
-  \node[text=paper,font=\scriptsize,align=left,anchor=west] at (0.65,1.8)
-    {\bfseries SAM\ \ 买方 / 卖方 / 产业三类客户};
-  \fill[gold] (1.0,0.2) rectangle (4.9,1.1);
-  \node[text=navy,font=\scriptsize,align=left,anchor=west] at (1.15,0.65)
-    {\bfseries SOM\ \ 2--6 亿/年 证据服务订阅};
-\end{tikzpicture}\\[0.2em]
-{\scriptsize\color{graytext} TAM 双口径锚：GGII vs 高盛}
-\column{0.56\textwidth}
-{\footnotesize\bfseries\color{navy} 竞品四大缺口}\\[0.3em]
-\begin{columns}[T]
-\column{0.48\textwidth}
-\begin{tcolorbox}[colback=white,colframe=navy!15,arc=1.5mm,boxrule=0.7pt,left=1.5mm,right=1.5mm,top=0.9mm,bottom=0.9mm]
-  {\scriptsize\bfseries\color{navy} 无证据分级传导}
-\end{tcolorbox}
-\vspace{0.35em}
-\begin{tcolorbox}[colback=white,colframe=navy!15,arc=1.5mm,boxrule=0.7pt,left=1.5mm,right=1.5mm,top=0.9mm,bottom=0.9mm]
-  {\scriptsize\bfseries\color{navy} 无因果批判层}
-\end{tcolorbox}
-\column{0.48\textwidth}
-\begin{tcolorbox}[colback=white,colframe=navy!15,arc=1.5mm,boxrule=0.7pt,left=1.5mm,right=1.5mm,top=0.9mm,bottom=0.9mm]
-  {\scriptsize\bfseries\color{navy} 无双账本溯源}
-\end{tcolorbox}
-\vspace{0.35em}
-\begin{tcolorbox}[colback=white,colframe=navy!15,arc=1.5mm,boxrule=0.7pt,left=1.5mm,right=1.5mm,top=0.9mm,bottom=0.9mm]
-  {\scriptsize\bfseries\color{navy} 无工程口径归一}
-\end{tcolorbox}
-\end{columns}
-
-\vspace{0.55em}
-{\footnotesize\bfseries\color{navy} 定价}\ {\footnotesize\color{graytext} 按证据深度三档分层，试点期 5 家付费客户}\\[0.25em]
-{\footnotesize\bfseries\color{navy} 路径}\ {\footnotesize\color{graytext} 案例报告获客 $\to$ 嵌入买方工作流 $\to$ API 化}
+\column{0.46\textwidth}
+\centering
+\includegraphics[width=\linewidth]{../latex/fig_tam.pdf}
+\column{0.54\textwidth}
+\small
+\begin{itemize}\setlength{\itemsep}{0.5em}
+  \item 现有工具的四类缺口：验证与估值是两套数字；结论找不到数字出处；把相关当因果；额定与峰值混比。
+  \item 三档定价：基础验证订阅、证据链报告、定制链路部署。
+  \item 落地路径：以案例报告获客，嵌入分析师日常工作流，再 API 化输出。
+  \item 证据服务订阅空间约 2--6 亿元/年（SOM）。
+\end{itemize}
 \end{columns}
 \end{frame}
 
 % ============ P10 路线图 ============
-\sectiontag{06 路线图}
-\begin{frame}{路线图：36 个月三步走}
-\vspace{0.5em}
-\begin{columns}[T]
-\column{0.32\textwidth}
-\begin{tcolorbox}[enhanced,colback=white,colframe=navy!15,arc=2mm,boxrule=0.7pt,
-  borderline north={2.2mm}{0mm}{gold},left=2mm,right=2mm,top=1.6mm,bottom=1.6mm]
-  {\bfseries\color{navy} 0--6 月 · 验证期}\\[0.3em]
-  \footnotesize\color{graytext}
-  \begin{itemize}\setlength{\itemsep}{0.2em}
-    \item Claim 终验 47/51 已完成
-    \item 5 家付费试点
-    \item 案例报告产品化
-  \end{itemize}
-\end{tcolorbox}
-\column{0.32\textwidth}
-\begin{tcolorbox}[enhanced,colback=white,colframe=navy!15,arc=2mm,boxrule=0.7pt,
-  borderline north={2.2mm}{0mm}{navy},left=2mm,right=2mm,top=1.6mm,bottom=1.6mm]
-  {\bfseries\color{navy} 6--18 月 · 放大期}\\[0.3em]
-  \footnotesize\color{graytext}
-  \begin{itemize}\setlength{\itemsep}{0.2em}
-    \item 实时检索上线
-    \item 专利核验全覆盖
-    \item 扩展 50 家
-  \end{itemize}
-\end{tcolorbox}
-\column{0.32\textwidth}
-\begin{tcolorbox}[enhanced,colback=white,colframe=navy!15,arc=2mm,boxrule=0.7pt,
-  borderline north={2.2mm}{0mm}{ice},left=2mm,right=2mm,top=1.6mm,bottom=1.6mm]
-  {\bfseries\color{navy} 18--36 月 · 规模期}\\[0.3em]
-  \footnotesize\color{graytext}
-  \begin{itemize}\setlength{\itemsep}{0.2em}
-    \item 平台化 + API
-    \item 跨行业 ontology
-    \item 证据资产订阅化
-  \end{itemize}
-\end{tcolorbox}
-\end{columns}
-
-\vspace{1.2em}
-\begin{center}
-\begin{tikzpicture}
-  \draw[-{Stealth[length=3mm]},gold,line width=2pt] (0,0) -- (10.6,0);
-  \node[below,text=graytext,font=\scriptsize] at (1.6,-0.1) {验证期};
-  \node[below,text=graytext,font=\scriptsize] at (5.3,-0.1) {放大期};
-  \node[below,text=graytext,font=\scriptsize] at (9.2,-0.1) {规模期};
-\end{tikzpicture}
-\end{center}
+\begin{frame}{路线图：47/51 已验证，下一步实时检索与 50 家覆盖}
+\vspace{0.6em}
+\centering
+\includegraphics[width=0.88\linewidth]{../latex/fig_roadmap.pdf}
 \end{frame}
 
 % ============ P11 合规边界 ============
-\sectiontag{08 合规边界}
-\begin{frame}{合规边界：三条红线写进产品}
+\begin{frame}{合规边界：三条规则写在输出里}
 \vspace{0.6em}
-\begin{columns}[T]
-\column{0.32\textwidth}
-\begin{tcolorbox}[enhanced,colback=white,colframe=navy!15,arc=2mm,boxrule=0.7pt,
-  borderline west={2.2mm}{0mm}{gold},left=2.2mm,right=2mm,top=1.8mm,bottom=1.8mm]
-  {\color{gold}\bfseries\large 一}\ {\bfseries\color{navy}\large 非投资建议}\\[0.4em]
-  {\footnotesize\color{graytext} 输出常驻标注「原型情景 · 非投资建议」；悲观情景常驻，对冲卖方乐观偏差}
-\end{tcolorbox}
-\column{0.32\textwidth}
-\begin{tcolorbox}[enhanced,colback=white,colframe=navy!15,arc=2mm,boxrule=0.7pt,
-  borderline west={2.2mm}{0mm}{gold},left=2.2mm,right=2mm,top=1.8mm,bottom=1.8mm]
-  {\color{gold}\bfseries\large 二}\ {\bfseries\color{navy}\large 证据不越级}\\[0.4em]
-  {\footnotesize\color{graytext} 研报 / 媒体来源显式降级，不与公告原文同级采信}
-\end{tcolorbox}
-\column{0.32\textwidth}
-\begin{tcolorbox}[enhanced,colback=white,colframe=navy!15,arc=2mm,boxrule=0.7pt,
-  borderline west={2.2mm}{0mm}{gold},left=2.2mm,right=2mm,top=1.8mm,bottom=1.8mm]
-  {\color{gold}\bfseries\large 三}\ {\bfseries\color{navy}\large 来源全标注}\\[0.4em]
-  {\footnotesize\color{graytext} 每个数字带内容指纹与页码；AI 参与环节如实披露}
-\end{tcolorbox}
-\end{columns}
-
-\vspace{1.3em}
-\begin{center}
-{\small\color{navy} 合规不是补丁，是产品的{\color{gold}\bfseries 默认配置}}
-\end{center}
+\small
+\begin{itemize}\setlength{\itemsep}{1.0em}
+  \item 所有估值输出常驻「原型情景、非投资建议」标注；悲观情景常驻展示，不输出单点数字。
+  \item 研报与媒体来源显式降级标注，不与公告原文级证据混用。
+  \item 每个数字带来源指纹；AI 参与环节在报告中如实披露。
+\end{itemize}
 \end{frame}
 
-% ============ P12 团队收尾 ============
-\sectiontag{}
+% ============ P12 团队与收尾（深色） ============
 \begin{frame}[plain]
 \begin{tikzpicture}[remember picture,overlay]
   \fill[navy] (current page.south west) rectangle (current page.north east);
-  \fill[gold] ([xshift=-0.35cm,yshift=0.35cm]current page.south east)
-              rectangle (current page.south east);
+  \fill[gold] ([xshift=0cm,yshift=1.05cm]current page.south west)
+              rectangle ([xshift=\paperwidth,yshift=0.95cm]current page.south west);
 \end{tikzpicture}
-\vspace{1.2em}
-{\color{gold}\small 团队 · 07}\\[0.8em]
-{\color{paper}\LARGE\bfseries 验证派：经济金融 $\times$ 工程 $\times$ Agent 开发}\\[1.3em]
-\begin{columns}[T]
-\column{0.31\textwidth}
-{\color{gold}\bfseries 经济金融}\\[0.3em]
-{\color{ice}\footnotesize Claim 终验 · 参数复核 · 估值口径}
-\column{0.31\textwidth}
-{\color{gold}\bfseries 工程实现}\\[0.3em]
-{\color{ice}\footnotesize 验证链 / 归一化 / 映射 / 批判层全栈代码 + 140 回归}
-\column{0.31\textwidth}
-{\color{gold}\bfseries Agent 设计}\\[0.3em]
-{\color{ice}\footnotesize 工作流编排 · 证据账本 · 合规输出层}
-\end{columns}
-
-\vspace{2.0em}
-{\color{gold}\rule{0.25\textwidth}{0.9pt}}\\[1.0em]
-{\color{paper}\Large\bfseries 把判断权留给人类，把可复算留给机器。}\\[1.2em]
-{\color{ice}\small Claim2Value · 北大金融 AI 智能体创新大赛 · 谢谢}
+\vspace{1.6em}
+{\color{paper}\LARGE\bfseries Claim2Value}\\[1.6em]
+{\color{ice}\small 团队分工}\\[1.0em]
+{\color{paper}\small 经济金融：Claim 终验与估值口径把关}\\[0.9em]
+{\color{paper}\small 工程实现：验证链全栈代码与 140 项回归测试}\\[0.9em]
+{\color{paper}\small Agent 设计：工作流编排与证据账本}\\[2.2em]
+{\color{paper}\large 谢谢}
 \end{frame}
 
 \end{document}
