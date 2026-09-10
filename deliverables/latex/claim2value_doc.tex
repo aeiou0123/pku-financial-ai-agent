@@ -1,0 +1,385 @@
+% Claim2Value 项目说明文档（北大金融 AI 智能体创新大赛）
+% 编译：latexmk -xelatex claim2value_doc.tex
+\documentclass[11pt,a4paper]{ctexrep}
+\usepackage[margin=2.4cm,top=2.6cm,bottom=2.6cm]{geometry}
+\usepackage{xcolor,graphicx,booktabs,array,multirow,tabularx}
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr,titlesec,enumitem,fontspec,xeCJK}
+\usepackage{hyperref}
+
+% ---------- 品牌色 ----------
+\definecolor{navy}{HTML}{1E2761}
+\definecolor{gold}{HTML}{F0B429}
+\definecolor{ice}{HTML}{CADCFC}
+\definecolor{ink}{HTML}{212121}
+\definecolor{mute}{HTML}{5A6372}
+\definecolor{lightbg}{HTML}{F4F7FE}
+
+% ---------- 字体 ----------
+\setCJKmainfont{Microsoft YaHei}
+\setCJKsansfont{Microsoft YaHei}
+\setmainfont{Fira Sans}
+\setsansfont{Fira Sans}
+
+\hypersetup{colorlinks=true, linkcolor=navy, urlcolor=navy, citecolor=navy}
+
+% ---------- 标题样式 ----------
+\titleformat{\chapter}[block]
+  {\normalfont\sffamily\bfseries\color{navy}}
+  {\fontsize{40}{44}\selectfont\thechapter\hspace{0.4em}\textcolor{gold}{\rule[-0.25em]{3pt}{1.6em}}\hspace{0.4em}}
+  {0pt}{\fontsize{22}{26}\selectfont}
+\titlespacing*{\chapter}{0pt}{-10pt}{18pt}
+\titleformat{\section}{\normalfont\sffamily\bfseries\large\color{navy}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalfont\sffamily\bfseries\normalsize\color{navy}}{\thesubsection}{0.6em}{}
+
+% ---------- 页眉页脚 ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\color{mute}Claim2Value · 项目说明文档}
+\fancyhead[R]{\small\sffamily\color{mute}北大金融 AI 智能体创新大赛}
+\fancyfoot[C]{\small\sffamily\color{mute}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\color{ice}\hrule width\headwidth height 0.4pt}
+
+% ---------- 盒子 ----------
+\newtcolorbox{keybox}[1][关键结论]{colback=lightbg,colframe=navy,
+  boxrule=0.8pt,arc=2mm,left=8pt,right=8pt,top=6pt,bottom=6pt,
+  title={\sffamily\bfseries #1},coltitle=white,colbacktitle=navy}
+\newtcolorbox{casebox}[1][实证案例]{colback=lightbg,colframe=gold,
+  boxrule=1pt,arc=2mm,left=8pt,right=8pt,top=6pt,bottom=6pt,
+  title={\sffamily\bfseries #1},coltitle=navy,colbacktitle=gold}
+\newtcolorbox{warnbox}[1][边界与限制]{colback=white,colframe=mute,
+  boxrule=0.6pt,arc=1.5mm,left=8pt,right=8pt,top=6pt,bottom=6pt,
+  title={\sffamily\bfseries #1},coltitle=white,colbacktitle=mute}
+
+% ---------- 大数字 ----------
+\newcommand{\bignum}[2]{{\fontsize{30}{34}\selectfont\sffamily\bfseries\color{navy}#1}\\[2pt]{\small\sffamily\color{mute}#2}}
+
+\setlist{itemsep=2pt,topsep=4pt}
+
+\begin{document}
+
+% ================= 封面 =================
+\begin{titlepage}
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[navy] (current page.south west) rectangle (current page.north east);
+  % 链条 motif
+  \draw[ice,line width=2.5pt] ([yshift=8.2cm]current page.center) ++(-3.2,0) -- ++(6.4,0);
+  \foreach \x/\c in {-3.2/ice,0/gold,3.2/ice}{
+    \fill[\c] ([yshift=8.2cm]current page.center) ++(\x,0) circle (0.32);
+  }
+  \node[text=ice,font=\sffamily\small] at ([yshift=7.55cm]current page.center)
+    {C L A I M \quad $\rightarrow$ \quad 证据 \quad $\rightarrow$ \quad 价值};
+\end{tikzpicture}
+\vspace*{7.2cm}
+\begin{center}
+{\fontsize{44}{52}\selectfont\sffamily\bfseries\color{white}Claim2Value}\\[14pt]
+{\fontsize{19}{24}\selectfont\sffamily\color{ice}工业技术 Claim 到金融价值的可信映射 Agent}\\[18pt]
+{\large\sffamily\color{gold}把「公司说自己技术多牛」变成「证据支持的财务影响」}\\[10pt]
+\end{center}
+\vfill
+\begin{center}
+{\sffamily\color{ice}北大金融 AI 智能体创新大赛 \quad 机器人关节模组产业链}\\[6pt]
+{\sffamily\color{ice}2026 年 9 月}
+\end{center}
+\vspace{1.2cm}
+\end{titlepage}
+
+% ================= 摘要 =================
+\chapter*{摘要}
+\addcontentsline{toc}{chapter}{摘要}
+\thispagestyle{fancy}
+
+机器人产业链的技术事件每天都在发生：减速器扭矩密度提升、丝杠量产、新订单落地。但这些工程信号值多少钱，卖方研报各说各话，买方只能靠人肉翻译。
+
+Claim2Value 做的事情只有一件：把公司的技术宣称（Claim）逐条对回公告原文验证，并把验证结论传导进估值。验证不是摆设——置信度低的宣称会真实拉低估值假设，口径有问题的数据会被拦在门外。最终交付的不是目标价，而是一张「市场隐含预期 ↔ 已验证证据」对照表：绿的谐波 512.96 亿市值隐含的销量预期，是可验证基准假设的 16.7 倍。差多少、差在哪、证据强度够不够，买方自己判断赔率。
+
+目前系统覆盖机器人关节模组产业链 11 家上市公司、51 条结构化 Claim，其中 47 条完成公告原文级验证（页码定位加内容指纹）。140 项回归测试全过，无 API key 也能离线跑完整链路。
+
+\begin{keybox}[这份文档回答三个问题]
+产品做了什么（第 2--6 章）、凭什么可信（第 3、7 章）、生意怎么做（第 8、9 章）。所有估值数字都是原型情景，不构成投资建议。
+\end{keybox}
+
+\tableofcontents
+
+% ================= 第 1 章 =================
+\chapter{问题：工程信号与金融决策之间的断层}
+
+\section{断层长什么样}
+
+机器人关节模组产业链的信息生产端很热闹：减速器厂发新品参数，丝杠厂发订单公告，整机厂发量产计划。信息的消费端是买方的买入、卖出、持有决策。两端之间没有可靠的转换层。
+
+\begin{center}
+\begin{tikzpicture}[
+  box/.style={draw=navy,fill=lightbg,rounded corners=2mm,minimum width=4.6cm,minimum height=2.6cm,align=left,text=ink,font=\small},
+  lbl/.style={font=\sffamily\bfseries\color{navy}}]
+\node[box] (a) at (0,0) {\textbf{产业链技术信号}\\[2pt]· 减速器扭矩密度提升公告\\· 丝杠量产与订单落地\\· 募投扩产与产能爬坡\\· 新品发布与参数宣称};
+\node[box] (b) at (9.2,0) {\textbf{金融决策}\\[2pt]· 这条宣称值多少钱\\· 证据强度够不够写进报告\\· 买、卖、持有的赔率判断};
+\draw[-{Stealth[length=4mm]},line width=2.5pt,gold] (a) -- (b) node[midway,above,font=\sffamily\bfseries\color{navy}]{断层};
+\end{tikzpicture}
+\end{center}
+
+\section{三个具体表现}
+
+\textbf{人肉翻译。}把「额定扭矩 51--130 Nm」翻译成「收入能多多少」，靠分析师手工完成。一条宣称从公告到估值假设，中间没有任何留痕，复核者无法复算。
+
+\textbf{口径打架。}卖方研报对公司 ASP 的假设各自为政。绿的谐波一例：券商盈利预测普遍按约 1,500 元/台的降价假设建模，而 2024 年年报显示实际 ASP 已到 1,293 元——假设被现实击穿，研报的估值结论却没有同步修正。
+
+\textbf{真假难辨。}公司公告、券商研报、媒体转述、行业蓝皮书混在一起出现在同一张对比表里。买方拿到一张表，看不出哪一格是公告原文、哪一格是媒体转述、哪一格根本找不到出处。
+
+\begin{casebox}[口径错位的真实代价（SH\_003）]
+一家头部券商研报写道：「双环传动 2025Q2 减速器及其他业务收入 3.49 亿元，同比增长 35.8\%」。系统在做口径审查时发现：双环 2025 年半年报第 14 页的原文是\textbf{半年累计} 348,990,082.38 元、同比 +35.66\%。研报把半年累计数当成了单季数，增速还顺手改了小数点。如果拿这个「Q2 单季」去年化，收入会直接高估一倍。
+\end{casebox}
+
+% ================= 第 2 章 =================
+\chapter{产品：从 Claim 到估值的可信流水线}
+
+\section{架构总览}
+
+\begin{center}
+\begin{tikzpicture}[
+  stage/.style={draw=navy,fill=navy,text=white,rounded corners=1.5mm,minimum width=1.85cm,minimum height=0.95cm,font=\sffamily\small\bfseries,align=center},
+  key/.style={draw=gold,fill=gold,text=navy,rounded corners=1.5mm,minimum width=1.85cm,minimum height=0.95cm,font=\sffamily\small\bfseries,align=center},
+  arr/.style={-{Stealth[length=2.5mm]},line width=1.2pt,mute}]
+\node[stage] (s1) at (0,0) {Claim};
+\node[key]   (s2) at (2.15,0) {验证};
+\node[stage] (s3) at (4.3,0) {门控};
+\node[stage] (s4) at (6.45,0) {工程\\归一化};
+\node[stage] (s5) at (8.6,0) {经济\\映射};
+\node[key]   (s6) at (10.75,0) {因果\\批判};
+\node[stage] (s7) at (12.9,0) {财务\\三情景};
+\foreach \a/\b in {s1/s2,s2/s3,s3/s4,s4/s5,s5/s6,s6/s7} \draw[arr] (\a) -- (\b);
+\end{tikzpicture}
+
+\vspace{4pt}
+{\small\color{mute}金色节点是本产品和一般「AI 投研工具」的分界线：验证层决定信不信，批判层决定打几折。}
+\end{center}
+
+\section{四条设计原则}
+
+\textbf{传导而非并存。}多数工具的做法是「验证归验证、财务照算」，验证结论和估值模型各说各话。本产品里，验证置信度直接调整经济假设，假设再进模型。验证强度决定估值强度，链路里没有「无条件相信」的数字。
+
+\textbf{逐条溯源。}每条经济假设带三样东西：证据等级、置信度、provenance 链。从任何一个估值数字出发，能一路点回公告原文的具体页码。
+
+\textbf{透明打折。}因果批判层对每个「技术到业绩」的假设生成替代解释清单：销量增长里多少是行业共同的 $\beta$，多少是公司自己的 $\alpha$？回答不了的，就从置信度里扣掉。折扣比例写在输出里，不藏在模型里。
+
+\textbf{三栏输入。}财务模型的每个输入分三栏：历史锚点（年报原文）、人工假设（写明谁拍的、依据是什么）、计算结果。看模型的人一眼知道哪个数字是披露、哪个数字是情景。
+
+\section{技术实现要点}
+
+规则引擎负责确定性检查（数值篡改、限定词缺失、口径偷换、时间错位），LLM 负责语义理解，两者双轨交叉。工程参数进模型之前先过归一化：额定扭矩和峰值扭矩分开、电机本体和关节模组分开、不同减速比档位分开。不可比的参数明确标记，绝不硬算。映射规则全部写在 ontology JSON 里，代码零硬编码——换行业就是换一份 ontology。
+
+% ================= 第 3 章 =================
+\chapter{证据网络：51 条 Claim 的验证台账}
+
+\section{覆盖与分级}
+
+证据网络覆盖机器人关节模组产业链 11 家上市公司，共 51 条结构化 Claim。每条 Claim 带五个必填字段：来源、页码定位、原文摘录、口径说明、核验人。核验人为空的证据，写库工具直接拒收。
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+ & \textbf{数量} & \textbf{含义与证据标准} \\
+\midrule
+已验证 & {\sffamily\bfseries\color{navy}\large 47 条} & 可引用；公告原文级：页码定位 + 内容指纹 \\
+待验证 & {\sffamily\bfseries\color{navy}\large 4 条} & 不引用；显式标注疑点与驳回路径 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+覆盖公司：绿的谐波、双环传动（环动科技）、步科股份、中大力德、鸣志电器、柯力传感、五洲新春、贝斯特、恒立液压、国茂股份、秦川机床。
+
+\section{证据分级的规矩}
+
+公告原文、券商研报、媒体转述、行业报告，在系统里是四个不同的证据等级，不许混用。研报转述的数字必须降级标注；找不到官方出处的，宁可标「待验证」也不升级。2026 年 9 月 9 日的一轮终验里，11 条 Claim 经巨潮资讯网公告原文逐字核对后升级为已验证——包括 SH\_003 的口径纠偏（见第 1 章案例框）。剩下 4 条待验证的原因也写得明白：两条公司官方从未披露过该数值，两条需要厂商选型手册才能核对。
+
+\begin{keybox}
+待验证条目不是系统的软肋，是系统的功能演示。一个什么都能「验证通过」的工具不可信；一个敢写「这条我们核不到」的工具才可信。
+\end{keybox}
+
+% ================= 第 4 章 =================
+\chapter{深度案例：一条 Claim 的一生}
+
+以绿的谐波「关节模组减重 30\%」这条宣称为例，完整走一遍流水线（\texttt{python app.py} 实跑，无 API key，本地离线）。
+
+\section{五步实录}
+
+\textbf{第一步，输入与检出。}规则引擎比对公司宣称与原始披露，检出限定词缺失：原文是「同等出力情况下减重 30\%」，宣称把前提丢了。判定：部分成立，置信度 0.3。不是非黑即白，是证据强度分级。
+
+\textbf{第二步，门控与归一化。}「部分成立」在放行集合内，进入财务链路。14 行工程参数做量纲与口径归一：4 行可比，10 行明确标记为不可比。不可比的不硬算。
+
+\textbf{第三步，经济映射。}工程参数映射成经济假设：扭矩密度 → 渗透率，-10.26\%（证据等级 high）；重量 → BOM 单位成本，-5.47\%（弹性系数经环动科技招股书的材料成本证据校准）。每条假设挂证据等级和置信度。
+
+\textbf{第四步，因果批判。}12 个替代解释、14 条待补反事实：销量里多少是行业 $\beta$、多少是公司 $\alpha$？批判层把置信度从 0.5 打到 0.32，最高 50\% 不可归因。这个折扣透明地写在输出里。
+
+\textbf{第五步，财务三情景。}批判层调整后的假设进 DCF，输出三情景企业价值：
+
+\begin{center}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+情景 & \textbf{base 基准} & \textbf{upside 乐观} & \textbf{downside 悲观} \\
+\midrule
+企业价值 EV & 43.4 亿 & 69.4 亿 & 15.8 亿 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+每个情景都挂「原型情景、非投资建议」标注和置信度。悲观情景常驻输出，用来对冲卖方一致预期的系统性乐观偏差。
+
+% ================= 第 5 章 =================
+\chapter{通用性：同一条链路，换一家公司}
+
+专用工具没有价值，通用 Agent 才有。同一条 \texttt{run\_financial\_chain}，换一组输入文件，就是另一家公司。
+
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}lX X@{}}
+\toprule
+ & \textbf{绿的谐波} & \textbf{双环传动} \\
+\midrule
+输入 & 绿的 fixture & 双环 fixture（rv/gear 双产品线） \\
+产品线识别 & harmonic / joint & rv / gear（\texttt{detect\_product\_lines} 自动识别） \\
+映射规则 & 默认 ontology & 双环变体（规则级 \texttt{product\_line\_scope}） \\
+三情景 EV & 43.4 / 69.4 / 15.8 亿 & 72.7 / 122.9 / 19.0 亿 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+双环的 RV 减速器参数不是拍脑袋：ASP 与单位成本按环动科技（双环控股子公司）科创板招股书的实际均价 2,653--3,209 元/台校准。产品线泛化、ontology 变体、规则级作用域，全部是代码层实现，140 项回归测试锁定。
+
+% ================= 第 6 章 =================
+\chapter{反向 DCF：诚实的估值观}
+
+\section{我们不做目标价}
+
+简化 DCF 只算可验证证据支持的基本面价值，市值里还含人形机器人叙事预期。我们不硬凑市值，而是反向量化差距。
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  xbar, xmin=0, xmax=600, width=11.5cm, height=4.6cm,
+  xlabel={亿元}, xlabel style={font=\small},
+  symbolic y coords={悲观 downside, 基准 base, 乐观 upside, 市价},
+  ytick=data, yticklabel style={font=\small},
+  yticklabels={悲观 downside, 基准 base, 乐观 upside, 市价 2026-09-04},
+  nodes near coords, nodes near coords style={font=\small\bfseries},
+  every axis plot/.append style={fill=navy,draw=none},
+  xmajorgrids=true, grid style={ice},
+  axis line style={mute}, tick label style={font=\small\color{mute}},
+]
+\addplot coordinates {(0.9,悲观 downside) (30.8,基准 base) (58.5,乐观 upside)};
+\addplot[every axis plot/.append style={fill=gold}] coordinates {(512.96,市价)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+以绿的谐波 2026-09-04 市值 512.96 亿元为起点反推：\textbf{现价隐含的销量预期，是可验证基准假设的 16.7 倍}（\texttt{reverse\_dcf} 实测 16.66$\times$）。换句话说，市场为人形机器人量产期权支付的价格，约等于 482 亿元——这部分不在 2025--2027 年可验证现金流里。
+
+值得一提的是修正方向：2026-09-09 的参数复核把税率、单位成本、RV 均价全部按年报和招股书重新锚定后，隐含倍数从 8.5$\times$ 扩大到 16.7$\times$。差距拉大说明原假设偏乐观，证据锚定的修正让「市场有多乐观」这个问题有了更诚实的答案。
+
+\begin{keybox}
+「隐含预期 ↔ 已验证证据」对照表是合规边界内的交付物：我们不替买方下结论，我们把市场定价里隐含的预期拆开摆平，让买方自己判断赔率。
+\end{keybox}
+
+% ================= 第 7 章 =================
+\chapter{工程可信度}
+
+Agent 的可信不是口号，是测试矩阵和延迟曲线。
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{指标} & \textbf{数值} & \textbf{口径} \\
+\midrule
+回归测试 & 140 项全过 & 含 9 项端到端回归，golden file 锁定 \\
+提案审校 & 0 issue & 跨章锚点数字机器对账 \\
+规则链延迟 & p50 4.3ms / p95 5.0ms & N=30，同日三次复测 3.7--4.3ms \\
+判别准确率 & Claude 91.8\% / GPT 90.8\% & 98 个判别用例的 benchmark（非业务准确率） \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+三层含义：每个数字可复算（golden file 回归锁定），每个断言可回溯（证据指纹加页码），每个边界如实标注（降级路径、口径疑点、待验证清单全部写进输出）。整个 Demo 离线可复现：无 API key，一条 \texttt{python app.py} 跑完整链路，现场断网也演示得了。
+
+% ================= 第 8 章 =================
+\chapter{商业潜力}
+
+\section{市场与客户}
+
+TAM 的上限锚是谐波减速器环节的远期空间 71--603 亿元（GGII 与高盛两种口径并列呈现，不选一个充数）。SAM 按三类客户切分：买方研究员（赔率判断）、卖方研究员（报告质检）、产业资本（供应商与竞品核验）。SOM 按证据服务订阅估算，每年 2--6 亿元。
+
+\section{竞品缺口}
+
+现有金融数据终端和 AI 投研工具普遍存在四个缺口：没有证据分级传导（验证和估值两套数字）、没有双账本溯源（数字找不到出处）、没有因果批判层（相关当因果）、没有工程口径归一（额定峰值混着比）。这四个缺口就是本产品的定价依据。
+
+\section{定价与路径}
+
+按「证据深度」三档订阅：基础验证、证据链报告、定制链路。落地路径分三步：用绿的谐波案例报告获客，嵌入买方研究员的日常核验工作流，再 API 化输出。验证期目标是 5 家付费试点。
+
+% ================= 第 9 章 =================
+\chapter{路线图}
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{阶段} & \textbf{时间} & \textbf{交付} \\
+\midrule
+验证期 & 0--6 月 & Claim 终验 47/51 已完成；5 家付费试点；案例报告产品化 \\
+放大期 & 6--18 月 & 实时检索上线；专利核验全覆盖；覆盖扩展至 50 家公司 \\
+规模期 & 18--36 月 & 平台化 + API 输出；跨行业 ontology 复用；证据资产订阅化 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+剩余 4 条待验证 Claim 的路径也已写明：两条等公司官方披露，两条待厂商选型手册（绿的 LHS-32 已有官方样本下载渠道，环动 SHPR-20E 建议直接向厂商索取）。
+
+% ================= 第 10 章 =================
+\chapter{合规边界}
+
+三条红线写在输出层，不靠自觉：
+
+\begin{enumerate}
+\item \textbf{非投资建议}。所有估值输出常驻「原型情景、非投资建议」标注；悲观情景常驻，对冲卖方一致预期的系统性乐观偏差。
+\item \textbf{证据不越级}。券商研报、媒体转述显式降级标注，不与公告原文级证据混用；待验证条目不假装验证过。
+\item \textbf{来源全标注}。每个数字带来源与内容指纹；AI 参与部分按大赛要求如实披露。
+\end{enumerate}
+
+% ================= 附录 =================
+\appendix
+
+\chapter{附录}
+
+\section{Claim 验证分级统计（2026-09-09 终验后）}
+
+\begin{center}
+\begin{tabular}{@{}lrl@{}}
+\toprule
+\textbf{状态} & \textbf{条数} & \textbf{说明} \\
+\midrule
+已验证（公告原文级） & 47 & 含 11 条经巨潮公告原文逐字核对升级 \\
+待验证 & 4 & BK\_001/BK\_003（官方未披露）、GH\_007/SH\_002（待厂商 datasheet） \\
+\midrule
+合计 & 51 & 覆盖 11 家上市公司 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{运行方法}
+
+\begin{verbatim}
+pip install -r requirements.txt
+python app.py                    # 离线全链路 Demo（无需 API key）
+python -m pytest tests -q        # 140 项回归测试
+python scripts/audit_proposal.py # 项目书一致性审校
+\end{verbatim}
+
+代码、数据与文档：\url{https://github.com/aeiou0123/pku-financial-ai-agent}
+
+\vspace{1cm}
+\begin{warnbox}[免责声明]
+本文所有估值均为研究用途的原型情景，不构成投资建议。所述三情景企业价值基于公开披露信息与显式标注的人工假设，参数口径见仓库 \texttt{data/processed/} 下各输入表的 notes 字段。
+\end{warnbox}
+
+\end{document}

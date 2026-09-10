@@ -83,3 +83,20 @@ data/processed/huandong_patents.json
 
 # Local working/staging artifacts (submission packaging, debug renders)
 work/
+
+# LaTeX build artifacts (deliverables/latex, deliverables/beamer sources stay)
+*.aux
+*.log
+*.out
+*.toc
+*.nav
+*.snm
+*.vrb
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.xdv
+deliverables/latex/page-*.png
+deliverables/latex/fix-*.png
+deliverables/beamer/page-*.png
+deliverables/beamer/pptx_pages/
