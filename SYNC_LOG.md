@@ -6,6 +6,17 @@
 
 ---
 
+## 2026-09-10 提交物质量重做：LaTeX 说明文档 + Beamer 路演 PPT（K3）
+
+针对"PDF 简陋、PPT 渲染弱、AI 味重"的反馈，提交物整体升级为 LaTeX 原生排版：
+
+- **说明文档**（`deliverables/latex/claim2value_doc.tex` → `Claim2Value_项目说明文档.pdf`）：ctexrep + 品牌定制样式（藏青/金/冰蓝），定制封面页、目录、TikZ 流水线图、pgfplots 反向 DCF 对照图、tcolorbox 要点框、14 页。内容从项目书 01–08 章扩写，写作按"说人话"规则去模板腔。编译零错误，逐页视觉 QA 一轮（修复大数字表格错位、柱状图标签裁切）。
+- **路演 PPT**（`deliverables/beamer/claim2value_pitch.tex` → PDF + 图像版 PPTX）：Beamer metropolis 主题改品牌色，公式原生渲染，12 页结构与 `11_pitch_outline.md` 一致。
+- **封面提示词**（`deliverables/cover_prompt.md`）：ChatGPT image 双版本提示词（含文字版 + 纯图形版），品牌色号与链条 motif 指定，供人工生成后替换 `cover_16x9.png`。
+- `.gitignore` 补 LaTeX 中间文件与 QA 渲染图。
+
+---
+
 ## 2026-09-10 BigQuant 提交材料分类定稿（K3）
 
 按用户提供的「提交作品」表单截图，把提交素材重写为逐字段可复制版：
