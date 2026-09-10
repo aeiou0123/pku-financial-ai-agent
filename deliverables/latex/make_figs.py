@@ -95,7 +95,7 @@ bars = ax.bar(xs, actual, width=0.5, color=NAVY)
 for b, v in zip(bars, actual):
     ax.text(b.get_x() + b.get_width()/2, v + 70, f"{v:,}", ha="center", fontsize=9)
 ax.axhline(4300, color=GRAY, linestyle="--", linewidth=1.0)
-ax.text(3.45, 4350, "修正前假设 4,300", fontsize=8.5, color=GRAY, ha="right")
+ax.text(3.45, 4460, "修正前假设 4,300", fontsize=8.5, color=GRAY, ha="right")
 ax.axhline(3100, color=GOLD, linestyle="-", linewidth=1.4)
 ax.text(3.45, 3150, "修正后 3,100", fontsize=8.5, color="#B8860B", ha="right")
 ax.set_ylim(0, 4800)
@@ -103,39 +103,55 @@ ax.set_ylabel("RV 减速器均价（元/台）", fontsize=9)
 hgrid(ax)
 save(fig, "fig_rv_anchor")
 
-# ---------- 5. Benchmark 修复前后 ----------
+# ---------- 5. Benchmark：裸 LLM vs 规则层+LLM（benchmarks/pipeline_report.md 口径） ----------
 fig, ax = plt.subplots(figsize=(5.6, 2.5))
 labels = ["Claude", "GPT"]
-before = [83.7, 82.7]
+before = [62.5, 65.3]
 after = [91.8, 90.8]
 x = np.arange(2)
-b1 = ax.bar(x - 0.17, before, width=0.32, color=GRAY, label="StateVerifier 修复前")
-b2 = ax.bar(x + 0.17, after, width=0.32, color=NAVY, label="修复后")
+b1 = ax.bar(x - 0.17, before, width=0.32, color=GRAY, label="裸 LLM")
+b2 = ax.bar(x + 0.17, after, width=0.32, color=NAVY, label="规则层 + LLM")
 for bars in (b1, b2):
     for b in bars:
         ax.text(b.get_x() + b.get_width()/2, b.get_height() + 0.6, f"{b.get_height():.1f}%",
                 ha="center", fontsize=9)
 ax.set_xticks(x, labels, fontsize=10)
-ax.set_ylim(75, 96)
+ax.set_ylim(50, 100)
 ax.set_ylabel("98 用例判别准确率", fontsize=9)
 ax.legend(frameon=False, fontsize=8.5, loc="upper center", bbox_to_anchor=(0.5, 1.04), ncol=2)
 hgrid(ax)
 save(fig, "fig_benchmark")
 
-# ---------- 6. TAM/SAM/SOM（带宽示意，非比例轴） ----------
-fig, ax = plt.subplots(figsize=(6.0, 2.3))
-rows = [("TAM 上限锚", "谐波环节远期空间 71–603 亿元", 1.00, LIGHT, "#5A6372"),
-        ("SAM", "买方 / 卖方 / 产业资本三类客户", 0.72, "#3A4A9E", "white"),
-        ("SOM", "证据服务订阅 2–6 亿元/年", 0.45, NAVY, "white")]
+# ---------- 5b. 反向 DCF：市价 vs 模型三情景 ----------
+fig, ax = plt.subplots(figsize=(6.0, 2.5))
+names = ["市价（2026-09-04）", "乐观 upside", "基准 base", "悲观 downside"]
+vals = [512.96, 58.5, 30.8, 0.9]
+colors = [GOLD, NAVY, NAVY, GRAY]
+y = np.arange(len(names))[::-1]
+bars = ax.barh(y, vals, color=colors, height=0.58)
+for yi, v in zip(y, vals):
+    ax.text(v + 8, yi, f"{v:g}", va="center", fontsize=9.5, color="#212121", fontweight="bold")
+ax.set_yticks(y, names, fontsize=9.5)
+ax.set_xlim(0, 640)
+ax.set_xlabel("亿元", fontsize=9)
+ax.xaxis.grid(True, color=LIGHT, linewidth=0.8)
+ax.set_axisbelow(True)
+save(fig, "fig_reverse_dcf")
+
+# ---------- 6. TAM/SAM/SOM（带宽示意，描述在条带右侧，非比例轴） ----------
+fig, ax = plt.subplots(figsize=(6.2, 2.4))
+rows = [("TAM 上限锚", "谐波环节远期空间 71–603 亿元", 1.00, LIGHT, NAVY),
+        ("SAM", "买方 / 卖方 / 产业资本三类客户", 0.68, "#3A4A9E", "white"),
+        ("SOM", "证据服务订阅 2–6 亿元/年", 0.40, NAVY, "white")]
 for i, (name, desc, w, color, tcolor) in enumerate(rows):
     y = 2 - i
-    ax.barh(y, w, height=0.62, color=color)
+    ax.barh(y, w, height=0.6, color=color)
     ax.text(0.015, y, name, fontsize=10, fontweight="bold", color=tcolor, va="center")
-    ax.text(0.015, y - 0.42, desc, fontsize=8.5, color="#5A6372", va="center")
-ax.set_xlim(0, 1.02)
-ax.set_ylim(-0.8, 2.55)
+    ax.text(w + 0.03, y, desc, fontsize=9, color="#5A6372", va="center")
+ax.set_xlim(0, 1.75)
+ax.set_ylim(-0.75, 2.55)
 ax.axis("off")
-ax.text(0.0, -0.72, "注：三层带宽为示意，不代表比例关系；TAM 取 GGII 与高盛两种口径并列。",
+ax.text(0.0, -0.6, "注：带宽为示意，不代表比例关系；TAM 取 GGII 与高盛两种口径并列。",
         fontsize=8, color="#9AA3B2")
 save(fig, "fig_tam")
 
