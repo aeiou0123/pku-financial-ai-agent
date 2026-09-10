@@ -6,6 +6,24 @@
 
 ---
 
+## 2026-09-09 大赛提交包：PPT + 封面 + 说明文档 PDF + 表单素材（K3）
+
+按 BigQuant 提交要求（必填：项目名称/摘要/公开介绍/核心创新点/团队名称/16:9 封面；可选附件：Demo/核心代码/演示视频/PPT/PDF 说明文档）完成提交材料包，全部数字与 PR #28/#29 后口径一致：
+
+- `deliverables/Claim2Value_pitch.pptx`：12 页路演 PPT（按 `11_pitch_outline.md` 用 pptxgenjs 生成，构建脚本 `deliverables/build_deck.js` 同仓可复现；经 PowerPoint→PDF→逐页视觉 QA，修复了 P9 漏斗文字遮挡问题）；
+- `deliverables/cover_16x9.png`：1920×1080 项目封面（与 PPT 同一视觉语言）；
+- `deliverables/Claim2Value_项目说明文档.pdf`：十章说明文档（pandoc + xelatex + 微软雅黑渲染）；
+- `deliverables/submission_form.md`：BigQuant 网页表单可复制素材（按技术创新 30%/落地价值 40%/商业潜力 30% 评分维度组织）；
+- `deliverables/team_and_sources.md`：团队成员与公开资料索引（团队名称留待人工填写）；
+- `deliverables/SUBMISSION_PACKAGE_README.md`：提交包说明与运行指引；
+- `work/Claim2Value_submission_staging_20260909/`：BigQuant 上传用暂存副本（`work/` 已加入 .gitignore，不入库）。
+- 07 章团队页更新：Chen Luodi 角色描述补全（教育背景以正式报名材料为准）。
+- 回归 `pytest` 140 passed、`audit_proposal.py` issues=0。
+
+**剩余人工项**：① 团队名称填入表单并提交 BigQuant；② 演示视频真人彩排录屏（脚本 `docs/proposal/10_demo_script.md`）；③ 4 条待验证 Claim 的厂商 datasheet（绿的 LHS-32：leaderdrivecn.com/download/30.html 有官方样本下载页；环动 SHPR-20E：建议联系厂商索取选型手册）。
+
+---
+
 ## 2026-09-09 15 条 Claim 官方来源机器预检 + 模型参数复核（K3）
 
 本轮由 K3 把两项"人工待办"的检索与对照部分完成，产出两份报告，**不改动任何 claim 状态与模型数值**，确认动作留给人：
@@ -13,6 +31,18 @@
 - **15 条待验证 Claim 预检**（`docs/proposal/appendix_precheck_report.md`）：自建巨潮资讯网（cninfo）公告检索/PDF 下载/文本比对管线，逐条核对官方原文。结果：**10 条数值与官方原文逐字一致（建议升级已验证）、1 条（SH_003）数值一致但研报把"2025H1 累计"误标为"Q2 单季"（建议修正口径后升级）、4 条维持待验证**（BK_001/BK_003/GH_007/SH_002，附已尝试路径与驳回理由）。亮点发现：SH_003 是"口径偷换检测"价值的现成案例；QC_004 在巨潮找到公司投资者关系活动记录表原文（编号 2023-02），证据等级可升。
 - **模型参数复核**（`docs/proposal/model_param_review.md`）：以官方披露为锚点逐项对照两家模型输入与 ontology 弹性系数。关键锚点：绿的谐波系高新技术企业实际税率 15%（模型用 25%，偏保守）；绿的 2024 实际毛利率 36-37.5% vs 模型隐含 49.6%（偏乐观）；环动科技招股书 RV 实际均价 2,653-3,209 元/台 vs 双环模型 ASP 4300 元（偏高约 40%，RV 成本假设需同步下修）；weight→unit_cost 弹性 0.5 建议降至 0.2-0.3。WACC 10%、永续增长 3%、双环税率 15% 等通过。
 - **后续人工动作**：① 抽读预检报告中的官方链接确认后，用 `claim_bank_writer.py` 升级 10+1 条（51 条将变为 46 已验证/4 待验证）；② 经济金融组按复核报告决定改数或仅补 Q&A 口径；③ 若改数需重跑回归并更新 `10_demo_script.md` 口播数字；来不及则按报告第五节"最小动作"只补 `09_qa_playbook.md`。
+
+---
+
+## 2026-09-09 15 条 Claim 终验确认写回（K3 预检 + 用户确认，47/4）
+
+用户抽读预检报告并确认后，执行写回：
+
+- **11 条升级"已验证"**（`claim_bank_writer.py` 写回官方证据 11 条，`evidence_level=official_filing`，来源全部为巨潮资讯网公告原文 PDF 直链）：WZX_002/003/004、BST_002/004、HLYY_002/003/004、GM_004、QC_004。
+- **SH_003 口径修正后升级**：研报"2025Q2 单季 3.49 亿 +35.8%"实为 2025H1 半年累计误标，按双环 2025 半年报 p.14 修正为"2025H1 累计 3.49 亿、+35.66%"后升级——"口径偷换检测→官方原文纠偏"的完整实证案例。
+- **4 条维持待验证**：BK_001/BK_003（官方从未披露该数值）、GH_007/SH_002（需厂商 datasheet，附录已写明下一步路径）。
+- **口径同步**：51 条 = **47 已验证 / 4 待验证**；`appendix_pending_review.md` 重新生成；README、03/04/06 章、09/10 章、KIMICODE_PROGRESS、TODO 全部同步。
+- 回归 `pytest` 140 passed、`audit_proposal.py` issues=0。
 
 ---
 

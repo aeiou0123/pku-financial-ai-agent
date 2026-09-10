@@ -12,7 +12,7 @@
 |---|---|
 | 项目书 | 8 章全部定稿；审校 issues=0；答辩问答预案 `09_qa_playbook.md`（8 题）齐备 |
 | 商业潜力（70% 分值载体） | 第 5 章完整（TAM/SAM/SOM 2–6 亿/年、竞争格局、三档定价），素材 C1–C8 齐备；路演大纲 `11_pitch_outline.md`（12 页）已定 |
-| Claim Bank | **51 条 / 11 家公司**：36 条已验证可引用、15 条待人工终验（**核对清单已备好**：`docs/proposal/appendix_pending_review.md`，PR #25） |
+| Claim Bank | **51 条 / 11 家公司**：47 条已验证可引用（公告原文级，含 2026-09-09 机器预检+人工确认升级的 11 条）、4 条待验证（BK_001/BK_003/GH_007/SH_002，附驳回路径：`docs/proposal/appendix_pending_review.md`） |
 | 技术管线 | 全链路：engineering_analyzer → economic_mapper → causal_critic → workflow；估值链已移植 2 家公司（绿的、双环）；反向 DCF implied 16.66×（PR #19；PR #28 参数复核后口径） |
 | 演示 | 3 分钟口播脚本 + 1 分钟 fallback + 录屏清单（`10_demo_script.md`，PR #24），全部基于 2026-09-07 实跑；延迟 N=30 p50 4.3ms/p95 5.0ms |
 | 测试 | 140 passed，全绿 |
@@ -49,7 +49,7 @@
 
 ## 三、待办与风险（诚实标注）
 
-1. **15 条待验证 Claim 人工终验**（最高优先级）：唯一证据均为券商研报口径，缺官方一手披露。核对清单 `appendix_pending_review.md` 已备好，按"通过→改已验证补官方来源 / 驳回→notes 写理由"操作。
+1. ~~**15 条待验证 Claim 人工终验**~~ **已完成（2026-09-09）**：K3 机器预检（官方原文逐条比对）+ 人工确认后 11 条升级已验证（含 SH_003 口径修正案例），剩 4 条维持待验证（附驳回路径）。终验清单 `appendix_pending_review.md`、预检报告 `appendix_precheck_report.md`。
 2. **演示彩排**：脚本/大纲已备（PR #24），需真人按 `10_demo_script.md` 走一遍并录屏。
 3. **live 检索未实现**：`evidence_retriever.py` 在 roadmap，当前故意用本地缓存（避免 Demo 单点，离线可复现）。
 4. **ontology 弹性系数为谐波标定**，RV 专属标定待 BOM 复核（批判层已据此降置信度）。
@@ -82,7 +82,7 @@ python scripts/audit_proposal.py    # 应 issues=0
 PYTHONIOENCODING=utf-8 PYTHONUTF8=1 python app.py   # 本地全链路 demo（无 API key）
 ```
 
-Claim Bank 状态：`data/processed/claim_bank_filled.json`（51 条：36 已验证 / 15 待验证）。
+Claim Bank 状态：`data/processed/claim_bank_filled.json`（51 条：47 已验证 / 4 待验证，2026-09-09 终验后）。
 
 本地终验（2026-09-08）：`140 passed`、`audit_proposal.py issues=0`、编译检查通过；绿的谐波与双环传动离线链路均已复跑。双环显式目标公司 `双环传动/环动科技` 产生 3 条定量假设，三情景 EV 为 5.8755 / 10.9412 / 0.4410 bn。
 

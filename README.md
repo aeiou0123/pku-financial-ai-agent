@@ -16,7 +16,7 @@ Claim2Value（Evidence-Grounded Engineering-to-Finance Agent）面向产业链�
 
 代码、数据与文档已收口至交付前状态，质量线：**140 个回归测试全过 + 提案审校脚本 0 issue**（`python -m pytest tests -q`、`python scripts/audit_proposal.py`）。PR #2–#26 全部合并到 `main`，当前能力全景：
 
-**1. 多公司证据网络（PR #15/#21）**：Claim Bank 扩展至 **11 家机器人产业链公司 51 条结构化 claim**——36 条已验证（公告原文级，附页码与内容指纹，BK_004 双源逐字、GH_002 双源互证），15 条待验证（带显式定义疑点，终验核对清单 `docs/proposal/appendix_pending_review.md` 由 Phase 3D 新增）；另有 1 条行业市场数据（IND_001）。
+**1. 多公司证据网络（PR #15/#21/#29）**：Claim Bank 扩展至 **11 家机器人产业链公司 51 条结构化 claim**——47 条已验证（公告原文级，附页码与内容指纹，BK_004 双源逐字、GH_002 双源互证；含 2026-09-09 机器预检+人工确认升级的 11 条），4 条待验证（带显式定义疑点，核对清单 `docs/proposal/appendix_pending_review.md`）；另有 1 条行业市场数据（IND_001）。
 
 **2. 双环传动全链路估值链（PR #20）**：financial_model 泛化到多产品线（rv/gear 自动识别），economic_mapper 支持规则级 `product_line_scope`，ontology 变体 `tech_to_economics_ontology_shuanghuan.json` + `data/processed/shuanghuan_model_inputs.csv`，端到端输出三情景 EV **72.66 / 122.89 / 19.04 亿元**（base/upside/downside；PR #28 按环动招股书实际均价校准 RV 参数后），回归覆盖 `tests/test_shuanghuan_chain.py`。
 
@@ -223,8 +223,8 @@ API key、`.env`、`*.pdf`（研究报告类）、第三方仓库代码、Python
 
 ## 当前任务（Phase 3D 完成后的交付准备）
 
-1. 15 条待验证 Claim 人工终验（核对清单已备好：`docs/proposal/appendix_pending_review.md`）；
-2. 经济金融组复核模型输入、BOM、税率、DCF 与 RV ontology 参数；
+1. ~~15 条待验证 Claim 人工终验~~ **已完成（2026-09-09，47 已验证 / 4 待验证附驳回路径）**；
+2. ~~经济金融组复核模型输入~~ **已完成（2026-09-09，PR #28 参数修正落地）**；
 3. 演示彩排：按 `docs/proposal/10_demo_script.md` 走一遍 3 分钟版 + fallback 版；
 4. 赛后增强（非阻塞）：实时检索、专利核验全覆盖、更多产业链公司接入。
 

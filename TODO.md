@@ -61,7 +61,7 @@
 - [x] 展开 01–04、06–08 七章（按各 stub 内的建议结构与素材指针写）。（PR #14）
 - [x] Phase 3A 提质：机械审校脚本（锚点数字/溯源标签/PR 引用/过时表述，issues=0）；04 章升级 5→14 条已验证 + 3 个新示例（双源互证/双源逐字/产能利用率）；01/02/06/08 章末全局索引指引；SH_003 复核结论入 Claim Bank notes（项目书未引用，无正文风险）。（PR #16）
 - [x] C7 效率实测：`scripts/benchmark_latency.py` N=30 自动化基准，p50 4.3ms/p95 5.0ms（PR #18 首测、PR #24 修复被 smoke test 覆盖的根因并统一全仓口径）。
-- [ ] 15 条待验证 claim 人工终验：核对清单（`docs/proposal/appendix_pending_review.md`，PR #25）+ **K3 机器预检报告（`docs/proposal/appendix_precheck_report.md`）已备**——10 条官方原文一致建议升级、1 条口径修正后升级、4 条维持待验证；人工抽读确认后用 `claim_bank_writer.py` 写回。
+- [x] 15 条待验证 claim 人工终验：**已完成（2026-09-09，PR #29）**——K3 机器预检（cninfo 官方原文逐条比对，预检报告 `docs/proposal/appendix_precheck_report.md`）+ 人工确认后 11 条升级（10 条逐字一致 + SH_003 修正"Q2 单季"→"2025H1 累计"口径后升级），剩 4 条维持待验证（BK_001/BK_003/GH_007/SH_002，附驳回路径）。51 条 = 47 已验证 / 4 待验证。
 - [x] 经济金融组复核模型输入：~~待复核~~ **K3 复核报告（`docs/proposal/model_param_review.md`）+ 用户确认后修正已落地（PR #28）**——RV ASP/成本按环动招股书锚定、weight 弹性 0.5→0.25、绿的税率 15%、谐波成本按 2024 年报毛利率锚定；140 回归全绿，文档数字已同步。
 - [x] Phase 3C 模块 1-4：延迟基准 N=30（PR #18）、反向 DCF（PR #19）、双环全链路移植（PR #20）、Claim Bank 扩至 51 条/11 家（PR #21）。（2026-09-07）
 - [x] 答辩问答预案 `09_qa_playbook.md`（PR #22）。

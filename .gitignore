@@ -80,3 +80,6 @@ data/processed/*_candidates_filtered.csv
 data/processed/*_param_lines.txt
 data/processed/huandong_patents.csv
 data/processed/huandong_patents.json
+
+# Local working/staging artifacts (submission packaging, debug renders)
+work/

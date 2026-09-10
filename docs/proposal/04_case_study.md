@@ -225,8 +225,8 @@ notes 中记录复核结论；媒体/研报转述来源（如五洲新春公告�
 2. **证据账本（Evidence Ledger）**：已验证条目的原文出处、页码定位、摘录、
    口径说明、核验人、核验日期与内容指纹（如 GH_005 指纹 `5d831f3e36c9b085`），
    支持一键回溯到公告原文；
-3. **StateVerifier 结论**：核验状态汇总——36 条已验证（公告原文级，
-   其中 BK_004 双源逐字、GH_002 双源互证）、15 条待验证（附定义疑点与
+3. **StateVerifier 结论**：核验状态汇总——47 条已验证（公告原文级，
+   其中 BK_004 双源逐字、GH_002 双源互证）、4 条待验证（附定义疑点与
    "待人工终验"标注）、传闻级证据显式隔离（如智元订单 [C4]）；
 4. **财务影响情景**：三情景 EV 区间（0.94 / 30.78 / 58.50 亿元）与
    隐含预期反推对照表（市价隐含销量预期 ≈ base 假设 16.7 倍，PR #19；PR #28 参数复核后口径），
@@ -250,7 +250,7 @@ notes 中记录复核结论；媒体/研报转述来源（如五洲新春公告�
 | [C3] | `valuation_anchor.md` | 市值 512.96 亿、PE(TTM) 365.83、一致预期、PEG≈4.9 |
 | [C4] | `capacity_evidence.md` | 销量 +72.5%、定增总额 14.13 亿/净额 14.02 亿、进度 6.08%/8.39%、延期至 2028、客户 13 家、智元传闻标注 |
 | [C5] | `asp_analysis.md` | ASP 1,293/1,099 元、券商 1,500 元假设、量增价跌序列、口径警示 |
-| Claim Bank | `data/processed/claim_bank_filled.json` | 51 条 claim（11 家公司），36 条已验证（公告原文级，页码+指纹）、15 条待验证（PR #15/#21） |
+| Claim Bank | `data/processed/claim_bank_filled.json` | 51 条 claim（11 家公司），47 条已验证（公告原文级，页码+指纹）、4 条待验证（PR #15/#21/#29） |
 | 模型 | `data/processed/green_harmonic_model_results.json` | 三情景 EV 0.94/30.78/58.50 亿元，base 2027 营收 46.25 亿元（PR #28 参数复核后口径） |
 | 第二案例 | `data/processed/shuanghuan_model_inputs.csv` + `tests/test_shuanghuan_chain.py` | 双环传动全链路移植：三情景 EV 72.66/122.89/19.04 亿元，e2e 测试随附（PR #20；PR #28 参数复核后口径） |
 | 反向 DCF | `src/financial_model.py:reverse_dcf` + `tests/test_reverse_dcf.py` | 市价 512.96 亿隐含销量预期 ≈ base 假设 16.7 倍（PR #19；PR #28 口径） |
