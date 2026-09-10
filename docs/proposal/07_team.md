@@ -41,9 +41,10 @@ structured-output 稳健性——验证语义等价的 Schema 表示差异是否
 世界再定价"的母题高度同构。需要诚实说明：根据画像文档，其强项在可靠性研究与
 评测，而非重型后端/infra 工程，相应职责由计算机成员承担。
 
-**Chen Luodi：AI Systems & Agent Engineering Lead（西安交通大学，计算机方向）。**
-负责编排框架、检索/RAG、后端、数据管道、工具集成与部署等系统工程实现，是
-团队中"把验证层与财务链路变成可运行代码"的关键工程角色。2026-09-01 其
+**Chen Luodi（陈洛笛）：AI Systems & Agent Engineering Lead（西安交通大学，
+本科三年级；教育背景以本人及正式报名材料确认为准）。** 负责编排框架、检索/RAG、
+后端、数据管道、工具集成与部署等系统工程实现，是团队中"把验证层与财务链路变成
+可运行代码"的关键工程角色。2026-09-01 其
 GitHub 账号（FeishengLuo）以 write 权限加入协作仓库。
 
 **电气成员（姓名以报名材料为准）：Electrical Engineering Ground Truth。**

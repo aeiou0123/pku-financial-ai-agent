@@ -1,1493 +1,1603 @@
 [
- {
-  "claim_id": "GH_001",
-  "claim_text": "绿的谐波新一代谐波减速器关节模组在同等出力情况下减重30%以上",
-  "subject": "绿的谐波",
-  "product": "新一代谐波减速器关节模组",
-  "metric": "重量/出力比",
-  "value": "减重30%以上",
-  "baseline": "上一代产品/同出力产品",
-  "source_text": "国信证券研报：聚焦谐波减速器的轻量小型化技术突破，同等出力情况下减重30%以上",
-  "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202504301665112608_1.pdf",
-  "claim_type": "技术性能",
-  "verification_status": "已验证",
-  "confidence": 0.9,
-  "definition_issues": [
-   "同等出力的测试条件未明确",
-   "减重对象是否包含电机/减速器整体未明确"
-  ],
-  "evidence_list": [
-   {
-    "source": "green_harmonic_2024_annual_report.txt（公司2024年年度报告，官方披露）",
-    "locator": "第10页（管理层讨论分析与讨论·（1）紧跟智能机器人发展步伐，优化迭代产品）",
-    "excerpt": "首先，针对人形机器人等行业的新兴需求，聚焦谐波减速器的轻量小型化技术突破，同等出力情况下减重 30%以上。",
-    "caliber": "官方年报原文为“谐波减速器”轻量小型化、同等出力减重30%以上，数值与claim的“减重30%以上”一致；但原文主体是谐波减速器（针对人形机器人新兴需求），未明确表述为“关节模组”整体减重，也未明确基准型号及是否含电机，claim中“新一代谐波减速器关节模组”的表述与原文口径略有差异，definition_issues中的疑点年报未澄清。",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "5f1eeda424479ed9"
-   }
-  ],
-  "notes": "2025Q1 增补核验：年报第10页\"同等出力情况下减重30%以上\"逐字证实，但原文主体为谐波减速器，关节模组口径差异见 caliber；definition_issues 保留。 原注：需核对：是单个减速器减重还是关节模组整体减重？基准型号是什么？"
- },
- {
-  "claim_id": "GH_002",
-  "claim_text": "绿的谐波2024年谐波减速器销量24.65万台，同比增长16.56%",
-  "subject": "绿的谐波",
-  "product": "谐波减速器",
-  "metric": "销量",
-  "value": "24.65万台",
-  "baseline": "2023年销量",
-  "source_text": "国信证券研报：2024年谐波减速器及金属部件收入3.25亿元，谐波减速器销量24.65万台，同比增长16.56%",
-  "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202504301665112608_1.pdf",
-  "claim_type": "产能/需求",
-  "verification_status": "已验证",
-  "confidence": 0.85,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "green_harmonic_2024_annual_report.txt（公司2024年年度报告，官方披露）",
-    "locator": "第39页（经营情况讨论与分析·(2). 产销量情况分析表）",
-    "excerpt": "主要产品        单  生产量        销售量        库存量         生产量比        销售量比        库存量比\n            位                                    上年增减        上年增减        上年增减\n                          246,501      19,473\n谐波减速器       台  251,736    392,187    209,181       （%）         （%）         （%）\n               359,220                                22.00       16.56     -30.84",
-    "caliber": "年报产销量情况分析表（第39页）明确谐波减速器销售量比上年增减 16.56%，与 claim 同比增速完全一致；表中 246,501 与 24.65 万台对应（claim 绝对值），但 PDF 转文本后表格行列错位，251,736/392,187/209,181/359,220 等数无法可靠归属具体列，绝对值仅据此表与研报互证；24.65 万台绝对值另见 green_harmonic_2025q1_review 研报逐字表述（降级证据）。",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "51fd5045cab91bef"
-   },
-   {
-    "source": "green_harmonic_2025q1_review.txt（https://pdf.dfcfw.com/pdf/H3_AP202504301665112608_1.pdf，国信证券研报）",
-    "locator": "报告首页业绩点评段（txt第22-23行，该txt无页脚页码标记）",
-    "excerpt": "谐波减速器及金属部件收入 3.25 亿元，同比增加 2.56%，谐波减速器销量 24.65 万台，同比增长 16.56%；机电一体化产品收入 0.53 亿元，同比增长 56.74%",
-    "caliber": "研报口径与claim数值完全一致：销量24.65万台、同比+16.56%；增速与官方年报产销量表的16.56%相互印证，但年报文本中销量绝对值无法确证为246,501台，24.65万台目前仅见于研报（降级证据）。；注：研报 txt 为双栏抽取，摘录已剔除穿插的估值侧栏文字。",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "analyst_report",
-    "fingerprint": "2bc15c35a7eccfca"
-   }
-  ],
-  "notes": "2025Q1 增补核验：年报第39页产销量表确认销售量同比+16.56%，表中246,501与24.65万台对应（列归属受文本抽取错位影响，见 caliber）；绝对值另获国信研报逐字互证。 原注：年报中应可找到销量数据交叉验证"
- },
- {
-  "claim_id": "GH_003",
-  "claim_text": "绿的谐波已完成年产50万台精密减速器产能建设",
-  "subject": "绿的谐波",
-  "product": "精密减速器",
-  "metric": "产能",
-  "value": "50万台/年",
-  "baseline": "",
-  "source_text": "国信证券研报：产能方面，公司完成了年产50万台精密减速器",
-  "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202504301665112608_1.pdf",
-  "claim_type": "产能/需求",
-  "verification_status": "已验证",
-  "confidence": 0.95,
-  "definition_issues": [
-   "50万台是设计产能还是实际达产产能？",
-   "是否包含谐波减速器及机电一体化产品？"
-  ],
-  "evidence_list": [
-   {
-    "source": "green_harmonic_2024_annual_report.txt（公司2024年年度报告，官方披露）",
-    "locator": "第11页（管理层讨论与分析·二、产能提升稳步推进）",
-    "excerpt": "报告期内，公司完成了年产 50 万台精密减速器的扩产项目的相关智能化产线的建设调试工作和达产工作，并计划于 2025 年实现产能的稳步爬坡，目前，该项目已进入全面达产阶段，生产效率和产品良率均达到预期目标。",
-    "caliber": "官方年报明确“完成了年产50万台精密减速器的扩产项目的相关智能化产线的建设调试工作和达产工作”“已进入全面达产阶段”，与claim“已完成年产50万台精密减速器产能建设”一致；原文同时说明2025年处于产能爬坡期，50万台为扩产项目设计/达产产能，非2024年实际产量。",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "3101ee97061f279d"
-   }
-  ],
-  "notes": "2025Q1 增补核验：年报第11页\"完成了年产50万台精密减速器的扩产项目的相关智能化产线的建设调试工作和达产工作…已进入全面达产阶段\"。 原注：需在公司年报/募投公告中查找确切表述"
- },
- {
-  "claim_id": "GH_004",
-  "claim_text": "绿的谐波已成为多家头部具身智能机器人企业的核心供应商",
-  "subject": "绿的谐波",
-  "product": "谐波减速器/一体化关节模组",
-  "metric": "客户认证",
-  "value": "头部具身智能机器人企业",
-  "baseline": "",
-  "source_text": "2024年年报：自主研发的高扭矩密度谐波减速器和一体化关节模组，已在国内具身智能机器人产业链占据领先地位，成为多家头部具身智能机器人企业的核心供应商",
-  "source_url": "https://static.cninfo.com.cn/finalpage/2026-04-23/1225149955.PDF",
-  "claim_type": "客户/订单",
-  "verification_status": "已验证",
-  "confidence": 0.9,
-  "definition_issues": [
-   "具体客户名称未披露",
-   "核心供应商的界定标准未明确"
-  ],
-  "evidence_list": [
-   {
-    "source": "green_harmonic_2024_annual_report.txt（公司2024年年度报告；claim所附URL https://static.cninfo.com.cn/finalpage/2026-04-23/1225149955.PDF）",
-    "locator": "第21页（管理层讨论与分析·具身智能机器人核心关节部件段落）",
-    "excerpt": "自主研发的高扭矩密度谐波减速器和一体化关节模组，已在国内具身智能机器人产业链占据领先地位，成为多家头部具身智能机器人企业的核心供应商。",
-    "caliber": "与claim及claim_bank中source_text逐字一致，官方年报直接支持；但年报未披露具体客户名称，“核心供应商”无界定标准，2025年年报亦有同样表述（第18页附近），属公司单方面陈述，未经客户公告交叉验证。",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "f2cd2d0102d3970b"
-   }
-  ],
-  "notes": "2025Q1 增补核验：年报第21页逐字证实；为公司单方陈述，具体客户未披露。 原注：需通过客户公告或供应链调研确认具体企业名称"
- },
- {
-  "claim_id": "GH_005",
-  "claim_text": "绿的谐波2024年毛利率37.54%，同比下降3.60个百分点",
-  "subject": "绿的谐波",
-  "product": "公司整体",
-  "metric": "毛利率",
-  "value": "37.54%",
-  "baseline": "2023年毛利率41.14%",
-  "source_text": "2024年年报及券商点评：公司毛利率为37.54%，同比-3.60pct",
-  "source_url": "https://static.cninfo.com.cn/finalpage/2026-04-23/1225149955.PDF",
-  "claim_type": "财务表现",
-  "verification_status": "已验证",
-  "confidence": 0.95,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "green_harmonic_2024_annual_report.pdf（巨潮资讯网 https://static.cninfo.com.cn/finalpage/2025-04-30/1223423684.PDF）",
-    "locator": "第37页（第三节 管理层讨论与分析）",
-    "excerpt": "公司近三年的综合毛利率分别为 48.69%、41.14%和 37.54%，处于相对较高水平。",
-    "caliber": "合并报表口径，综合毛利率=（营业收入-营业成本）/营业收入；2024年37.54%较2023年41.14%下降3.60个百分点",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-06",
-    "evidence_level": "official_filing",
-    "fingerprint": "5d831f3e36c9b085"
-   }
-  ],
-  "notes": "年报直接可验证"
- },
- {
-  "claim_id": "GH_006",
-  "claim_text": "绿的谐波2025年营业收入同比增长47.31%，归母净利润同比增长121.42%",
-  "subject": "绿的谐波",
-  "product": "公司整体",
-  "metric": "营收/净利润增速",
-  "value": "营收+47.31%，净利润+121.42%",
-  "baseline": "2024年同期",
-  "source_text": "2025年年报：本报告期营业收入、利润总额、归属于上市公司股东的净利润较上年同期分别增长47.31%、137.48%、121.42%",
-  "source_url": "https://static.cninfo.com.cn/finalpage/2026-04-23/1225149955.PDF",
-  "claim_type": "财务表现",
-  "verification_status": "已验证",
-  "confidence": 0.95,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "green_harmonic_2025_annual_report.pdf（巨潮资讯网 https://static.cninfo.com.cn/finalpage/2026-04-23/1225149955.PDF）",
-    "locator": "第7页（第二节 公司简介和主要财务指标）",
-    "excerpt": "经常性损益的净利润较上年同期分别增长 47.31%、137.48%、121.42%、115.19%",
-    "caliber": "合并报表口径，归属于上市公司股东的净利润同比增长121.42%；营业收入同比增长47.31%",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-06",
-    "evidence_level": "official_filing",
-    "fingerprint": "700be65362c396fd"
-   }
-  ],
-  "notes": "年报直接可验证"
- },
- {
-  "claim_id": "GH_007",
-  "claim_text": "绿的谐波LHS-32谐波减速器额定扭矩51-130 Nm，重量2.5 kg",
-  "subject": "绿的谐波",
-  "product": "LHS-32谐波减速器",
-  "metric": "额定扭矩/重量",
-  "value": "51-130 Nm / 2.5 kg",
-  "baseline": "来福LHT-32、HD CSG-32",
-  "source_text": "国金证券研报：国内外同型号谐波减速器性能对比表",
-  "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf",
-  "claim_type": "技术性能",
-  "verification_status": "待验证",
-  "confidence": 0.7,
-  "definition_issues": [
-   "额定扭矩范围对应不同减速比",
-   "测试条件未说明"
-  ],
-  "evidence_list": [
-   {
-    "source": "humanoid_robot_joint_reducer_202209.txt（https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf，国金证券行业深度，2022-09-07）",
-    "locator": "图表46：国内外同型号谐波减速器性能对比（txt第1203-1219行，该txt无页脚页码标记）",
-    "excerpt": "绿的谐波（LHS-32) 来福(LHT-32) 钧兴(KSHG-32) HD(CSG-32)；减速比 30-160；51-130；重量 2.5；来源：哈默纳科、绿的谐波、来福谐波官网，国金证券研究所",
-    "caliber": "研报对比表中绿的谐波LHS-32额定扭矩51-130 Nm（对应减速比30-160范围）、重量2.5 kg，与claim数值一致；表格文本抽取行错位，但列归属可读；表注称数据源自各公司官网，本地datasheets目录为空、无官方一手规格文件，按规则降级为analyst_report；额定扭矩范围对应不同减速比，测试条件未说明。",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "analyst_report",
-    "fingerprint": "56f34fe225dafbcc"
-   }
-  ],
-  "notes": "降级：唯一证据为国金2022-09行业深度研报图表46（源自公司官网口径），本地缺官方datasheet，待补充后复核。 原注： torque density 约 20.4-52 Nm/kg；需与官网 datasheet 核对"
- },
- {
-  "claim_id": "BK_001",
-  "claim_text": "步科股份无框电机累计出货超5万台，在协作机器人行业位居国产TOP2",
-  "subject": "步科股份",
-  "product": "无框电机",
-  "metric": "累计出货量/市场地位",
-  "value": "超5万台，国产TOP2",
-  "baseline": "",
-  "source_text": "券商研报：据《2024年协作机器人产业发展蓝皮书》，公司无框电机累计出货超5万台，在协作机器人行业位居国产TOP2",
-  "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202508221732112681_1.pdf",
-  "claim_type": "产能/需求",
-  "verification_status": "待验证",
-  "confidence": 0.7,
-  "definition_issues": [
-   "统计口径为累计出货还是年度出货？",
-   "TOP2的统计范围和时间点未明确"
-  ],
-  "evidence_list": [
-   {
-    "source": "buke_2025q2_review.txt（https://pdf.dfcfw.com/pdf/H3_AP202507171710594249_1.pdf）",
-    "locator": "第1页（投资要点：公司是国内机器人电机龙头/蓝皮书引用段）",
-    "excerpt": "据《2024 年协作机器人产业发展蓝皮书》，公司直流低压伺服累计出货超 120 万台，位居移动机器人行业 TOP1；无框电机累计出货超 5 万台，在协作机器人行业位居国产 TOP2",
-    "caliber": "仅券商研报（群益投顾2025-07-17）载有该数据，且为引用《2024年协作机器人产业发展蓝皮书》口径，非公司官方披露；2024年报、2025半年报均无任何累计出货量/行业排名表述。数值与claim一致（超5万台、国产TOP2），但'国产TOP2'排名为券商研报/蓝皮书口径，统计范围与时间窗口未明确。；注：研报 txt 为双栏抽取，摘录已剔除穿插的产品组合表格文字。",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "analyst_report",
-    "fingerprint": "21842d17e0f464d4"
-   }
-  ],
-  "notes": "降级：仅群益投顾2025Q2研报引《2024年协作机器人产业发展蓝皮书》\"累计出货超5万台、国产TOP2\"，官方年报/半年报无此表述，排名口径非官方。 原注：需核对蓝皮书原文"
- },
- {
-  "claim_id": "BK_002",
-  "claim_text": "步科股份2024年机器人行业收入2.12亿元，同比增长12.26%",
-  "subject": "步科股份",
-  "product": "机器人行业业务",
-  "metric": "收入",
-  "value": "2.12亿元，+12.26%",
-  "baseline": "2023年机器人行业收入",
-  "source_text": "2024年年报：机器人行业收入2.12亿元，同比增长12.26%",
-  "source_url": "https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=688160&id=11403146",
-  "claim_type": "财务表现",
-  "verification_status": "已验证",
-  "confidence": 0.95,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "buke_2024_annual_report.pdf（新浪财经文件服务器转存上交所披露 http://file.finance.sina.com.cn/211.154.219.97:9494/MRGG/CNSESH_STOCK/2025/2025-4/2025-04-25/10962008.PDF）",
-    "locator": "第14页（第三节 管理层讨论与分析·主营业务分行业情况）",
-    "excerpt": "2024 年，公司机器人行业实现销售收入 21,242.55 万元，同比增长 12.26%。",
-    "caliber": "合并报表口径，机器人行业销售收入21,242.55万元≈2.12亿元",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-06",
-    "evidence_level": "official_filing",
-    "fingerprint": "efbd91bdba645ea4"
-   }
-  ],
-  "notes": "年报直接可验证"
- },
- {
-  "claim_id": "BK_003",
-  "claim_text": "步科股份第四代FMK无框力矩电机同尺寸扭矩输出提升约22%",
-  "subject": "步科股份",
-  "product": "第四代FMK无框力矩电机",
-  "metric": "扭矩输出",
-  "value": "提升约22%",
-  "baseline": "上一代同尺寸产品",
-  "source_text": "艾邦机器人/行业报道：步科发布第四代无框力矩电机，同尺寸扭矩输出提升约22%",
-  "source_url": "https://www.aibangbots.com/a/2212",
-  "claim_type": "技术性能",
-  "verification_status": "待验证",
-  "confidence": 0.7,
-  "definition_issues": [
-   "同尺寸的具体型号未明确",
-   "22%是额定扭矩还是峰值扭矩？"
-  ],
-  "evidence_list": [
-   {
-    "source": "buke_2025_halfyear_report.txt（http://file.finance.sina.com.cn/211.154.219.97:9494/MRGG/CNSESH_STOCK/2025/2025-8/2025-08-29/11403146.PDF）",
-    "locator": "第16页（第三节 管理层讨论与分析——研发进展/低压伺服）",
-    "excerpt": "在低压伺服方面，针对机器人关节市场，公司发布了第四代 FMK 系列无框力矩电机以及适配的 RD 系列中空驱动器，助力机器人关节发展。",
-    "caliber": "官方半年报仅证实第四代FMK无框力矩电机已发布（2025年7月推出，与研报一致），但未披露'同尺寸扭矩输出提升约22%'的任何数值；22%及'同尺寸'对比口径在2024年报、2025半年报、2025Q2/Q3研报中均未出现（源为官网/第三方文章口径）。claim中22%数值无法本地核实，不予强行匹配；具体性能对比需datasheet验证。",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "559c97bb2766ab21"
-   }
-  ],
-  "notes": "部分验证：2025半年报第16页官方证实发布第四代FMK系列无框力矩电机；\"同尺寸扭矩提升约22%\"在全部本地一手文本中不存在，待官网/datasheet核实。 原注：需官网 datasheet 或产品手册验证"
- },
- {
-  "claim_id": "BK_004",
-  "claim_text": "步科股份为工业6轴机械臂全球知名品牌设计专用伺服系统并确立长期战略合作关系",
-  "subject": "步科股份",
-  "product": "工业6轴机械臂伺服系统",
-  "metric": "客户合作",
-  "value": "全球知名品牌长期战略合作",
-  "baseline": "",
-  "source_text": "2024年年报/2025半年报：公司与工业6轴机械臂全球知名品牌合作取得长足进展，为标杆客户设计的专用工业6轴机械臂伺服系统获得客户认可并已确立长期战略合作关系",
-  "source_url": "https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=688160&id=11403146",
-  "claim_type": "客户/订单",
-  "verification_status": "已验证",
-  "confidence": 0.95,
-  "definition_issues": [
-   "客户名称未披露",
-   "全球知名品牌的具体定义未明确"
-  ],
-  "evidence_list": [
-   {
-    "source": "buke_2024_annual_report.txt（http://file.finance.sina.com.cn/211.154.219.97:9494/MRGG/CNSESH_STOCK/2025/2025-4/2025-04-25/10962008.PDF）",
-    "locator": "第14页（第三节 管理层讨论与分析——机器人行业/协作机器人与工业机械臂客户进展）",
-    "excerpt": "报告期内，公司与工业 6 轴机械臂全球知名品牌合作取得长足进展，为标杆客户设计的专用工业 6 轴机械臂伺服系统获得客户认可并已确立长期战略合作关系。",
-    "caliber": "官方2024年报逐字支持claim：'全球知名品牌'+'专用工业6轴机械臂伺服系统'+'确立长期战略合作关系'三要素齐全。客户名称未披露（年报通篇无具体客户名），'知名品牌'具体定义无法进一步核实，与definition_issues一致。",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "8425ad82fb215ce1"
-   },
-   {
-    "source": "buke_2025_halfyear_report.txt（http://file.finance.sina.com.cn/211.154.219.97:9494/MRGG/CNSESH_STOCK/2025/2025-8/2025-08-29/11403146.PDF）",
-    "locator": "第15页（第三节 管理层讨论与分析——机器人行业）",
-    "excerpt": "报告期内，公司与工业 6 轴机械臂全球知名品牌合作取得长足进展，为标杆客户设计的专用工业 6 轴机械臂伺服系统获得客户认可并已确立长期战略合作关系。",
-    "caliber": "官方2025半年报沿用与2024年报相同的表述，证实该战略合作关系在2025年持续有效。客户名称仍未披露。两条官方证据一致，claim已验证。",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "1a94dd05a6ef9c8f"
-   }
-  ],
-  "notes": "2025Q1 增补核验：2024年报第14页与2025半年报第15页逐字双源证实\"为标杆客户设计的专用工业6轴机械臂伺服系统获得客户认可并已确立长期战略合作关系\"；客户名称未披露。 原注：需通过公司投资者交流或供应链调研确认客户"
- },
- {
-  "claim_id": "BK_005",
-  "claim_text": "步科股份2025H1归母净利润2611.01万元，同比增长13.58%；扣非后净利润3602.56万元，同比增长42.27%",
-  "subject": "步科股份",
-  "product": "公司整体",
-  "metric": "净利润",
-  "value": "归母净利润+13.58%，扣非净利润+42.27%",
-  "baseline": "2024H1",
-  "source_text": "2025年半年度报告",
-  "source_url": "https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=688160&id=11403146",
-  "claim_type": "财务表现",
-  "verification_status": "已验证",
-  "confidence": 0.95,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "buke_2025_halfyear_report.pdf（新浪财经文件服务器转存上交所披露 http://file.finance.sina.com.cn/211.154.219.97:9494/MRGG/CNSESH_STOCK/2025/2025-8/2025-08-29/11403146.PDF）",
-    "locator": "第13页（第三节 管理层讨论与分析·主要财务数据变动）",
-    "excerpt": "公司股东的净利润 2,611.01 万元，较上年同期增长 13.58%；扣除股份支付影响后归属于上市公司股东的净利润 3,602.56 万元，较上年同期增长 42.27%。",
-    "caliber": "2025年半年度合并报表口径，归属于上市公司股东的净利润2,611.01万元（+13.58%）；扣除股份支付影响后3,602.56万元（+42.27%）",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-06",
-    "evidence_level": "official_filing",
-    "fingerprint": "da031a60fc3634c1"
-   }
-  ],
-  "notes": "半年报直接可验证"
- },
- {
-  "claim_id": "SH_001",
-  "claim_text": "双环传动子公司环动科技RV减速器国内市占率从2021年的10.11%提升至2023年的18.89%",
-  "subject": "环动科技",
-  "product": "RV减速器",
-  "metric": "国内市占率",
-  "value": "10.11%→18.89%",
-  "baseline": "2021年市占率",
-  "source_text": "环动科技招股书：根据GGII统计，2021至2023年度，公司RV减速器产品国内市占率自10.11%增长至18.89%",
-  "source_url": "https://static.sse.com.cn/stock/disclosure/announcement/c/202504/002040_20250429_OY7U.pdf",
-  "claim_type": "产能/需求",
-  "verification_status": "已验证",
-  "confidence": 0.9,
-  "definition_issues": [
-   "GGII统计口径未披露",
-   "是否包含所有应用场景的RV减速器？"
-  ],
-  "evidence_list": [
-   {
-    "source": "huandong_ipo_prospectus.txt（环动科技招股说明书申报稿，https://static.sse.com.cn/stock/disclosure/announcement/c/202504/002040_20250429_OY7U.pdf）",
-    "locator": "第1-1-22页（重大事项提示，同行业数据亦见第1-1-79、1-1-108页）",
-    "excerpt": "2021 至 2023 年各年度，公司的市场占有率分别为 10.11%、13.65%、18.89%，逐年上升且仅次于纳博特斯克，同期纳博特斯克的市场占有率分别为",
-    "caliber": "招股书转引GGII（高工产业研究院）统计，口径为公司RV减速器产品国内（中国机器人RV减速器市场）市占率，2021年10.11%→2023年18.89%与Claim完全一致；GGII原始统计口径未公开披露。",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "93ad216b3b7927c4"
-   }
-  ],
-  "notes": "2025Q1 增补核验：环动招股书第1-1-22页（另见1-1-79、1-1-108）\"2021至2023年各年度，公司的市场占有率分别为10.11%、13.65%、18.89%\"，转引GGII统计。 原注：招股书直接可验证"
- },
- {
-  "claim_id": "SH_002",
-  "claim_text": "双环传动SHPR-20E RV减速器额定扭矩110-231 Nm，重量4.7 kg",
-  "subject": "双环传动",
-  "product": "SHPR-20E RV减速器",
-  "metric": "额定扭矩/重量",
-  "value": "110-231 Nm / 4.7 kg",
-  "baseline": "纳博特斯克RV-20E（412 Nm / 2.5 kg）",
-  "source_text": "国金证券研报：RV减速器国内外主要品牌同型号参数对比表",
-  "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf",
-  "claim_type": "技术性能",
-  "verification_status": "待验证",
-  "confidence": 0.65,
-  "definition_issues": [
-   "额定扭矩范围对应不同减速比",
-   "扭矩密度约23.4-49.1 Nm/kg，与180 Nm/kg目标差距大"
-  ],
-  "evidence_list": [
-   {
-    "source": "humanoid_robot_joint_reducer_202209.txt（国金证券行业深度研究2022-09-07，https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf）",
-    "locator": "第33页（图表65：RV减速器国内外主要品牌同型号参数对比）",
-    "excerpt": "性能指标 南通振康(ZKRV-20E) 双环传动(SHPR-20E) 纳博特斯克(RV-20E)；额定扭矩(Nm) 137-243 110-231；重量(Kg) 4.7 4.7",
-    "caliber": "本地datasheets目录为空，无官方产品规格来源，降级为研报证据。图表65列示SHPR-20E额定扭矩110-231 Nm、重量4.7 Kg，与Claim数值一致（不同减速比档位对应扭矩范围）；原表因PDF抽取错位，纳博特斯克RV-20E列的412 Nm/2.5kg与0.35等数值串行，建议以原始研报PDF图表复核列对应关系。",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "analyst_report",
-    "fingerprint": "2bbac0ecc324a46d"
-   }
-  ],
-  "notes": "降级：唯一证据为国金2022-09行业深度研报图表65参数对比表（且PDF抽取有列错位风险，需回看原始PDF），本地缺官方datasheet。 原注：需与官网/ datasheet 核对；注意180 Nm/kg可能是不同型号或测试条件"
- },
- {
-  "claim_id": "SH_003",
-  "claim_text": "双环传动2025Q2减速器及其他业务收入3.49亿元，同比增长35.8%",
-  "subject": "双环传动",
-  "product": "减速器及其他业务",
-  "metric": "收入增速",
-  "value": "3.49亿元，+35.8%",
-  "baseline": "2024Q2",
-  "source_text": "券商研报：乘用车齿轮、智能执行机构、减速器及其他收入分别26.68、4.26、3.49亿元，同比+12.9%、+51.7%、+35.8%",
-  "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202508221732112681_1.pdf",
-  "claim_type": "财务表现",
-  "verification_status": "待验证",
-  "confidence": 0.5,
-  "evidence_list": [
-   {
-    "source": "shuanghuan_2025q2_review.txt（民生证券双环传动2025年半年报点评，2025-08-28，https://pdf.dfcfw.com/pdf/H3_AP202508221732112681_1.pdf）",
-    "locator": "点评正文第1页（25Q2业绩表现亮眼段）",
-    "excerpt": "其中乘用车齿轮、智能执行机构、减速器及其他收入分别 26.68、4.26、3.49 亿元，同比+12.9%、+51.7%、+35.8%。",
-    "caliber": "研报口径，数值3.49亿元、同比+35.8%与Claim一致；但单季口径仅来自研报，且与官方半年报存在口径疑点：2025半年报显示减速器及其他2025H1（半年累计）收入348,990,082.38元（≈3.49亿元）、上年同期280,453,449.66元（≈2.80亿元），据此推算半年累计同比约+24.4%，且乘用车齿轮26.68亿、智能执行机构4.26亿亦均与半年报半年累计数（2,668,932,810.05元、425,541,978.80元）完全一致，疑研报将半年报累计数标注为Q2单季，单季拆分无法由本地官方披露复现。",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "analyst_report",
-    "fingerprint": "07baebeaf0133355"
-   },
-   {
-    "source": "shuanghuan_2025_halfyear_report.txt（双环传动2025年半年度报告全文）",
-    "locator": "第14页（第三节 管理层讨论与分析·营业收入构成表，分产品）",
-    "excerpt": "减速器及其他      348,990,082.38                       280,453,449.66          6.49%（营业收入构成表：本报告期/上年同期，单位：元）",
-    "caliber": "官方半年报口径，减速器及其他2025H1半年累计收入约3.49亿元；表中同比增减列因PDF文本抽取错位无法直接读取，按两年累计数推算同比约+24.4%，与Claim所述Q2单季+35.8%不同口径，数值不能直接互证。",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "5aa56df49903b210"
-   }
-  ],
-  "notes": "口径疑点：民生研报称2025Q2单季3.49亿/+35.8%，但双环2025半年报第14页显示减速器及其他业务2025H1半年累计即348,990,082.38元（≈3.49亿），疑研报将累计数标注为单季；单季拆分校验无法由本地官方披露复现，待复核。 原注：可通过半年报交叉验证。 复核结论（2026-09-06，Phase 3A）：项目书各章均未引用该3.49亿/Q2单季数字，无正文风险；如后续引用，一律以官方半年报H1累计口径（348,990,082.38元、同比约+24.4%）为准，不采用研报'Q2单季+35.8%'标注。"
- },
- {
-  "claim_id": "SH_004",
-  "claim_text": "环动科技下游客户已覆盖埃斯顿、埃夫特、卡诺普、爱仕达旗下钱江机器人等知名机器人制造商",
-  "subject": "环动科技",
-  "product": "RV减速器",
-  "metric": "客户覆盖",
-  "value": "埃斯顿、埃夫特、卡诺普、钱江机器人等",
-  "baseline": "",
-  "source_text": "环动科技招股书：公司下游客户已覆盖埃斯顿、埃夫特、卡诺普、爱仕达旗下钱江机器人等知名机器人制造商",
-  "source_url": "https://static.sse.com.cn/stock/disclosure/announcement/c/202504/002040_20250429_OY7U.pdf",
-  "claim_type": "客户/订单",
-  "verification_status": "已验证",
-  "confidence": 0.9,
-  "definition_issues": [
-   "覆盖是否意味着批量供货？",
-   "各客户收入占比未披露"
-  ],
-  "evidence_list": [
-   {
-    "source": "huandong_ipo_prospectus.txt（环动科技招股说明书申报稿，https://static.sse.com.cn/stock/disclosure/announcement/c/202504/002040_20250429_OY7U.pdf）",
-    "locator": "第1-1-108页（业务与技术·竞争优势，客户名单亦见第1-1-13、1-1-15页）",
-    "excerpt": "公司 RV 减速器产品主要客户包括埃斯顿（002747.SZ）、埃夫特（688165.SH）、卡诺普、爱仕达（002403.SZ）旗下钱江机器人、新时达（002527.SZ）、新松机器人（300024.SZ）、凯尔达（688255.SH）、广州数控、华中数控（300161.SZ）等一批国内知名品牌制造商和上市公司",
-    "caliber": "招股书直接披露的主要客户名单，埃斯顿、埃夫特、卡诺普、爱仕达旗下钱江机器人均在内，与Claim一致；系'主要客户'而非全部下游客户，各客户收入占比未在该句披露（埃斯顿为第一大客户，报告期占营收约43%-53%）。",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "284061fe392cdfcc"
-   }
-  ],
-  "notes": "2025Q1 增补核验：环动招股书第1-1-108页主要客户名单逐字含埃斯顿、埃夫特、卡诺普、爱仕达旗下钱江机器人；埃斯顿为第一大客户（占营收约43%-53%）。 原注：招股书直接可验证"
- },
- {
-  "claim_id": "SH_005",
-  "claim_text": "环动科技RV减速器产品销量持续增长，2023年度产能利用率超过100%",
-  "subject": "环动科技",
-  "product": "RV减速器",
-  "metric": "产能利用率",
-  "value": "101.30%",
-  "baseline": "2021-2022年产能利用率80.61%、87.02%",
-  "source_text": "环动科技招股书：报告期各期，公司RV减速器产品的产能利用率分别为80.61%、87.02%、101.30%和83.08%",
-  "source_url": "https://static.sse.com.cn/stock/disclosure/announcement/c/202504/002040_20250429_OY7U.pdf",
-  "claim_type": "产能/需求",
-  "verification_status": "已验证",
-  "confidence": 0.9,
-  "definition_issues": [
-   "产能利用率>100%意味着超负荷生产或产能统计口径问题"
-  ],
-  "evidence_list": [
-   {
-    "source": "huandong_ipo_prospectus.txt（环动科技招股说明书申报稿，https://static.sse.com.cn/stock/disclosure/announcement/c/202504/002040_20250429_OY7U.pdf）",
-    "locator": "第1-1-115页（业务与技术·产能产量销量表及说明）",
-    "excerpt": "报告期各期，公司 RV 减速器产品的产能利用率分别为 80.61%、87.02%、101.30% 和 83.08%，最近三年持续较快增长且其中 2023 年度超过 100%，2024 年上半年因产量增长相对放缓而有所回落。",
-    "caliber": "招股书披露的RV减速器产能利用率（产量/产能），2021-2024H1分别为80.61%、87.02%、101.30%、83.08%，2023年度101.30%>100%与Claim一致；>100%系实际产量超过名义产能（超负荷生产及统计口径所致），招股书原文亦确认'2023年度产能利用率已超过100%'（第1-1-127页）。",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "c75355b535a4654c"
-   }
-  ],
-  "notes": "2025Q1 增补核验：环动招股书第1-1-115页\"产能利用率分别为80.61%、87.02%、101.30%和83.08%，其中2023年度超过100%\"；>100%系产量超名义产能。 原注：需核对招股书产能统计口径"
- },
- {
-  "claim_id": "SH_006",
-  "claim_text": "双环传动2024年归母净利润10.24亿元，同比增长25.42%",
-  "subject": "双环传动",
-  "product": "公司整体",
-  "metric": "归母净利润",
-  "value": "10.24亿元，+25.42%",
-  "baseline": "2023年",
-  "source_text": "2024年年报：归母净利润10.24亿元，同比增长25.42%",
-  "source_url": "https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=002472",
-  "claim_type": "财务表现",
-  "verification_status": "已验证",
-  "confidence": 0.95,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "shuanghuan_2024_annual_report.pdf（新浪财经文件服务器转存深交所披露 http://file.finance.sina.com.cn/211.154.219.97:9494/MRGG/CNSESZ_STOCK/2025/2025-4/2025-04-25/10973440.PDF）",
-    "locator": "第7页（第二节 公司简介和主要财务指标·主要会计数据）",
-    "excerpt": "损益的净利润（元） 1,023,911,091.96 816,407,328.54 25.42% 582,085,021.77",
-    "caliber": "合并报表口径，2024年归属于上市公司股东的净利润1,023,911,091.96元≈10.24亿元，同比增长25.42%",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-06",
-    "evidence_level": "official_filing",
-    "fingerprint": "facef687bd8ef695"
-   }
-  ],
-  "notes": "年报直接可验证"
- },
- {
-  "claim_id": "IND_001",
-  "claim_text": "2023年中国工业机器人销量达31.60万台，2019-2023年CAGR为19.86%",
-  "subject": "中国工业机器人市场",
-  "product": "工业机器人",
-  "metric": "销量",
-  "value": "31.60万台，CAGR 19.86%",
-  "baseline": "2019年15.31万台",
-  "source_text": "环动科技招股书引用GGII数据",
-  "source_url": "https://static.sse.com.cn/stock/disclosure/announcement/c/202504/002040_20250429_OY7U.pdf",
-  "claim_type": "市场数据",
-  "verification_status": "已验证",
-  "confidence": 0.9,
-  "definition_issues": [
-   "GGII统计口径未披露"
-  ],
-  "evidence_list": [
-   {
-    "source": "huandong_ipo_prospectus.txt（https://static.sse.com.cn/stock/disclosure/announcement/c/202504/002040_20250429_OY7U.pdf）",
-    "locator": "第95页（第五节 业务与技术/行业基本情况，页脚1-1-95）",
-    "excerpt": "根据 GGII 统计数据，2019-2023 年，我国工业机器人销量由 2019 年的 15.31 万台提升至 2023 年的 31.60 万台，年均复合增长率达 19.86%。",
-    "caliber": "招股书转引行业协会口径：数据原始出处为 GGII（高工机器人产业研究所），招股书未披露 GGII 销量的具体统计口径（如销量与安装量是否区分）。原文 CAGR 表述为\"2019-2023 年，我国工业机器人销量由 2019 年的 15.31 万台提升至 2023 年的 31.60 万台，年均复合增长率达 19.86%\"，区间与 Claim 的 2019-2023 完全一致，且 (31.60/15.31)^(1/4)-1≈19.86%，数值自洽。",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "0e33d51dd08b74ef"
-   }
-  ],
-  "notes": "2025Q1 增补核验：环动招股书第95页\"2019-2023年，我国工业机器人销量由15.31万台提升至31.60万台，年均复合增长率达19.86%\"，转引GGII；CAGR数值自洽。 原注：作为行业基准数据使用"
- },
- {
-  "claim_id": "ZDL_001",
-  "claim_text": "中大力德2024年实现营业收入9.76亿元，同比下降10.10%；归属于上市公司股东的净利润0.73亿元，同比下降0.82%",
-  "subject": "中大力德",
-  "product": "公司整体（精密减速器/减速电机/智能执行单元）",
-  "metric": "营业收入及归母净利润",
-  "value": "营收9.76亿元(-10.10%)；归母净利0.73亿元(-0.82%)",
-  "baseline": "2023年营收10.86亿元、归母净利0.73亿元",
-  "source_text": "中大力德：2024年年度报告（2025-04-18披露，新浪财经公告库全文）",
-  "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=002896&id=10892079",
-  "claim_type": "财务表现",
-  "verification_status": "已验证",
-  "confidence": 0.85,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "中大力德：2024年年度报告（2025-04-18披露，新浪财经公告库全文），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=002896&id=10892079",
-    "locator": "第三节 管理层讨论与分析（营业收入构成/经营情况讨论）",
-    "excerpt": "报告期内，公司实现营业收入976,342,989.09元，同比下降10.10%；实现归属于上市公司股东的净利润72,550,353.38元，同比下降0.82%",
-    "caliber": "合并报表口径、全年累计；'9.76亿元/0.73亿元'为约数，精确值以元为单位原文为准",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "11c2ffeaab63643e"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "ZDL_002",
-  "claim_text": "中大力德2024年智能执行单元销售收入370,217,648.31元，占主营收入37.92%，同比下降23.65%；精密减速器销售收入242,551,909.71元，占比24.84%，同比增长1.07%",
-  "subject": "中大力德",
-  "product": "智能执行单元；精密减速器（RV/谐波/行星）",
-  "metric": "分产品销售收入及占比",
-  "value": "智能执行单元3.70亿元(-23.65%，占比37.92%)；精密减速器2.43亿元(+1.07%，占比24.84%)",
-  "baseline": "2023年智能执行单元4.85亿元、精密减速器2.40亿元",
-  "source_text": "中大力德：2024年年度报告（分产品营业收入构成表，2025-04-18披露）",
-  "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=002896&id=10892079",
-  "claim_type": "财务表现",
-  "verification_status": "已验证",
-  "confidence": 0.85,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "中大力德：2024年年度报告（分产品营业收入构成表，2025-04-18披露），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=002896&id=10892079",
-    "locator": "第三节 管理层讨论与分析——分产品营业收入构成表",
-    "excerpt": "| 精密减速器| 242,551,909.71| 24.84%| 239,987,454.94| 22.10%| 1.07%| / | 智能执行单元| 370,217,648.31| 37.92%| 484,893,574.23| 44.65%| -23.65%|",
-    "caliber": "分产品口径为主营业务收入（不含其他业务/配件）；占比为该口径下的结构占比",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "a4f114e109ac1224"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "ZDL_003",
-  "claim_text": "中大力德2024年主要产品生产量323.48万台，同比下降3.79%",
-  "subject": "中大力德",
-  "product": "主要产品合计（减速电机、精密减速器、智能执行单元）",
-  "metric": "生产量",
-  "value": "323.48万台(-3.79%)",
-  "baseline": "2023年产量336.22万台",
-  "source_text": "中大力德：2024年年度报告（产销量情况表，2025-04-18披露）",
-  "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=002896&id=10892079",
-  "claim_type": "产能需求",
-  "verification_status": "已验证",
-  "confidence": 0.85,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "中大力德：2024年年度报告（产销量情况表，2025-04-18披露），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=002896&id=10892079",
-    "locator": "第三节 管理层讨论与分析——产销量情况",
-    "excerpt": "| 生产量| 台| 3,234,842.00| 3,362,186.00| -3.79%|",
-    "caliber": "为全产品合计产量，未按减速器/电机/执行单元拆分；不能直接当作减速器单品产量使用",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "da32ae9956cb48f0"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "ZDL_004",
-  "claim_text": "中大力德通过全资子公司佛山中大实施'智能执行单元及大型RV减速器生产线项目'，拟投资17,500.00万元，其中使用募集资金11,500万元",
-  "subject": "中大力德",
-  "product": "智能执行单元、大型RV减速器（佛山基地）",
-  "metric": "募投项目投资总额",
-  "value": "17,500万元（其中募集资金11,500万元）",
-  "baseline": "",
-  "source_text": "中大力德：2024年年度报告（募集资金投向说明，2025-04-18披露）",
-  "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=002896&id=10892079",
-  "claim_type": "产能需求",
-  "verification_status": "已验证",
-  "confidence": 0.8,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "中大力德：2024年年度报告（募集资金投向说明，2025-04-18披露），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=002896&id=10892079",
-    "locator": "第六节 重要事项/第十节 财务报告——募集资金投向说明",
-    "excerpt": "本次项目拟使用房产总建筑面积为约20,000平方米……拟投资17,500.00万元，其中房屋建设费用4,000.00万元，设备购置及安装费用12,000.00万元，铺底流动资金1,500.00 万元，项目资金来源主要于本次变更的募集资金，不足部分公司自筹投入",
-    "caliber": "实施主体为全资子公司佛山中大，建设期24个月；属拟投资/在建产能，非已投产产能",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "67b78bcdb3f0dd5f"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "MZ_001",
-  "claim_text": "鸣志电器2024年实现营业收入24.16亿元，同比下降4.99%；归母净利润7,791万元，同比下降44.53%",
-  "subject": "鸣志电器",
-  "product": "公司整体（控制电机及其驱动系统为核心业务）",
-  "metric": "营业收入及归母净利润",
-  "value": "营收24.16亿元(-4.99%)；归母净利7,791万元(-44.53%)",
-  "baseline": "2023年营收25.43亿元",
-  "source_text": "鸣志电器：2024年年度报告（2025-04-26披露，新浪财经公告库全文）",
-  "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603728&id=11004352",
-  "claim_type": "财务表现",
-  "verification_status": "已验证",
-  "confidence": 0.85,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "鸣志电器：2024年年度报告（2025-04-26披露，新浪财经公告库全文），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603728&id=11004352",
-    "locator": "第二节 公司简介和主要财务指标/第三节 管理层讨论与分析",
-    "excerpt": "报告期内，公司全年实现营业收入241,593万元，同比下降4.99%……公司全年实现归属于上市公司股东的净利润7,791万元，同比下降44.53%",
-    "caliber": "合并报表全年累计；'24.16亿元'为约数；利润下降主因新建项目产能未达产+营收下滑",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "f62304c662acc775"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "MZ_002",
-  "claim_text": "鸣志电器2024年控制电机及其驱动系统业务实现营业收入19.59亿元，销量2,383.33万台/万套，收入同比下降5.45%",
-  "subject": "鸣志电器",
-  "product": "控制电机及其驱动系统（步进/无刷/伺服/空心杯及驱动）",
-  "metric": "核心业务分部收入及销量",
-  "value": "收入19.59亿元(-5.45%)；销量2,383.33万台/万套(+4.97%)",
-  "baseline": "上年同期收入20.71亿元（由-5.45%倒推）",
-  "source_text": "鸣志电器：2024年年度报告（分产品经营数据表，2025-04-26披露）",
-  "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603728&id=11004352",
-  "claim_type": "财务表现",
-  "verification_status": "已验证",
-  "confidence": 0.85,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "鸣志电器：2024年年度报告（分产品经营数据表，2025-04-26披露），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603728&id=11004352",
-    "locator": "第三节 管理层讨论与分析——主营业务分产品情况表",
-    "excerpt": "| 控制电机及其驱动系统| 1,959,196,207.55| 2,383.33| -5.45%| 4.97%|",
-    "caliber": "分部口径含电机+驱动器+模组，不等于空心杯单一产品收入；销量单位万台/万套混计",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "6df26c68137c12ad"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "MZ_003",
-  "claim_text": "鸣志电器2024年无刷电机业务合计实现营业收入21,951万元，同比增长31%，其中无刷空心杯产品线年销售规模同比增速超过30%",
-  "subject": "鸣志电器",
-  "product": "无刷电机/无刷空心杯电机（灵巧手、医疗等）",
-  "metric": "无刷电机产品线收入及增速",
-  "value": "21,951万元(+31%)；无刷空心杯销售规模增速超30%",
-  "baseline": "上年同期无刷电机收入",
-  "source_text": "鸣志电器：2024年年度报告（管理层讨论与分析——产品线经营情况，2025-04-26披露）",
-  "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603728&id=11004352",
-  "claim_type": "财务表现",
-  "verification_status": "已验证",
-  "confidence": 0.8,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "鸣志电器：2024年年度报告（管理层讨论与分析——产品线经营情况，2025-04-26披露），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603728&id=11004352",
-    "locator": "第三节 管理层讨论与分析——控制电机及其驱动系统业务相关主要产品线的经营情况",
-    "excerpt": "报告期内，公司无刷电机业务合计实现营业收入21,951万元，较上年同期增长31%",
-    "caliber": "'无刷电机业务'为产品线口径，非空心杯单品收入；空心杯仅披露增速百分比未披露绝对额",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "5db7bbcd0f7232a6"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "MZ_004",
-  "claim_text": "鸣志电器2024年控制电机及其驱动系统业务在机器人应用领域营业收入同比增长约2.3%，其中无齿槽空心杯业务在机器人应用领域的增长接近200%",
-  "subject": "鸣志电器",
-  "product": "无齿槽空心杯电机模组等（机器人运动控制模块）",
-  "metric": "机器人应用领域收入增速",
-  "value": "机器人应用领域+2.3%；无齿槽空心杯机器人领域增长接近200%",
-  "baseline": "2023年同口径应用领域收入",
-  "source_text": "鸣志电器：2024年年度报告（管理层讨论与分析——应用领域经营情况，2025-04-26披露）",
-  "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603728&id=11004352",
-  "claim_type": "市场展望",
-  "verification_status": "已验证",
-  "confidence": 0.8,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "鸣志电器：2024年年度报告（管理层讨论与分析——应用领域经营情况，2025-04-26披露），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603728&id=11004352",
-    "locator": "第三节 管理层讨论与分析——应用领域经营情况（机器人）",
-    "excerpt": "报告期内，公司控制电机及其驱动系统业务在机器人应用领域的营业收入同比增长约2.3%，其中公司无齿槽空心杯业务在机器人应用领域的增长接近200%",
-    "caliber": "仅披露同比增速百分比，未披露机器人领域收入绝对额；'无齿槽空心杯'与'空心杯'口径需注意区分",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "5e01922e89981b50"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "KL_001",
-  "claim_text": "柯力传感2024年实现营业收入1,295,126,038.72元，同比增长20.79%；归属于上市公司股东的净利润260,508,314.67元，同比减少16.62%",
-  "subject": "柯力传感",
-  "product": "称重/测力传感器及工业物联网（整体）",
-  "metric": "营业收入及归母净利润（2024年度）",
-  "value": "营收12.95亿元(+20.79%)；归母净利2.61亿元(-16.62%)",
-  "baseline": "2023年营收10.72亿元、归母净利3.12亿元",
-  "source_text": "柯力传感《2024年年度报告摘要（更正版）》（2025-04-26批准，中财网2025-07-11转载）",
-  "source_url": "https://www.cfi.net.cn/p20250711000243.html",
-  "claim_type": "财务表现",
-  "verification_status": "已验证",
-  "confidence": 0.85,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "柯力传感《2024年年度报告摘要（更正版）》（2025-04-26批准，中财网2025-07-11转载），https://www.cfi.net.cn/p20250711000243.html",
-    "locator": "第二节 主要会计数据（3.1近3年的主要会计数据表）",
-    "excerpt": "报告期内，公司实现营业收入129,512.60万元，比上年同期增长20.79%；实现归属于上市公司股东的净利润26,050.83万元，比上年同期减少16.62%",
-    "caliber": "合并报表口径，年度累计；摘要为'更正版'，以更正后数据为准",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "1a7615915b48180c"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "KL_002",
-  "claim_text": "柯力传感六维力/力矩传感器已完成人形机器人手腕、脚腕等产品系列开发，2024年内已给50多家国内人形机器人、协作机器人、工业机器人客户送样，部分客户已进入批量订单阶段",
-  "subject": "柯力传感",
-  "product": "六维力/力矩传感器（机器人传感器）",
-  "metric": "送样客户数量",
-  "value": "50多家客户送样，部分进入批量订单阶段",
-  "baseline": "",
-  "source_text": "柯力传感《2024年年度报告摘要（更正版）》（2025-04-26批准，中财网转载）",
-  "source_url": "https://www.cfi.net.cn/p20250711000243.html",
-  "claim_type": "客户订单",
-  "verification_status": "已验证",
-  "confidence": 0.8,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "柯力传感《2024年年度报告摘要（更正版）》（2025-04-26批准，中财网转载），https://www.cfi.net.cn/p20250711000243.html",
-    "locator": "第三节 重要事项（三）大力发展新四样",
-    "excerpt": "报告期内，公司六维力/力矩传感器已完成人形机器人手腕、脚腕，工业臂、协作臂末端的产品系列开发，掌握了结构解耦、算法解耦、高速采样通讯等技术要点，并已给50多家国内人形机器人、协作机器人、工业机器人客户送样，部分客户已进入批量订单阶段",
-    "caliber": "'50多家'为公司口径约数，未披露具体送样台数；'批量订单'客户数量未量化",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "20cf9d710927e2e2"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "KL_003",
-  "claim_text": "柯力传感2025年实现营业收入155,843.89万元（同比+20.33%），归属于上市公司股东的净利润34,055.13万元",
-  "subject": "柯力传感",
-  "product": "传感器与物联网系统集成（整体）",
-  "metric": "营业收入及归母净利润（2025年度）",
-  "value": "营收15.58亿元(+20.33%)；归母净利3.41亿元",
-  "baseline": "2024年营收12.95亿元",
-  "source_text": "柯力传感《2025年年度报告》（2026-04-26批准，新浪财经公告库全文）",
-  "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603662&id=12209189",
-  "claim_type": "财务表现",
-  "verification_status": "已验证",
-  "confidence": 0.85,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "柯力传感《2025年年度报告》（2026-04-26批准，新浪财经公告库全文），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603662&id=12209189",
-    "locator": "第三节 管理层讨论与分析/（一）总体经营情况",
-    "excerpt": "公司实现营业收入155,843.89万元，归属于上市公司股东的净利润34,055.13万元，归属于上市公司股东的扣除非经常性损益的净利润21,392.09万元",
-    "caliber": "合并报表年度累计口径；该年报为2026年4月披露的FY2025报告",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "6f7f2e83f390ecc7"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "KL_004",
-  "claim_text": "柯力传感2025年机器人力学传感器销售量超过1500只，送样客户数超过70家；2026年月出货量已突破千只",
-  "subject": "柯力传感",
-  "product": "机器人力学传感器（六维力/力矩等）",
-  "metric": "销售量/送样客户数/月出货量",
-  "value": "2025年销量超1500只；送样客户超70家；2026年月出货突破千只",
-  "baseline": "",
-  "source_text": "柯力传感《2025年年度报告》（2026-04-26批准，新浪财经公告库全文）",
-  "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603662&id=12209189",
-  "claim_type": "客户订单",
-  "verification_status": "已验证",
-  "confidence": 0.8,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "柯力传感《2025年年度报告》（2026-04-26批准，新浪财经公告库全文），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603662&id=12209189",
-    "locator": "第三节 管理层讨论与分析（新业务进展段落）",
-    "excerpt": "报告期内，机器人力学传感器销售量超过1500只，送样客户数超过70家，已进入小批量生产向批量化供应过渡的发展阶段。2026年，机器人力学传感器业务有望迅速提升收入规模，月出货量已突破千只，处于蓬勃发展态势",
-    "caliber": "'超1500只'为2025全年累计销量公司口径；'月出货突破千只'为2026年初阶段数据非年化；机器人力学传感器含六维力及一维至三维力产品，非纯六维力口径",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "99a01ccea629c160"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "WZX_001",
-  "claim_text": "五洲新春2024年实现营业收入3,264,549,247.12元（32.65亿元），同比增长5.10%；归属于上市公司股东的净利润91,370,150.18元（9,137.01万元），同比下滑33.88%",
-  "subject": "五洲新春",
-  "product": "轴承/精密零部件/丝杠（整体）",
-  "metric": "营业收入及归母净利润（2024年度）",
-  "value": "营收32.65亿元(+5.10%)；归母净利9,137.01万元(-33.88%)",
-  "baseline": "2023年营收31.06亿元、归母净利1.38亿元",
-  "source_text": "五洲新春《2024年年度报告》（2025-04-27批准，新浪财经公告库全文）",
-  "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603667&id=11045532",
-  "claim_type": "财务表现",
-  "verification_status": "已验证",
-  "confidence": 0.85,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "五洲新春《2024年年度报告》（2025-04-27批准，新浪财经公告库全文），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603667&id=11045532",
-    "locator": "第三节 管理层讨论与分析（2024年度主要会计数据表）",
-    "excerpt": "全年实现营业收入32.65亿元，同比增长5.10%，归母净利润9,137.01万元，同比下滑33.88%",
-    "caliber": "合并报表年度累计口径；归母净利降幅较大主要与境外业务不及预期等非收入因素有关",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "23d0c812abf68b9f"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "WZX_002",
-  "claim_text": "五洲新春2024年至12月3日丝杠产品（含三种类型）累计开票收入约为含税金额680万元（含汽车类丝杠产品），占公司2023年全年营业收入的0.22%",
-  "subject": "五洲新春",
-  "product": "丝杠（梯形丝杠/滚珠丝杠副/行星滚柱丝杠）",
-  "metric": "丝杠产品累计开票收入及营收占比",
-  "value": "约680万元（含税，截至2024-12-03），占2023年营收0.22%",
-  "baseline": "2023年全年营业收入（约31.06亿元）",
-  "source_text": "五洲新春股票交易异常波动公告（2024-12-03发布，经腾讯新闻/e公司转述公告原文）",
-  "source_url": "https://news.qq.com/rain/a/20241203A0822Q00",
-  "claim_type": "财务表现",
-  "verification_status": "待验证",
-  "confidence": 0.5,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "五洲新春股票交易异常波动公告（2024-12-03发布，经腾讯新闻/e公司转述公告原文），https://news.qq.com/rain/a/20241203A0822Q00",
-    "locator": "公司公告原文段落（页码需查交易所PDF）",
-    "excerpt": "2024年至今，公司丝杠产品累计开票收入约为含税金额680万元（包含汽车类丝杠产品），占公司2023年全年营业收入的0.22%，占比非常小，对公司业绩不形成影响",
-    "caliber": "数字出自公司正式公告但经媒体转述获取、未直接核对上交所公告PDF；'680万元'为含税开票口径且含汽车类丝杠，非纯机器人丝杠口径；占比为占2023年营收",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "news_media",
-    "fingerprint": "dc1e5f384d29b317"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
- },
- {
-  "claim_id": "WZX_003",
-  "claim_text": "五洲新春拟与新昌高新技术产业园区管委会及新昌县高创控股集团签订对外投资协议，投资建设行星滚柱丝杠、微型滚珠丝杠及智能汽车丝杠等项目，总投资约15亿元，预计建设周期3年，总用地约100亩",
-  "subject": "五洲新春",
-  "product": "行星滚柱丝杠/微型滚珠丝杠/智能汽车丝杠",
-  "metric": "项目计划总投资",
-  "value": "约15亿元，建设周期3年，用地约100亩",
-  "baseline": "",
-  "source_text": "五洲新春对外投资公告（2025-02-28发布，东方财富网转述）",
-  "source_url": "https://finance.eastmoney.com/a/202502283333344246.html",
-  "claim_type": "产能需求",
-  "verification_status": "待验证",
-  "confidence": 0.5,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "五洲新春对外投资公告（2025-02-28发布，东方财富网转述），https://finance.eastmoney.com/a/202502283333344246.html",
-    "locator": "公司公告原文段落（页码需查交易所PDF）",
-    "excerpt": "计划投资建设行星滚柱丝杠、微型滚珠丝杠及智能汽车丝杠等项目，项目总投资约为15亿元，预计建设周期为3年。项目总用地约100亩，资金来源于自有资金及自筹资金",
-    "caliber": "为'拟投资'计划数而非已投入金额，经媒体转述公告获取、未直接核对公告PDF；后续实际投资额可能调整",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "news_media",
-    "fingerprint": "dc12beff90f7cc2d"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
- },
- {
-  "claim_id": "WZX_004",
-  "claim_text": "五洲新春2023年轴承产品业务实现营收17.89亿元，同比-5.12%，毛利率18.01%；轴承产品出货4.54亿套，同比-4.40%",
-  "subject": "五洲新春",
-  "product": "轴承产品",
-  "metric": "轴承业务营收、毛利率、出货量（2023年度）",
-  "value": "营收17.89亿元(-5.12%)；毛利率18.01%；出货4.54亿套(-4.40%)",
-  "baseline": "2022年轴承业务营收及出货量",
-  "source_text": "券商研报（点评2023年年报及2024年一季报），新浪财经研报平台",
-  "source_url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/lastest/rptid/767790536699/index.phtml",
-  "claim_type": "财务表现",
-  "verification_status": "待验证",
-  "confidence": 0.5,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "券商研报（点评2023年年报及2024年一季报），新浪财经研报平台，https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/lastest/rptid/767790536699/index.phtml",
-    "locator": "研报'轴承业务高速发展'段落",
-    "excerpt": "2023年公司轴承产品业务实现营收17.89亿元，同比-5.12%，毛利率18.01%，同比-0.03pct，轴承产品出货4.54亿套，同比-4.40%",
-    "caliber": "来源为券商研报对公司2023年年报的转述，未直接核对年报原文分部数据；毛利率为轴承产品业务口径",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "analyst_report",
-    "fingerprint": "21bd9ed0759b044c"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
- },
- {
-  "claim_id": "BST_001",
-  "claim_text": "贝斯特2023年实现营业收入13.43亿元，同比增长22.42%；归母净利润2.64亿元，同比增长15.13%",
-  "subject": "贝斯特",
-  "product": "公司整体（精密零部件/涡轮增压器零部件/新能源车零部件）",
-  "metric": "年度营业收入及归母净利润",
-  "value": "营收13.43亿元(+22.42%)；归母净利2.64亿元(+15.13%)",
-  "baseline": "2022年同期（同比口径）",
-  "source_text": "智通财经转述公司2023年年度报告（2024-04-19），年报全文PDF见雪球托管巨潮文件",
-  "source_url": "https://news.qq.com/rain/a/20240419A0A0D000",
-  "claim_type": "财务表现",
-  "verification_status": "已验证",
-  "confidence": 0.8,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "智通财经转述公司2023年年度报告（2024-04-19），年报全文PDF见雪球托管巨潮文件，https://news.qq.com/rain/a/20240419A0A0D000",
-    "locator": "2023年年度报告第二节 主要会计数据和财务指标（年报全文PDF：https://stockn.xueqiu.com/SZ300580/20240419070609.pdf ）",
-    "excerpt": "报告期内公司实现营业收入13.43亿元，同比增长22.42%;归属于上市公司股东的净利润2.64亿元，同比增长15.13%",
-    "caliber": "归母净利润含非经常性损益；扣非净利润2.43亿元(+57.48%)增速口径差异大；媒体转述+官方PDF交叉验证",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "e2da257e153b90fb"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "BST_002",
-  "claim_text": "贝斯特2023年上半年营业收入约6.34亿元，同比增加29.42%；归母净利润约1.3亿元，同比增加62.08%",
-  "subject": "贝斯特",
-  "product": "公司整体（上半年累计口径）",
-  "metric": "半年度营业收入及归母净利润",
-  "value": "营收约6.34亿元(+29.42%)；净利约1.3亿元(+62.08%)",
-  "baseline": "2022年上半年（同比口径）",
-  "source_text": "每日经济新闻/凤凰网江苏转述公司2023年半年度业绩报告（2023-08-08）",
-  "source_url": "https://js.ifeng.com/c/8S3zO7KsDwb",
-  "claim_type": "财务表现",
-  "verification_status": "待验证",
-  "confidence": 0.5,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "每日经济新闻/凤凰网江苏转述公司2023年半年度业绩报告（2023-08-08），https://js.ifeng.com/c/8S3zO7KsDwb",
-    "locator": "",
-    "excerpt": "贝斯特（SZ 300580）8月7日晚间发布半年度业绩报告称，2023年上半年营业收入约6.34亿元，同比增加29.42%",
-    "caliber": "媒体转述半年度业绩报告，未直接核对半年报原文；净利增速62.08%与全年15.13%差异显著，存在低基数效应口径问题",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "news_media",
-    "fingerprint": "c024a904c263e938"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
- },
- {
-  "claim_id": "BST_003",
-  "claim_text": "贝斯特2023年报披露：滚珠丝杠副、直线导轨副首台套已成功下线，部分产品送样验证中；行星滚柱丝杠已顺利出样",
-  "subject": "贝斯特",
-  "product": "直线滚动功能部件（滚珠丝杠副/直线导轨副/行星滚柱丝杠）",
-  "metric": "产品研发/送样进度（定性+阶段性）",
-  "value": "首台套下线、送样验证中、行星滚柱丝杠出样",
-  "baseline": "",
-  "source_text": "无锡贝斯特精机股份有限公司《2023年年度报告》（2024-04-20披露，巨潮PDF）",
-  "source_url": "https://stockn.xueqiu.com/SZ300580/20240419070609.pdf",
-  "claim_type": "技术性能",
-  "verification_status": "已验证",
-  "confidence": 0.8,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "无锡贝斯特精机股份有限公司《2023年年度报告》（2024-04-20披露，巨潮PDF），https://stockn.xueqiu.com/SZ300580/20240419070609.pdf",
-    "locator": "第三节 管理层讨论与分析（公司从事的主要业务部分）",
-    "excerpt": "报告期内，公司生产的滚珠丝杠副、直线导轨副等产品首台套已实现成功下线，部分产品已在送样验证过程中；自主研发的行星滚柱丝杠已顺利出样，并紧跟……",
-    "caliber": "公司口径，未披露丝杠业务收入/产能具体数字；'送样验证'不等于批量订单，验证转化率存疑",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "62590d625e8f8a3f"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "BST_004",
-  "claim_text": "贝斯特股权激励考核目标：以2021年营收为基数，2022-2024年营业收入目标增长率分别不低于10%/25%/45%",
-  "subject": "贝斯特",
-  "product": "公司整体（股权激励业绩考核）",
-  "metric": "股权激励营收考核目标",
-  "value": "以2021年为基数，2022-2024年营收增长目标不低于10%/25%/45%",
-  "baseline": "2021年营业收入",
-  "source_text": "上海证券首次覆盖深度研报（2024-07-24，转述公司股权激励计划草案）",
-  "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202407241638269818_1.pdf",
-  "claim_type": "财务表现",
-  "verification_status": "待验证",
-  "confidence": 0.5,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "上海证券首次覆盖深度研报（2024-07-24，转述公司股权激励计划草案），https://pdf.dfcfw.com/pdf/H3_AP202407241638269818_1.pdf",
-    "locator": "研报正文股权激励章节（东方财富PDF）",
-    "excerpt": "以2021 年营业收入为基数，2022-2024 年营业收入的目标增长率将分别不低于10%/25%/45%；或以2021 年净利润为基数……",
-    "caliber": "券商研报转述，未直接核对股权激励计划公告原文；为公司层面考核目标而非实际业绩，属'目标值'口径",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "analyst_report",
-    "fingerprint": "bbfa2addc5d44569"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
- },
- {
-  "claim_id": "HLYY_001",
-  "claim_text": "恒立液压2023年实现营业收入89.85亿元，同比增长9.61%；归母净利润24.99亿元，同比增长6.66%",
-  "subject": "恒立液压",
-  "product": "公司整体（液压油缸/液压泵阀/液压系统等）",
-  "metric": "年度营业收入及归母净利润",
-  "value": "营收89.85亿元(+9.61%)；归母净利24.99亿元(+6.66%)",
-  "baseline": "2022年同期（同比口径）",
-  "source_text": "同花顺财经转述公司2023年年度业绩报告（2024-06-23）；国投证券研报、界面新闻等多源交叉一致",
-  "source_url": "https://m.10jqka.com.cn/20240623/c659104279.shtml",
-  "claim_type": "财务表现",
-  "verification_status": "已验证",
-  "confidence": 0.8,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "同花顺财经转述公司2023年年度业绩报告（2024-06-23）；国投证券研报、界面新闻等多源交叉一致，https://m.10jqka.com.cn/20240623/c659104279.shtml",
-    "locator": "",
-    "excerpt": "据恒立液压(601100)发布2023年年度业绩报告称，公司营业收入89.85亿元，同比增长9.61%；实现归属于上市公司股东净利润24.99亿元，同比增长6.66%",
-    "caliber": "多个独立来源数字一致，可信度高；'净利润'为归母口径",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "0044aab12219b342"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "HLYY_002",
-  "claim_text": "恒立液压2023年度权益分派：每10股派现金红利7.00元（含税），合计派现9.39亿元，占同期归母净利润的37.56%",
-  "subject": "恒立液压",
-  "product": "公司整体（利润分配）",
-  "metric": "现金分红总额及分红率",
-  "value": "每10股派7元；合计9.39亿元；占归母净利37.56%",
-  "baseline": "同期归母净利润24.99亿元",
-  "source_text": "同花顺财经转述公司2023年年度权益分配实施公告（2024-06-24）",
-  "source_url": "http://m.10jqka.com.cn/20240624/c659111675.shtml",
-  "claim_type": "财务表现",
-  "verification_status": "待验证",
-  "confidence": 0.5,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "同花顺财经转述公司2023年年度权益分配实施公告（2024-06-24），http://m.10jqka.com.cn/20240624/c659111675.shtml",
-    "locator": "",
-    "excerpt": "以总股本134082.10万股为基数，向全体股东每10股派发现金红利人民币7.00元，合计派发现金红利人民币9.39亿元，占同期归母净利润的比例为37.56%",
-    "caliber": "媒体转述权益分派实施公告，未直接核对公告原文；以当时总股本计算",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "news_media",
-    "fingerprint": "52fd59b1d10c9763"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
- },
- {
-  "claim_id": "HLYY_003",
-  "claim_text": "恒立液压通过定增募资20亿元，其中14亿元投向线性驱动器项目，达产后将形成多种规格电动缸和丝杠的生产能力",
-  "subject": "恒立液压",
-  "product": "线性驱动器/电动缸/丝杠（人形机器人方向）",
-  "metric": "募投项目金额",
-  "value": "定增募资20亿元，其中14亿元投向线性驱动器项目",
-  "baseline": "",
-  "source_text": "格隆汇报道转述公司2022年定增预案（2025-01-16）",
-  "source_url": "https://m.gelonghui.com/p/1629680",
-  "claim_type": "产能需求",
-  "verification_status": "待验证",
-  "confidence": 0.5,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "格隆汇报道转述公司2022年定增预案（2025-01-16），https://m.gelonghui.com/p/1629680",
-    "locator": "",
-    "excerpt": "公司在2022年开始进军人形机器人领域，通过定增募资20亿元，其中14亿元用于线性驱动器项目，达产后将形成多种规格电动缸和丝杠的生产能力。",
-    "caliber": "媒体转述定增预案口径；'募资20亿'为拟募资上限，实际发行净额可能低于该数，需以发行结果公告为准；'达产后产能'为规划值非现状",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "news_media",
-    "fingerprint": "898740da9e445a07"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
- },
- {
-  "claim_id": "HLYY_004",
-  "claim_text": "恒立液压2025年上半年共销售挖掘机用油缸30.83万只，同比增长超15%；线性驱动器项目上半年累计开发超过50款新产品且均完成量产转化投放市场",
-  "subject": "恒立液压",
-  "product": "挖掘机专用油缸；线性驱动器（电动缸/丝杠）",
-  "metric": "半年度产品销量/新品开发数量",
-  "value": "挖机油缸销量30.83万只(+15%以上)；线性驱动器新品超50款全部量产",
-  "baseline": "2024年上半年销量（同比口径）",
-  "source_text": "经济观察报报道转述公司2025年半年报（原文披露约2025年8-9月）",
-  "source_url": "https://jg-static.eeo.com.cn/article/info?id=d26de66e1a294d21adbc981c121fd48c&channelUuid=",
-  "claim_type": "产能需求",
-  "verification_status": "待验证",
-  "confidence": 0.5,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "经济观察报报道转述公司2025年半年报（原文披露约2025年8-9月），https://jg-static.eeo.com.cn/article/info?id=d26de66e1a294d21adbc981c121fd48c&channelUuid=",
-    "locator": "",
-    "excerpt": "恒立液压2025年半年报介绍，公司上半年共销售挖掘机用油缸30.83万只，同比增长超15%……线性驱动器项目2025上半年在技术研发与市场拓展方面取得成绩，累计开发超过 50 款新产品，所有新品均已顺利完成量产转化并正式投放市场",
-    "caliber": "媒体转述半年报，未直接核对半年报原文；油缸计量单位'只'需注意与'台套'换算；'超15%'为区间表述非精确值",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "news_media",
-    "fingerprint": "4e46294591068072"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
- },
- {
-  "claim_id": "GM_001",
-  "claim_text": "国茂股份2023年全年减速机销售约65.45万台，同比增长约7.64%",
-  "subject": "国茂股份",
-  "product": "减速机（通用减速机全品类）",
-  "metric": "减速机年销量",
-  "value": "约65.45万台，同比+7.64%",
-  "baseline": "2022年销量（隐含约60.8万台）",
-  "source_text": "江苏国茂减速机股份有限公司2023年年度报告（2024-04-25披露，雪球镜像PDF全文）",
-  "source_url": "https://stockn.xueqiu.com/SH603915/20240426586786.pdf",
-  "claim_type": "产能需求",
-  "verification_status": "已验证",
-  "confidence": 0.85,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "江苏国茂减速机股份有限公司2023年年度报告（2024-04-25披露，雪球镜像PDF全文），https://stockn.xueqiu.com/SH603915/20240426586786.pdf",
-    "locator": "第三节 管理层讨论与分析·一、经营情况讨论与分析，PDF p.9",
-    "excerpt": "全年减速机销售约65.45万台，同比增长约7.64%。同时公司内部围绕\"提质、控本、增效\"工作方针……",
-    "caliber": "数值带'约'为概数；为全品类减速机销售台数，非机器人精密减速器口径；'销售'口径与行业协会'产量'口径不同",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "1e2bd7a46d56c27c"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "GM_002",
-  "claim_text": "国茂股份2023年前五名客户销售额26,579.87万元，占年度销售总额9.99%，其中关联方销售0万元",
-  "subject": "国茂股份",
-  "product": "公司整体客户结构",
-  "metric": "前五大客户销售占比",
-  "value": "前五名客户销售额26,579.87万元，占年度销售总额9.99%",
-  "baseline": "",
-  "source_text": "江苏国茂减速机股份有限公司2023年年度报告（2024-04-25披露，雪球镜像PDF全文）",
-  "source_url": "https://stockn.xueqiu.com/SH603915/20240426586786.pdf",
-  "claim_type": "客户订单",
-  "verification_status": "已验证",
-  "confidence": 0.85,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "江苏国茂减速机股份有限公司2023年年度报告（2024-04-25披露，雪球镜像PDF全文），https://stockn.xueqiu.com/SH603915/20240426586786.pdf",
-    "locator": "第三节·五、(一)2.(7)主要销售客户及主要供应商情况，PDF p.18",
-    "excerpt": "前五名客户销售额26,579.87万元,占年度销售总额9.99%;其中前五名客户销售额中关联方销售额0万元,占年度销售总额0%。",
-    "caliber": "客户集中度低、无关联交易依赖；隐含年度销售总额约26.6亿元，可与营收口径交叉验证",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "4ff92422ccac5e60"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "GM_003",
-  "claim_text": "截至2023年12月31日，国茂股份及下属子公司拥有境内专利247项，其中发明专利35项",
-  "subject": "国茂股份",
-  "product": "公司整体知识产权",
-  "metric": "境内专利数量",
-  "value": "境内专利247项，其中发明专利35项",
-  "baseline": "",
-  "source_text": "江苏国茂减速机股份有限公司2023年年度报告（2024-04-25披露，雪球镜像PDF全文）",
-  "source_url": "https://stockn.xueqiu.com/SH603915/20240426586786.pdf",
-  "claim_type": "技术性能",
-  "verification_status": "已验证",
-  "confidence": 0.85,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "江苏国茂减速机股份有限公司2023年年度报告（2024-04-25披露，雪球镜像PDF全文），https://stockn.xueqiu.com/SH603915/20240426586786.pdf",
-    "locator": "第三节·四、报告期内核心竞争力分析·4、技术优势，PDF p.13",
-    "excerpt": "截止2023年12月31日,公司及下属子公司拥有境内专利247项,其中发明专利35项。",
-    "caliber": "仅含境内专利（不含PCT/海外专利）；为合并口径含子公司；时点数为2023年末存量而非当年新增",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "fb30f98960a48224"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "GM_004",
-  "claim_text": "国茂股份2023年实现营收26.60亿元（同比-1.35%），归母净利润3.96亿元（同比-4.44%）",
-  "subject": "国茂股份",
-  "product": "公司整体业绩",
-  "metric": "营业收入/归母净利润",
-  "value": "营收26.60亿元(-1.35%)；归母净利润3.96亿元(-4.44%)",
-  "baseline": "2022年营收26.97亿元、归母净利润4.14亿元",
-  "source_text": "东方财富研究报告页转述公司2023年年报",
-  "source_url": "https://emweb.securities.eastmoney.com/PC_HSF10/ResearchReport/index?type=web&code=SH603915&color=w",
-  "claim_type": "财务表现",
-  "verification_status": "待验证",
-  "confidence": 0.5,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "东方财富研究报告页转述公司2023年年报，https://emweb.securities.eastmoney.com/PC_HSF10/ResearchReport/index?type=web&code=SH603915&color=w",
-    "locator": "",
-    "excerpt": "公司发布2023年年报和2024年一季报,2023年公司实现营收26.60亿元,同比下滑1.35%,归母净利润3.96亿元,同比下滑4.44%",
-    "caliber": "为券商研报对年报的转述，非直接读到的年报表格原文；2023年度合并口径、累计值",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "analyst_report",
-    "fingerprint": "44c745383d6c5bf7"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
- },
- {
-  "claim_id": "QC_001",
-  "claim_text": "秦川机床2023年实现营业收入3,761,103,127.25元（37.61亿元），同比下降8.29%；归母净利润52,258,309.40元，同比下降81.00%",
-  "subject": "秦川机床",
-  "product": "公司整体业绩（机床类/零部件类/工具类等合计）",
-  "metric": "营业收入/归母净利润",
-  "value": "营收37.61亿元(-8.29%)；归母净利5,225.83万元(-81.00%)",
-  "baseline": "2022年调整后营收41.01亿元、归母净利2.75亿元",
-  "source_text": "秦川机床工具集团股份公司2023年年度报告（2024-03-30披露，新浪财经公告库全文）",
-  "source_url": "http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=000837&id=9925810",
-  "claim_type": "财务表现",
-  "verification_status": "已验证",
-  "confidence": 0.85,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "秦川机床工具集团股份公司2023年年度报告（2024-03-30披露，新浪财经公告库全文），http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=000837&id=9925810",
-    "locator": "第二节·六、主要会计数据和财务指标",
-    "excerpt": "营业收入（元）3,761,103,127.25 ……-8.29%；归属于上市公司股东的净利润（元）52,258,309.40 ……-81.00%",
-    "caliber": "合并报表口径；2022年基数为会计政策变更追溯调整后数据；扣非归母净利润为-3,466.62万元，与归母净利润差异大需区分",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "4b88654979ffe69a"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "QC_002",
-  "claim_text": "秦川机床机器人关节减速器已有5大系列、40种规格、140多种速比，满足5—1000KG负载匹配，是国内规格最全、系列最多的工业机器人关节减速器产品供应商",
-  "subject": "秦川机床",
-  "product": "工业机器人关节减速器（RV减速器，子公司秦川高精传动）",
-  "metric": "产品系列/规格/速比数量",
-  "value": "5大系列、40种规格、140多种速比，覆盖5—1000KG负载",
-  "baseline": "",
-  "source_text": "秦川机床工具集团股份公司2023年年度报告（2024-03-30披露，新浪财经公告库全文）",
-  "source_url": "http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=000837&id=9925810",
-  "claim_type": "技术性能",
-  "verification_status": "已验证",
-  "confidence": 0.8,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "秦川机床工具集团股份公司2023年年度报告（2024-03-30披露，新浪财经公告库全文），http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=000837&id=9925810",
-    "locator": "第三节·二、(6)机器人关节减速器",
-    "excerpt": "机器人关节减速器已有5大系列、40种规格、140多种速比，是国内规格最全、系列最多、满足5—1000KG负载匹配全系列工业机器人关节减速器产品的供应商",
-    "caliber": "为型谱覆盖范围（额定覆盖能力），非实际在产SKU数；与2023年11月互动易回复的'5大系列、23种规格、130种速比'存在时点差异",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "503bf6c9b0bfa4a5"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "QC_003",
-  "claim_text": "秦川机床2023年研发投入1.99亿元，占营业收入的5.30%；全年申报专利41件、授权专利48件、登记软著11件、制订标准38项",
-  "subject": "秦川机床",
-  "product": "公司整体研发投入",
-  "metric": "研发投入金额及占比",
-  "value": "研发投入1.99亿元（占营收5.30%）；申报专利41件、授权48件",
-  "baseline": "2022年研发投入3.40亿元（占营收8.30%）",
-  "source_text": "秦川机床工具集团股份公司2023年年度报告（2024-03-30披露，新浪财经公告库全文）",
-  "source_url": "http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=000837&id=9925810",
-  "claim_type": "技术性能",
-  "verification_status": "已验证",
-  "confidence": 0.85,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "秦川机床工具集团股份公司2023年年度报告（2024-03-30披露，新浪财经公告库全文），http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=000837&id=9925810",
-    "locator": "第三节·三、核心竞争力分析；研发投入表",
-    "excerpt": "2023年，秦川机床研发投入1.99亿元，占营业收入的5.30%。企业科创能力逐步提升。全年共申报专利 41件、授权专利48 件、登记软著11 件、制订标准38项。",
-    "caliber": "2023年研发投入资本化金额为0（2022年资本化率46.68%），投入总额下降41.39%主要因口径变化，两年不可直接同比；为全公司口径",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "official_filing",
-    "fingerprint": "cc0de7fc6b0d63ca"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
- },
- {
-  "claim_id": "QC_004",
-  "claim_text": "秦川机床在2023年5月机构调研中表示：公司机器人关节减速器占国产机器人关节减速器市场的20-25%，并预计2023年该产品销量和收入在去年基础上实现30%增长",
-  "subject": "秦川机床",
-  "product": "机器人关节减速器（RV减速器）",
-  "metric": "国产RV市场份额/2023年销量收入增速指引",
-  "value": "占国产机器人关节减速器市场20-25%；预计2023年销量和收入同比+30%",
-  "baseline": "2022年销量收入基数",
-  "source_text": "财联社报道《秦川机床：2023年预计机器人关节减速器产品销量和收入在去年基础上实现30%增长》（2023-05-28）",
-  "source_url": "https://m.cls.cn/detail/1362442",
-  "claim_type": "市场展望",
-  "verification_status": "待验证",
-  "confidence": 0.5,
-  "definition_issues": [],
-  "evidence_list": [
-   {
-    "source": "财联社报道《秦川机床：2023年预计机器人关节减速器产品销量和收入在去年基础上实现30%增长》（2023-05-28），https://m.cls.cn/detail/1362442",
-    "locator": "",
-    "excerpt": "秦川机床接受机构调研时表示……目前我国机器人关节减速器市场仍主要由国外产品主导，国产化率仅为30%，其中秦川机床机器人关节减速器占国产机器人关节减速器市场的20-25%。目前公司机器人关节减速器……",
-    "caliber": "20-25%是'占国产品牌份额'而非占全市场（全市场口径约6-7.5%）；'预计30%增长'为调研时目标/指引表述非审计实绩；媒体转述调研纪要，未找到纪要原文PDF",
-    "verifier": "经济金融组复核",
-    "verified_at": "2026-09-07",
-    "evidence_level": "news_media",
-    "fingerprint": "d73e1bff5c1298eb"
-   }
-  ],
-  "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
- }
+  {
+    "claim_id": "GH_001",
+    "claim_text": "绿的谐波新一代谐波减速器关节模组在同等出力情况下减重30%以上",
+    "subject": "绿的谐波",
+    "product": "新一代谐波减速器关节模组",
+    "metric": "重量/出力比",
+    "value": "减重30%以上",
+    "baseline": "上一代产品/同出力产品",
+    "source_text": "国信证券研报：聚焦谐波减速器的轻量小型化技术突破，同等出力情况下减重30%以上",
+    "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202504301665112608_1.pdf",
+    "claim_type": "技术性能",
+    "verification_status": "已验证",
+    "confidence": 0.9,
+    "definition_issues": [
+      "同等出力的测试条件未明确",
+      "减重对象是否包含电机/减速器整体未明确"
+    ],
+    "evidence_list": [
+      {
+        "source": "green_harmonic_2024_annual_report.txt（公司2024年年度报告，官方披露）",
+        "locator": "第10页（管理层讨论分析与讨论·（1）紧跟智能机器人发展步伐，优化迭代产品）",
+        "excerpt": "首先，针对人形机器人等行业的新兴需求，聚焦谐波减速器的轻量小型化技术突破，同等出力情况下减重 30%以上。",
+        "caliber": "官方年报原文为“谐波减速器”轻量小型化、同等出力减重30%以上，数值与claim的“减重30%以上”一致；但原文主体是谐波减速器（针对人形机器人新兴需求），未明确表述为“关节模组”整体减重，也未明确基准型号及是否含电机，claim中“新一代谐波减速器关节模组”的表述与原文口径略有差异，definition_issues中的疑点年报未澄清。",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "5f1eeda424479ed9"
+      }
+    ],
+    "notes": "2025Q1 增补核验：年报第10页\"同等出力情况下减重30%以上\"逐字证实，但原文主体为谐波减速器，关节模组口径差异见 caliber；definition_issues 保留。 原注：需核对：是单个减速器减重还是关节模组整体减重？基准型号是什么？"
+  },
+  {
+    "claim_id": "GH_002",
+    "claim_text": "绿的谐波2024年谐波减速器销量24.65万台，同比增长16.56%",
+    "subject": "绿的谐波",
+    "product": "谐波减速器",
+    "metric": "销量",
+    "value": "24.65万台",
+    "baseline": "2023年销量",
+    "source_text": "国信证券研报：2024年谐波减速器及金属部件收入3.25亿元，谐波减速器销量24.65万台，同比增长16.56%",
+    "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202504301665112608_1.pdf",
+    "claim_type": "产能/需求",
+    "verification_status": "已验证",
+    "confidence": 0.85,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "green_harmonic_2024_annual_report.txt（公司2024年年度报告，官方披露）",
+        "locator": "第39页（经营情况讨论与分析·(2). 产销量情况分析表）",
+        "excerpt": "主要产品        单  生产量        销售量        库存量         生产量比        销售量比        库存量比\n            位                                    上年增减        上年增减        上年增减\n                          246,501      19,473\n谐波减速器       台  251,736    392,187    209,181       （%）         （%）         （%）\n               359,220                                22.00       16.56     -30.84",
+        "caliber": "年报产销量情况分析表（第39页）明确谐波减速器销售量比上年增减 16.56%，与 claim 同比增速完全一致；表中 246,501 与 24.65 万台对应（claim 绝对值），但 PDF 转文本后表格行列错位，251,736/392,187/209,181/359,220 等数无法可靠归属具体列，绝对值仅据此表与研报互证；24.65 万台绝对值另见 green_harmonic_2025q1_review 研报逐字表述（降级证据）。",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "51fd5045cab91bef"
+      },
+      {
+        "source": "green_harmonic_2025q1_review.txt（https://pdf.dfcfw.com/pdf/H3_AP202504301665112608_1.pdf，国信证券研报）",
+        "locator": "报告首页业绩点评段（txt第22-23行，该txt无页脚页码标记）",
+        "excerpt": "谐波减速器及金属部件收入 3.25 亿元，同比增加 2.56%，谐波减速器销量 24.65 万台，同比增长 16.56%；机电一体化产品收入 0.53 亿元，同比增长 56.74%",
+        "caliber": "研报口径与claim数值完全一致：销量24.65万台、同比+16.56%；增速与官方年报产销量表的16.56%相互印证，但年报文本中销量绝对值无法确证为246,501台，24.65万台目前仅见于研报（降级证据）。；注：研报 txt 为双栏抽取，摘录已剔除穿插的估值侧栏文字。",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "analyst_report",
+        "fingerprint": "2bc15c35a7eccfca"
+      }
+    ],
+    "notes": "2025Q1 增补核验：年报第39页产销量表确认销售量同比+16.56%，表中246,501与24.65万台对应（列归属受文本抽取错位影响，见 caliber）；绝对值另获国信研报逐字互证。 原注：年报中应可找到销量数据交叉验证"
+  },
+  {
+    "claim_id": "GH_003",
+    "claim_text": "绿的谐波已完成年产50万台精密减速器产能建设",
+    "subject": "绿的谐波",
+    "product": "精密减速器",
+    "metric": "产能",
+    "value": "50万台/年",
+    "baseline": "",
+    "source_text": "国信证券研报：产能方面，公司完成了年产50万台精密减速器",
+    "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202504301665112608_1.pdf",
+    "claim_type": "产能/需求",
+    "verification_status": "已验证",
+    "confidence": 0.95,
+    "definition_issues": [
+      "50万台是设计产能还是实际达产产能？",
+      "是否包含谐波减速器及机电一体化产品？"
+    ],
+    "evidence_list": [
+      {
+        "source": "green_harmonic_2024_annual_report.txt（公司2024年年度报告，官方披露）",
+        "locator": "第11页（管理层讨论与分析·二、产能提升稳步推进）",
+        "excerpt": "报告期内，公司完成了年产 50 万台精密减速器的扩产项目的相关智能化产线的建设调试工作和达产工作，并计划于 2025 年实现产能的稳步爬坡，目前，该项目已进入全面达产阶段，生产效率和产品良率均达到预期目标。",
+        "caliber": "官方年报明确“完成了年产50万台精密减速器的扩产项目的相关智能化产线的建设调试工作和达产工作”“已进入全面达产阶段”，与claim“已完成年产50万台精密减速器产能建设”一致；原文同时说明2025年处于产能爬坡期，50万台为扩产项目设计/达产产能，非2024年实际产量。",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "3101ee97061f279d"
+      }
+    ],
+    "notes": "2025Q1 增补核验：年报第11页\"完成了年产50万台精密减速器的扩产项目的相关智能化产线的建设调试工作和达产工作…已进入全面达产阶段\"。 原注：需在公司年报/募投公告中查找确切表述"
+  },
+  {
+    "claim_id": "GH_004",
+    "claim_text": "绿的谐波已成为多家头部具身智能机器人企业的核心供应商",
+    "subject": "绿的谐波",
+    "product": "谐波减速器/一体化关节模组",
+    "metric": "客户认证",
+    "value": "头部具身智能机器人企业",
+    "baseline": "",
+    "source_text": "2024年年报：自主研发的高扭矩密度谐波减速器和一体化关节模组，已在国内具身智能机器人产业链占据领先地位，成为多家头部具身智能机器人企业的核心供应商",
+    "source_url": "https://static.cninfo.com.cn/finalpage/2026-04-23/1225149955.PDF",
+    "claim_type": "客户/订单",
+    "verification_status": "已验证",
+    "confidence": 0.9,
+    "definition_issues": [
+      "具体客户名称未披露",
+      "核心供应商的界定标准未明确"
+    ],
+    "evidence_list": [
+      {
+        "source": "green_harmonic_2024_annual_report.txt（公司2024年年度报告；claim所附URL https://static.cninfo.com.cn/finalpage/2026-04-23/1225149955.PDF）",
+        "locator": "第21页（管理层讨论与分析·具身智能机器人核心关节部件段落）",
+        "excerpt": "自主研发的高扭矩密度谐波减速器和一体化关节模组，已在国内具身智能机器人产业链占据领先地位，成为多家头部具身智能机器人企业的核心供应商。",
+        "caliber": "与claim及claim_bank中source_text逐字一致，官方年报直接支持；但年报未披露具体客户名称，“核心供应商”无界定标准，2025年年报亦有同样表述（第18页附近），属公司单方面陈述，未经客户公告交叉验证。",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "f2cd2d0102d3970b"
+      }
+    ],
+    "notes": "2025Q1 增补核验：年报第21页逐字证实；为公司单方陈述，具体客户未披露。 原注：需通过客户公告或供应链调研确认具体企业名称"
+  },
+  {
+    "claim_id": "GH_005",
+    "claim_text": "绿的谐波2024年毛利率37.54%，同比下降3.60个百分点",
+    "subject": "绿的谐波",
+    "product": "公司整体",
+    "metric": "毛利率",
+    "value": "37.54%",
+    "baseline": "2023年毛利率41.14%",
+    "source_text": "2024年年报及券商点评：公司毛利率为37.54%，同比-3.60pct",
+    "source_url": "https://static.cninfo.com.cn/finalpage/2026-04-23/1225149955.PDF",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.95,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "green_harmonic_2024_annual_report.pdf（巨潮资讯网 https://static.cninfo.com.cn/finalpage/2025-04-30/1223423684.PDF）",
+        "locator": "第37页（第三节 管理层讨论与分析）",
+        "excerpt": "公司近三年的综合毛利率分别为 48.69%、41.14%和 37.54%，处于相对较高水平。",
+        "caliber": "合并报表口径，综合毛利率=（营业收入-营业成本）/营业收入；2024年37.54%较2023年41.14%下降3.60个百分点",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-06",
+        "evidence_level": "official_filing",
+        "fingerprint": "5d831f3e36c9b085"
+      }
+    ],
+    "notes": "年报直接可验证"
+  },
+  {
+    "claim_id": "GH_006",
+    "claim_text": "绿的谐波2025年营业收入同比增长47.31%，归母净利润同比增长121.42%",
+    "subject": "绿的谐波",
+    "product": "公司整体",
+    "metric": "营收/净利润增速",
+    "value": "营收+47.31%，净利润+121.42%",
+    "baseline": "2024年同期",
+    "source_text": "2025年年报：本报告期营业收入、利润总额、归属于上市公司股东的净利润较上年同期分别增长47.31%、137.48%、121.42%",
+    "source_url": "https://static.cninfo.com.cn/finalpage/2026-04-23/1225149955.PDF",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.95,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "green_harmonic_2025_annual_report.pdf（巨潮资讯网 https://static.cninfo.com.cn/finalpage/2026-04-23/1225149955.PDF）",
+        "locator": "第7页（第二节 公司简介和主要财务指标）",
+        "excerpt": "经常性损益的净利润较上年同期分别增长 47.31%、137.48%、121.42%、115.19%",
+        "caliber": "合并报表口径，归属于上市公司股东的净利润同比增长121.42%；营业收入同比增长47.31%",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-06",
+        "evidence_level": "official_filing",
+        "fingerprint": "700be65362c396fd"
+      }
+    ],
+    "notes": "年报直接可验证"
+  },
+  {
+    "claim_id": "GH_007",
+    "claim_text": "绿的谐波LHS-32谐波减速器额定扭矩51-130 Nm，重量2.5 kg",
+    "subject": "绿的谐波",
+    "product": "LHS-32谐波减速器",
+    "metric": "额定扭矩/重量",
+    "value": "51-130 Nm / 2.5 kg",
+    "baseline": "来福LHT-32、HD CSG-32",
+    "source_text": "国金证券研报：国内外同型号谐波减速器性能对比表",
+    "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf",
+    "claim_type": "技术性能",
+    "verification_status": "待验证",
+    "confidence": 0.7,
+    "definition_issues": [
+      "额定扭矩范围对应不同减速比",
+      "测试条件未说明"
+    ],
+    "evidence_list": [
+      {
+        "source": "humanoid_robot_joint_reducer_202209.txt（https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf，国金证券行业深度，2022-09-07）",
+        "locator": "图表46：国内外同型号谐波减速器性能对比（txt第1203-1219行，该txt无页脚页码标记）",
+        "excerpt": "绿的谐波（LHS-32) 来福(LHT-32) 钧兴(KSHG-32) HD(CSG-32)；减速比 30-160；51-130；重量 2.5；来源：哈默纳科、绿的谐波、来福谐波官网，国金证券研究所",
+        "caliber": "研报对比表中绿的谐波LHS-32额定扭矩51-130 Nm（对应减速比30-160范围）、重量2.5 kg，与claim数值一致；表格文本抽取行错位，但列归属可读；表注称数据源自各公司官网，本地datasheets目录为空、无官方一手规格文件，按规则降级为analyst_report；额定扭矩范围对应不同减速比，测试条件未说明。",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "analyst_report",
+        "fingerprint": "56f34fe225dafbcc"
+      }
+    ],
+    "notes": "降级：唯一证据为国金2022-09行业深度研报图表46（源自公司官网口径），本地缺官方datasheet，待补充后复核。 原注： torque density 约 20.4-52 Nm/kg；需与官网 datasheet 核对"
+  },
+  {
+    "claim_id": "BK_001",
+    "claim_text": "步科股份无框电机累计出货超5万台，在协作机器人行业位居国产TOP2",
+    "subject": "步科股份",
+    "product": "无框电机",
+    "metric": "累计出货量/市场地位",
+    "value": "超5万台，国产TOP2",
+    "baseline": "",
+    "source_text": "券商研报：据《2024年协作机器人产业发展蓝皮书》，公司无框电机累计出货超5万台，在协作机器人行业位居国产TOP2",
+    "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202508221732112681_1.pdf",
+    "claim_type": "产能/需求",
+    "verification_status": "待验证",
+    "confidence": 0.7,
+    "definition_issues": [
+      "统计口径为累计出货还是年度出货？",
+      "TOP2的统计范围和时间点未明确"
+    ],
+    "evidence_list": [
+      {
+        "source": "buke_2025q2_review.txt（https://pdf.dfcfw.com/pdf/H3_AP202507171710594249_1.pdf）",
+        "locator": "第1页（投资要点：公司是国内机器人电机龙头/蓝皮书引用段）",
+        "excerpt": "据《2024 年协作机器人产业发展蓝皮书》，公司直流低压伺服累计出货超 120 万台，位居移动机器人行业 TOP1；无框电机累计出货超 5 万台，在协作机器人行业位居国产 TOP2",
+        "caliber": "仅券商研报（群益投顾2025-07-17）载有该数据，且为引用《2024年协作机器人产业发展蓝皮书》口径，非公司官方披露；2024年报、2025半年报均无任何累计出货量/行业排名表述。数值与claim一致（超5万台、国产TOP2），但'国产TOP2'排名为券商研报/蓝皮书口径，统计范围与时间窗口未明确。；注：研报 txt 为双栏抽取，摘录已剔除穿插的产品组合表格文字。",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "analyst_report",
+        "fingerprint": "21842d17e0f464d4"
+      }
+    ],
+    "notes": "降级：仅群益投顾2025Q2研报引《2024年协作机器人产业发展蓝皮书》\"累计出货超5万台、国产TOP2\"，官方年报/半年报无此表述，排名口径非官方。 原注：需核对蓝皮书原文"
+  },
+  {
+    "claim_id": "BK_002",
+    "claim_text": "步科股份2024年机器人行业收入2.12亿元，同比增长12.26%",
+    "subject": "步科股份",
+    "product": "机器人行业业务",
+    "metric": "收入",
+    "value": "2.12亿元，+12.26%",
+    "baseline": "2023年机器人行业收入",
+    "source_text": "2024年年报：机器人行业收入2.12亿元，同比增长12.26%",
+    "source_url": "https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=688160&id=11403146",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.95,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "buke_2024_annual_report.pdf（新浪财经文件服务器转存上交所披露 http://file.finance.sina.com.cn/211.154.219.97:9494/MRGG/CNSESH_STOCK/2025/2025-4/2025-04-25/10962008.PDF）",
+        "locator": "第14页（第三节 管理层讨论与分析·主营业务分行业情况）",
+        "excerpt": "2024 年，公司机器人行业实现销售收入 21,242.55 万元，同比增长 12.26%。",
+        "caliber": "合并报表口径，机器人行业销售收入21,242.55万元≈2.12亿元",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-06",
+        "evidence_level": "official_filing",
+        "fingerprint": "efbd91bdba645ea4"
+      }
+    ],
+    "notes": "年报直接可验证"
+  },
+  {
+    "claim_id": "BK_003",
+    "claim_text": "步科股份第四代FMK无框力矩电机同尺寸扭矩输出提升约22%",
+    "subject": "步科股份",
+    "product": "第四代FMK无框力矩电机",
+    "metric": "扭矩输出",
+    "value": "提升约22%",
+    "baseline": "上一代同尺寸产品",
+    "source_text": "艾邦机器人/行业报道：步科发布第四代无框力矩电机，同尺寸扭矩输出提升约22%",
+    "source_url": "https://www.aibangbots.com/a/2212",
+    "claim_type": "技术性能",
+    "verification_status": "待验证",
+    "confidence": 0.7,
+    "definition_issues": [
+      "同尺寸的具体型号未明确",
+      "22%是额定扭矩还是峰值扭矩？"
+    ],
+    "evidence_list": [
+      {
+        "source": "buke_2025_halfyear_report.txt（http://file.finance.sina.com.cn/211.154.219.97:9494/MRGG/CNSESH_STOCK/2025/2025-8/2025-08-29/11403146.PDF）",
+        "locator": "第16页（第三节 管理层讨论与分析——研发进展/低压伺服）",
+        "excerpt": "在低压伺服方面，针对机器人关节市场，公司发布了第四代 FMK 系列无框力矩电机以及适配的 RD 系列中空驱动器，助力机器人关节发展。",
+        "caliber": "官方半年报仅证实第四代FMK无框力矩电机已发布（2025年7月推出，与研报一致），但未披露'同尺寸扭矩输出提升约22%'的任何数值；22%及'同尺寸'对比口径在2024年报、2025半年报、2025Q2/Q3研报中均未出现（源为官网/第三方文章口径）。claim中22%数值无法本地核实，不予强行匹配；具体性能对比需datasheet验证。",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "559c97bb2766ab21"
+      }
+    ],
+    "notes": "部分验证：2025半年报第16页官方证实发布第四代FMK系列无框力矩电机；\"同尺寸扭矩提升约22%\"在全部本地一手文本中不存在，待官网/datasheet核实。 原注：需官网 datasheet 或产品手册验证"
+  },
+  {
+    "claim_id": "BK_004",
+    "claim_text": "步科股份为工业6轴机械臂全球知名品牌设计专用伺服系统并确立长期战略合作关系",
+    "subject": "步科股份",
+    "product": "工业6轴机械臂伺服系统",
+    "metric": "客户合作",
+    "value": "全球知名品牌长期战略合作",
+    "baseline": "",
+    "source_text": "2024年年报/2025半年报：公司与工业6轴机械臂全球知名品牌合作取得长足进展，为标杆客户设计的专用工业6轴机械臂伺服系统获得客户认可并已确立长期战略合作关系",
+    "source_url": "https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=688160&id=11403146",
+    "claim_type": "客户/订单",
+    "verification_status": "已验证",
+    "confidence": 0.95,
+    "definition_issues": [
+      "客户名称未披露",
+      "全球知名品牌的具体定义未明确"
+    ],
+    "evidence_list": [
+      {
+        "source": "buke_2024_annual_report.txt（http://file.finance.sina.com.cn/211.154.219.97:9494/MRGG/CNSESH_STOCK/2025/2025-4/2025-04-25/10962008.PDF）",
+        "locator": "第14页（第三节 管理层讨论与分析——机器人行业/协作机器人与工业机械臂客户进展）",
+        "excerpt": "报告期内，公司与工业 6 轴机械臂全球知名品牌合作取得长足进展，为标杆客户设计的专用工业 6 轴机械臂伺服系统获得客户认可并已确立长期战略合作关系。",
+        "caliber": "官方2024年报逐字支持claim：'全球知名品牌'+'专用工业6轴机械臂伺服系统'+'确立长期战略合作关系'三要素齐全。客户名称未披露（年报通篇无具体客户名），'知名品牌'具体定义无法进一步核实，与definition_issues一致。",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "8425ad82fb215ce1"
+      },
+      {
+        "source": "buke_2025_halfyear_report.txt（http://file.finance.sina.com.cn/211.154.219.97:9494/MRGG/CNSESH_STOCK/2025/2025-8/2025-08-29/11403146.PDF）",
+        "locator": "第15页（第三节 管理层讨论与分析——机器人行业）",
+        "excerpt": "报告期内，公司与工业 6 轴机械臂全球知名品牌合作取得长足进展，为标杆客户设计的专用工业 6 轴机械臂伺服系统获得客户认可并已确立长期战略合作关系。",
+        "caliber": "官方2025半年报沿用与2024年报相同的表述，证实该战略合作关系在2025年持续有效。客户名称仍未披露。两条官方证据一致，claim已验证。",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "1a94dd05a6ef9c8f"
+      }
+    ],
+    "notes": "2025Q1 增补核验：2024年报第14页与2025半年报第15页逐字双源证实\"为标杆客户设计的专用工业6轴机械臂伺服系统获得客户认可并已确立长期战略合作关系\"；客户名称未披露。 原注：需通过公司投资者交流或供应链调研确认客户"
+  },
+  {
+    "claim_id": "BK_005",
+    "claim_text": "步科股份2025H1归母净利润2611.01万元，同比增长13.58%；扣非后净利润3602.56万元，同比增长42.27%",
+    "subject": "步科股份",
+    "product": "公司整体",
+    "metric": "净利润",
+    "value": "归母净利润+13.58%，扣非净利润+42.27%",
+    "baseline": "2024H1",
+    "source_text": "2025年半年度报告",
+    "source_url": "https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=688160&id=11403146",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.95,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "buke_2025_halfyear_report.pdf（新浪财经文件服务器转存上交所披露 http://file.finance.sina.com.cn/211.154.219.97:9494/MRGG/CNSESH_STOCK/2025/2025-8/2025-08-29/11403146.PDF）",
+        "locator": "第13页（第三节 管理层讨论与分析·主要财务数据变动）",
+        "excerpt": "公司股东的净利润 2,611.01 万元，较上年同期增长 13.58%；扣除股份支付影响后归属于上市公司股东的净利润 3,602.56 万元，较上年同期增长 42.27%。",
+        "caliber": "2025年半年度合并报表口径，归属于上市公司股东的净利润2,611.01万元（+13.58%）；扣除股份支付影响后3,602.56万元（+42.27%）",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-06",
+        "evidence_level": "official_filing",
+        "fingerprint": "da031a60fc3634c1"
+      }
+    ],
+    "notes": "半年报直接可验证"
+  },
+  {
+    "claim_id": "SH_001",
+    "claim_text": "双环传动子公司环动科技RV减速器国内市占率从2021年的10.11%提升至2023年的18.89%",
+    "subject": "环动科技",
+    "product": "RV减速器",
+    "metric": "国内市占率",
+    "value": "10.11%→18.89%",
+    "baseline": "2021年市占率",
+    "source_text": "环动科技招股书：根据GGII统计，2021至2023年度，公司RV减速器产品国内市占率自10.11%增长至18.89%",
+    "source_url": "https://static.sse.com.cn/stock/disclosure/announcement/c/202504/002040_20250429_OY7U.pdf",
+    "claim_type": "产能/需求",
+    "verification_status": "已验证",
+    "confidence": 0.9,
+    "definition_issues": [
+      "GGII统计口径未披露",
+      "是否包含所有应用场景的RV减速器？"
+    ],
+    "evidence_list": [
+      {
+        "source": "huandong_ipo_prospectus.txt（环动科技招股说明书申报稿，https://static.sse.com.cn/stock/disclosure/announcement/c/202504/002040_20250429_OY7U.pdf）",
+        "locator": "第1-1-22页（重大事项提示，同行业数据亦见第1-1-79、1-1-108页）",
+        "excerpt": "2021 至 2023 年各年度，公司的市场占有率分别为 10.11%、13.65%、18.89%，逐年上升且仅次于纳博特斯克，同期纳博特斯克的市场占有率分别为",
+        "caliber": "招股书转引GGII（高工产业研究院）统计，口径为公司RV减速器产品国内（中国机器人RV减速器市场）市占率，2021年10.11%→2023年18.89%与Claim完全一致；GGII原始统计口径未公开披露。",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "93ad216b3b7927c4"
+      }
+    ],
+    "notes": "2025Q1 增补核验：环动招股书第1-1-22页（另见1-1-79、1-1-108）\"2021至2023年各年度，公司的市场占有率分别为10.11%、13.65%、18.89%\"，转引GGII统计。 原注：招股书直接可验证"
+  },
+  {
+    "claim_id": "SH_002",
+    "claim_text": "双环传动SHPR-20E RV减速器额定扭矩110-231 Nm，重量4.7 kg",
+    "subject": "双环传动",
+    "product": "SHPR-20E RV减速器",
+    "metric": "额定扭矩/重量",
+    "value": "110-231 Nm / 4.7 kg",
+    "baseline": "纳博特斯克RV-20E（412 Nm / 2.5 kg）",
+    "source_text": "国金证券研报：RV减速器国内外主要品牌同型号参数对比表",
+    "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf",
+    "claim_type": "技术性能",
+    "verification_status": "待验证",
+    "confidence": 0.65,
+    "definition_issues": [
+      "额定扭矩范围对应不同减速比",
+      "扭矩密度约23.4-49.1 Nm/kg，与180 Nm/kg目标差距大"
+    ],
+    "evidence_list": [
+      {
+        "source": "humanoid_robot_joint_reducer_202209.txt（国金证券行业深度研究2022-09-07，https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf）",
+        "locator": "第33页（图表65：RV减速器国内外主要品牌同型号参数对比）",
+        "excerpt": "性能指标 南通振康(ZKRV-20E) 双环传动(SHPR-20E) 纳博特斯克(RV-20E)；额定扭矩(Nm) 137-243 110-231；重量(Kg) 4.7 4.7",
+        "caliber": "本地datasheets目录为空，无官方产品规格来源，降级为研报证据。图表65列示SHPR-20E额定扭矩110-231 Nm、重量4.7 Kg，与Claim数值一致（不同减速比档位对应扭矩范围）；原表因PDF抽取错位，纳博特斯克RV-20E列的412 Nm/2.5kg与0.35等数值串行，建议以原始研报PDF图表复核列对应关系。",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "analyst_report",
+        "fingerprint": "2bbac0ecc324a46d"
+      }
+    ],
+    "notes": "降级：唯一证据为国金2022-09行业深度研报图表65参数对比表（且PDF抽取有列错位风险，需回看原始PDF），本地缺官方datasheet。 原注：需与官网/ datasheet 核对；注意180 Nm/kg可能是不同型号或测试条件"
+  },
+  {
+    "claim_id": "SH_003",
+    "claim_text": "双环传动2025H1（半年累计）减速器及其他业务收入3.49亿元，同比增长35.66%",
+    "subject": "双环传动",
+    "product": "减速器及其他业务",
+    "metric": "收入增速",
+    "value": "3.49亿元，+35.66%",
+    "baseline": "2024Q2",
+    "source_text": "券商研报：乘用车齿轮、智能执行机构、减速器及其他收入分别26.68、4.26、3.49亿元，同比+12.9%、+51.7%、+35.8%",
+    "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202508221732112681_1.pdf",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.5,
+    "evidence_list": [
+      {
+        "source": "shuanghuan_2025q2_review.txt（民生证券双环传动2025年半年报点评，2025-08-28，https://pdf.dfcfw.com/pdf/H3_AP202508221732112681_1.pdf）",
+        "locator": "点评正文第1页（25Q2业绩表现亮眼段）",
+        "excerpt": "其中乘用车齿轮、智能执行机构、减速器及其他收入分别 26.68、4.26、3.49 亿元，同比+12.9%、+51.7%、+35.8%。",
+        "caliber": "研报口径，数值3.49亿元、同比+35.8%与Claim一致；但单季口径仅来自研报，且与官方半年报存在口径疑点：2025半年报显示减速器及其他2025H1（半年累计）收入348,990,082.38元（≈3.49亿元）、上年同期280,453,449.66元（≈2.80亿元），据此推算半年累计同比约+24.4%，且乘用车齿轮26.68亿、智能执行机构4.26亿亦均与半年报半年累计数（2,668,932,810.05元、425,541,978.80元）完全一致，疑研报将半年报累计数标注为Q2单季，单季拆分无法由本地官方披露复现。",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "analyst_report",
+        "fingerprint": "07baebeaf0133355"
+      },
+      {
+        "source": "shuanghuan_2025_halfyear_report.txt（双环传动2025年半年度报告全文）",
+        "locator": "第14页（第三节 管理层讨论与分析·营业收入构成表，分产品）",
+        "excerpt": "减速器及其他      348,990,082.38                       280,453,449.66          6.49%（营业收入构成表：本报告期/上年同期，单位：元）",
+        "caliber": "官方半年报口径，减速器及其他2025H1半年累计收入约3.49亿元；表中同比增减列因PDF文本抽取错位无法直接读取，按两年累计数推算同比约+24.4%，与Claim所述Q2单季+35.8%不同口径，数值不能直接互证。",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "5aa56df49903b210"
+      },
+      {
+        "source": "双环传动2025年半年度报告（2025-08-27，巨潮资讯网 http://static.cninfo.com.cn/finalpage/2025-08-27/1224577440.PDF）",
+        "locator": "半年报 p.14 营业收入构成表",
+        "excerpt": "减速器及其他 348,990,082.38 元（占8.25%），上年同期 257,249,244.78 元（占5.95%），同比 +35.66%",
+        "caliber": "券商研报曾将2025H1半年累计误标为'2025Q2单季'；已按半年报修正 claim 时间口径为2025H1、增速35.66%；上年同期为257,249,244.78元（此前记录的280,453,449.66元为智能执行机构行串行错位）",
+        "verifier": "经济金融组复核（K3 机器预检 + 人工确认）",
+        "verified_at": "2026-09-09",
+        "evidence_level": "official_filing",
+        "fingerprint": "660d119f9498a3da"
+      }
+    ],
+    "notes": "口径疑点：民生研报称2025Q2单季3.49亿/+35.8%，但双环2025半年报第14页显示减速器及其他业务2025H1半年累计即348,990,082.38元（≈3.49亿），疑研报将累计数标注为单季；单季拆分校验无法由本地官方披露复现，待复核。 原注：可通过半年报交叉验证。 复核结论（2026-09-06，Phase 3A）：项目书各章均未引用该3.49亿/Q2单季数字，无正文风险；如后续引用，一律以官方半年报H1累计口径（348,990,082.38元、同比约+24.4%）为准，不采用研报'Q2单季+35.8%'标注。 2026-09-09 终验：券商研报曾将 H1 累计误标为 Q2 单季，已按 2025 半年报 p.14 修正时间口径与增速（35.66%）后升级已验证（PR 见 SYNC_LOG）。"
+  },
+  {
+    "claim_id": "SH_004",
+    "claim_text": "环动科技下游客户已覆盖埃斯顿、埃夫特、卡诺普、爱仕达旗下钱江机器人等知名机器人制造商",
+    "subject": "环动科技",
+    "product": "RV减速器",
+    "metric": "客户覆盖",
+    "value": "埃斯顿、埃夫特、卡诺普、钱江机器人等",
+    "baseline": "",
+    "source_text": "环动科技招股书：公司下游客户已覆盖埃斯顿、埃夫特、卡诺普、爱仕达旗下钱江机器人等知名机器人制造商",
+    "source_url": "https://static.sse.com.cn/stock/disclosure/announcement/c/202504/002040_20250429_OY7U.pdf",
+    "claim_type": "客户/订单",
+    "verification_status": "已验证",
+    "confidence": 0.9,
+    "definition_issues": [
+      "覆盖是否意味着批量供货？",
+      "各客户收入占比未披露"
+    ],
+    "evidence_list": [
+      {
+        "source": "huandong_ipo_prospectus.txt（环动科技招股说明书申报稿，https://static.sse.com.cn/stock/disclosure/announcement/c/202504/002040_20250429_OY7U.pdf）",
+        "locator": "第1-1-108页（业务与技术·竞争优势，客户名单亦见第1-1-13、1-1-15页）",
+        "excerpt": "公司 RV 减速器产品主要客户包括埃斯顿（002747.SZ）、埃夫特（688165.SH）、卡诺普、爱仕达（002403.SZ）旗下钱江机器人、新时达（002527.SZ）、新松机器人（300024.SZ）、凯尔达（688255.SH）、广州数控、华中数控（300161.SZ）等一批国内知名品牌制造商和上市公司",
+        "caliber": "招股书直接披露的主要客户名单，埃斯顿、埃夫特、卡诺普、爱仕达旗下钱江机器人均在内，与Claim一致；系'主要客户'而非全部下游客户，各客户收入占比未在该句披露（埃斯顿为第一大客户，报告期占营收约43%-53%）。",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "284061fe392cdfcc"
+      }
+    ],
+    "notes": "2025Q1 增补核验：环动招股书第1-1-108页主要客户名单逐字含埃斯顿、埃夫特、卡诺普、爱仕达旗下钱江机器人；埃斯顿为第一大客户（占营收约43%-53%）。 原注：招股书直接可验证"
+  },
+  {
+    "claim_id": "SH_005",
+    "claim_text": "环动科技RV减速器产品销量持续增长，2023年度产能利用率超过100%",
+    "subject": "环动科技",
+    "product": "RV减速器",
+    "metric": "产能利用率",
+    "value": "101.30%",
+    "baseline": "2021-2022年产能利用率80.61%、87.02%",
+    "source_text": "环动科技招股书：报告期各期，公司RV减速器产品的产能利用率分别为80.61%、87.02%、101.30%和83.08%",
+    "source_url": "https://static.sse.com.cn/stock/disclosure/announcement/c/202504/002040_20250429_OY7U.pdf",
+    "claim_type": "产能/需求",
+    "verification_status": "已验证",
+    "confidence": 0.9,
+    "definition_issues": [
+      "产能利用率>100%意味着超负荷生产或产能统计口径问题"
+    ],
+    "evidence_list": [
+      {
+        "source": "huandong_ipo_prospectus.txt（环动科技招股说明书申报稿，https://static.sse.com.cn/stock/disclosure/announcement/c/202504/002040_20250429_OY7U.pdf）",
+        "locator": "第1-1-115页（业务与技术·产能产量销量表及说明）",
+        "excerpt": "报告期各期，公司 RV 减速器产品的产能利用率分别为 80.61%、87.02%、101.30% 和 83.08%，最近三年持续较快增长且其中 2023 年度超过 100%，2024 年上半年因产量增长相对放缓而有所回落。",
+        "caliber": "招股书披露的RV减速器产能利用率（产量/产能），2021-2024H1分别为80.61%、87.02%、101.30%、83.08%，2023年度101.30%>100%与Claim一致；>100%系实际产量超过名义产能（超负荷生产及统计口径所致），招股书原文亦确认'2023年度产能利用率已超过100%'（第1-1-127页）。",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "c75355b535a4654c"
+      }
+    ],
+    "notes": "2025Q1 增补核验：环动招股书第1-1-115页\"产能利用率分别为80.61%、87.02%、101.30%和83.08%，其中2023年度超过100%\"；>100%系产量超名义产能。 原注：需核对招股书产能统计口径"
+  },
+  {
+    "claim_id": "SH_006",
+    "claim_text": "双环传动2024年归母净利润10.24亿元，同比增长25.42%",
+    "subject": "双环传动",
+    "product": "公司整体",
+    "metric": "归母净利润",
+    "value": "10.24亿元，+25.42%",
+    "baseline": "2023年",
+    "source_text": "2024年年报：归母净利润10.24亿元，同比增长25.42%",
+    "source_url": "https://vip.stock.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=002472",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.95,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "shuanghuan_2024_annual_report.pdf（新浪财经文件服务器转存深交所披露 http://file.finance.sina.com.cn/211.154.219.97:9494/MRGG/CNSESZ_STOCK/2025/2025-4/2025-04-25/10973440.PDF）",
+        "locator": "第7页（第二节 公司简介和主要财务指标·主要会计数据）",
+        "excerpt": "损益的净利润（元） 1,023,911,091.96 816,407,328.54 25.42% 582,085,021.77",
+        "caliber": "合并报表口径，2024年归属于上市公司股东的净利润1,023,911,091.96元≈10.24亿元，同比增长25.42%",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-06",
+        "evidence_level": "official_filing",
+        "fingerprint": "facef687bd8ef695"
+      }
+    ],
+    "notes": "年报直接可验证"
+  },
+  {
+    "claim_id": "IND_001",
+    "claim_text": "2023年中国工业机器人销量达31.60万台，2019-2023年CAGR为19.86%",
+    "subject": "中国工业机器人市场",
+    "product": "工业机器人",
+    "metric": "销量",
+    "value": "31.60万台，CAGR 19.86%",
+    "baseline": "2019年15.31万台",
+    "source_text": "环动科技招股书引用GGII数据",
+    "source_url": "https://static.sse.com.cn/stock/disclosure/announcement/c/202504/002040_20250429_OY7U.pdf",
+    "claim_type": "市场数据",
+    "verification_status": "已验证",
+    "confidence": 0.9,
+    "definition_issues": [
+      "GGII统计口径未披露"
+    ],
+    "evidence_list": [
+      {
+        "source": "huandong_ipo_prospectus.txt（https://static.sse.com.cn/stock/disclosure/announcement/c/202504/002040_20250429_OY7U.pdf）",
+        "locator": "第95页（第五节 业务与技术/行业基本情况，页脚1-1-95）",
+        "excerpt": "根据 GGII 统计数据，2019-2023 年，我国工业机器人销量由 2019 年的 15.31 万台提升至 2023 年的 31.60 万台，年均复合增长率达 19.86%。",
+        "caliber": "招股书转引行业协会口径：数据原始出处为 GGII（高工机器人产业研究所），招股书未披露 GGII 销量的具体统计口径（如销量与安装量是否区分）。原文 CAGR 表述为\"2019-2023 年，我国工业机器人销量由 2019 年的 15.31 万台提升至 2023 年的 31.60 万台，年均复合增长率达 19.86%\"，区间与 Claim 的 2019-2023 完全一致，且 (31.60/15.31)^(1/4)-1≈19.86%，数值自洽。",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "0e33d51dd08b74ef"
+      }
+    ],
+    "notes": "2025Q1 增补核验：环动招股书第95页\"2019-2023年，我国工业机器人销量由15.31万台提升至31.60万台，年均复合增长率达19.86%\"，转引GGII；CAGR数值自洽。 原注：作为行业基准数据使用"
+  },
+  {
+    "claim_id": "ZDL_001",
+    "claim_text": "中大力德2024年实现营业收入9.76亿元，同比下降10.10%；归属于上市公司股东的净利润0.73亿元，同比下降0.82%",
+    "subject": "中大力德",
+    "product": "公司整体（精密减速器/减速电机/智能执行单元）",
+    "metric": "营业收入及归母净利润",
+    "value": "营收9.76亿元(-10.10%)；归母净利0.73亿元(-0.82%)",
+    "baseline": "2023年营收10.86亿元、归母净利0.73亿元",
+    "source_text": "中大力德：2024年年度报告（2025-04-18披露，新浪财经公告库全文）",
+    "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=002896&id=10892079",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.85,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "中大力德：2024年年度报告（2025-04-18披露，新浪财经公告库全文），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=002896&id=10892079",
+        "locator": "第三节 管理层讨论与分析（营业收入构成/经营情况讨论）",
+        "excerpt": "报告期内，公司实现营业收入976,342,989.09元，同比下降10.10%；实现归属于上市公司股东的净利润72,550,353.38元，同比下降0.82%",
+        "caliber": "合并报表口径、全年累计；'9.76亿元/0.73亿元'为约数，精确值以元为单位原文为准",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "11c2ffeaab63643e"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "ZDL_002",
+    "claim_text": "中大力德2024年智能执行单元销售收入370,217,648.31元，占主营收入37.92%，同比下降23.65%；精密减速器销售收入242,551,909.71元，占比24.84%，同比增长1.07%",
+    "subject": "中大力德",
+    "product": "智能执行单元；精密减速器（RV/谐波/行星）",
+    "metric": "分产品销售收入及占比",
+    "value": "智能执行单元3.70亿元(-23.65%，占比37.92%)；精密减速器2.43亿元(+1.07%，占比24.84%)",
+    "baseline": "2023年智能执行单元4.85亿元、精密减速器2.40亿元",
+    "source_text": "中大力德：2024年年度报告（分产品营业收入构成表，2025-04-18披露）",
+    "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=002896&id=10892079",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.85,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "中大力德：2024年年度报告（分产品营业收入构成表，2025-04-18披露），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=002896&id=10892079",
+        "locator": "第三节 管理层讨论与分析——分产品营业收入构成表",
+        "excerpt": "| 精密减速器| 242,551,909.71| 24.84%| 239,987,454.94| 22.10%| 1.07%| / | 智能执行单元| 370,217,648.31| 37.92%| 484,893,574.23| 44.65%| -23.65%|",
+        "caliber": "分产品口径为主营业务收入（不含其他业务/配件）；占比为该口径下的结构占比",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "a4f114e109ac1224"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "ZDL_003",
+    "claim_text": "中大力德2024年主要产品生产量323.48万台，同比下降3.79%",
+    "subject": "中大力德",
+    "product": "主要产品合计（减速电机、精密减速器、智能执行单元）",
+    "metric": "生产量",
+    "value": "323.48万台(-3.79%)",
+    "baseline": "2023年产量336.22万台",
+    "source_text": "中大力德：2024年年度报告（产销量情况表，2025-04-18披露）",
+    "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=002896&id=10892079",
+    "claim_type": "产能需求",
+    "verification_status": "已验证",
+    "confidence": 0.85,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "中大力德：2024年年度报告（产销量情况表，2025-04-18披露），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=002896&id=10892079",
+        "locator": "第三节 管理层讨论与分析——产销量情况",
+        "excerpt": "| 生产量| 台| 3,234,842.00| 3,362,186.00| -3.79%|",
+        "caliber": "为全产品合计产量，未按减速器/电机/执行单元拆分；不能直接当作减速器单品产量使用",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "da32ae9956cb48f0"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "ZDL_004",
+    "claim_text": "中大力德通过全资子公司佛山中大实施'智能执行单元及大型RV减速器生产线项目'，拟投资17,500.00万元，其中使用募集资金11,500万元",
+    "subject": "中大力德",
+    "product": "智能执行单元、大型RV减速器（佛山基地）",
+    "metric": "募投项目投资总额",
+    "value": "17,500万元（其中募集资金11,500万元）",
+    "baseline": "",
+    "source_text": "中大力德：2024年年度报告（募集资金投向说明，2025-04-18披露）",
+    "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=002896&id=10892079",
+    "claim_type": "产能需求",
+    "verification_status": "已验证",
+    "confidence": 0.8,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "中大力德：2024年年度报告（募集资金投向说明，2025-04-18披露），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=002896&id=10892079",
+        "locator": "第六节 重要事项/第十节 财务报告——募集资金投向说明",
+        "excerpt": "本次项目拟使用房产总建筑面积为约20,000平方米……拟投资17,500.00万元，其中房屋建设费用4,000.00万元，设备购置及安装费用12,000.00万元，铺底流动资金1,500.00 万元，项目资金来源主要于本次变更的募集资金，不足部分公司自筹投入",
+        "caliber": "实施主体为全资子公司佛山中大，建设期24个月；属拟投资/在建产能，非已投产产能",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "67b78bcdb3f0dd5f"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "MZ_001",
+    "claim_text": "鸣志电器2024年实现营业收入24.16亿元，同比下降4.99%；归母净利润7,791万元，同比下降44.53%",
+    "subject": "鸣志电器",
+    "product": "公司整体（控制电机及其驱动系统为核心业务）",
+    "metric": "营业收入及归母净利润",
+    "value": "营收24.16亿元(-4.99%)；归母净利7,791万元(-44.53%)",
+    "baseline": "2023年营收25.43亿元",
+    "source_text": "鸣志电器：2024年年度报告（2025-04-26披露，新浪财经公告库全文）",
+    "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603728&id=11004352",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.85,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "鸣志电器：2024年年度报告（2025-04-26披露，新浪财经公告库全文），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603728&id=11004352",
+        "locator": "第二节 公司简介和主要财务指标/第三节 管理层讨论与分析",
+        "excerpt": "报告期内，公司全年实现营业收入241,593万元，同比下降4.99%……公司全年实现归属于上市公司股东的净利润7,791万元，同比下降44.53%",
+        "caliber": "合并报表全年累计；'24.16亿元'为约数；利润下降主因新建项目产能未达产+营收下滑",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "f62304c662acc775"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "MZ_002",
+    "claim_text": "鸣志电器2024年控制电机及其驱动系统业务实现营业收入19.59亿元，销量2,383.33万台/万套，收入同比下降5.45%",
+    "subject": "鸣志电器",
+    "product": "控制电机及其驱动系统（步进/无刷/伺服/空心杯及驱动）",
+    "metric": "核心业务分部收入及销量",
+    "value": "收入19.59亿元(-5.45%)；销量2,383.33万台/万套(+4.97%)",
+    "baseline": "上年同期收入20.71亿元（由-5.45%倒推）",
+    "source_text": "鸣志电器：2024年年度报告（分产品经营数据表，2025-04-26披露）",
+    "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603728&id=11004352",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.85,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "鸣志电器：2024年年度报告（分产品经营数据表，2025-04-26披露），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603728&id=11004352",
+        "locator": "第三节 管理层讨论与分析——主营业务分产品情况表",
+        "excerpt": "| 控制电机及其驱动系统| 1,959,196,207.55| 2,383.33| -5.45%| 4.97%|",
+        "caliber": "分部口径含电机+驱动器+模组，不等于空心杯单一产品收入；销量单位万台/万套混计",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "6df26c68137c12ad"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "MZ_003",
+    "claim_text": "鸣志电器2024年无刷电机业务合计实现营业收入21,951万元，同比增长31%，其中无刷空心杯产品线年销售规模同比增速超过30%",
+    "subject": "鸣志电器",
+    "product": "无刷电机/无刷空心杯电机（灵巧手、医疗等）",
+    "metric": "无刷电机产品线收入及增速",
+    "value": "21,951万元(+31%)；无刷空心杯销售规模增速超30%",
+    "baseline": "上年同期无刷电机收入",
+    "source_text": "鸣志电器：2024年年度报告（管理层讨论与分析——产品线经营情况，2025-04-26披露）",
+    "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603728&id=11004352",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.8,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "鸣志电器：2024年年度报告（管理层讨论与分析——产品线经营情况，2025-04-26披露），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603728&id=11004352",
+        "locator": "第三节 管理层讨论与分析——控制电机及其驱动系统业务相关主要产品线的经营情况",
+        "excerpt": "报告期内，公司无刷电机业务合计实现营业收入21,951万元，较上年同期增长31%",
+        "caliber": "'无刷电机业务'为产品线口径，非空心杯单品收入；空心杯仅披露增速百分比未披露绝对额",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "5db7bbcd0f7232a6"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "MZ_004",
+    "claim_text": "鸣志电器2024年控制电机及其驱动系统业务在机器人应用领域营业收入同比增长约2.3%，其中无齿槽空心杯业务在机器人应用领域的增长接近200%",
+    "subject": "鸣志电器",
+    "product": "无齿槽空心杯电机模组等（机器人运动控制模块）",
+    "metric": "机器人应用领域收入增速",
+    "value": "机器人应用领域+2.3%；无齿槽空心杯机器人领域增长接近200%",
+    "baseline": "2023年同口径应用领域收入",
+    "source_text": "鸣志电器：2024年年度报告（管理层讨论与分析——应用领域经营情况，2025-04-26披露）",
+    "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603728&id=11004352",
+    "claim_type": "市场展望",
+    "verification_status": "已验证",
+    "confidence": 0.8,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "鸣志电器：2024年年度报告（管理层讨论与分析——应用领域经营情况，2025-04-26披露），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603728&id=11004352",
+        "locator": "第三节 管理层讨论与分析——应用领域经营情况（机器人）",
+        "excerpt": "报告期内，公司控制电机及其驱动系统业务在机器人应用领域的营业收入同比增长约2.3%，其中公司无齿槽空心杯业务在机器人应用领域的增长接近200%",
+        "caliber": "仅披露同比增速百分比，未披露机器人领域收入绝对额；'无齿槽空心杯'与'空心杯'口径需注意区分",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "5e01922e89981b50"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "KL_001",
+    "claim_text": "柯力传感2024年实现营业收入1,295,126,038.72元，同比增长20.79%；归属于上市公司股东的净利润260,508,314.67元，同比减少16.62%",
+    "subject": "柯力传感",
+    "product": "称重/测力传感器及工业物联网（整体）",
+    "metric": "营业收入及归母净利润（2024年度）",
+    "value": "营收12.95亿元(+20.79%)；归母净利2.61亿元(-16.62%)",
+    "baseline": "2023年营收10.72亿元、归母净利3.12亿元",
+    "source_text": "柯力传感《2024年年度报告摘要（更正版）》（2025-04-26批准，中财网2025-07-11转载）",
+    "source_url": "https://www.cfi.net.cn/p20250711000243.html",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.85,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "柯力传感《2024年年度报告摘要（更正版）》（2025-04-26批准，中财网2025-07-11转载），https://www.cfi.net.cn/p20250711000243.html",
+        "locator": "第二节 主要会计数据（3.1近3年的主要会计数据表）",
+        "excerpt": "报告期内，公司实现营业收入129,512.60万元，比上年同期增长20.79%；实现归属于上市公司股东的净利润26,050.83万元，比上年同期减少16.62%",
+        "caliber": "合并报表口径，年度累计；摘要为'更正版'，以更正后数据为准",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "1a7615915b48180c"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "KL_002",
+    "claim_text": "柯力传感六维力/力矩传感器已完成人形机器人手腕、脚腕等产品系列开发，2024年内已给50多家国内人形机器人、协作机器人、工业机器人客户送样，部分客户已进入批量订单阶段",
+    "subject": "柯力传感",
+    "product": "六维力/力矩传感器（机器人传感器）",
+    "metric": "送样客户数量",
+    "value": "50多家客户送样，部分进入批量订单阶段",
+    "baseline": "",
+    "source_text": "柯力传感《2024年年度报告摘要（更正版）》（2025-04-26批准，中财网转载）",
+    "source_url": "https://www.cfi.net.cn/p20250711000243.html",
+    "claim_type": "客户订单",
+    "verification_status": "已验证",
+    "confidence": 0.8,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "柯力传感《2024年年度报告摘要（更正版）》（2025-04-26批准，中财网转载），https://www.cfi.net.cn/p20250711000243.html",
+        "locator": "第三节 重要事项（三）大力发展新四样",
+        "excerpt": "报告期内，公司六维力/力矩传感器已完成人形机器人手腕、脚腕，工业臂、协作臂末端的产品系列开发，掌握了结构解耦、算法解耦、高速采样通讯等技术要点，并已给50多家国内人形机器人、协作机器人、工业机器人客户送样，部分客户已进入批量订单阶段",
+        "caliber": "'50多家'为公司口径约数，未披露具体送样台数；'批量订单'客户数量未量化",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "20cf9d710927e2e2"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "KL_003",
+    "claim_text": "柯力传感2025年实现营业收入155,843.89万元（同比+20.33%），归属于上市公司股东的净利润34,055.13万元",
+    "subject": "柯力传感",
+    "product": "传感器与物联网系统集成（整体）",
+    "metric": "营业收入及归母净利润（2025年度）",
+    "value": "营收15.58亿元(+20.33%)；归母净利3.41亿元",
+    "baseline": "2024年营收12.95亿元",
+    "source_text": "柯力传感《2025年年度报告》（2026-04-26批准，新浪财经公告库全文）",
+    "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603662&id=12209189",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.85,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "柯力传感《2025年年度报告》（2026-04-26批准，新浪财经公告库全文），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603662&id=12209189",
+        "locator": "第三节 管理层讨论与分析/（一）总体经营情况",
+        "excerpt": "公司实现营业收入155,843.89万元，归属于上市公司股东的净利润34,055.13万元，归属于上市公司股东的扣除非经常性损益的净利润21,392.09万元",
+        "caliber": "合并报表年度累计口径；该年报为2026年4月披露的FY2025报告",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "6f7f2e83f390ecc7"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "KL_004",
+    "claim_text": "柯力传感2025年机器人力学传感器销售量超过1500只，送样客户数超过70家；2026年月出货量已突破千只",
+    "subject": "柯力传感",
+    "product": "机器人力学传感器（六维力/力矩等）",
+    "metric": "销售量/送样客户数/月出货量",
+    "value": "2025年销量超1500只；送样客户超70家；2026年月出货突破千只",
+    "baseline": "",
+    "source_text": "柯力传感《2025年年度报告》（2026-04-26批准，新浪财经公告库全文）",
+    "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603662&id=12209189",
+    "claim_type": "客户订单",
+    "verification_status": "已验证",
+    "confidence": 0.8,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "柯力传感《2025年年度报告》（2026-04-26批准，新浪财经公告库全文），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603662&id=12209189",
+        "locator": "第三节 管理层讨论与分析（新业务进展段落）",
+        "excerpt": "报告期内，机器人力学传感器销售量超过1500只，送样客户数超过70家，已进入小批量生产向批量化供应过渡的发展阶段。2026年，机器人力学传感器业务有望迅速提升收入规模，月出货量已突破千只，处于蓬勃发展态势",
+        "caliber": "'超1500只'为2025全年累计销量公司口径；'月出货突破千只'为2026年初阶段数据非年化；机器人力学传感器含六维力及一维至三维力产品，非纯六维力口径",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "99a01ccea629c160"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "WZX_001",
+    "claim_text": "五洲新春2024年实现营业收入3,264,549,247.12元（32.65亿元），同比增长5.10%；归属于上市公司股东的净利润91,370,150.18元（9,137.01万元），同比下滑33.88%",
+    "subject": "五洲新春",
+    "product": "轴承/精密零部件/丝杠（整体）",
+    "metric": "营业收入及归母净利润（2024年度）",
+    "value": "营收32.65亿元(+5.10%)；归母净利9,137.01万元(-33.88%)",
+    "baseline": "2023年营收31.06亿元、归母净利1.38亿元",
+    "source_text": "五洲新春《2024年年度报告》（2025-04-27批准，新浪财经公告库全文）",
+    "source_url": "https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603667&id=11045532",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.85,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "五洲新春《2024年年度报告》（2025-04-27批准，新浪财经公告库全文），https://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=603667&id=11045532",
+        "locator": "第三节 管理层讨论与分析（2024年度主要会计数据表）",
+        "excerpt": "全年实现营业收入32.65亿元，同比增长5.10%，归母净利润9,137.01万元，同比下滑33.88%",
+        "caliber": "合并报表年度累计口径；归母净利降幅较大主要与境外业务不及预期等非收入因素有关",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "23d0c812abf68b9f"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "WZX_002",
+    "claim_text": "五洲新春2024年至12月3日丝杠产品（含三种类型）累计开票收入约为含税金额680万元（含汽车类丝杠产品），占公司2023年全年营业收入的0.22%",
+    "subject": "五洲新春",
+    "product": "丝杠（梯形丝杠/滚珠丝杠副/行星滚柱丝杠）",
+    "metric": "丝杠产品累计开票收入及营收占比",
+    "value": "约680万元（含税，截至2024-12-03），占2023年营收0.22%",
+    "baseline": "2023年全年营业收入（约31.06亿元）",
+    "source_text": "五洲新春股票交易异常波动公告（2024-12-03发布，经腾讯新闻/e公司转述公告原文）",
+    "source_url": "https://news.qq.com/rain/a/20241203A0822Q00",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.5,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "五洲新春股票交易异常波动公告（2024-12-03发布，经腾讯新闻/e公司转述公告原文），https://news.qq.com/rain/a/20241203A0822Q00",
+        "locator": "公司公告原文段落（页码需查交易所PDF）",
+        "excerpt": "2024年至今，公司丝杠产品累计开票收入约为含税金额680万元（包含汽车类丝杠产品），占公司2023年全年营业收入的0.22%，占比非常小，对公司业绩不形成影响",
+        "caliber": "数字出自公司正式公告但经媒体转述获取、未直接核对上交所公告PDF；'680万元'为含税开票口径且含汽车类丝杠，非纯机器人丝杠口径；占比为占2023年营收",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "news_media",
+        "fingerprint": "dc1e5f384d29b317"
+      },
+      {
+        "source": "五洲新春关于股票交易风险提示性公告（2024-12-05，巨潮资讯网 http://static.cninfo.com.cn/finalpage/2024-12-05/1221927980.PDF）",
+        "locator": "公告'风险提示'节第4点（2024-12-06/12-07 异常波动公告同文）",
+        "excerpt": "公司丝杠产品包括梯形丝杠（滑动丝杠）、滚珠丝杠副、行星滚柱丝杠三种类型，2024 年至今，公司丝杠产品累计开票收入约为含税金额680 万元（其中汽车类丝杠产品约占八成左右），占公司2023 年全年营业收入的0.22%，占比非常小，对公司业绩不形成影响",
+        "caliber": "官方公告原文核对一致；680万元为含税开票口径且汽车类丝杠约占八成；占比为占2023年营收；'至12月3日'为公告日口径",
+        "verifier": "经济金融组复核（K3 机器预检 + 人工确认）",
+        "verified_at": "2026-09-09",
+        "evidence_level": "official_filing",
+        "fingerprint": "50cdaaf801d13099"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
+  },
+  {
+    "claim_id": "WZX_003",
+    "claim_text": "五洲新春拟与新昌高新技术产业园区管委会及新昌县高创控股集团签订对外投资协议，投资建设行星滚柱丝杠、微型滚珠丝杠及智能汽车丝杠等项目，总投资约15亿元，预计建设周期3年，总用地约100亩",
+    "subject": "五洲新春",
+    "product": "行星滚柱丝杠/微型滚珠丝杠/智能汽车丝杠",
+    "metric": "项目计划总投资",
+    "value": "约15亿元，建设周期3年，用地约100亩",
+    "baseline": "",
+    "source_text": "五洲新春对外投资公告（2025-02-28发布，东方财富网转述）",
+    "source_url": "https://finance.eastmoney.com/a/202502283333344246.html",
+    "claim_type": "产能需求",
+    "verification_status": "已验证",
+    "confidence": 0.5,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "五洲新春对外投资公告（2025-02-28发布，东方财富网转述），https://finance.eastmoney.com/a/202502283333344246.html",
+        "locator": "公司公告原文段落（页码需查交易所PDF）",
+        "excerpt": "计划投资建设行星滚柱丝杠、微型滚珠丝杠及智能汽车丝杠等项目，项目总投资约为15亿元，预计建设周期为3年。项目总用地约100亩，资金来源于自有资金及自筹资金",
+        "caliber": "为'拟投资'计划数而非已投入金额，经媒体转述公告获取、未直接核对公告PDF；后续实际投资额可能调整",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "news_media",
+        "fingerprint": "dc12beff90f7cc2d"
+      },
+      {
+        "source": "五洲新春关于拟签订对外投资协议的公告（2025-03-01，巨潮资讯网 http://static.cninfo.com.cn/finalpage/2025-03-01/1222674664.PDF）",
+        "locator": "公告'重要内容提示'及'对外投资概述'节",
+        "excerpt": "拟与新昌高新技术产业园区管理委员会、新昌县高创控股集团有限公司签订《投资协议》，拟投资建设行星滚柱丝杠、微型滚珠丝杠及智能汽车丝杠建设项目。项目计划总投资约15亿元，总用地约100亩，预计项目投资建设周期3年",
+        "caliber": "'拟投资'计划数口径，公告明示'为计划数或预计数，不构成对股东的承诺'；签约对方与 claim 一致",
+        "verifier": "经济金融组复核（K3 机器预检 + 人工确认）",
+        "verified_at": "2026-09-09",
+        "evidence_level": "official_filing",
+        "fingerprint": "8fe808e3da443249"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
+  },
+  {
+    "claim_id": "WZX_004",
+    "claim_text": "五洲新春2023年轴承产品业务实现营收17.89亿元，同比-5.12%，毛利率18.01%；轴承产品出货4.54亿套，同比-4.40%",
+    "subject": "五洲新春",
+    "product": "轴承产品",
+    "metric": "轴承业务营收、毛利率、出货量（2023年度）",
+    "value": "营收17.89亿元(-5.12%)；毛利率18.01%；出货4.54亿套(-4.40%)",
+    "baseline": "2022年轴承业务营收及出货量",
+    "source_text": "券商研报（点评2023年年报及2024年一季报），新浪财经研报平台",
+    "source_url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/lastest/rptid/767790536699/index.phtml",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.5,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "券商研报（点评2023年年报及2024年一季报），新浪财经研报平台，https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/lastest/rptid/767790536699/index.phtml",
+        "locator": "研报'轴承业务高速发展'段落",
+        "excerpt": "2023年公司轴承产品业务实现营收17.89亿元，同比-5.12%，毛利率18.01%，同比-0.03pct，轴承产品出货4.54亿套，同比-4.40%",
+        "caliber": "来源为券商研报对公司2023年年报的转述，未直接核对年报原文分部数据；毛利率为轴承产品业务口径",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "analyst_report",
+        "fingerprint": "21bd9ed0759b044c"
+      },
+      {
+        "source": "五洲新春2023年年度报告（2024-04-27，巨潮资讯网 http://static.cninfo.com.cn/finalpage/2024-04-27/1219880742.PDF）",
+        "locator": "年报'主营业务分行业情况表'+'产销量情况分析表'",
+        "excerpt": "轴承产品营业收入 1,788,573,047.57 元，比上年增减 -5.12%，毛利率 18.01%（减少 0.03 个百分点）；轴承产品销售量 45,393.66 万套，比上年 -4.40%",
+        "caliber": "年报分部口径，营收/毛利率/出货量/增速四项逐一核对一致（17.89亿=1,788,573,047.57元；4.54亿套=45,393.66万套）",
+        "verifier": "经济金融组复核（K3 机器预检 + 人工确认）",
+        "verified_at": "2026-09-09",
+        "evidence_level": "official_filing",
+        "fingerprint": "d68d1e62684fcbe3"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
+  },
+  {
+    "claim_id": "BST_001",
+    "claim_text": "贝斯特2023年实现营业收入13.43亿元，同比增长22.42%；归母净利润2.64亿元，同比增长15.13%",
+    "subject": "贝斯特",
+    "product": "公司整体（精密零部件/涡轮增压器零部件/新能源车零部件）",
+    "metric": "年度营业收入及归母净利润",
+    "value": "营收13.43亿元(+22.42%)；归母净利2.64亿元(+15.13%)",
+    "baseline": "2022年同期（同比口径）",
+    "source_text": "智通财经转述公司2023年年度报告（2024-04-19），年报全文PDF见雪球托管巨潮文件",
+    "source_url": "https://news.qq.com/rain/a/20240419A0A0D000",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.8,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "智通财经转述公司2023年年度报告（2024-04-19），年报全文PDF见雪球托管巨潮文件，https://news.qq.com/rain/a/20240419A0A0D000",
+        "locator": "2023年年度报告第二节 主要会计数据和财务指标（年报全文PDF：https://stockn.xueqiu.com/SZ300580/20240419070609.pdf ）",
+        "excerpt": "报告期内公司实现营业收入13.43亿元，同比增长22.42%;归属于上市公司股东的净利润2.64亿元，同比增长15.13%",
+        "caliber": "归母净利润含非经常性损益；扣非净利润2.43亿元(+57.48%)增速口径差异大；媒体转述+官方PDF交叉验证",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "e2da257e153b90fb"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "BST_002",
+    "claim_text": "贝斯特2023年上半年营业收入约6.34亿元，同比增加29.42%；归母净利润约1.3亿元，同比增加62.08%",
+    "subject": "贝斯特",
+    "product": "公司整体（上半年累计口径）",
+    "metric": "半年度营业收入及归母净利润",
+    "value": "营收约6.34亿元(+29.42%)；净利约1.3亿元(+62.08%)",
+    "baseline": "2022年上半年（同比口径）",
+    "source_text": "每日经济新闻/凤凰网江苏转述公司2023年半年度业绩报告（2023-08-08）",
+    "source_url": "https://js.ifeng.com/c/8S3zO7KsDwb",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.5,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "每日经济新闻/凤凰网江苏转述公司2023年半年度业绩报告（2023-08-08），https://js.ifeng.com/c/8S3zO7KsDwb",
+        "locator": "",
+        "excerpt": "贝斯特（SZ 300580）8月7日晚间发布半年度业绩报告称，2023年上半年营业收入约6.34亿元，同比增加29.42%",
+        "caliber": "媒体转述半年度业绩报告，未直接核对半年报原文；净利增速62.08%与全年15.13%差异显著，存在低基数效应口径问题",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "news_media",
+        "fingerprint": "c024a904c263e938"
+      },
+      {
+        "source": "贝斯特2023年半年度报告（2023-08-08，巨潮资讯网 http://static.cninfo.com.cn/finalpage/2023-08-08/1217479733.PDF）",
+        "locator": "半年报'主要会计数据和财务指标'表",
+        "excerpt": "营业收入 633,605,486.61 元，本报告期比上年同期增减 29.42%；归属于上市公司股东的净利润 129,645,713.52 元，62.08%",
+        "caliber": "半年报原文核对一致（约6.34亿/约1.3亿）；净利+62.08%含低基数效应，已在 caliber 注明",
+        "verifier": "经济金融组复核（K3 机器预检 + 人工确认）",
+        "verified_at": "2026-09-09",
+        "evidence_level": "official_filing",
+        "fingerprint": "b2d23d91ffd4ef33"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
+  },
+  {
+    "claim_id": "BST_003",
+    "claim_text": "贝斯特2023年报披露：滚珠丝杠副、直线导轨副首台套已成功下线，部分产品送样验证中；行星滚柱丝杠已顺利出样",
+    "subject": "贝斯特",
+    "product": "直线滚动功能部件（滚珠丝杠副/直线导轨副/行星滚柱丝杠）",
+    "metric": "产品研发/送样进度（定性+阶段性）",
+    "value": "首台套下线、送样验证中、行星滚柱丝杠出样",
+    "baseline": "",
+    "source_text": "无锡贝斯特精机股份有限公司《2023年年度报告》（2024-04-20披露，巨潮PDF）",
+    "source_url": "https://stockn.xueqiu.com/SZ300580/20240419070609.pdf",
+    "claim_type": "技术性能",
+    "verification_status": "已验证",
+    "confidence": 0.8,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "无锡贝斯特精机股份有限公司《2023年年度报告》（2024-04-20披露，巨潮PDF），https://stockn.xueqiu.com/SZ300580/20240419070609.pdf",
+        "locator": "第三节 管理层讨论与分析（公司从事的主要业务部分）",
+        "excerpt": "报告期内，公司生产的滚珠丝杠副、直线导轨副等产品首台套已实现成功下线，部分产品已在送样验证过程中；自主研发的行星滚柱丝杠已顺利出样，并紧跟……",
+        "caliber": "公司口径，未披露丝杠业务收入/产能具体数字；'送样验证'不等于批量订单，验证转化率存疑",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "62590d625e8f8a3f"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "BST_004",
+    "claim_text": "贝斯特股权激励考核目标：以2021年营收为基数，2022-2024年营业收入目标增长率分别不低于10%/25%/45%",
+    "subject": "贝斯特",
+    "product": "公司整体（股权激励业绩考核）",
+    "metric": "股权激励营收考核目标",
+    "value": "以2021年为基数，2022-2024年营收增长目标不低于10%/25%/45%",
+    "baseline": "2021年营业收入",
+    "source_text": "上海证券首次覆盖深度研报（2024-07-24，转述公司股权激励计划草案）",
+    "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202407241638269818_1.pdf",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.5,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "上海证券首次覆盖深度研报（2024-07-24，转述公司股权激励计划草案），https://pdf.dfcfw.com/pdf/H3_AP202407241638269818_1.pdf",
+        "locator": "研报正文股权激励章节（东方财富PDF）",
+        "excerpt": "以2021 年营业收入为基数，2022-2024 年营业收入的目标增长率将分别不低于10%/25%/45%；或以2021 年净利润为基数……",
+        "caliber": "券商研报转述，未直接核对股权激励计划公告原文；为公司层面考核目标而非实际业绩，属'目标值'口径",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "analyst_report",
+        "fingerprint": "bbfa2addc5d44569"
+      },
+      {
+        "source": "贝斯特2022年限制性股票激励计划（草案）（更正后）及实施考核管理办法（2022-10-21，巨潮资讯网 http://static.cninfo.com.cn/finalpage/2022-10-21/1214853855.PDF）",
+        "locator": "激励计划草案'公司层面业绩考核'章",
+        "excerpt": "以2021年营业收入为基数，2022年、2023年以及2024年营业收入的目标增长率将分别不低于10%、25%及45%（或以2021年净利润为基数的同等口径）",
+        "caliber": "公司层面考核目标值口径（非实际业绩），与 claim 表述一致",
+        "verifier": "经济金融组复核（K3 机器预检 + 人工确认）",
+        "verified_at": "2026-09-09",
+        "evidence_level": "official_filing",
+        "fingerprint": "db8fe24c1d2ec037"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
+  },
+  {
+    "claim_id": "HLYY_001",
+    "claim_text": "恒立液压2023年实现营业收入89.85亿元，同比增长9.61%；归母净利润24.99亿元，同比增长6.66%",
+    "subject": "恒立液压",
+    "product": "公司整体（液压油缸/液压泵阀/液压系统等）",
+    "metric": "年度营业收入及归母净利润",
+    "value": "营收89.85亿元(+9.61%)；归母净利24.99亿元(+6.66%)",
+    "baseline": "2022年同期（同比口径）",
+    "source_text": "同花顺财经转述公司2023年年度业绩报告（2024-06-23）；国投证券研报、界面新闻等多源交叉一致",
+    "source_url": "https://m.10jqka.com.cn/20240623/c659104279.shtml",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.8,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "同花顺财经转述公司2023年年度业绩报告（2024-06-23）；国投证券研报、界面新闻等多源交叉一致，https://m.10jqka.com.cn/20240623/c659104279.shtml",
+        "locator": "",
+        "excerpt": "据恒立液压(601100)发布2023年年度业绩报告称，公司营业收入89.85亿元，同比增长9.61%；实现归属于上市公司股东净利润24.99亿元，同比增长6.66%",
+        "caliber": "多个独立来源数字一致，可信度高；'净利润'为归母口径",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "0044aab12219b342"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "HLYY_002",
+    "claim_text": "恒立液压2023年度权益分派：每10股派现金红利7.00元（含税），合计派现9.39亿元，占同期归母净利润的37.56%",
+    "subject": "恒立液压",
+    "product": "公司整体（利润分配）",
+    "metric": "现金分红总额及分红率",
+    "value": "每10股派7元；合计9.39亿元；占归母净利37.56%",
+    "baseline": "同期归母净利润24.99亿元",
+    "source_text": "同花顺财经转述公司2023年年度权益分配实施公告（2024-06-24）",
+    "source_url": "http://m.10jqka.com.cn/20240624/c659111675.shtml",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.5,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "同花顺财经转述公司2023年年度权益分配实施公告（2024-06-24），http://m.10jqka.com.cn/20240624/c659111675.shtml",
+        "locator": "",
+        "excerpt": "以总股本134082.10万股为基数，向全体股东每10股派发现金红利人民币7.00元，合计派发现金红利人民币9.39亿元，占同期归母净利润的比例为37.56%",
+        "caliber": "媒体转述权益分派实施公告，未直接核对公告原文；以当时总股本计算",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "news_media",
+        "fingerprint": "52fd59b1d10c9763"
+      },
+      {
+        "source": "恒立液压2023年年度权益分派实施公告（公告编号2024-015，2024-06-24，巨潮资讯网 http://static.cninfo.com.cn/finalpage/2024-06-24/1220436905.PDF）",
+        "locator": "公告'分配方案'节",
+        "excerpt": "本次利润分配以方案实施前的公司总股本1,340,820,992股为基数，每股派发现金红利0.70元（含税），共计派发现金红利938,574,694.40元",
+        "caliber": "每股0.70元=每10股7.00元；总股本134,082.10万股；总额9.386亿≈9.39亿；37.56%为派现额/2023年归母净利24.99亿的推算比，一致",
+        "verifier": "经济金融组复核（K3 机器预检 + 人工确认）",
+        "verified_at": "2026-09-09",
+        "evidence_level": "official_filing",
+        "fingerprint": "25857475dadbbd29"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
+  },
+  {
+    "claim_id": "HLYY_003",
+    "claim_text": "恒立液压通过定增募资20亿元，其中14亿元投向线性驱动器项目，达产后将形成多种规格电动缸和丝杠的生产能力",
+    "subject": "恒立液压",
+    "product": "线性驱动器/电动缸/丝杠（人形机器人方向）",
+    "metric": "募投项目金额",
+    "value": "定增募资20亿元，其中14亿元投向线性驱动器项目",
+    "baseline": "",
+    "source_text": "格隆汇报道转述公司2022年定增预案（2025-01-16）",
+    "source_url": "https://m.gelonghui.com/p/1629680",
+    "claim_type": "产能需求",
+    "verification_status": "已验证",
+    "confidence": 0.5,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "格隆汇报道转述公司2022年定增预案（2025-01-16），https://m.gelonghui.com/p/1629680",
+        "locator": "",
+        "excerpt": "公司在2022年开始进军人形机器人领域，通过定增募资20亿元，其中14亿元用于线性驱动器项目，达产后将形成多种规格电动缸和丝杠的生产能力。",
+        "caliber": "媒体转述定增预案口径；'募资20亿'为拟募资上限，实际发行净额可能低于该数，需以发行结果公告为准；'达产后产能'为规划值非现状",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "news_media",
+        "fingerprint": "898740da9e445a07"
+      },
+      {
+        "source": "恒立液压非公开发行A股股票发行情况报告书（2022-12-29，巨潮资讯网 http://static.cninfo.com.cn/finalpage/2022-12-29/1215468676.PDF）+ 2025年半年度报告募集资金承诺项目表（1224567720.PDF）",
+        "locator": "发行情况报告书'募集资金金额'节；2025半年报募投项目表",
+        "excerpt": "募集资金总额为人民币1,999,999,948.80元（净额1,989,617,204.16元），主要用于恒立墨西哥项目、线性驱动器项目等；线性驱动器项目承诺投资140,000.00万元",
+        "caliber": "募资20亿为发行结果口径（净额19.90亿）；14亿投向线性驱动器为募投承诺口径；'达产后产能'为规划值非现状",
+        "verifier": "经济金融组复核（K3 机器预检 + 人工确认）",
+        "verified_at": "2026-09-09",
+        "evidence_level": "official_filing",
+        "fingerprint": "4e99314b234ea478"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
+  },
+  {
+    "claim_id": "HLYY_004",
+    "claim_text": "恒立液压2025年上半年共销售挖掘机用油缸30.83万只，同比增长超15%；线性驱动器项目上半年累计开发超过50款新产品且均完成量产转化投放市场",
+    "subject": "恒立液压",
+    "product": "挖掘机专用油缸；线性驱动器（电动缸/丝杠）",
+    "metric": "半年度产品销量/新品开发数量",
+    "value": "挖机油缸销量30.83万只(+15%以上)；线性驱动器新品超50款全部量产",
+    "baseline": "2024年上半年销量（同比口径）",
+    "source_text": "经济观察报报道转述公司2025年半年报（原文披露约2025年8-9月）",
+    "source_url": "https://jg-static.eeo.com.cn/article/info?id=d26de66e1a294d21adbc981c121fd48c&channelUuid=",
+    "claim_type": "产能需求",
+    "verification_status": "已验证",
+    "confidence": 0.5,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "经济观察报报道转述公司2025年半年报（原文披露约2025年8-9月），https://jg-static.eeo.com.cn/article/info?id=d26de66e1a294d21adbc981c121fd48c&channelUuid=",
+        "locator": "",
+        "excerpt": "恒立液压2025年半年报介绍，公司上半年共销售挖掘机用油缸30.83万只，同比增长超15%……线性驱动器项目2025上半年在技术研发与市场拓展方面取得成绩，累计开发超过 50 款新产品，所有新品均已顺利完成量产转化并正式投放市场",
+        "caliber": "媒体转述半年报，未直接核对半年报原文；油缸计量单位'只'需注意与'台套'换算；'超15%'为区间表述非精确值",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "news_media",
+        "fingerprint": "4e46294591068072"
+      },
+      {
+        "source": "恒立液压2025年半年度报告（2025-08-26，巨潮资讯网 http://static.cninfo.com.cn/finalpage/2025-08-26/1224567720.PDF）",
+        "locator": "半年报'经营情况讨论与分析'",
+        "excerpt": "上半年，公司共销售挖掘机用油缸30.83万只，同比增长超15%……线性驱动器项目上半年在技术研发与市场拓展方面取得亮眼成绩，累计开发超过50款新产品，所有新品均已顺利完成量产转化并正式投放市场",
+        "caliber": "半年报原文逐字一致；'超15%'为区间表述；油缸计量单位'只'",
+        "verifier": "经济金融组复核（K3 机器预检 + 人工确认）",
+        "verified_at": "2026-09-09",
+        "evidence_level": "official_filing",
+        "fingerprint": "81b5f19d342ae773"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
+  },
+  {
+    "claim_id": "GM_001",
+    "claim_text": "国茂股份2023年全年减速机销售约65.45万台，同比增长约7.64%",
+    "subject": "国茂股份",
+    "product": "减速机（通用减速机全品类）",
+    "metric": "减速机年销量",
+    "value": "约65.45万台，同比+7.64%",
+    "baseline": "2022年销量（隐含约60.8万台）",
+    "source_text": "江苏国茂减速机股份有限公司2023年年度报告（2024-04-25披露，雪球镜像PDF全文）",
+    "source_url": "https://stockn.xueqiu.com/SH603915/20240426586786.pdf",
+    "claim_type": "产能需求",
+    "verification_status": "已验证",
+    "confidence": 0.85,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "江苏国茂减速机股份有限公司2023年年度报告（2024-04-25披露，雪球镜像PDF全文），https://stockn.xueqiu.com/SH603915/20240426586786.pdf",
+        "locator": "第三节 管理层讨论与分析·一、经营情况讨论与分析，PDF p.9",
+        "excerpt": "全年减速机销售约65.45万台，同比增长约7.64%。同时公司内部围绕\"提质、控本、增效\"工作方针……",
+        "caliber": "数值带'约'为概数；为全品类减速机销售台数，非机器人精密减速器口径；'销售'口径与行业协会'产量'口径不同",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "1e2bd7a46d56c27c"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "GM_002",
+    "claim_text": "国茂股份2023年前五名客户销售额26,579.87万元，占年度销售总额9.99%，其中关联方销售0万元",
+    "subject": "国茂股份",
+    "product": "公司整体客户结构",
+    "metric": "前五大客户销售占比",
+    "value": "前五名客户销售额26,579.87万元，占年度销售总额9.99%",
+    "baseline": "",
+    "source_text": "江苏国茂减速机股份有限公司2023年年度报告（2024-04-25披露，雪球镜像PDF全文）",
+    "source_url": "https://stockn.xueqiu.com/SH603915/20240426586786.pdf",
+    "claim_type": "客户订单",
+    "verification_status": "已验证",
+    "confidence": 0.85,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "江苏国茂减速机股份有限公司2023年年度报告（2024-04-25披露，雪球镜像PDF全文），https://stockn.xueqiu.com/SH603915/20240426586786.pdf",
+        "locator": "第三节·五、(一)2.(7)主要销售客户及主要供应商情况，PDF p.18",
+        "excerpt": "前五名客户销售额26,579.87万元,占年度销售总额9.99%;其中前五名客户销售额中关联方销售额0万元,占年度销售总额0%。",
+        "caliber": "客户集中度低、无关联交易依赖；隐含年度销售总额约26.6亿元，可与营收口径交叉验证",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "4ff92422ccac5e60"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "GM_003",
+    "claim_text": "截至2023年12月31日，国茂股份及下属子公司拥有境内专利247项，其中发明专利35项",
+    "subject": "国茂股份",
+    "product": "公司整体知识产权",
+    "metric": "境内专利数量",
+    "value": "境内专利247项，其中发明专利35项",
+    "baseline": "",
+    "source_text": "江苏国茂减速机股份有限公司2023年年度报告（2024-04-25披露，雪球镜像PDF全文）",
+    "source_url": "https://stockn.xueqiu.com/SH603915/20240426586786.pdf",
+    "claim_type": "技术性能",
+    "verification_status": "已验证",
+    "confidence": 0.85,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "江苏国茂减速机股份有限公司2023年年度报告（2024-04-25披露，雪球镜像PDF全文），https://stockn.xueqiu.com/SH603915/20240426586786.pdf",
+        "locator": "第三节·四、报告期内核心竞争力分析·4、技术优势，PDF p.13",
+        "excerpt": "截止2023年12月31日,公司及下属子公司拥有境内专利247项,其中发明专利35项。",
+        "caliber": "仅含境内专利（不含PCT/海外专利）；为合并口径含子公司；时点数为2023年末存量而非当年新增",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "fb30f98960a48224"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "GM_004",
+    "claim_text": "国茂股份2023年实现营收26.60亿元（同比-1.35%），归母净利润3.96亿元（同比-4.44%）",
+    "subject": "国茂股份",
+    "product": "公司整体业绩",
+    "metric": "营业收入/归母净利润",
+    "value": "营收26.60亿元(-1.35%)；归母净利润3.96亿元(-4.44%)",
+    "baseline": "2022年营收26.97亿元、归母净利润4.14亿元",
+    "source_text": "东方财富研究报告页转述公司2023年年报",
+    "source_url": "https://emweb.securities.eastmoney.com/PC_HSF10/ResearchReport/index?type=web&code=SH603915&color=w",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.5,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "东方财富研究报告页转述公司2023年年报，https://emweb.securities.eastmoney.com/PC_HSF10/ResearchReport/index?type=web&code=SH603915&color=w",
+        "locator": "",
+        "excerpt": "公司发布2023年年报和2024年一季报,2023年公司实现营收26.60亿元,同比下滑1.35%,归母净利润3.96亿元,同比下滑4.44%",
+        "caliber": "为券商研报对年报的转述，非直接读到的年报表格原文；2023年度合并口径、累计值",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "analyst_report",
+        "fingerprint": "44c745383d6c5bf7"
+      },
+      {
+        "source": "国茂股份2023年年度报告（2024-04-27，巨潮资讯网 http://static.cninfo.com.cn/finalpage/2024-04-27/1219881401.PDF）",
+        "locator": "年报'主要会计数据'表",
+        "excerpt": "营业收入 2,660,414,937.05 元，本期比上年同期增减 -1.35%；归属于上市公司股东的净利润 395,500,856.38 元，-4.44%",
+        "caliber": "年报合并口径核对一致（26.60亿/3.96亿）",
+        "verifier": "经济金融组复核（K3 机器预检 + 人工确认）",
+        "verified_at": "2026-09-09",
+        "evidence_level": "official_filing",
+        "fingerprint": "72c67d46961754d6"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
+  },
+  {
+    "claim_id": "QC_001",
+    "claim_text": "秦川机床2023年实现营业收入3,761,103,127.25元（37.61亿元），同比下降8.29%；归母净利润52,258,309.40元，同比下降81.00%",
+    "subject": "秦川机床",
+    "product": "公司整体业绩（机床类/零部件类/工具类等合计）",
+    "metric": "营业收入/归母净利润",
+    "value": "营收37.61亿元(-8.29%)；归母净利5,225.83万元(-81.00%)",
+    "baseline": "2022年调整后营收41.01亿元、归母净利2.75亿元",
+    "source_text": "秦川机床工具集团股份公司2023年年度报告（2024-03-30披露，新浪财经公告库全文）",
+    "source_url": "http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=000837&id=9925810",
+    "claim_type": "财务表现",
+    "verification_status": "已验证",
+    "confidence": 0.85,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "秦川机床工具集团股份公司2023年年度报告（2024-03-30披露，新浪财经公告库全文），http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=000837&id=9925810",
+        "locator": "第二节·六、主要会计数据和财务指标",
+        "excerpt": "营业收入（元）3,761,103,127.25 ……-8.29%；归属于上市公司股东的净利润（元）52,258,309.40 ……-81.00%",
+        "caliber": "合并报表口径；2022年基数为会计政策变更追溯调整后数据；扣非归母净利润为-3,466.62万元，与归母净利润差异大需区分",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "4b88654979ffe69a"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "QC_002",
+    "claim_text": "秦川机床机器人关节减速器已有5大系列、40种规格、140多种速比，满足5—1000KG负载匹配，是国内规格最全、系列最多的工业机器人关节减速器产品供应商",
+    "subject": "秦川机床",
+    "product": "工业机器人关节减速器（RV减速器，子公司秦川高精传动）",
+    "metric": "产品系列/规格/速比数量",
+    "value": "5大系列、40种规格、140多种速比，覆盖5—1000KG负载",
+    "baseline": "",
+    "source_text": "秦川机床工具集团股份公司2023年年度报告（2024-03-30披露，新浪财经公告库全文）",
+    "source_url": "http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=000837&id=9925810",
+    "claim_type": "技术性能",
+    "verification_status": "已验证",
+    "confidence": 0.8,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "秦川机床工具集团股份公司2023年年度报告（2024-03-30披露，新浪财经公告库全文），http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=000837&id=9925810",
+        "locator": "第三节·二、(6)机器人关节减速器",
+        "excerpt": "机器人关节减速器已有5大系列、40种规格、140多种速比，是国内规格最全、系列最多、满足5—1000KG负载匹配全系列工业机器人关节减速器产品的供应商",
+        "caliber": "为型谱覆盖范围（额定覆盖能力），非实际在产SKU数；与2023年11月互动易回复的'5大系列、23种规格、130种速比'存在时点差异",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "503bf6c9b0bfa4a5"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "QC_003",
+    "claim_text": "秦川机床2023年研发投入1.99亿元，占营业收入的5.30%；全年申报专利41件、授权专利48件、登记软著11件、制订标准38项",
+    "subject": "秦川机床",
+    "product": "公司整体研发投入",
+    "metric": "研发投入金额及占比",
+    "value": "研发投入1.99亿元（占营收5.30%）；申报专利41件、授权48件",
+    "baseline": "2022年研发投入3.40亿元（占营收8.30%）",
+    "source_text": "秦川机床工具集团股份公司2023年年度报告（2024-03-30披露，新浪财经公告库全文）",
+    "source_url": "http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=000837&id=9925810",
+    "claim_type": "技术性能",
+    "verification_status": "已验证",
+    "confidence": 0.85,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "秦川机床工具集团股份公司2023年年度报告（2024-03-30披露，新浪财经公告库全文），http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=000837&id=9925810",
+        "locator": "第三节·三、核心竞争力分析；研发投入表",
+        "excerpt": "2023年，秦川机床研发投入1.99亿元，占营业收入的5.30%。企业科创能力逐步提升。全年共申报专利 41件、授权专利48 件、登记软著11 件、制订标准38项。",
+        "caliber": "2023年研发投入资本化金额为0（2022年资本化率46.68%），投入总额下降41.39%主要因口径变化，两年不可直接同比；为全公司口径",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "official_filing",
+        "fingerprint": "cc0de7fc6b0d63ca"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（已对源全文逐字核对）。口径见 caliber。"
+  },
+  {
+    "claim_id": "QC_004",
+    "claim_text": "秦川机床在2023年5月机构调研中表示：公司机器人关节减速器占国产机器人关节减速器市场的20-25%，并预计2023年该产品销量和收入在去年基础上实现30%增长",
+    "subject": "秦川机床",
+    "product": "机器人关节减速器（RV减速器）",
+    "metric": "国产RV市场份额/2023年销量收入增速指引",
+    "value": "占国产机器人关节减速器市场20-25%；预计2023年销量和收入同比+30%",
+    "baseline": "2022年销量收入基数",
+    "source_text": "财联社报道《秦川机床：2023年预计机器人关节减速器产品销量和收入在去年基础上实现30%增长》（2023-05-28）",
+    "source_url": "https://m.cls.cn/detail/1362442",
+    "claim_type": "市场展望",
+    "verification_status": "已验证",
+    "confidence": 0.5,
+    "definition_issues": [],
+    "evidence_list": [
+      {
+        "source": "财联社报道《秦川机床：2023年预计机器人关节减速器产品销量和收入在去年基础上实现30%增长》（2023-05-28），https://m.cls.cn/detail/1362442",
+        "locator": "",
+        "excerpt": "秦川机床接受机构调研时表示……目前我国机器人关节减速器市场仍主要由国外产品主导，国产化率仅为30%，其中秦川机床机器人关节减速器占国产机器人关节减速器市场的20-25%。目前公司机器人关节减速器……",
+        "caliber": "20-25%是'占国产品牌份额'而非占全市场（全市场口径约6-7.5%）；'预计30%增长'为调研时目标/指引表述非审计实绩；媒体转述调研纪要，未找到纪要原文PDF",
+        "verifier": "经济金融组复核",
+        "verified_at": "2026-09-07",
+        "evidence_level": "news_media",
+        "fingerprint": "d73e1bff5c1298eb"
+      },
+      {
+        "source": "秦川机床投资者关系活动记录表（编号2023-02，调研期2023-05-24至26日，2023-05-28披露，巨潮资讯网 http://static.cninfo.com.cn/finalpage/2023-05-28/1216926194.PDF）",
+        "locator": "记录表第7问'机器人关节减速器、滚珠丝杠和导轨的市场规模、销量、市占率情况'",
+        "excerpt": "目前我国机器人关节减速器市场仍主要由国外产品主导，国产化率仅为30%，其中秦川机床机器人关节减速器占国产机器人关节减速器市场的20-25%。目前公司机器人关节减速器产能为6-9万套，2023年预计机器人关节减速器产品销量和收入在去年基础上实现30%的增长",
+        "caliber": "公司正式披露的投资者关系活动记录表（巨潮公告库）；20-25%为占国产品牌份额口径（全市场约6-7.5%）；+30%为调研指引非审计实绩",
+        "verifier": "经济金融组复核（K3 机器预检 + 人工确认）",
+        "verified_at": "2026-09-09",
+        "evidence_level": "official_filing",
+        "fingerprint": "b4f122fac99f56aa"
+      }
+    ],
+    "notes": "Phase 3C 横向扩展：AI 调研初核（媒体/研报转述，待人工终验）。口径见 caliber。"
+  }
 ]

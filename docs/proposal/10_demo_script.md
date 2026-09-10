@@ -11,7 +11,7 @@
 
 | 数字 | 口径 | 来源 |
 |---|---|---|
-| 51 条 Claim / 11 家公司（36 已验证 / 15 待终验） | Claim Bank 全量 | `data/processed/claim_bank_filled.json` |
+| 51 条 Claim / 11 家公司（47 已验证 / 4 待终验） | Claim Bank 全量 | `data/processed/claim_bank_filled.json` |
 | 反向 DCF：市价 512.96 亿隐含销量预期 ≈ base 假设 **16.7 倍** | 绿的谐波模型（独立模型，非 Demo 链） | `reverse_dcf(inputs, 51.296)` 实测 16.66×，三情景 gap -94.00% / -88.60% / -99.82%（PR #28 参数复核后口径） |
 | 规则链延迟 **p50 4.3ms / p95 5.0ms**（N=30，三次复测 3.7–4.3ms） | 工程性能 | `benchmarks/latency_report.md` |
 
