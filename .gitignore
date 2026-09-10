@@ -98,5 +98,7 @@ work/
 *.xdv
 deliverables/latex/page-*.png
 deliverables/latex/fix-*.png
+deliverables/latex/v2-*.png
 deliverables/beamer/page-*.png
+deliverables/beamer/fix-*.png
 deliverables/beamer/pptx_pages/
