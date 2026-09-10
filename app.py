@@ -238,6 +238,11 @@ def render_streamlit() -> None:
 
 
 def main() -> None:
+    if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
+        try:
+            sys.stdout.reconfigure(encoding="utf-8")
+        except Exception:
+            pass
     parser = argparse.ArgumentParser(description="Claim2Value 本地 Demo（串联全链路）")
     parser.add_argument("--fixture", default=str(DEFAULT_FIXTURE_PATH))
     parser.add_argument("--json-out", default="")

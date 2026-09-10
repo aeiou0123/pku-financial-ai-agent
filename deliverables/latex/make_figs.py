@@ -159,7 +159,7 @@ save(fig, "fig_tam")
 fig, ax = plt.subplots(figsize=(6.4, 2.7))
 cols = [("0–6 月 · 验证期", GOLD, NAVY, ["Claim 终验 47/51 已完成", "5 家付费试点", "案例报告产品化"]),
         ("6–18 月 · 放大期", NAVY, "white", ["实时检索上线", "专利核验全覆盖", "覆盖扩展至 50 家"]),
-        ("18–36 月 · 规模期", "#5B6DB8", "white", ["平台化 + API 输出", "跨行业 ontology", "证据资产订阅化"])]
+        ("18–36 月 · 规模期", "#5B6DB8", "white", ["平台化 + API 输出", "跨行业因果本体库", "证据资产订阅化"])]
 for i, (title, color, tcolor, texts) in enumerate(cols):
     x = i / 3
     ax.barh(2.1, 1/3, left=x, height=0.52, color=color)
