@@ -64,3 +64,13 @@ smoke用确定性模拟数据，真实官方工具验收CSV解析、初始买费
 Drive训练文件622965149字节，大于连接器268435456字节上限，返回413。测试文件144652201字节虽返回下载引用，但当前工作环境两次落地下载返回403，未取得可校验文件。只能确认Drive元数据和官方说明，不能宣称已核验真实Parquet内容。最直接做法是在本机从已授权Drive下载，然后按上述命令执行；回传run_summary.json、model.json和必要的验证记录，无需把大数据上传公开GitHub。
 
 复杂模型、因子筛选、滚动重训等后置，先获得真实基线再判断增量。当前代码只是一个可测量起点，不保证技术题加分或收益。
+
+## 封装真实预测结果
+
+完成实际predict后，执行以下命令；记录真实使用的AI工具与版本。工具检查代码、模型和CSV指纹，并重新调用官方check，拒绝未完成或变动的产物。
+
+```bash
+python -m competition.package_code --run competition/runs/test_predictions --tools C:\FEL_MARKET\tools.py --test C:\FEL_MARKET\test.parquet --ai-tools "填写实际工具及版本" --out work/code.zip
+```
+
+解压后执行 `python reproduce.py --data <官方test.parquet所在目录> --out <新目录>`，结果须与原名单指纹一致。详见[交付工具说明](../docs/semifinal/delivery_tools.md)。

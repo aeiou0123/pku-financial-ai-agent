@@ -1,0 +1,17 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "缺失或空文件：01_统一信息表.docx",
+    "缺失或空文件：02_项目说明.pdf",
+    "缺失或空文件：03_展示稿.pptx",
+    "缺失或空文件：04_运行视频.mp4",
+    "缺失或空文件：07_技术题/submission.csv",
+    "缺失或空文件：07_技术题/code.zip",
+    "缺失或空文件：07_技术题/技术题报告.pptx"
+  ],
+  "manual_review": [
+    "本地部署实际启动与人工环节需按说明验收"
+  ],
+  "checks": {},
+  "scope": "Structure/media inspection only; no verification of claims, performance or actual user experience."
+}
