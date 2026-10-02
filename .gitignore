@@ -29,6 +29,9 @@ ENV/
 env/
 .venv/
 .venv-demo/
+.venv-competition/
+competition/private_data/
+competition/runs/
 
 # Environment variables and secrets
 .env

@@ -6,7 +6,9 @@
 
 本轮新增可交互的本地核查页面：自定义声明与证据、两家公司示例情景、来源定位、JSON/Markdown报告导出。自定义声明尚未绑定公司参数，暂不自动生成估值；示例情景采用固定数据与假设。本地模式不调用大模型或实时检索。
 
-Windows 双击 `start_demo.bat`，Linux 执行 `bash start_demo.sh`；首次依赖安装需要联网。打开 http://127.0.0.1:8501 ，无账号、无需模型密钥。操作、限制、运行证据与验收状态见[评委操作导览](docs/semifinal/reviewer_quickstart.md)。本轮148项测试通过，Windows真实电脑与真人试用仍待验收。
+Windows 双击 `start_demo.bat`，Linux 执行 `bash start_demo.sh`；首次依赖安装需要联网。打开 http://127.0.0.1:8501 ，无账号、无需模型密钥。操作、限制、运行证据与验收状态见[评委操作导览](docs/semifinal/reviewer_quickstart.md)。完整代码162项测试通过，Windows真实电脑与真人试用仍待验收。
+
+统一技术题已有[本地训练、验证与推理基线](competition/README.md)，包含官方扣费回测适配与防泄漏测试；真实数据训练尚未完成，暂无真实Sharpe或测试名单。团队时间安排、分工与本轮复核见[复赛推进安排](docs/semifinal/execution_plan_20261002.md)。
 
 以下“当前进展”保留为初赛阶段历史记录；其中延迟、准确率及验证标注须按各自数据范围解读，不代表本轮新增真实场景评测。
 
