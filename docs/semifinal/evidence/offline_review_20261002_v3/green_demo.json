@@ -1,0 +1,1123 @@
+{
+  "claim": "绿的谐波新一代谐波减速器关节模组减重30%以上",
+  "source": "国信证券研报：聚焦谐波减速器的轻量小型化技术突破，在同等出力情况下减重30%以上。",
+  "verification": {
+    "verdict": "partially_supported",
+    "confidence": 0.3,
+    "verdict_source": "rule_only_fallback",
+    "rule_flags": [
+      "限定词缺失：「同等出力情况下」在 source 中存在但 claim 中缺失"
+    ],
+    "trust_score": 0.75,
+    "reasoning": "限定词缺失：「同等出力情况下」在 source 中存在但 claim 中缺失",
+    "verification_path": "rule_only",
+    "report": "============================================================\n  Claim2Value 验证报告\n============================================================\n\n  Claim: 绿的谐波新一代谐波减速器关节模组减重30%以上...\n  判定: 部分成立\n  置信度: 0.30\n  判定来源: rule_only_fallback\n  证据可信度: 0.75\n\n  规则层检出:\n    - 限定词缺失：「同等出力情况下」在 source 中存在但 claim 中缺失\n\n\n============================================================"
+  },
+  "gate": {
+    "passed": true,
+    "allowed_verdicts": [
+      "supported",
+      "partially_supported"
+    ],
+    "reason": "验证结论 partially_supported 属于放行集合 ['supported', 'partially_supported']，进入财务链路"
+  },
+  "engineering": {
+    "n_rows": 14,
+    "n_comparable": 4,
+    "comparability_counts": {
+      "comparable": 4,
+      "not_comparable": 10
+    },
+    "rows": [
+      {
+        "company": "绿的谐波",
+        "product_series": "LHS",
+        "model": "LHS-32",
+        "scope": "gear_unit",
+        "torque_nm": 51.0,
+        "torque_density_nm_kg": 20.4,
+        "power_density_w_kg": null,
+        "operating_point_raw": "rated",
+        "adjustments": [],
+        "provenance": {
+          "torque_nm": "实测：datasheet 额定扭矩（连续工况）",
+          "torque_density_nm_kg": "实测：datasheet/研报直接披露",
+          "power_density_w_kg": "缺失"
+        },
+        "missing_fields": [],
+        "comparability": "comparable",
+        "errors": [],
+        "warnings": [],
+        "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf",
+        "notes": "国金证券行业研报对比表；额定扭矩取范围下限；齿隙精度≤1 arcmin"
+      },
+      {
+        "company": "绿的谐波",
+        "product_series": "LCS",
+        "model": "LCS-20-100-C-I",
+        "scope": "gear_unit",
+        "torque_nm": 38.0,
+        "torque_density_nm_kg": null,
+        "power_density_w_kg": null,
+        "operating_point_raw": "rated",
+        "adjustments": [],
+        "provenance": {
+          "torque_nm": "实测：datasheet 额定扭矩（连续工况）",
+          "torque_density_nm_kg": "缺失",
+          "power_density_w_kg": "缺失"
+        },
+        "missing_fields": [
+          "weight_kg",
+          "torque_density_nm_kg"
+        ],
+        "comparability": "not_comparable",
+        "errors": [],
+        "warnings": [],
+        "source_url": "https://m.chinabaogao.com/detail/631742.html",
+        "notes": "观研报告网：绿的谐波与哈默纳科同级产品对比"
+      },
+      {
+        "company": "绿的谐波",
+        "product_series": "Y系列",
+        "model": "Y系列（三次谐波）",
+        "scope": "gear_unit",
+        "torque_nm": null,
+        "torque_density_nm_kg": null,
+        "power_density_w_kg": null,
+        "operating_point_raw": "unknown",
+        "adjustments": [],
+        "provenance": {
+          "torque_nm": "缺失",
+          "torque_density_nm_kg": "缺失",
+          "power_density_w_kg": "缺失"
+        },
+        "missing_fields": [
+          "torque_nm",
+          "weight_kg",
+          "torque_density_nm_kg"
+        ],
+        "comparability": "not_comparable",
+        "errors": [],
+        "warnings": [],
+        "source_url": "",
+        "notes": "年报提及：扭转刚度提升1倍以上，单向传动精度提升2倍以上"
+      },
+      {
+        "company": "绿的谐波",
+        "product_series": "KAS",
+        "model": "KAS系列旋转执行器",
+        "scope": "joint_module",
+        "torque_nm": null,
+        "torque_density_nm_kg": null,
+        "power_density_w_kg": null,
+        "operating_point_raw": "unknown",
+        "adjustments": [],
+        "provenance": {
+          "torque_nm": "缺失",
+          "torque_density_nm_kg": "缺失",
+          "power_density_w_kg": "缺失"
+        },
+        "missing_fields": [
+          "torque_nm",
+          "weight_kg",
+          "torque_density_nm_kg"
+        ],
+        "comparability": "not_comparable",
+        "errors": [],
+        "warnings": [],
+        "source_url": "",
+        "notes": "2024/2025年报：高转矩密度旋转执行器"
+      },
+      {
+        "company": "步科股份",
+        "product_series": "FMK",
+        "model": "FMK02509-0004-5511-7DP02",
+        "scope": "motor_body",
+        "torque_nm": 0.063,
+        "torque_density_nm_kg": null,
+        "power_density_w_kg": null,
+        "operating_point_raw": "rated",
+        "adjustments": [],
+        "provenance": {
+          "torque_nm": "实测：datasheet 额定扭矩（连续工况）",
+          "torque_density_nm_kg": "缺失",
+          "power_density_w_kg": "缺失"
+        },
+        "missing_fields": [
+          "weight_kg",
+          "torque_density_nm_kg"
+        ],
+        "comparability": "not_comparable",
+        "errors": [],
+        "warnings": [],
+        "source_url": "https://www.kinco.cn/productdetail/wkljdj30.html",
+        "notes": "WebSearch公开参数；重量/扭矩密度官网未披露"
+      },
+      {
+        "company": "步科股份",
+        "product_series": "FMK",
+        "model": "FMK06018-0020-2028N-10DP02",
+        "scope": "motor_body",
+        "torque_nm": 1.0,
+        "torque_density_nm_kg": null,
+        "power_density_w_kg": null,
+        "operating_point_raw": "rated",
+        "adjustments": [],
+        "provenance": {
+          "torque_nm": "实测：datasheet 额定扭矩（连续工况）",
+          "torque_density_nm_kg": "缺失",
+          "power_density_w_kg": "缺失"
+        },
+        "missing_fields": [
+          "weight_kg",
+          "torque_density_nm_kg"
+        ],
+        "comparability": "not_comparable",
+        "errors": [],
+        "warnings": [],
+        "source_url": "https://www.kinco.cn/productdetail/wkljdj30.html",
+        "notes": "WebSearch公开参数"
+      },
+      {
+        "company": "步科股份",
+        "product_series": "FMK",
+        "model": "FMK11525-0117-3260N-10DP02",
+        "scope": "motor_body",
+        "torque_nm": 3.5,
+        "torque_density_nm_kg": null,
+        "power_density_w_kg": null,
+        "operating_point_raw": "rated",
+        "adjustments": [],
+        "provenance": {
+          "torque_nm": "实测：datasheet 额定扭矩（连续工况）",
+          "torque_density_nm_kg": "缺失",
+          "power_density_w_kg": "缺失"
+        },
+        "missing_fields": [
+          "weight_kg",
+          "torque_density_nm_kg"
+        ],
+        "comparability": "not_comparable",
+        "errors": [],
+        "warnings": [],
+        "source_url": "https://www.kinco.cn/productdetail/wkljdj30.html",
+        "notes": "WebSearch公开参数"
+      },
+      {
+        "company": "步科股份",
+        "product_series": "FMK（第四代）",
+        "model": "FMK系列（25-115mm外径）",
+        "scope": "motor_body",
+        "torque_nm": null,
+        "torque_density_nm_kg": null,
+        "power_density_w_kg": null,
+        "operating_point_raw": "unknown",
+        "adjustments": [],
+        "provenance": {
+          "torque_nm": "缺失",
+          "torque_density_nm_kg": "缺失",
+          "power_density_w_kg": "缺失"
+        },
+        "missing_fields": [
+          "torque_nm",
+          "weight_kg",
+          "torque_density_nm_kg"
+        ],
+        "comparability": "not_comparable",
+        "errors": [],
+        "warnings": [],
+        "source_url": "https://www.aibangbots.com/a/2212",
+        "notes": "2025年7月发布；同尺寸扭矩输出提升约22%；噪音<55dB"
+      },
+      {
+        "company": "双环传动/环动科技",
+        "product_series": "SHPR",
+        "model": "SHPR-20E",
+        "scope": "gear_unit",
+        "torque_nm": 110.0,
+        "torque_density_nm_kg": 23.4,
+        "power_density_w_kg": null,
+        "operating_point_raw": "rated",
+        "adjustments": [],
+        "provenance": {
+          "torque_nm": "实测：datasheet 额定扭矩（连续工况）",
+          "torque_density_nm_kg": "实测：datasheet/研报直接披露",
+          "power_density_w_kg": "缺失"
+        },
+        "missing_fields": [],
+        "comparability": "comparable",
+        "errors": [],
+        "warnings": [],
+        "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf",
+        "notes": "国金证券行业研报：RV-20E同型号参数对比"
+      },
+      {
+        "company": "环动科技",
+        "product_series": "RV",
+        "model": "RV减速器（6-1000kg机器人覆盖）",
+        "scope": "gear_unit",
+        "torque_nm": null,
+        "torque_density_nm_kg": null,
+        "power_density_w_kg": null,
+        "operating_point_raw": "unknown",
+        "adjustments": [],
+        "provenance": {
+          "torque_nm": "缺失",
+          "torque_density_nm_kg": "缺失",
+          "power_density_w_kg": "缺失"
+        },
+        "missing_fields": [
+          "torque_nm",
+          "weight_kg",
+          "torque_density_nm_kg"
+        ],
+        "comparability": "not_comparable",
+        "errors": [],
+        "warnings": [],
+        "source_url": "",
+        "notes": "招股书：实现6-1000kg工业机器人所需精密减速器全覆盖"
+      },
+      {
+        "company": "Harmonic Drive",
+        "product_series": "CSG",
+        "model": "CSG-32",
+        "scope": "gear_unit",
+        "torque_nm": 99.0,
+        "torque_density_nm_kg": 31.0,
+        "power_density_w_kg": null,
+        "operating_point_raw": "rated",
+        "adjustments": [],
+        "provenance": {
+          "torque_nm": "实测：datasheet 额定扭矩（连续工况）",
+          "torque_density_nm_kg": "实测：datasheet/研报直接披露",
+          "power_density_w_kg": "缺失"
+        },
+        "missing_fields": [],
+        "comparability": "comparable",
+        "errors": [],
+        "warnings": [],
+        "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf",
+        "notes": "国金证券行业研报对比表；额定扭矩取范围下限"
+      },
+      {
+        "company": "Harmonic Drive",
+        "product_series": "CSF",
+        "model": "CSF-20-100-2UH",
+        "scope": "gear_unit",
+        "torque_nm": 40.0,
+        "torque_density_nm_kg": null,
+        "power_density_w_kg": null,
+        "operating_point_raw": "rated",
+        "adjustments": [],
+        "provenance": {
+          "torque_nm": "实测：datasheet 额定扭矩（连续工况）",
+          "torque_density_nm_kg": "缺失",
+          "power_density_w_kg": "缺失"
+        },
+        "missing_fields": [
+          "weight_kg",
+          "torque_density_nm_kg"
+        ],
+        "comparability": "not_comparable",
+        "errors": [],
+        "warnings": [],
+        "source_url": "https://m.chinabaogao.com/detail/631742.html",
+        "notes": "观研报告网：与绿的谐波LCS-20对比"
+      },
+      {
+        "company": "来福谐波",
+        "product_series": "LHT",
+        "model": "LHT-32",
+        "scope": "gear_unit",
+        "torque_nm": 99.0,
+        "torque_density_nm_kg": 31.4,
+        "power_density_w_kg": null,
+        "operating_point_raw": "rated",
+        "adjustments": [],
+        "provenance": {
+          "torque_nm": "实测：datasheet 额定扭矩（连续工况）",
+          "torque_density_nm_kg": "实测：datasheet/研报直接披露",
+          "power_density_w_kg": "缺失"
+        },
+        "missing_fields": [],
+        "comparability": "comparable",
+        "errors": [],
+        "warnings": [],
+        "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf",
+        "notes": "国金证券行业研报对比表"
+      },
+      {
+        "company": "纳博特斯克",
+        "product_series": "RV",
+        "model": "RV-20E",
+        "scope": "gear_unit",
+        "torque_nm": null,
+        "torque_density_nm_kg": null,
+        "power_density_w_kg": null,
+        "operating_point_raw": "unknown",
+        "adjustments": [],
+        "provenance": {
+          "torque_nm": "缺失",
+          "torque_density_nm_kg": "缺失",
+          "power_density_w_kg": "缺失"
+        },
+        "missing_fields": [
+          "torque_nm",
+          "weight_kg",
+          "torque_density_nm_kg"
+        ],
+        "comparability": "not_comparable",
+        "errors": [],
+        "warnings": [],
+        "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf",
+        "notes": "国金研报图表65 PDF抽取列错位待复核（同SH_003 caliber）：原表412Nm/2.5kg/164.8Nm/kg疑串行，不参与可比性基准；以原始研报PDF复核后回填"
+      }
+    ]
+  },
+  "economics": {
+    "target_company": "绿的谐波",
+    "n_assumptions": 6,
+    "n_quantitative": 3,
+    "assumption_set": {
+      "target_company": "绿的谐波",
+      "assumptions": [
+        {
+          "variable": "sales_volume",
+          "variable_label": "销量（份额/渗透率）",
+          "rule_id": "torque_density_to_share",
+          "rule_name": "扭矩密度→产品竞争力→渗透率/份额",
+          "engineering_metric": "torque_density_nm_kg",
+          "direction": "positive",
+          "elasticity": 0.3,
+          "input_class": "assumption",
+          "qualitative_only": false,
+          "engineering_value": 20.4,
+          "baseline_value": 130.0,
+          "peer_median": 31.0,
+          "relative_delta": -0.341935,
+          "adjusted_value": 116.66447,
+          "delta_pct": -0.102581,
+          "target_comparability": "comparable",
+          "evidence_grade": "high",
+          "confidence": 0.8,
+          "provenance_chain": [
+            "工程参数：绿的谐波 torque_density_nm_kg 中位 20.4（样本 1 个，最差可比性 comparable）",
+            "ontology 规则 torque_density_to_share（扭矩密度→产品竞争力→渗透率/份额）：方向 positive，弹性 0.3",
+            "同业基准：同口径样本 3 个，中位 31.0，相对差距 -34.19%",
+            "行业数据：competitor_market_share.csv 中国工业机器人用谐波减速器市占率/2021/绿的谐波 = 24.7（国金证券行业研报）",
+            "行业数据：industry_data_summary.csv 工业机器人单台谐波减速器用量/参考 = 3.5（源达信息研报引用MIR睿工业）",
+            "弹性换算：-34.19% × 0.3 × 方向+ = -10.26%"
+          ],
+          "notes": "扭矩密度领先是人形机器人等新兴场景（industry_data_summary.csv：Optimus 单台 40 关节）渗透的前提条件之一。（目标公司：绿的谐波）；证据等级 high，置信度 0.8（可比性 comparable，同业样本 3 个，行业数据缺失 0 条）"
+        },
+        {
+          "variable": "sales_volume",
+          "variable_label": "销量（份额/渗透率）",
+          "rule_id": "power_density_to_share",
+          "rule_name": "功率密度→产品竞争力→渗透率/份额",
+          "engineering_metric": "power_density_w_kg",
+          "direction": "positive",
+          "elasticity": 0.3,
+          "input_class": "assumption",
+          "qualitative_only": true,
+          "engineering_value": null,
+          "baseline_value": null,
+          "peer_median": null,
+          "relative_delta": null,
+          "adjusted_value": null,
+          "delta_pct": null,
+          "target_comparability": null,
+          "evidence_grade": "low",
+          "confidence": 0.3,
+          "provenance_chain": [
+            "ontology 规则 power_density_to_share（功率密度→产品竞争力→渗透率/份额）：方向 positive，弹性 0.3"
+          ],
+          "notes": "目标公司无可用定量样本（not_comparable 或指标缺失），按硬规则不生成定量假设；功率密度决定关节动态响应能力，直接影响人形机器人等对体积/功耗敏感场景的选型。（目标公司：绿的谐波）"
+        },
+        {
+          "variable": "unit_cost",
+          "variable_label": "单位成本",
+          "rule_id": "efficiency_to_unit_cost",
+          "rule_name": "传动效率→能耗成本差异→客户等效单位成本",
+          "engineering_metric": "efficiency_pct",
+          "direction": "negative",
+          "elasticity": 0.2,
+          "input_class": "assumption",
+          "qualitative_only": false,
+          "engineering_value": 80.0,
+          "baseline_value": 730.0,
+          "peer_median": 80.0,
+          "relative_delta": 0.0,
+          "adjusted_value": 730.0,
+          "delta_pct": -0.0,
+          "target_comparability": "approximate",
+          "evidence_grade": "medium",
+          "confidence": 0.5,
+          "provenance_chain": [
+            "工程参数：绿的谐波 efficiency_pct 中位 80.0（样本 1 个，最差可比性 approximate）",
+            "ontology 规则 efficiency_to_unit_cost（传动效率→能耗成本差异→客户等效单位成本）：方向 negative，弹性 0.2",
+            "同业基准：同口径样本 3 个，中位 80.0，相对差距 +0.00%",
+            "行业数据：industry_data_summary.csv 工业机器人单台谐波减速器用量/参考 = 3.5（源达信息研报引用MIR睿工业）",
+            "弹性换算：+0.00% × 0.2 × 方向- = -0.00%"
+          ],
+          "notes": "效率劣势会在整机厂 TCO 测算中暴露，长期构成降价压力；效率优势是进入对能耗敏感场景（移动机器人）的门槛。（目标公司：绿的谐波）；证据等级 medium，置信度 0.5（可比性 approximate，同业样本 3 个，行业数据缺失 0 条）"
+        },
+        {
+          "variable": "asp",
+          "variable_label": "平均售价（ASP）",
+          "rule_id": "backlash_to_asp",
+          "rule_name": "背隙/传动精度→可服务市场分层→ASP 溢价",
+          "engineering_metric": "backlash_arcsec",
+          "direction": "negative",
+          "elasticity": 0.15,
+          "input_class": "assumption",
+          "qualitative_only": true,
+          "engineering_value": null,
+          "baseline_value": null,
+          "peer_median": null,
+          "relative_delta": null,
+          "adjusted_value": null,
+          "delta_pct": null,
+          "target_comparability": null,
+          "evidence_grade": "low",
+          "confidence": 0.3,
+          "provenance_chain": [
+            "ontology 规则 backlash_to_asp（背隙/传动精度→可服务市场分层→ASP 溢价）：方向 negative，弹性 0.15"
+          ],
+          "notes": "目标样本中位值 60.0 未达定量门槛（≤30 arcsec，背隙 ≤30 arcsec（≤0.5 arcmin）视为高端精密市场门槛；目标样本中位值高于该门槛时不生成定量假设，仅给定性说明）；背隙精度未达高端门槛时产品定位中端市场，ASP 上限受中端竞品制约；精度突破门槛是可服务市场扩张（TAM 分层上移）的必要条件。（目标公司：绿的谐波）"
+        },
+        {
+          "variable": "addressable_market",
+          "variable_label": "可服务市场分层（高端/中端）",
+          "rule_id": "backlash_to_addressable_market",
+          "rule_name": "背隙/传动精度→可服务市场分层（定性）",
+          "engineering_metric": "backlash_arcsec",
+          "direction": "negative",
+          "elasticity": 0.0,
+          "input_class": "assumption",
+          "qualitative_only": true,
+          "engineering_value": null,
+          "baseline_value": null,
+          "peer_median": null,
+          "relative_delta": null,
+          "adjusted_value": null,
+          "delta_pct": null,
+          "target_comparability": null,
+          "evidence_grade": "low",
+          "confidence": 0.3,
+          "provenance_chain": [
+            "ontology 规则 backlash_to_addressable_market（背隙/传动精度→可服务市场分层（定性））：方向 negative，弹性 0.0",
+            "样本池共 4 个（目标 1 / 同业 3）"
+          ],
+          "notes": "按背隙精度把市场分为高端（≤30 arcsec，半导体/精密装配）与中端（>30 arcsec，一般工业机器人）：达标则 TAM 分层上移，不达标则份额竞争集中在中端，价格战风险升高。（目标公司：绿的谐波）"
+        },
+        {
+          "variable": "unit_cost",
+          "variable_label": "单位成本",
+          "rule_id": "weight_to_unit_cost",
+          "rule_name": "重量→材料成本/BOM→单位成本",
+          "engineering_metric": "weight_kg",
+          "direction": "positive",
+          "elasticity": 0.25,
+          "input_class": "assumption",
+          "qualitative_only": false,
+          "engineering_value": 2.5,
+          "baseline_value": 730.0,
+          "peer_median": 3.2,
+          "relative_delta": -0.21875,
+          "adjusted_value": 690.07776,
+          "delta_pct": -0.054688,
+          "target_comparability": "approximate",
+          "evidence_grade": "medium",
+          "confidence": 0.5,
+          "provenance_chain": [
+            "工程参数：绿的谐波 weight_kg 中位 2.5（样本 1 个，最差可比性 approximate）",
+            "ontology 规则 weight_to_unit_cost（重量→材料成本/BOM→单位成本）：方向 positive，弹性 0.25",
+            "同业基准：同口径样本 3 个，中位 3.2，相对差距 -21.88%",
+            "弹性换算：-21.88% × 0.25 × 方向+ = -5.47%"
+          ],
+          "notes": "重量显著高于同扭矩级同业时，材料成本劣势将压缩毛利空间；反向的轻量化优势是毛利改善的候选来源。（目标公司：绿的谐波）；证据等级 medium，置信度 0.5（可比性 approximate，同业样本 3 个，行业数据缺失 0 条）"
+        }
+      ],
+      "qualitative_notes": [
+        "[power_density_to_share] 目标公司无可用定量样本（not_comparable 或指标缺失），按硬规则不生成定量假设；功率密度决定关节动态响应能力，直接影响人形机器人等对体积/功耗敏感场景的选型。（目标公司：绿的谐波）",
+        "[backlash_to_asp] 目标样本中位值 60.0 未达定量门槛（≤30 arcsec，背隙 ≤30 arcsec（≤0.5 arcmin）视为高端精密市场门槛；目标样本中位值高于该门槛时不生成定量假设，仅给定性说明）；背隙精度未达高端门槛时产品定位中端市场，ASP 上限受中端竞品制约；精度突破门槛是可服务市场扩张（TAM 分层上移）的必要条件。（目标公司：绿的谐波）",
+        "[backlash_to_addressable_market] 按背隙精度把市场分为高端（≤30 arcsec，半导体/精密装配）与中端（>30 arcsec，一般工业机器人）：达标则 TAM 分层上移，不达标则份额竞争集中在中端，价格战风险升高。（目标公司：绿的谐波）"
+      ],
+      "warnings": [
+        "规则 power_density_to_share：目标公司 绿的谐波 无定量样本，已降级为定性说明"
+      ]
+    }
+  },
+  "causal": {
+    "target_company": "绿的谐波",
+    "reviews": [
+      {
+        "variable": "sales_volume",
+        "variable_label": "销量（份额/渗透率）",
+        "rule_id": "torque_density_to_share",
+        "qualitative_only": false,
+        "original_confidence": 0.8,
+        "adjusted_confidence": 0.6,
+        "confidence_adjustments": [
+          {
+            "rule_id": "ALT-IND-001",
+            "delta": -0.1,
+            "reason": "替代解释「行业总量增长（行业β）」成立会分流对该假设的因果归因"
+          },
+          {
+            "rule_id": "ALT-COMP-001",
+            "delta": -0.05,
+            "reason": "替代解释「竞争格局变化」成立会分流对该假设的因果归因"
+          },
+          {
+            "rule_id": "ALT-POL-001",
+            "delta": -0.05,
+            "reason": "替代解释「政策性替代（国产化替代）」成立会分流对该假设的因果归因"
+          }
+        ],
+        "alternative_explanations": [
+          {
+            "explanation": "行业总需求增长本身即可推高公司销量/份额，无需该公司相对技术表现发生变化",
+            "variables": [
+              "sales_volume",
+              "torque_density_nm_kg"
+            ],
+            "compatibility": "coexists",
+            "compatibility_label": "可同时成立",
+            "basis": "常识性机制（共同因子）；industry_data_summary.csv 载有行业销量/需求增速（如中国工业机器人减速器需求量 CAGR 28.11%，2019-2023）",
+            "alt_type": "industry",
+            "alt_type_label": "行业性",
+            "rule_id": "ALT-IND-001",
+            "confidence_penalty": 0.1
+          },
+          {
+            "explanation": "竞争对手产能受限/退出/策略收缩可使目标公司被动获得份额，与目标公司技术领先无关",
+            "variables": [
+              "sales_volume",
+              "torque_density_nm_kg"
+            ],
+            "compatibility": "partial_overlap",
+            "compatibility_label": "部分重叠",
+            "basis": "competitor_market_share.csv 载有竞争格局快照（如 2021 年哈默纳科35.5% vs 绿的谐波 24.7%）；格局单点快照无法排除动态变化",
+            "alt_type": "competitive",
+            "alt_type_label": "竞争性",
+            "rule_id": "ALT-COMP-001",
+            "confidence_penalty": 0.05
+          },
+          {
+            "explanation": "国产化替代政策与供应链本土化采购趋势可独立推动份额提升，与相对技术性能无因果关联",
+            "variables": [
+              "sales_volume",
+              "torque_density_nm_kg"
+            ],
+            "compatibility": "coexists",
+            "compatibility_label": "可同时成立",
+            "basis": "industry_data_summary.csv 载有国产化率（2022 年 35.7% → 2023 年 45.1%，单年 +9.4pct），说明政策性替代正在进行",
+            "alt_type": "policy",
+            "alt_type_label": "政策性",
+            "rule_id": "ALT-POL-001",
+            "confidence_penalty": 0.05
+          }
+        ],
+        "counterfactual_requirements": [
+          {
+            "requirement": "同行（非目标公司）同期的销量/出货增速数据，作为行业β对照组",
+            "purpose": "排除「行业整体放量」替代解释：若同行增速与公司一致，则增长主要是行业β而非公司技术α",
+            "satisfied": false,
+            "basis": "未提供该对照证据（available_evidence 中无此 key），保守判未满足",
+            "priority": "high",
+            "rule_id": "ALT-IND-001"
+          },
+          {
+            "requirement": "「若无该技术因素」的目标公司市场份额反事实估计（如基于历史份额趋势外推的对照）",
+            "purpose": "分离技术因素的净贡献：份额提升超出趋势外推的部分才可初步归因于技术因素",
+            "satisfied": false,
+            "basis": "未提供该对照证据（available_evidence 中无此 key），保守判未满足",
+            "priority": "high",
+            "rule_id": "ALT-IND-001"
+          },
+          {
+            "requirement": "主要竞争对手同期的产能利用率、扩产/减产公告或退出事件记录",
+            "purpose": "排除「竞争对手产能受限」替代解释：若对手满产且份额稳定，公司份额提升才更可能源于自身因素",
+            "satisfied": false,
+            "basis": "未提供该对照证据（available_evidence 中无此 key），保守判未满足",
+            "priority": "high",
+            "rule_id": "ALT-COMP-001"
+          },
+          {
+            "requirement": "政策性替代的时间窗与力度证据（政策发布时点、补贴/采购倾斜范围），及窗口外同类公司的份额表现",
+            "purpose": "排除「政策性替代」解释：窗口外若份额提升同样发生，政策性解释的权重下降",
+            "satisfied": false,
+            "basis": "未提供该对照证据（available_evidence 中无此 key），保守判未满足",
+            "priority": "medium",
+            "rule_id": "ALT-POL-001"
+          }
+        ],
+        "non_attributable": [
+          {
+            "portion_pct_range": [
+              20.0,
+              40.0
+            ],
+            "description": "销量/份额变化中的行业共同成分（行业β）",
+            "reason": "行业总需求增长同时抬升所有参与者；缺少同行对照证据时，保守按 20-40% 的行业β成分不计入目标公司技术因素",
+            "rule_id": "NA-IND-001"
+          }
+        ],
+        "n_open_counterfactuals": 4
+      },
+      {
+        "variable": "sales_volume",
+        "variable_label": "销量（份额/渗透率）",
+        "rule_id": "power_density_to_share",
+        "qualitative_only": true,
+        "original_confidence": 0.3,
+        "adjusted_confidence": 0.1,
+        "confidence_adjustments": [
+          {
+            "rule_id": "ALT-IND-001",
+            "delta": -0.1,
+            "reason": "替代解释「行业总量增长（行业β）」成立会分流对该假设的因果归因"
+          },
+          {
+            "rule_id": "ALT-COMP-001",
+            "delta": -0.05,
+            "reason": "替代解释「竞争格局变化」成立会分流对该假设的因果归因"
+          },
+          {
+            "rule_id": "ALT-POL-001",
+            "delta": -0.05,
+            "reason": "替代解释「政策性替代（国产化替代）」成立会分流对该假设的因果归因"
+          }
+        ],
+        "alternative_explanations": [
+          {
+            "explanation": "行业总需求增长本身即可推高公司销量/份额，无需该公司相对技术表现发生变化",
+            "variables": [
+              "sales_volume",
+              "power_density_w_kg"
+            ],
+            "compatibility": "coexists",
+            "compatibility_label": "可同时成立",
+            "basis": "常识性机制（共同因子）；industry_data_summary.csv 载有行业销量/需求增速（如中国工业机器人减速器需求量 CAGR 28.11%，2019-2023）",
+            "alt_type": "industry",
+            "alt_type_label": "行业性",
+            "rule_id": "ALT-IND-001",
+            "confidence_penalty": 0.1
+          },
+          {
+            "explanation": "竞争对手产能受限/退出/策略收缩可使目标公司被动获得份额，与目标公司技术领先无关",
+            "variables": [
+              "sales_volume",
+              "power_density_w_kg"
+            ],
+            "compatibility": "partial_overlap",
+            "compatibility_label": "部分重叠",
+            "basis": "competitor_market_share.csv 载有竞争格局快照（如 2021 年哈默纳科35.5% vs 绿的谐波 24.7%）；格局单点快照无法排除动态变化",
+            "alt_type": "competitive",
+            "alt_type_label": "竞争性",
+            "rule_id": "ALT-COMP-001",
+            "confidence_penalty": 0.05
+          },
+          {
+            "explanation": "国产化替代政策与供应链本土化采购趋势可独立推动份额提升，与相对技术性能无因果关联",
+            "variables": [
+              "sales_volume",
+              "power_density_w_kg"
+            ],
+            "compatibility": "coexists",
+            "compatibility_label": "可同时成立",
+            "basis": "industry_data_summary.csv 载有国产化率（2022 年 35.7% → 2023 年 45.1%，单年 +9.4pct），说明政策性替代正在进行",
+            "alt_type": "policy",
+            "alt_type_label": "政策性",
+            "rule_id": "ALT-POL-001",
+            "confidence_penalty": 0.05
+          }
+        ],
+        "counterfactual_requirements": [
+          {
+            "requirement": "同行（非目标公司）同期的销量/出货增速数据，作为行业β对照组",
+            "purpose": "排除「行业整体放量」替代解释：若同行增速与公司一致，则增长主要是行业β而非公司技术α",
+            "satisfied": false,
+            "basis": "未提供该对照证据（available_evidence 中无此 key），保守判未满足",
+            "priority": "high",
+            "rule_id": "ALT-IND-001"
+          },
+          {
+            "requirement": "「若无该技术因素」的目标公司市场份额反事实估计（如基于历史份额趋势外推的对照）",
+            "purpose": "分离技术因素的净贡献：份额提升超出趋势外推的部分才可初步归因于技术因素",
+            "satisfied": false,
+            "basis": "未提供该对照证据（available_evidence 中无此 key），保守判未满足",
+            "priority": "high",
+            "rule_id": "ALT-IND-001"
+          },
+          {
+            "requirement": "主要竞争对手同期的产能利用率、扩产/减产公告或退出事件记录",
+            "purpose": "排除「竞争对手产能受限」替代解释：若对手满产且份额稳定，公司份额提升才更可能源于自身因素",
+            "satisfied": false,
+            "basis": "未提供该对照证据（available_evidence 中无此 key），保守判未满足",
+            "priority": "high",
+            "rule_id": "ALT-COMP-001"
+          },
+          {
+            "requirement": "政策性替代的时间窗与力度证据（政策发布时点、补贴/采购倾斜范围），及窗口外同类公司的份额表现",
+            "purpose": "排除「政策性替代」解释：窗口外若份额提升同样发生，政策性解释的权重下降",
+            "satisfied": false,
+            "basis": "未提供该对照证据（available_evidence 中无此 key），保守判未满足",
+            "priority": "medium",
+            "rule_id": "ALT-POL-001"
+          }
+        ],
+        "non_attributable": [
+          {
+            "portion_pct_range": [
+              60.0,
+              100.0
+            ],
+            "description": "整条定性假设的经济含义",
+            "reason": "该假设未建立定量因果链（无 delta_pct），无法把任何具体比例 confidently 归因于技术因素；保守起见不归因",
+            "rule_id": "NA-QUAL-001"
+          },
+          {
+            "portion_pct_range": [
+              20.0,
+              40.0
+            ],
+            "description": "销量/份额变化中的行业共同成分（行业β）",
+            "reason": "行业总需求增长同时抬升所有参与者；缺少同行对照证据时，保守按 20-40% 的行业β成分不计入目标公司技术因素",
+            "rule_id": "NA-IND-001"
+          }
+        ],
+        "n_open_counterfactuals": 4
+      },
+      {
+        "variable": "unit_cost",
+        "variable_label": "单位成本",
+        "rule_id": "efficiency_to_unit_cost",
+        "qualitative_only": false,
+        "original_confidence": 0.5,
+        "adjusted_confidence": 0.32,
+        "confidence_adjustments": [
+          {
+            "rule_id": "ALT-PRICE-001",
+            "delta": -0.08,
+            "reason": "替代解释「价格因素（价格战/原材料周期）」成立会分流对该假设的因果归因"
+          },
+          {
+            "rule_id": "ALT-MET-001",
+            "delta": -0.1,
+            "reason": "替代解释「口径混杂」成立会分流对该假设的因果归因"
+          }
+        ],
+        "alternative_explanations": [
+          {
+            "explanation": "价格战/降价促销/原材料价格周期可产生同样的 ASP 或成本变化，技术溢价并非唯一解释",
+            "variables": [
+              "unit_cost",
+              "efficiency_pct"
+            ],
+            "compatibility": "partial_overlap",
+            "compatibility_label": "部分重叠",
+            "basis": "常识性机制（价格竞争与投入品价格周期是制造业 ASP/成本变动的常规来源）",
+            "alt_type": "other",
+            "alt_type_label": "其他",
+            "rule_id": "ALT-PRICE-001",
+            "confidence_penalty": 0.08
+          },
+          {
+            "explanation": "该假设的部分样本未做口径归一（raw/推算值混入），观察到的相对差距部分来自口径差异而非真实技术差异",
+            "variables": [
+              "unit_cost",
+              "efficiency_pct"
+            ],
+            "compatibility": "partial_overlap",
+            "compatibility_label": "部分重叠",
+            "basis": "engineering_analyzer 的可比性分级：approximate 样本含推算值/口径修正，显式不确定性；口径差异贡献无法从测量差距中剥离",
+            "alt_type": "metric",
+            "alt_type_label": "口径性",
+            "rule_id": "ALT-MET-001",
+            "confidence_penalty": 0.1
+          }
+        ],
+        "counterfactual_requirements": [
+          {
+            "requirement": "同行同期 ASP 与单位成本变动对照（区分行业性价格周期与公司特异性变化）",
+            "purpose": "排除「价格战/原材料周期」解释：若全行业 ASP 同向变动，技术溢价解释的权重下降",
+            "satisfied": false,
+            "basis": "未提供该对照证据（available_evidence 中无此 key），保守判未满足",
+            "priority": "medium",
+            "rule_id": "ALT-PRICE-001"
+          },
+          {
+            "requirement": "统一口径下的复测数据（同工况、同装配范围实测），替换 raw/推算样本后重算相对差距",
+            "purpose": "排除「口径混杂」解释：统一口径后差距若消失或显著缩小，原归因不成立",
+            "satisfied": false,
+            "basis": "未提供该对照证据（available_evidence 中无此 key），保守判未满足",
+            "priority": "high",
+            "rule_id": "ALT-MET-001"
+          }
+        ],
+        "non_attributable": [
+          {
+            "portion_pct_range": [
+              30.0,
+              50.0
+            ],
+            "description": "相对差距中由未归一样本贡献的部分",
+            "reason": "目标样本可比性为 approximate（含推算值/口径修正），口径差异贡献无法从测量差距中剥离，保守按 30-50% 不计入技术归因",
+            "rule_id": "NA-MET-001"
+          }
+        ],
+        "n_open_counterfactuals": 2
+      },
+      {
+        "variable": "asp",
+        "variable_label": "平均售价（ASP）",
+        "rule_id": "backlash_to_asp",
+        "qualitative_only": true,
+        "original_confidence": 0.3,
+        "adjusted_confidence": 0.17,
+        "confidence_adjustments": [
+          {
+            "rule_id": "ALT-COMP-001",
+            "delta": -0.05,
+            "reason": "替代解释「竞争格局变化」成立会分流对该假设的因果归因"
+          },
+          {
+            "rule_id": "ALT-PRICE-001",
+            "delta": -0.08,
+            "reason": "替代解释「价格因素（价格战/原材料周期）」成立会分流对该假设的因果归因"
+          }
+        ],
+        "alternative_explanations": [
+          {
+            "explanation": "竞争对手产能受限/退出/策略收缩可使目标公司被动获得份额，与目标公司技术领先无关",
+            "variables": [
+              "asp",
+              "backlash_arcsec"
+            ],
+            "compatibility": "partial_overlap",
+            "compatibility_label": "部分重叠",
+            "basis": "competitor_market_share.csv 载有竞争格局快照（如 2021 年哈默纳科35.5% vs 绿的谐波 24.7%）；格局单点快照无法排除动态变化",
+            "alt_type": "competitive",
+            "alt_type_label": "竞争性",
+            "rule_id": "ALT-COMP-001",
+            "confidence_penalty": 0.05
+          },
+          {
+            "explanation": "价格战/降价促销/原材料价格周期可产生同样的 ASP 或成本变化，技术溢价并非唯一解释",
+            "variables": [
+              "asp",
+              "backlash_arcsec"
+            ],
+            "compatibility": "partial_overlap",
+            "compatibility_label": "部分重叠",
+            "basis": "常识性机制（价格竞争与投入品价格周期是制造业 ASP/成本变动的常规来源）",
+            "alt_type": "other",
+            "alt_type_label": "其他",
+            "rule_id": "ALT-PRICE-001",
+            "confidence_penalty": 0.08
+          }
+        ],
+        "counterfactual_requirements": [
+          {
+            "requirement": "主要竞争对手同期的产能利用率、扩产/减产公告或退出事件记录",
+            "purpose": "排除「竞争对手产能受限」替代解释：若对手满产且份额稳定，公司份额提升才更可能源于自身因素",
+            "satisfied": false,
+            "basis": "未提供该对照证据（available_evidence 中无此 key），保守判未满足",
+            "priority": "high",
+            "rule_id": "ALT-COMP-001"
+          },
+          {
+            "requirement": "同行同期 ASP 与单位成本变动对照（区分行业性价格周期与公司特异性变化）",
+            "purpose": "排除「价格战/原材料周期」解释：若全行业 ASP 同向变动，技术溢价解释的权重下降",
+            "satisfied": false,
+            "basis": "未提供该对照证据（available_evidence 中无此 key），保守判未满足",
+            "priority": "medium",
+            "rule_id": "ALT-PRICE-001"
+          }
+        ],
+        "non_attributable": [
+          {
+            "portion_pct_range": [
+              60.0,
+              100.0
+            ],
+            "description": "整条定性假设的经济含义",
+            "reason": "该假设未建立定量因果链（无 delta_pct），无法把任何具体比例 confidently 归因于技术因素；保守起见不归因",
+            "rule_id": "NA-QUAL-001"
+          }
+        ],
+        "n_open_counterfactuals": 2
+      },
+      {
+        "variable": "addressable_market",
+        "variable_label": "可服务市场分层（高端/中端）",
+        "rule_id": "backlash_to_addressable_market",
+        "qualitative_only": true,
+        "original_confidence": 0.3,
+        "adjusted_confidence": 0.3,
+        "confidence_adjustments": [],
+        "alternative_explanations": [],
+        "counterfactual_requirements": [],
+        "non_attributable": [
+          {
+            "portion_pct_range": [
+              60.0,
+              100.0
+            ],
+            "description": "整条定性假设的经济含义",
+            "reason": "该假设未建立定量因果链（无 delta_pct），无法把任何具体比例 confidently 归因于技术因素；保守起见不归因",
+            "rule_id": "NA-QUAL-001"
+          }
+        ],
+        "n_open_counterfactuals": 0
+      },
+      {
+        "variable": "unit_cost",
+        "variable_label": "单位成本",
+        "rule_id": "weight_to_unit_cost",
+        "qualitative_only": false,
+        "original_confidence": 0.5,
+        "adjusted_confidence": 0.32,
+        "confidence_adjustments": [
+          {
+            "rule_id": "ALT-PRICE-001",
+            "delta": -0.08,
+            "reason": "替代解释「价格因素（价格战/原材料周期）」成立会分流对该假设的因果归因"
+          },
+          {
+            "rule_id": "ALT-MET-001",
+            "delta": -0.1,
+            "reason": "替代解释「口径混杂」成立会分流对该假设的因果归因"
+          }
+        ],
+        "alternative_explanations": [
+          {
+            "explanation": "价格战/降价促销/原材料价格周期可产生同样的 ASP 或成本变化，技术溢价并非唯一解释",
+            "variables": [
+              "unit_cost",
+              "weight_kg"
+            ],
+            "compatibility": "partial_overlap",
+            "compatibility_label": "部分重叠",
+            "basis": "常识性机制（价格竞争与投入品价格周期是制造业 ASP/成本变动的常规来源）",
+            "alt_type": "other",
+            "alt_type_label": "其他",
+            "rule_id": "ALT-PRICE-001",
+            "confidence_penalty": 0.08
+          },
+          {
+            "explanation": "该假设的部分样本未做口径归一（raw/推算值混入），观察到的相对差距部分来自口径差异而非真实技术差异",
+            "variables": [
+              "unit_cost",
+              "weight_kg"
+            ],
+            "compatibility": "partial_overlap",
+            "compatibility_label": "部分重叠",
+            "basis": "engineering_analyzer 的可比性分级：approximate 样本含推算值/口径修正，显式不确定性；口径差异贡献无法从测量差距中剥离",
+            "alt_type": "metric",
+            "alt_type_label": "口径性",
+            "rule_id": "ALT-MET-001",
+            "confidence_penalty": 0.1
+          }
+        ],
+        "counterfactual_requirements": [
+          {
+            "requirement": "同行同期 ASP 与单位成本变动对照（区分行业性价格周期与公司特异性变化）",
+            "purpose": "排除「价格战/原材料周期」解释：若全行业 ASP 同向变动，技术溢价解释的权重下降",
+            "satisfied": false,
+            "basis": "未提供该对照证据（available_evidence 中无此 key），保守判未满足",
+            "priority": "medium",
+            "rule_id": "ALT-PRICE-001"
+          },
+          {
+            "requirement": "统一口径下的复测数据（同工况、同装配范围实测），替换 raw/推算样本后重算相对差距",
+            "purpose": "排除「口径混杂」解释：统一口径后差距若消失或显著缩小，原归因不成立",
+            "satisfied": false,
+            "basis": "未提供该对照证据（available_evidence 中无此 key），保守判未满足",
+            "priority": "high",
+            "rule_id": "ALT-MET-001"
+          }
+        ],
+        "non_attributable": [
+          {
+            "portion_pct_range": [
+              30.0,
+              50.0
+            ],
+            "description": "相对差距中由未归一样本贡献的部分",
+            "reason": "目标样本可比性为 approximate（含推算值/口径修正），口径差异贡献无法从测量差距中剥离，保守按 30-50% 不计入技术归因",
+            "rule_id": "NA-MET-001"
+          }
+        ],
+        "n_open_counterfactuals": 2
+      }
+    ],
+    "warnings": [
+      "规则 power_density_to_share：目标公司 绿的谐波 无定量样本，已降级为定性说明"
+    ],
+    "total_alternatives": 12,
+    "total_open_counterfactuals": 14
+  },
+  "financial": {
+    "status": "ok",
+    "reason": "财务三情景已基于批判层调整后的假设生成",
+    "model_inputs_path": "/workspace/scratch/6ccd007a2a3c/pku-financial-ai-agent/data/processed/green_harmonic_model_inputs.csv",
+    "product_lines": [
+      "harmonic",
+      "joint"
+    ],
+    "scenarios": {
+      "base": {
+        "enterprise_value_bn": 4.34196642,
+        "ebitda_2027_bn": 0.75513035,
+        "fcf_2027_bn": 0.34217894,
+        "revenue_2027_bn": 4.15056288,
+        "model_status": "prototype_scenario_not_investment_recommendation"
+      },
+      "upside": {
+        "enterprise_value_bn": 6.93545204,
+        "ebitda_2027_bn": 1.0418853,
+        "fcf_2027_bn": 0.54606296,
+        "revenue_2027_bn": 4.70258774,
+        "model_status": "prototype_scenario_not_investment_recommendation"
+      },
+      "downside": {
+        "enterprise_value_bn": 1.57737913,
+        "ebitda_2027_bn": 0.45468648,
+        "fcf_2027_bn": 0.12486125,
+        "revenue_2027_bn": 3.62344139,
+        "model_status": "prototype_scenario_not_investment_recommendation"
+      }
+    },
+    "critic_annotation": {
+      "adjusted_confidence": 0.32,
+      "non_attributable_pct": 50.0,
+      "basis": "取 3 条假设审查中 adjusted_confidence 最小值与不可归因区间上界最大值（定量假设优先）"
+    }
+  },
+  "errors": [],
+  "report_markdown": "============================================================\n  Claim2Value 财务影响链路报告\n============================================================\n\n  Claim: 绿的谐波新一代谐波减速器关节模组减重30%以上\n  判定: 部分成立（partially_supported，置信度 0.30，来源 rule_only_fallback）\n  待补反事实证据: 14 条（替代解释 12 条）\n\n  门控: 放行 — 验证结论 partially_supported 属于放行集合 ['supported', 'partially_supported']，进入财务链路\n\n------------------------------------------------------------\n【验证阶段】\n============================================================\n  Claim2Value 验证报告\n============================================================\n\n  Claim: 绿的谐波新一代谐波减速器关节模组减重30%以上...\n  判定: 部分成立\n  置信度: 0.30\n  判定来源: rule_only_fallback\n  证据可信度: 0.75\n\n  规则层检出:\n    - 限定词缺失：「同等出力情况下」在 source 中存在但 claim 中缺失\n\n\n============================================================\n\n------------------------------------------------------------\n【工程参数归一化】\n  共 14 行参数，可比较 4 行（分级：{'comparable': 4, 'not_comparable': 10}）\n\n------------------------------------------------------------\n【经济假设映射】\n  目标公司：绿的谐波，假设 6 条（定量 3 条）\n    - [torque_density_to_share] 销量（份额/渗透率） → -10.26%（证据 high，置信度 0.8）\n    - [power_density_to_share] 销量（份额/渗透率） → 定性（证据 low，置信度 0.3）\n    - [efficiency_to_unit_cost] 单位成本 → -0.00%（证据 medium，置信度 0.5）\n    - [backlash_to_asp] 平均售价（ASP） → 定性（证据 low，置信度 0.3）\n    - [backlash_to_addressable_market] 可服务市场分层（高端/中端） → 定性（证据 low，置信度 0.3）\n    - [weight_to_unit_cost] 单位成本 → -5.47%（证据 medium，置信度 0.5）\n\n------------------------------------------------------------\n【因果批判层】\n    - [torque_density_to_share] 销量（份额/渗透率）（定量）：置信度 0.8 → 0.6，待补反事实 4 条\n        不可归因 20-40%：销量/份额变化中的行业共同成分（行业β）\n    - [power_density_to_share] 销量（份额/渗透率）（定性）：置信度 0.3 → 0.1，待补反事实 4 条\n        不可归因 60-100%：整条定性假设的经济含义\n        不可归因 20-40%：销量/份额变化中的行业共同成分（行业β）\n    - [efficiency_to_unit_cost] 单位成本（定量）：置信度 0.5 → 0.32，待补反事实 2 条\n        不可归因 30-50%：相对差距中由未归一样本贡献的部分\n    - [backlash_to_asp] 平均售价（ASP）（定性）：置信度 0.3 → 0.17，待补反事实 2 条\n        不可归因 60-100%：整条定性假设的经济含义\n    - [backlash_to_addressable_market] 可服务市场分层（高端/中端）（定性）：置信度 0.3 → 0.3，待补反事实 0 条\n        不可归因 60-100%：整条定性假设的经济含义\n    - [weight_to_unit_cost] 单位成本（定量）：置信度 0.5 → 0.32，待补反事实 2 条\n        不可归因 30-50%：相对差距中由未归一样本贡献的部分\n\n------------------------------------------------------------\n【财务三情景】\n    base     EV=4.3420 bn  2027 EBITDA=0.7551 bn  2027 FCF=0.3422 bn\n        ⚠ 该情景基于置信度 0.32 的假设，其中最高 50% 不可归因（取 3 条假设审查中 adjusted_confidence 最小值与不可归因区间上界最大值（定量假设优先））\n    upside   EV=6.9355 bn  2027 EBITDA=1.0419 bn  2027 FCF=0.5461 bn\n        ⚠ 该情景基于置信度 0.32 的假设，其中最高 50% 不可归因（取 3 条假设审查中 adjusted_confidence 最小值与不可归因区间上界最大值（定量假设优先））\n    downside EV=1.5774 bn  2027 EBITDA=0.4547 bn  2027 FCF=0.1249 bn\n        ⚠ 该情景基于置信度 0.32 的假设，其中最高 50% 不可归因（取 3 条假设审查中 adjusted_confidence 最小值与不可归因区间上界最大值（定量假设优先））\n\n============================================================",
+  "review_session": {
+    "mode": "preset_scenario_demo",
+    "case_id": "GH_001_LOCAL",
+    "company": "绿的谐波",
+    "created_at_utc": "2026-10-02T14:08:27.853345+00:00",
+    "elapsed_ms": 4.056,
+    "external_api_calls": 0,
+    "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202504301665112608_1.pdf",
+    "source_locator": "研报页码待人工核验",
+    "source_sha256": "aeac54a2ba12a75b068c7d7da62a431d159798ec3be6a9fb9e19b722ab8737d8",
+    "evidence_status": "candidate_evidence_not_finally_verified",
+    "financial_scope": "固定工程参数与财务假设的敏感性示例，非本条声明的已识别因果效应",
+    "limitations": [
+      "“减重”对象（减速器或完整关节模组）尚未核实",
+      "“同等出力”的测试条件和上一代基准型号尚未核实",
+      "本地无 API 模式只执行确定性规则，不代表完整语义验证",
+      "本地规则未发现异常不代表声明成立；此模式不调用大模型或实时检索",
+      "来源等级由文本规则推断，不代表原件已认证；链接与页码仅记录，不自动核验"
+    ]
+  }
+}

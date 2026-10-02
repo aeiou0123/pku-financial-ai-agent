@@ -1,0 +1,15 @@
+{
+  "scope": "Author-written development probes; not independently labeled real cases",
+  "cases": [
+    {"case_id": "ALIAS_A", "claim": "公司扣非净利润为47.31亿元", "source": "年报：公司扣非后净利润为47.31亿元", "expected_verdict": "abstain", "purpose": "同义表述不应触发口径冲突；本地模式仍不确认支持"},
+    {"case_id": "ALIAS_B", "claim": "公司扣非后净利润为47.31亿元", "source": "年报：公司扣非净利润为47.31亿元", "expected_verdict": "abstain", "purpose": "反向同义表述"},
+    {"case_id": "PROFIT_CONFLICT", "claim": "公司归母净利润为47.31亿元", "source": "年报：公司扣非后净利润为47.31亿元", "expected_verdict": "definition_mismatch", "purpose": "归母与扣非口径仍需区分"},
+    {"case_id": "EMPTY", "claim": "公司产品适用于机器人", "source": "", "expected_verdict": "abstain", "purpose": "无证据拒答"},
+    {"case_id": "SEMANTIC", "claim": "公司产品适用于机器人", "source": "新闻称公司正在研究新的应用方向", "expected_verdict": "abstain", "purpose": "规则不足时不确认语义"},
+    {"case_id": "NUMBER", "claim": "产品额定扭矩为172Nm", "source": "产品手册：产品额定扭矩为180Nm", "expected_verdict": "refuted", "purpose": "单项直接数值冲突"},
+    {"case_id": "UNIT_EQUIVALENCE", "claim": "产品额定扭矩为172Nm", "source": "产品手册：产品额定扭矩为0.172kNm", "expected_verdict": "abstain", "purpose": "等价单位不应被判数值矛盾"},
+    {"case_id": "THOUSANDS", "claim": "产品年度出货1000台", "source": "公告：产品年度出货1,000台", "expected_verdict": "abstain", "purpose": "千分位格式不应被判数值矛盾"},
+    {"case_id": "OTHER_MODEL", "claim": "A型号额定扭矩为172Nm", "source": "产品手册：A型号额定扭矩为180Nm，B型号额定扭矩为172Nm", "expected_verdict": "refuted", "purpose": "其他型号数值不应掩盖本型号冲突"},
+    {"case_id": "BACKGROUND", "claim": "公司毛利率为30%", "source": "公告：公司毛利率为30%；公司在国内开展业务", "expected_verdict": "abstain", "purpose": "证据背景中的国内不一定是毛利率限定条件"}
+  ]
+}

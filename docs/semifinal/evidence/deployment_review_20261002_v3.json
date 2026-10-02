@@ -1,0 +1,23 @@
+{
+  "scope": "LINUX_INDEPENDENT_UNZIP_ACCEPTANCE",
+  "archive_sha256": "673c8eebadca16e629206818a1aad4388f376fe09f56607409c28f71e896d31a",
+  "archive_file": "Claim2Value_local_deployment_20261002_v3.zip",
+  "runs": [
+    {
+      "attempt": 1,
+      "startup_seconds": 42.091,
+      "health": "ok",
+      "ui_test": "PASS"
+    },
+    {
+      "attempt": 2,
+      "startup_seconds": 1.504,
+      "health": "ok",
+      "ui_test": "PASS"
+    }
+  ],
+  "repeat_start_skipped_pip": true,
+  "python": "3.12",
+  "windows_verified": false,
+  "human_browser_review": false
+}
