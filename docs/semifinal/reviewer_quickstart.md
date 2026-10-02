@@ -26,7 +26,7 @@ Linux：`.venv-demo/bin/python -m streamlit run app.py --server.address 127.0.0.
 
 空声明显示错误并清除旧结果，避免把旧报告误当作本次成功。证据留空会给缺证/拒答输出。来源链接和页码为记录字段，不会据此自动核实原PDF；不支持PDF上传/OCR。表内来源可信度、规则置信度未校准为现实事件概率。
 
-## 本轮实测
+## 首轮界面实测（历史记录）
 
 - `python -m pytest tests -q`：148 passed（原140项加8项本轮回归；包括Streamlit AppTest表单/案例切换/下载控件/空输入）。
 - Linux Python 3.12独立 .venv-demo：依赖安装完成，Streamlit健康接口返回ok，独立环境AppTest运行绿的谐波示例通过。

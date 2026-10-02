@@ -1,0 +1,20 @@
+{
+  "scope": "SYNTHETIC_INTEGRATION_ONLY_NOT_COMPETITION_PERFORMANCE",
+  "tools_sha256": "50ce8aedf54029b2ddb1f3afb703c8a25c8364d424ccf9ea9f641175bc55a07e",
+  "rows": 200,
+  "days": 10,
+  "csv_sha256": "fa8064e95fac7fb8d93d9010fa0224924d0711b7af4bd1a06ba41823c97526d2",
+  "seed": 712,
+  "result": "PASS",
+  "checks": [
+    "same-row synthetic signal",
+    "20 unique holdings each day",
+    "official CSV parse",
+    "initial buy fee",
+    "terminal sale fee",
+    "continuous NAV",
+    "fixed-list equal-weight rebalance fees"
+  ],
+  "real_training_run": false,
+  "real_test_submission_check": false
+}
