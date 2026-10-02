@@ -36,7 +36,7 @@ def test_presets_run_correct_company_models_without_llm(name):
     assert result["review_session"]["external_api_calls"] == 0
 
 
-@pytest.mark.parametrize("url", ["javascript:alert(1)", "file:///tmp/a", "https://user:secret@example.com"])
+@pytest.mark.parametrize("url", ["javascript:alert(1)", "file:///tmp/a", "https://user:secret@example.com", "https://example.com\n/path"])
 def test_source_links_cannot_expose_nonweb_or_credentials(url):
     with pytest.raises(ValueError):
         run_review("声明", "原文", url)

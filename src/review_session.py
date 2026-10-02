@@ -28,7 +28,8 @@ def demo_cases():
             "source_url": fixture["evidence"]["source_url"],
             "source_locator": fixture["evidence"]["source_locator"],
             "evidence_status": fixture["evidence"]["extraction_status"],
-            "limitations": fixture["limitations"], "chain_options": {},
+            "limitations": fixture["limitations"],
+            "chain_options": {"target_company": fixture["company"]},
         },
         "双环传动/环动科技 · 客户覆盖": {
             "case_id": "SH_004_LOCAL", "company": "双环传动/环动科技",
@@ -48,6 +49,8 @@ def demo_cases():
 def safe_source_url(value):
     """Only expose HTTP(S) links; nothing is fetched or authenticated here."""
     value = value.strip()
+    if any(ord(char) < 32 or ord(char) == 127 for char in value):
+        raise ValueError("来源链接不能包含换行或控制字符")
     parsed = urlsplit(value)
     if value and (parsed.scheme not in {"http", "https"} or not parsed.netloc or parsed.username or parsed.password):
         raise ValueError("来源链接须为不含账号密码的完整 HTTP(S) URL")
