@@ -212,6 +212,7 @@ def main():
     summary = {"command": args.command, "python": platform.python_version(),
                "numpy": np.__version__, "pandas": pd.__version__,
                "tools_sha256": TOOLS_SHA, "model_sha256": sha256(args.out / "model.json"),
+               "code_sha256": sha256(Path(__file__)),
                "train_end": model["trained_through"], "alpha": model["alpha"],
                "hold_bonus": args.hold_bonus, "test_return_access": False,
                "selection_score": "predicted_relative_return_plus_incumbent_bonus",

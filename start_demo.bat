@@ -3,14 +3,10 @@ setlocal
 cd /d "%~dp0"
 where py >nul 2>nul
 if errorlevel 1 (
-  python -m venv .venv-demo
+  python scripts\launch_demo.py
 ) else (
-  py -3 -m venv .venv-demo
+  py -3 scripts\launch_demo.py
 )
-if errorlevel 1 goto failed
-".venv-demo\Scripts\python.exe" -m pip install -r requirements-demo.txt
-if errorlevel 1 goto failed
-".venv-demo\Scripts\python.exe" -m streamlit run app.py --server.address 127.0.0.1 --server.port 8501 --browser.gatherUsageStats false
 if errorlevel 1 goto failed
 exit /b 0
 :failed
