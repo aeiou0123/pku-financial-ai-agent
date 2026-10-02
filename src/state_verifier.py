@@ -62,8 +62,6 @@ DEFINITION_PAIRS: List[DefinitionPair] = [
                     "归母净利润含非经常性损益，扣非净利润不含，差异可达 30-50%"),
     DefinitionPair("归母净利润", "扣非后净利润", "利润口径", "medium",
                     "同上"),
-    DefinitionPair("扣非净利润", "扣非后净利润", "利润口径", "low",
-                    "同一概念不同表述"),
     # ── 利润率口径 ──
     DefinitionPair("毛利率", "净利率", "利润率口径", "high",
                     "毛利率不含期间费用，净利率含，差异通常 10-20 个百分点"),
@@ -508,6 +506,12 @@ class StateVerifier:
             # 无证据 → 不做规则检查，让 LLM 处理 abstain
             result.flags.append("无证据，规则层跳过")
             return result
+
+        # Registry aliases are not conflicting financial definitions. Normalize
+        # only this explicit wording alias; do not merge 归母 and 扣非 concepts.
+        # Callers retain the original source text and its fingerprint.
+        claim = claim.replace("扣非后净利润", "扣非净利润")
+        source = source.replace("扣非后净利润", "扣非净利润")
 
         # ── 检测顺序即优先级（高 → 低）──
         # 口径偷换 > 数值矛盾 > 时间错位 > 来源降级 > 限定词缺失

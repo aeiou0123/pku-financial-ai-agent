@@ -1,0 +1,58 @@
+{
+  "created_at_utc": "2026-10-02T14:25:24.956839+00:00",
+  "scope": "ASSISTANT_SELF_REVIEW_OF_DRAFTS",
+  "files": [
+    {
+      "name": "01_统一信息表_草稿.docx",
+      "bytes": 19549,
+      "sha256": "17385bc3a942109416784e1f27855f8edb6e888d3c62d765086e379632e600f4"
+    },
+    {
+      "name": "02_项目说明_复赛草稿.pdf",
+      "bytes": 126943,
+      "sha256": "78c826e8256e807fb4beae92d689d0992b7020dafd7dde32ce106c0bcbf92cdd"
+    },
+    {
+      "name": "03_展示稿_复赛草稿.pptx",
+      "bytes": 46538,
+      "sha256": "341a46d76ff196f540101fe0e439037fa9b4220de80b912a09cffb2bce8dcdc1"
+    }
+  ],
+  "docx": {
+    "rendered_pages": 3,
+    "visual_review_all_pages": true,
+    "official_table_count": 7,
+    "identity_signature_complete": false
+  },
+  "pdf": {
+    "pages": 6,
+    "main_bookmarks": [
+      "1 问题与创新",
+      "2 效果与效率",
+      "3 适用性与呈现",
+      "4 初赛后深化情况",
+      "5 局限与下一步"
+    ],
+    "visual_review_all_pages": true
+  },
+  "pptx": {
+    "slides": 9,
+    "native_tables": 7,
+    "structural_and_import_validation": "pass",
+    "visual_review_all_slides": true,
+    "native_powerpoint_verified": false,
+    "native_font_rendering_verified": false
+  },
+  "code_test_result": {
+    "passed": 176,
+    "command": ".venv-demo/bin/python -m pytest tests -q"
+  },
+  "not_complete": [
+    "team/contact/signature/date",
+    "new-source authentication",
+    "independent natural-claim validation",
+    "Windows/human trial",
+    "real runtime video",
+    "actual technical training and submission"
+  ]
+}

@@ -1,0 +1,382 @@
+{
+  "scope": "DEVELOPMENT_PROBES_USED_TO_REPAIR_EXPLICIT_ALIAS_NOT_HELD_OUT",
+  "before": {
+    "scope": "EXISTING_DEVELOPMENT_BENCHMARK_AND_AUTHORED_PROBES_NOT_OUT_OF_SAMPLE",
+    "created_at_utc": "2026-10-02T13:53:20.900438+00:00",
+    "mutations": {
+      "cases": 98,
+      "families": 19,
+      "exact_hits": 87,
+      "exact_rate": 0.8877551020408163,
+      "family_macro_rate": 0.8951127819548872,
+      "always_abstain_hits": 19,
+      "by_type": {
+        "evidence_absence": {
+          "n": 19,
+          "hits": 19,
+          "rate": 1.0
+        },
+        "qualifier_removal": {
+          "n": 19,
+          "hits": 18,
+          "rate": 0.9473684210526315
+        },
+        "source_downgrade": {
+          "n": 17,
+          "hits": 17,
+          "rate": 1.0
+        },
+        "temporal_shift": {
+          "n": 10,
+          "hits": 8,
+          "rate": 0.8
+        },
+        "unit_swap": {
+          "n": 17,
+          "hits": 11,
+          "rate": 0.6470588235294118
+        },
+        "value_tampering": {
+          "n": 16,
+          "hits": 14,
+          "rate": 0.875
+        }
+      },
+      "confusion": [
+        {
+          "expected": "abstain",
+          "actual": "abstain",
+          "n": 19
+        },
+        {
+          "expected": "definition_mismatch",
+          "actual": "abstain",
+          "n": 6
+        },
+        {
+          "expected": "definition_mismatch",
+          "actual": "definition_mismatch",
+          "n": 11
+        },
+        {
+          "expected": "low_confidence",
+          "actual": "low_confidence",
+          "n": 17
+        },
+        {
+          "expected": "partially_supported",
+          "actual": "abstain",
+          "n": 1
+        },
+        {
+          "expected": "partially_supported",
+          "actual": "partially_supported",
+          "n": 18
+        },
+        {
+          "expected": "refuted",
+          "actual": "abstain",
+          "n": 4
+        },
+        {
+          "expected": "refuted",
+          "actual": "refuted",
+          "n": 22
+        }
+      ],
+      "verdict_counts": {
+        "refuted": 22,
+        "partially_supported": 18,
+        "abstain": 30,
+        "low_confidence": 17,
+        "definition_mismatch": 11
+      }
+    },
+    "development_probes": {
+      "cases": 10,
+      "families": 10,
+      "exact_hits": 4,
+      "exact_rate": 0.4,
+      "family_macro_rate": 0.4,
+      "always_abstain_hits": 7,
+      "by_type": {
+        "development_probe": {
+          "n": 10,
+          "hits": 4,
+          "rate": 0.4
+        }
+      },
+      "confusion": [
+        {
+          "expected": "abstain",
+          "actual": "abstain",
+          "n": 2
+        },
+        {
+          "expected": "abstain",
+          "actual": "definition_mismatch",
+          "n": 2
+        },
+        {
+          "expected": "abstain",
+          "actual": "partially_supported",
+          "n": 1
+        },
+        {
+          "expected": "abstain",
+          "actual": "refuted",
+          "n": 2
+        },
+        {
+          "expected": "definition_mismatch",
+          "actual": "definition_mismatch",
+          "n": 1
+        },
+        {
+          "expected": "refuted",
+          "actual": "abstain",
+          "n": 1
+        },
+        {
+          "expected": "refuted",
+          "actual": "refuted",
+          "n": 1
+        }
+      ],
+      "verdict_counts": {
+        "definition_mismatch": 3,
+        "abstain": 3,
+        "refuted": 3,
+        "partially_supported": 1
+      }
+    },
+    "original_references": {
+      "n": 19,
+      "alerts": 3,
+      "ground_truth_status": "NOT_REAUTHENTICATED_NOT_A_FALSE_POSITIVE_RATE"
+    },
+    "runtime": {
+      "repeats_per_mutation": 5,
+      "p50_case_median_ms": 0.043565500163822435,
+      "p95_case_median_ms": 0.10204699992755195,
+      "external_api_calls": 0,
+      "api_charge": 0,
+      "compute_cost_measured": false,
+      "scope": "Warm local custom-rule function; excludes startup, browser, reading, network and LLM. No throughput claim."
+    },
+    "environment": {
+      "python": "3.12.14",
+      "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+      "cpu_logical_count": 9
+    },
+    "input_sha256": {
+      "benchmarks/claim_verification_v2.json": "53c3f25c876e894685d5eeb0afd0a33f329b848afb2abc41743dc521e7faa7f9",
+      "benchmarks/local_boundary_probes.json": "1c16538765cb6056bf65f4fb0d50fafd35d023d1641a9d4df05673730c4ac94e"
+    },
+    "code_sha256": {
+      "scripts/evaluate_local_review.py": "0056047702cd8ff18bb7a8edcdfd55f3ccd8ad95ea71ba7a06d645303d75aafd",
+      "src/review_session.py": "7c543ac5f8cffeed143fa4be1f68946dfc18ff56e57bd433c4cc7dca30030596",
+      "src/state_verifier.py": "23fddcaf7a07f3d4e53a85bbbfa14995fe7c5b9fa41d93282763c19d27b566d5",
+      "src/workflow.py": "942be5ae06f1b36294170833af2e831109b56c5460e3ee63520e49df642b313f",
+      "src/evidence_ledger.py": "d2f72ffde730d582a6b0f3d751a486136c56a095a97dc706fb78b4116c82b85a"
+    },
+    "limitations": [
+      "98 mutations derive from 19 original families; no new independent natural claims or source-authenticated labels.",
+      "Rules were previously developed using this benchmark; these are development results, not generalization accuracy.",
+      "Always-abstain is a diagnostic baseline, not a competitive LLM baseline.",
+      "No actual current Qwen/Kimi or other model API run.",
+      "Local abstention on clean text is intentional and must not be called positive verification.",
+      "Authored boundary probes were used to review and repair aliases; they are not a held-out set."
+    ]
+  },
+  "after": {
+    "scope": "EXISTING_DEVELOPMENT_BENCHMARK_AND_AUTHORED_PROBES_NOT_OUT_OF_SAMPLE",
+    "created_at_utc": "2026-10-02T13:54:09.808344+00:00",
+    "mutations": {
+      "cases": 98,
+      "families": 19,
+      "exact_hits": 87,
+      "exact_rate": 0.8877551020408163,
+      "family_macro_rate": 0.8951127819548872,
+      "always_abstain_hits": 19,
+      "by_type": {
+        "evidence_absence": {
+          "n": 19,
+          "hits": 19,
+          "rate": 1.0
+        },
+        "qualifier_removal": {
+          "n": 19,
+          "hits": 18,
+          "rate": 0.9473684210526315
+        },
+        "source_downgrade": {
+          "n": 17,
+          "hits": 17,
+          "rate": 1.0
+        },
+        "temporal_shift": {
+          "n": 10,
+          "hits": 8,
+          "rate": 0.8
+        },
+        "unit_swap": {
+          "n": 17,
+          "hits": 11,
+          "rate": 0.6470588235294118
+        },
+        "value_tampering": {
+          "n": 16,
+          "hits": 14,
+          "rate": 0.875
+        }
+      },
+      "confusion": [
+        {
+          "expected": "abstain",
+          "actual": "abstain",
+          "n": 19
+        },
+        {
+          "expected": "definition_mismatch",
+          "actual": "abstain",
+          "n": 6
+        },
+        {
+          "expected": "definition_mismatch",
+          "actual": "definition_mismatch",
+          "n": 11
+        },
+        {
+          "expected": "low_confidence",
+          "actual": "low_confidence",
+          "n": 17
+        },
+        {
+          "expected": "partially_supported",
+          "actual": "abstain",
+          "n": 1
+        },
+        {
+          "expected": "partially_supported",
+          "actual": "partially_supported",
+          "n": 18
+        },
+        {
+          "expected": "refuted",
+          "actual": "abstain",
+          "n": 4
+        },
+        {
+          "expected": "refuted",
+          "actual": "refuted",
+          "n": 22
+        }
+      ],
+      "verdict_counts": {
+        "refuted": 22,
+        "partially_supported": 18,
+        "abstain": 30,
+        "low_confidence": 17,
+        "definition_mismatch": 11
+      }
+    },
+    "development_probes": {
+      "cases": 10,
+      "families": 10,
+      "exact_hits": 6,
+      "exact_rate": 0.6,
+      "family_macro_rate": 0.6,
+      "always_abstain_hits": 7,
+      "by_type": {
+        "development_probe": {
+          "n": 10,
+          "hits": 6,
+          "rate": 0.6
+        }
+      },
+      "confusion": [
+        {
+          "expected": "abstain",
+          "actual": "abstain",
+          "n": 4
+        },
+        {
+          "expected": "abstain",
+          "actual": "partially_supported",
+          "n": 1
+        },
+        {
+          "expected": "abstain",
+          "actual": "refuted",
+          "n": 2
+        },
+        {
+          "expected": "definition_mismatch",
+          "actual": "definition_mismatch",
+          "n": 1
+        },
+        {
+          "expected": "refuted",
+          "actual": "abstain",
+          "n": 1
+        },
+        {
+          "expected": "refuted",
+          "actual": "refuted",
+          "n": 1
+        }
+      ],
+      "verdict_counts": {
+        "abstain": 5,
+        "definition_mismatch": 1,
+        "refuted": 3,
+        "partially_supported": 1
+      }
+    },
+    "original_references": {
+      "n": 19,
+      "alerts": 3,
+      "ground_truth_status": "NOT_REAUTHENTICATED_NOT_A_FALSE_POSITIVE_RATE"
+    },
+    "runtime": {
+      "repeats_per_mutation": 5,
+      "p50_case_median_ms": 0.043568999444687506,
+      "p95_case_median_ms": 0.09103100001084385,
+      "external_api_calls": 0,
+      "api_charge": 0,
+      "compute_cost_measured": false,
+      "scope": "Warm local custom-rule function; excludes startup, browser, reading, network and LLM. No throughput claim."
+    },
+    "environment": {
+      "python": "3.12.14",
+      "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+      "cpu_logical_count": 9
+    },
+    "input_sha256": {
+      "benchmarks/claim_verification_v2.json": "53c3f25c876e894685d5eeb0afd0a33f329b848afb2abc41743dc521e7faa7f9",
+      "benchmarks/local_boundary_probes.json": "1c16538765cb6056bf65f4fb0d50fafd35d023d1641a9d4df05673730c4ac94e"
+    },
+    "code_sha256": {
+      "scripts/evaluate_local_review.py": "0056047702cd8ff18bb7a8edcdfd55f3ccd8ad95ea71ba7a06d645303d75aafd",
+      "src/review_session.py": "7c543ac5f8cffeed143fa4be1f68946dfc18ff56e57bd433c4cc7dca30030596",
+      "src/state_verifier.py": "463f155086865a09f4d29efdfab93cbd8a43326dbc92dd34782a5244841ac683",
+      "src/workflow.py": "942be5ae06f1b36294170833af2e831109b56c5460e3ee63520e49df642b313f",
+      "src/evidence_ledger.py": "d2f72ffde730d582a6b0f3d751a486136c56a095a97dc706fb78b4116c82b85a"
+    },
+    "limitations": [
+      "98 mutations derive from 19 original families; no new independent natural claims or source-authenticated labels.",
+      "Rules were previously developed using this benchmark; these are development results, not generalization accuracy.",
+      "Always-abstain is a diagnostic baseline, not a competitive LLM baseline.",
+      "No actual current Qwen/Kimi or other model API run.",
+      "Local abstention on clean text is intentional and must not be called positive verification.",
+      "Authored boundary probes were used to review and repair aliases; they are not a held-out set."
+    ]
+  },
+  "remaining_probe_failures": [
+    "UNIT_EQUIVALENCE",
+    "THOUSANDS",
+    "OTHER_MODEL",
+    "BACKGROUND"
+  ]
+}
