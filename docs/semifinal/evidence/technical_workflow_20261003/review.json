@@ -1,0 +1,65 @@
+{
+  "scope": "ASSISTANT_SELF_REVIEW_NOT_INDEPENDENT_JUDGING",
+  "date": "2026-10-03",
+  "source_sha256": {
+    "competition/experiment.py": "be9b7dd1d71058b08be2c2157003d7814666321b93780ee36193c0fc9a530d8c",
+    "competition/experiment_smoke.py": "e63c4a61cf64f1d861e304a70c2378cde9723c1af70c09443fbb53b54b149034",
+    "scripts/launch_technical.py": "be80a449e9ee10390e7e92cf616bbca9cb8be7bc3f864a7cd6d1ff2fa72c1595",
+    "scripts/build_technical_execution.py": "47d1ae14406cee226478a4c1b38e7e12faa8ada324e7edd7d094f43616922937",
+    "start_technical.sh": "247689ee76ba1ec0676e27b534cbfabf024dde34847cb2192e4bc71cdb8d6301",
+    "start_technical.bat": "0782d3dd949ec9a4146fa9f51430dcf50878f155069b72facbf712095ef73980",
+    "tests/test_competition_experiment.py": "e9d148f790c3f5c9835150185df1070d198e7c43b625be0be0ffde10d60eddf7"
+  },
+  "regression": {
+    "passed": 230,
+    "elapsed_seconds": 11.94,
+    "new_workflow_tests": 18,
+    "python": "3.12.14",
+    "openblas_num_threads": 1
+  },
+  "official_accounting_integration": "PASS_ON_SYNTHETIC_RETURNS",
+  "development_models": 6,
+  "development_validations": 18,
+  "fixed20_controls": 2,
+  "independent_unpack": {
+    "result": "PASS",
+    "candidate_zip_sha256": "dca020d41ced190e873092e0f1e5af5ad57f92c4dc275cec730dc0d5b2860e97",
+    "files": 18,
+    "manifest_each_file_checked": true,
+    "isolated_venv_installed": true,
+    "launcher_smoke": "PASS",
+    "system": "Linux",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "pyarrow": "20.0.0",
+    "setup_elapsed_measured": false
+  },
+  "data_access_retry": {
+    "date": "2026-10-03",
+    "train_bytes": 622965149,
+    "download_limit_bytes": 268435456,
+    "train_http": 413,
+    "test_bytes": 144652201,
+    "test_stream_reference_returned": true,
+    "test_local_download_http": 403,
+    "real_parquet_obtained": false
+  },
+  "review_repairs": [
+    "Bind frozen candidate scores to completed result.json and accounting.json, not only an editable lock summary",
+    "Bind holdout reported values to completed receipts",
+    "Keep incomplete/failing directories and refuse overwrite",
+    "Claim holdout before reading 2020 and refuse development restart in that directory"
+  ],
+  "remaining": [
+    "real public-training development and 2020 results",
+    "real test holdings and official check",
+    "actual final code.zip and technical report",
+    "Windows and cross-system execution",
+    "real UI video and user trial"
+  ],
+  "limitations": [
+    "Single-experiment-directory guard; human deletion/new directories cannot restore pristine holdout status",
+    "No real Sharpe, model performance, test prediction or competition submission",
+    "Synthetic finalization subprocess contract tests do not prove actual end-to-end final submission"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "scope": "SYNTHETIC_WORKFLOW_WITH_REAL_ACCOUNTING_NOT_COMPETITION_PERFORMANCE",
+  "result": "PASS",
+  "seed": 734,
+  "fixture_rows": 5200,
+  "development_models": 6,
+  "development_candidates": 9,
+  "development_validation_runs": 18,
+  "development_fixed_controls": 2,
+  "official_account_calls": 22,
+  "holdout_attempts_completed": 1,
+  "test_data_access": false,
+  "real_training_run": false,
+  "real_test_submission": false,
+  "performance_metrics_reported": false,
+  "elapsed_seconds": 0.862,
+  "code_sha256": {
+    "competition/experiment.py": "be9b7dd1d71058b08be2c2157003d7814666321b93780ee36193c0fc9a530d8c",
+    "competition/baseline.py": "375f4a512375eb0e1e69ef3440a8a5b97e3e510bab4103eafcf901d529cd33b6",
+    "competition/package_code.py": "f66e840eef5961e3e2e94e92a3b5d53b3ad187b88c1a12e81ad9698bf59f4f05",
+    "competition/requirements.txt": "ec0f1c630a87ef1f7824c96f1980faaa8f6cbc844909aa1d9e708633b1b08acf"
+  },
+  "smoke_code_sha256": "e63c4a61cf64f1d861e304a70c2378cde9723c1af70c09443fbb53b54b149034",
+  "tools_sha256": "50ce8aedf54029b2ddb1f3afb703c8a25c8364d424ccf9ea9f641175bc55a07e",
+  "synthetic_fixture_identity": "52b0f6ae1183a9b2d8dda1dface9a44bad7d0d5deafe68ce2155298b9074dc8d",
+  "checks": [
+    "six cached model fits for eighteen development strategies",
+    "development labels end before 2020",
+    "frozen selection bound to accounting receipts",
+    "real official CSV parsing and portfolio fees on synthetic returns",
+    "holdout lock remains unchanged",
+    "second holdout attempt refused",
+    "development after holdout refused"
+  ],
+  "limitations": [
+    "synthetic returns; no real Parquet validation or research performance",
+    "finalization subprocess contracts are regression-tested, not a real submission"
+  ]
+}

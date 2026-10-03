@@ -2,6 +2,12 @@
 
 与Claim2Value作品估值模块独立。依据Drive中的FEL-MARKET-2026-LOCAL-v1.2.1说明实现。本轮完成代码、合成数据集成检查和防泄漏回归，尚未完成真实训练、真实测试名单或真实验证Sharpe。
 
+## 2026-10-03新增：可执行的完整实验流程
+
+推荐使用[三阶段执行指南](../docs/semifinal/technical_workflow_guide.md)：`scripts/launch_technical.py`自动建立独立环境，`competition.experiment`完成develop→holdout→finalize。开发期6次训练复用为18条策略记录，预先登记选择规则，冻结方案与账户指纹；单次2020留出验证后全量训练，双次预测一致且官方check有效才封装。技术题报告仍须根据实际结果整理；执行包不等于正式code.zip。
+
+开发/留出命令不接受测试数据路径。下列baseline独立命令保留用于研究与诊断；绕过新流程自行调整方案时，仍须如实披露已查看的2020结果，不能继续称为未触碰留出集。
+
 ## 数据与环境
 
 将赛事原文件放在仓库外同一目录，例如 Windows `C:\FEL_MARKET`：train.parquet、test.parquet、tools.py。代码核验三个文件的官方SHA-256，且调用原tools.py的validate_data、backtest、check；不在公开仓库重发赛事原数据或工具。
