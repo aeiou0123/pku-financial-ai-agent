@@ -10,7 +10,7 @@
 
 ## 当前构建路径
 
-文档由scripts/build_semifinal_materials.py使用materials_content.json中的明确证据路径生成，须提供官方DOCX模板与中文TrueType字体，输出目录必须不存在。PPTX由scripts/build_semifinal_slides.mjs在Codex演示稿运行时生成，输出work/materials_final_20261003/03_展示稿_复赛草稿.pptx；已存在时finalizer拒绝覆盖。该构建环境不是部署依赖，队员可直接编辑已交付PPTX。
+文档由scripts/build_semifinal_materials.py使用materials_content.json中的明确证据路径生成，须提供官方DOCX模板与中文TrueType字体，输出目录必须不存在。PPTX由scripts/build_semifinal_slides.mjs在Codex演示稿运行时生成，输出work/materials_sources_20261003/03_展示稿_复赛草稿.pptx；已存在时finalizer拒绝覆盖。该构建环境不是部署依赖，队员可直接编辑已交付PPTX。
 
 旧v3材料与旧运行记录只用于历史追踪。当前原件、真实财务样本、独立标签、真人试用、真实录屏和真实技术题仍有缺口，后续更新不得沿用旧指纹或旧情景数字。
 

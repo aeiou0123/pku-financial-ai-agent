@@ -26,8 +26,8 @@
       "sha256": "9343c08e66938727e88fdb71908809056b0be03dbec93b3e037254c999eb0e9c"
     },
     "03_展示稿_复赛草稿.pptx": {
-      "bytes": 46666,
-      "sha256": "81c4e1e8c996b4396e1082a17fe9ccc65fe5f7188f025e65859a1df75b671eb5"
+      "bytes": 46739,
+      "sha256": "5391feb3f48f22d37d087af6046fd4d2591f970b3187f41b26cfddcddbf0087d"
     },
     "02_项目说明_复赛草稿.pdf": {
       "bytes": 128667,
@@ -37,7 +37,7 @@
   "inputs_sha256": {
     "docs/semifinal/materials_content.json": "983185ce22b1779efa25a180356de4e5c5046d8d11be986175dcc2c15be6f118",
     "scripts/build_semifinal_materials.py": "5b6f689217ad0c8a9e0d8bbada9bd7b393009a1985bc9f3fb8d318e476f4dab5",
-    "scripts/build_semifinal_slides.mjs": "03621ec3b31482b922024f491a22293905e5df4fd590bb4defd596cfd915e0ad",
+    "scripts/build_semifinal_slides.mjs": "5f2ffe93cf975750bda1259360251198c4637afb5ac8347ca776b1cd194ff9cc",
     "docs/semifinal/evidence/local_development_20261003/results.json": "dba77c3ccf9bbc4eaaf8eed36736330de6e5b6a1ac7bf944934a727ab9236604",
     "docs/semifinal/evidence/offline_review_20261003/green_demo.json": "f719c9d0c00d1cb616bdef9c273ba0f9f273031f1b1179057391cd76775f41a0",
     "docs/semifinal/evidence/offline_review_20261003/shuanghuan_demo.json": "caadec8dd0a154651c6a2c2d57d136c9e9ea42cba95ffc562bdcf719113e0aa0",

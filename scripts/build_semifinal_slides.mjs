@@ -5,8 +5,8 @@ import {Presentation, PresentationFile} from '@oai/artifact-tool';
 
 const root=process.env.PROJECT_ROOT;
 const workspaceDir=path.join(root,'work');
-const buildDir=path.join(workspaceDir,'slide_build_20261003_release');
-const finalPath=path.join(workspaceDir,'materials_final_20261003','03_展示稿_复赛草稿.pptx');
+const buildDir=path.join(workspaceDir,'slide_build_20261003_sources');
+const finalPath=path.join(workspaceDir,'materials_sources_20261003','03_展示稿_复赛草稿.pptx');
 const skill='/root/.codex/skills/builtins/presentations';
 const {finalizePresentation}=await import(pathToFileURL(path.join(skill,'container_tools/artifact_tool_utils.mjs')).href);
 const font='WenQuanYi Micro Hei';
@@ -66,7 +66,7 @@ for(const [stem,label] of [['green_demo','绿的谐波'],['shuanghuan_demo','双
 table(s,values,290,215,[454,230,230,230]);
 text(s,'这些数字是原型情景企业价值，不表示已识别因果效应。\n自定义输入缺少绑定财务参数时不生成估值。',68,559,1140,90,26,'#566A78');
 
-s=slide('数量与型号边界修复','来源：local_boundary_probes.json、local_development_20261003/alias_review_comparison.json和failures.json。当前10条开发探针全命中，修复题包含其中，不是独立验证。');
+s=slide('数量与型号边界修复','来源：local_boundary_probes.json、local_development_20261002/alias_review_comparison.json（历史同义词对照）与local_development_20261003/results.json及failures.json（当前边界结果）。当前10条开发探针全命中，修复题包含其中，不是独立验证。');
 text(s,'“扣非净利润”和“扣非后净利润”同义误判已修复。\n归母与扣非继续区分，当前10条开发边界题全部命中。',68,150,1140,100,27);
 table(s,[['已修复边界','当前处理','人工核对'],['注册等价单位','Nm/kNm、g/kg、人民币换算','未知单位'],['合法千分位','只转换三位分组','错误格式'],['明确X型号标记','保留该型号全部分段','无标记表格'],['特定公司背景句','不当作指标限定条件','其他语义范围']],275,270,[285,559,300]);
 text(s,'10/10属于修复用开发题，不能称独立验证提升。\n既有98题还有11条标签未命中，失败记录全部保留。',68,580,1140,80,24,'#566A78');
