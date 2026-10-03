@@ -100,7 +100,7 @@ def make_pdf(output, content, font_path):
     h2 = ParagraphStyle('h2', parent=normal, fontSize=12, leading=18, spaceBefore=8, spaceAfter=6, keepWithNext=True)
     small = ParagraphStyle('small', parent=normal, fontSize=9, leading=13, spaceAfter=4)
     cell_style = ParagraphStyle('cell', parent=normal, fontSize=9.6, leading=14.6, spaceAfter=0)
-    summary = json.loads((ROOT/'docs/semifinal/evidence/local_development_20261002/results.json').read_text())['summary']
+    summary = json.loads((ROOT/content['evidence_paths']['evaluation']).read_text())['summary']
     class BookmarkedDoc(SimpleDocTemplate):
         def afterFlowable(self, flowable):
             if hasattr(flowable, '_bookmark'):
@@ -138,7 +138,7 @@ def make_pdf(output, content, font_path):
         if i:story.append(PageBreak())
         if i == 0:
             story.append(Paragraph('Claim2Value 复赛项目说明',h1))
-            story.append(Paragraph('北京大学金融AI智能体创新大赛　版本日期 2026年10月2日',small))
+            story.append(Paragraph('北京大学金融AI智能体创新大赛　版本日期 2026年10月3日',small))
             story.append(Spacer(1,10))
         p = Paragraph(escape(page['heading']),h1)
         if i in (1,3):p._bookmark=('detail'+str(i),1)
@@ -160,7 +160,7 @@ def make_pdf(output, content, font_path):
             elif kind=='scenario_table':
                 rows=[['固定示例 EV 亿元','base','upside','downside']]
                 for stem,label in [('green_demo','绿的谐波'),('shuanghuan_demo','双环传动')]:
-                    f=json.loads((ROOT/f'docs/semifinal/evidence/offline_review_20261002_v3/{stem}.json').read_text())['financial']['scenarios']
+                    f=json.loads((ROOT/content['evidence_paths']['cases']/f'{stem}.json').read_text())['financial']['scenarios']
                     rows.append([label]+[f"{f[k]['enterprise_value_bn']*10:.2f}" for k in ['base','upside','downside']])
                 story.extend([table(rows,[0.43,0.19,0.19,0.19]),Spacer(1,9)])
             elif kind=='runtime':
@@ -169,7 +169,7 @@ def make_pdf(output, content, font_path):
                 story.append(Paragraph(escape(text),normal))
     def footer(canvas, doc):
         canvas.saveState();canvas.setFont('CJK',8.5);canvas.setFillColor(colors.HexColor('#58626A'))
-        canvas.drawString(44,24,'Claim2Value　2026年10月2日');canvas.drawRightString(A4[0]-44,24,str(doc.page));canvas.restoreState()
+        canvas.drawString(44,24,'Claim2Value　2026年10月3日');canvas.drawRightString(A4[0]-44,24,str(doc.page));canvas.restoreState()
     doc.build(story,onFirstPage=footer,onLaterPages=footer)
 
 
@@ -187,3 +187,4 @@ def main():
 
 
 if __name__=='__main__':main()
+
