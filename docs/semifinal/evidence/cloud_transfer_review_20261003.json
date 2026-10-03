@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-03",
+  "scope": "TRANSFER_TOOL_LOCAL_REVIEW_NOT_REAL_CLOUD_EXECUTION",
+  "google_drive_notebook": {
+    "id": "1aJy2_gPvAbkBhqJIYmwBomMDMJvLac-P",
+    "url": "https://colab.research.google.com/drive/1aJy2_gPvAbkBhqJIYmwBomMDMJvLac-P",
+    "mime_type": "application/vnd.google.colaboratory",
+    "bytes": 17054,
+    "metadata_readback_verified": true
+  },
+  "checks": {
+    "local_pytest_command": "OPENBLAS_NUM_THREADS=1 .venv-demo/bin/python -m pytest tests/test_cloud_training_transfer.py tests/test_training_transfer.py -q",
+    "local_contract_tests_passed": 12,
+    "local_pytest_seconds": 0.06,
+    "nbformat_valid": true,
+    "code_cell_syntax_valid": true,
+    "embedded_module_definitions_executed_locally": true,
+    "embedded_sources_equal_reviewed_modules": true,
+    "execution_outputs_empty": true
+  },
+  "limits": {
+    "google_colab_authenticated_execution": false,
+    "actual_original_training_download": false,
+    "actual_drive_parts_uploaded": false,
+    "model_training": false,
+    "full_repository_test_suite_rerun": false,
+    "required_user_step": "Open notebook, Run all, complete own Google authentication if requested"
+  },
+  "latest_original_fetch_error": {
+    "http_status": 413,
+    "file_bytes": 622965149,
+    "connector_single_file_limit_bytes": 268435456,
+    "retry_after_new_drive_grant": true
+  },
+  "sha256": {
+    "scripts/cloud_training_transfer.py": "92ce553386fbba7a4fec128505140786a21d38aa9854e110ff4202c66f431cc7",
+    "scripts/build_cloud_transfer_notebook.py": "bf7e76f944565de97ea1826645e8bd864fca3390b9d0400710e815f5e180a03c",
+    "tests/test_cloud_training_transfer.py": "33fb8f885aed91bf23eaa10ee289e93b72d88ddd2243c12427aaac7ba2158f97",
+    "notebooks/Claim2Value_Drive云端分割.ipynb": "b7399bfb7027f9b3142555e2e958d921509d987e58ae2b26cbf4b79f9d9eb4bb",
+    "scripts/transfer_training_data.py": "47bae6c5085a52bea420f29dd398f2d9da6f760df934999e58137d17f632a92e"
+  }
+}

@@ -1,10 +1,24 @@
-# 让云端继续训练：只传训练文件的三个原始字节分段
+# 让云端继续训练：在 Colab 分割训练文件并写回 Drive
 
 2026-10-03更新：云端已成功下载官方test.parquet（144652201字节），并核验官方SHA-256、结构、1212个交易日、每日400公司和信息日期。此前测试下载403已解除。尚未训练或生成真实名单。
 
 唯一数据获取阻塞是train.parquet：622965149字节超出当前插件单文件268435456字节上限，413不是重新授权能解决的。原始Drive数据及既有共享方式保持不变。
 
-## 你只需要完成一次小操作
+## 推荐：全程在 Google 云端处理
+
+已在项目 Drive 目录创建并通过元数据读回核验：[Claim2Value 云端分割笔记本](https://colab.research.google.com/drive/1aJy2_gPvAbkBhqJIYmwBomMDMJvLac-P)。不需要将训练文件下载到自己的电脑。
+
+1. 打开以上笔记本，选择「运行时 → 全部运行」。
+2. 若 Google 提示登录或授权，选择有训练文件访问权的 Google 账号。Colab 登录与 ChatGPT 的 Drive 插件授权独立，这一步需要本人完成。
+3. 等待最后输出 `COMPLETE`，将输出的新文件夹链接或名字发给助手。正常结果是三个 part 文件和一个 `parts_manifest.json`；未出现 `COMPLETE` 时不能当作完成。
+
+笔记本通过官方 Drive SDK 以 8 MiB 请求读取原件到 Colab 临时磁盘，核验完整官方 SHA-256，分割成最多 200 MiB 的原始字节段，再写入现有项目目录的新子文件夹。上传后逐段核对服务器字节数和 MD5，全部通过才上传最终 manifest。原文件及其共享权限保持原样；重跑会另建文件夹。
+
+当前状态：笔记本已上传，格式、语法、嵌入代码及 12 项本地传输检查通过；实际 Google Colab 登录、SDK 传输和大文件运行尚未执行。当前插件没有启动 Colab 运行环境的接口，重新给予 Drive 权限后直接下载训练原件仍返回 413。运行错误请回传错误文字。
+
+代码与验证见 `scripts/cloud_training_transfer.py`、`scripts/build_cloud_transfer_notebook.py`、`notebooks/Claim2Value_Drive云端分割.ipynb` 和 `evidence/cloud_transfer_review_20261003.json`。Notebook 自带传输源码，运行时不拉取可变 GitHub 源码，也不包含原始数据或凭据。
+
+## 备用：在自己的电脑分段后上传
 
 1. 从已共享Drive下载原始train.parquet到自己电脑，例如C:\FEL_MARKET\train.parquet。
 2. 解压分段工具包，Python3运行下面命令（仅使用Python标准库，无需安装依赖）：
