@@ -1,0 +1,444 @@
+{
+  "date": "2026-10-03",
+  "scope": "REAL_OFFICIAL_DATA_BASELINE_NOT_COMPETITION_SCORE",
+  "selection_rule": "maximize minimum fold net Sharpe; then mean; then smaller bonus; then smaller alpha",
+  "selected": {
+    "alpha": 1e-05,
+    "hold_bonus": 0.0008,
+    "fold_sharpes": [
+      -0.10166514307510185,
+      0.7885331846721062
+    ]
+  },
+  "candidates": [
+    {
+      "alpha": 1e-05,
+      "hold_bonus": 0.0,
+      "fold_sharpes": [
+        -0.7120743827692088,
+        0.10242960583793011
+      ]
+    },
+    {
+      "alpha": 1e-05,
+      "hold_bonus": 0.0004,
+      "fold_sharpes": [
+        -0.6141458452392432,
+        1.2480981619655134
+      ]
+    },
+    {
+      "alpha": 1e-05,
+      "hold_bonus": 0.0008,
+      "fold_sharpes": [
+        -0.10166514307510185,
+        0.7885331846721062
+      ]
+    },
+    {
+      "alpha": 0.001,
+      "hold_bonus": 0.0,
+      "fold_sharpes": [
+        -0.7179635684795194,
+        0.11649196588699802
+      ]
+    },
+    {
+      "alpha": 0.001,
+      "hold_bonus": 0.0004,
+      "fold_sharpes": [
+        -0.5839341507643863,
+        1.3269107139815712
+      ]
+    },
+    {
+      "alpha": 0.001,
+      "hold_bonus": 0.0008,
+      "fold_sharpes": [
+        -0.10166514307510185,
+        0.621627752847169
+      ]
+    },
+    {
+      "alpha": 0.1,
+      "hold_bonus": 0.0,
+      "fold_sharpes": [
+        -0.8124683682426936,
+        -0.040516374125666055
+      ]
+    },
+    {
+      "alpha": 0.1,
+      "hold_bonus": 0.0004,
+      "fold_sharpes": [
+        -0.6859994787832572,
+        1.0641637137402054
+      ]
+    },
+    {
+      "alpha": 0.1,
+      "hold_bonus": 0.0008,
+      "fold_sharpes": [
+        -0.2357041263398154,
+        0.5325321920726707
+      ]
+    }
+  ],
+  "fold_comparisons": [
+    {
+      "fold": {
+        "id": "A",
+        "train_end": "2015-12-31",
+        "start": "2016-01-01",
+        "end": "2017-12-31"
+      },
+      "strategy": {
+        "days": 488,
+        "net_sharpe": -0.10166514307510185,
+        "gross_sharpe_same_holdings": -0.08523502784943546,
+        "final_nav": 0.9641546791478443,
+        "net_annualized_return_252": -0.018673635838350577,
+        "net_annualized_volatility_252": 0.11757188716192238,
+        "max_drawdown_including_initial_nav": -0.2205517609915023
+      },
+      "fixed20": {
+        "days": 488,
+        "net_sharpe": -0.22039296812184883,
+        "gross_sharpe_same_holdings": -0.20786277998441252,
+        "final_nav": 0.9337656461043076,
+        "net_annualized_return_252": -0.03476948677327707,
+        "net_annualized_volatility_252": 0.12512723982513158,
+        "max_drawdown_including_initial_nav": -0.29512564804566066
+      },
+      "turnover": {
+        "mean_constituent_replacement_fraction_excluding_first_day": 0.002361396303901438,
+        "absolute_nav_units_total_fees": 0.0038085305333754754,
+        "fee_note": "absolute fee sum uses evolving NAV; it is not a turnover rate"
+      },
+      "accounting_sha256": "34bc92f0e394129d6ec9f532c96d89aa281010d851edd83bab4b9bdd83044c5e"
+    },
+    {
+      "fold": {
+        "id": "B",
+        "train_end": "2017-12-31",
+        "start": "2018-01-01",
+        "end": "2019-12-31"
+      },
+      "strategy": {
+        "days": 487,
+        "net_sharpe": 0.7885331846721062,
+        "gross_sharpe_same_holdings": 0.8053677011473405,
+        "final_nav": 1.1555014187349806,
+        "net_annualized_return_252": 0.07765767158643477,
+        "net_annualized_volatility_252": 0.10135722857627254,
+        "max_drawdown_including_initial_nav": -0.14006231577760342
+      },
+      "fixed20": {
+        "days": 487,
+        "net_sharpe": -0.1077583881810539,
+        "gross_sharpe_same_holdings": -0.09359259616987078,
+        "final_nav": 0.967626655999689,
+        "net_annualized_return_252": -0.016884690697273053,
+        "net_annualized_volatility_252": 0.10599964371424198,
+        "max_drawdown_including_initial_nav": -0.15859668122313708
+      },
+      "turnover": {
+        "mean_constituent_replacement_fraction_excluding_first_day": 0.00102880658436214,
+        "absolute_nav_units_total_fees": 0.0036468621944678917,
+        "fee_note": "absolute fee sum uses evolving NAV; it is not a turnover rate"
+      },
+      "accounting_sha256": "2aedeb93f6252c86519ccd1e67655ac3ceadce68f29080df063484fdb5de87fd"
+    },
+    {
+      "fold": {
+        "id": "2020",
+        "train_end": "2019-12-31",
+        "start": "2020-01-01",
+        "end": "2020-12-31"
+      },
+      "strategy": {
+        "days": 243,
+        "net_sharpe": -0.09126800372304775,
+        "gross_sharpe_same_holdings": -0.07458680199520176,
+        "final_nav": 0.982997168739949,
+        "net_annualized_return_252": -0.017626983277655328,
+        "net_annualized_volatility_252": 0.11840299771389458,
+        "max_drawdown_including_initial_nav": -0.13937446698508194
+      },
+      "fixed20": {
+        "days": 243,
+        "net_sharpe": -0.6630137441944934,
+        "gross_sharpe_same_holdings": -0.6470236066098933,
+        "final_nav": 0.9195528758368708,
+        "net_annualized_return_252": -0.08329901901115988,
+        "net_annualized_volatility_252": 0.12028828467166573,
+        "max_drawdown_including_initial_nav": -0.18442659221159374
+      },
+      "turnover": {
+        "mean_constituent_replacement_fraction_excluding_first_day": 0.0006198347107438017,
+        "absolute_nav_units_total_fees": 0.0018954367845961787,
+        "fee_note": "absolute fee sum uses evolving NAV; it is not a turnover rate"
+      },
+      "accounting_sha256": "fe23691c8b7c1000851d7c744016e75e809cb9c6e3c0073f2910d4d7a11be93a"
+    }
+  ],
+  "holdout_used_for_selection": false,
+  "holdout_attempts": 1,
+  "test_sharpe": null,
+  "final": {
+    "context": {
+      "selection_lock_sha256": "2b0e5ad9028c28af72453566e79098bb2c4e2bca7b0297e4c7f7b6e0884f9f90",
+      "holdout_summary_sha256": "153e85685659b6a7037940f4f141cff7ceecaaee954465c01f6807ecaeb2302e"
+    },
+    "files_sha256": {
+      "submission.csv": "b0e6049b2dc327dc7c1576a13fe47a039792f68d43ab8aadf8bbdf0d655d8a1f",
+      "code.zip": "670c1eb1e9540369380c5656e946c67372160e7cbba68109687b5aaebcfaa942"
+    },
+    "status": "COMPLETE",
+    "official_check": {
+      "status": "VALID",
+      "problem_id": "FEL-MARKET-2026-LOCAL-v1.2.1",
+      "days": 1212,
+      "rows": 24240,
+      "same_as_template": false
+    },
+    "reproduction_matches": true,
+    "test_sharpe": null,
+    "report_pptx_created": false,
+    "ai_tools": "ChatGPT Work / Codex assisted code and report authoring and review; no Qwen/Kimi model API used in this run; exact serving model identifier not recorded by the program."
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "pyarrow": "20.0.0",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39"
+  },
+  "runtime": [
+    {
+      "phase": "develop",
+      "exit_code": 0,
+      "elapsed_seconds": 224.086,
+      "maximum_child_rss_kib_linux": 499404,
+      "user_cpu_seconds": 221.810322,
+      "system_cpu_seconds": 4.190024,
+      "dependency_install_included": false,
+      "api_calls_for_modeling": 0,
+      "openblas_threads": 1,
+      "omp_threads": 1
+    },
+    {
+      "phase": "holdout",
+      "exit_code": 0,
+      "elapsed_seconds": 34.111,
+      "maximum_child_rss_kib_linux": 465168,
+      "user_cpu_seconds": 33.607138,
+      "system_cpu_seconds": 0.778602,
+      "dependency_install_included": false,
+      "api_calls_for_modeling": 0,
+      "openblas_threads": 1,
+      "omp_threads": 1
+    },
+    {
+      "phase": "finalize",
+      "exit_code": 0,
+      "elapsed_seconds": 46.998,
+      "maximum_child_rss_kib_linux": 452148,
+      "user_cpu_seconds": 45.876119,
+      "system_cpu_seconds": 1.4720469999999999,
+      "dependency_install_included": false,
+      "api_calls_for_modeling": 0,
+      "openblas_threads": 1,
+      "omp_threads": 1
+    }
+  ],
+  "runtime_total_seconds": 305.195,
+  "chart": {
+    "categories": [
+      "起点",
+      "01月末",
+      "02月末",
+      "03月末",
+      "04月末",
+      "05月末",
+      "06月末",
+      "07月末",
+      "08月末",
+      "09月末",
+      "10月末",
+      "11月末",
+      "12月末"
+    ],
+    "strategy_nav": [
+      1.0,
+      1.0388314202659052,
+      1.0659874277366854,
+      1.0269592695480725,
+      0.9913703104862026,
+      0.9968330424679969,
+      0.9756346094265452,
+      0.9710433031553175,
+      0.9741298525882144,
+      0.9827621017284262,
+      0.9833194836412174,
+      0.9932308361471238,
+      0.982997168739949
+    ],
+    "fixed20_nav": [
+      1.0,
+      1.0151198794586191,
+      1.0175510935831835,
+      0.9826079054336804,
+      0.9458464330515954,
+      0.9612943989681708,
+      0.921390900797288,
+      0.9097371605307862,
+      0.9046450283646813,
+      0.8962494106394627,
+      0.9063108068968914,
+      0.8966101956962218,
+      0.9195528758368708
+    ],
+    "sample_note": "Public 2020 holdout only. Month-end actual account NAV; initial NAV 1. Terminal fee included."
+  },
+  "provenance_sha256": {
+    "plan.json": "b7e1cbc16335745b9adeb7f459266246e7febcd629afa87b0798d4a9bf38c182",
+    "selection_lock.json": "2b0e5ad9028c28af72453566e79098bb2c4e2bca7b0297e4c7f7b6e0884f9f90",
+    "holdout_started.json": "955a498fe2ecd08fec29c09ce0ee6adc68c0f7dbc978e57c519707b1c31e47b6",
+    "holdout_summary.json": "153e85685659b6a7037940f4f141cff7ceecaaee954465c01f6807ecaeb2302e",
+    "final/receipt.json": "c147100271f06b4757ba8d25d40c081545ad87baaabffa31e15ee42978a66ad1"
+  },
+  "data_sha256": {
+    "train": "482d4c0387e9da2facd77f722fa465b2d69ec7f119d96933c57761790f4d9519",
+    "test": "015ce29eade2ddd199e23b68bb4c829b004750e2d02e13f1b4a2550024887171"
+  },
+  "tools_sha256": "50ce8aedf54029b2ddb1f3afb703c8a25c8364d424ccf9ea9f641175bc55a07e",
+  "prediction_run": {
+    "command": "predict",
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "tools_sha256": "50ce8aedf54029b2ddb1f3afb703c8a25c8364d424ccf9ea9f641175bc55a07e",
+    "model_sha256": "0245c0c25f84e04916855129c04b2c18155cc7027f3d8ac251004576110c1700",
+    "code_sha256": "375f4a512375eb0e1e69ef3440a8a5b97e3e510bab4103eafcf901d529cd33b6",
+    "train_end": "2020-12-31",
+    "alpha": 1e-05,
+    "hold_bonus": 0.0008,
+    "test_return_access": false,
+    "selection_score": "predicted_relative_return_plus_incumbent_bonus",
+    "status": "COMPLETE",
+    "holding_rows": 24240,
+    "holdings_sha256": "b0e6049b2dc327dc7c1576a13fe47a039792f68d43ab8aadf8bbdf0d655d8a1f",
+    "submission_check": {
+      "status": "VALID",
+      "problem_id": "FEL-MARKET-2026-LOCAL-v1.2.1",
+      "days": 1212,
+      "rows": 24240,
+      "same_as_template": false
+    },
+    "test_sharpe": null,
+    "elapsed_seconds": 5.441
+  },
+  "reproduction_run": {
+    "command": "predict",
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "tools_sha256": "50ce8aedf54029b2ddb1f3afb703c8a25c8364d424ccf9ea9f641175bc55a07e",
+    "model_sha256": "0245c0c25f84e04916855129c04b2c18155cc7027f3d8ac251004576110c1700",
+    "code_sha256": "375f4a512375eb0e1e69ef3440a8a5b97e3e510bab4103eafcf901d529cd33b6",
+    "train_end": "2020-12-31",
+    "alpha": 1e-05,
+    "hold_bonus": 0.0008,
+    "test_return_access": false,
+    "selection_score": "predicted_relative_return_plus_incumbent_bonus",
+    "status": "COMPLETE",
+    "holding_rows": 24240,
+    "holdings_sha256": "b0e6049b2dc327dc7c1576a13fe47a039792f68d43ab8aadf8bbdf0d655d8a1f",
+    "submission_check": {
+      "status": "VALID",
+      "problem_id": "FEL-MARKET-2026-LOCAL-v1.2.1",
+      "days": 1212,
+      "rows": 24240,
+      "same_as_template": false
+    },
+    "test_sharpe": null,
+    "elapsed_seconds": 5.711
+  },
+  "ai_tools": "ChatGPT Work / Codex assisted code and report authoring and review; no Qwen/Kimi model API used in this run; exact serving model identifier not recorded by the program.",
+  "limitations": [
+    "Anonymous factors have no verified economic names.",
+    "Single 2020 holdout, no independent multi-year test-return evaluation.",
+    "Development selection uses 9 candidates and has selection risk.",
+    "Full test-period returns and competition rank/bonus are not public.",
+    "Prediction determinism is checked in the same Linux environment only.",
+    "Compute monetary cost is not metered; no model API calls."
+  ],
+  "presentation_review": {
+    "result": "PASS",
+    "slides": 13,
+    "slide_limit": 20,
+    "native_tables": 7,
+    "native_charts": 1,
+    "embedded_editable_chart_workbooks": 1,
+    "all_final_slides_rendered": true,
+    "individually_visually_inspected_slides": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "visual_findings": [],
+    "chart_points_match_original_accounting_to_6_decimals": true,
+    "all_sharpe_values_recomputed_from_official_daily_net_returns": true,
+    "native_powerpoint_opened": false,
+    "sha256": "d51434dc6bb64e5ddcdb458b8bb575f5b3232327fe201d30155c1c12c0970488",
+    "source_builder_sha256": "fd1fd15860405b750a36c610f3c1deca46c895d59fc5d47ef177550d0f7fee0c"
+  },
+  "independent_code_package_reproduction": {
+    "scope": "ACTUAL_EXTRACTED_CODE_ZIP_REPRODUCTION_SAME_PINNED_LINUX_ENV",
+    "result": "PASS",
+    "prediction_seconds": 5.797,
+    "submission_sha256": "b0e6049b2dc327dc7c1576a13fe47a039792f68d43ab8aadf8bbdf0d655d8a1f",
+    "official_check": {
+      "status": "VALID",
+      "problem_id": "FEL-MARKET-2026-LOCAL-v1.2.1",
+      "days": 1212,
+      "rows": 24240,
+      "same_as_template": false
+    },
+    "code_zip_sha256": "106332782f1bb8ce3b0b594315f371ca7391c2b56c2289cc1d16571149954990",
+    "same_environment_only": true,
+    "new_dependency_install": false,
+    "model_code_changed_for_delivery": false,
+    "documentation_repackaged_after_review": true,
+    "original_final_code_zip_retained": true
+  },
+  "test_holdings_structure_review": {
+    "date_count": 1212,
+    "min_companies": 20,
+    "max_companies": 20,
+    "first_date": "2021-01-04",
+    "last_date": "2025-12-31",
+    "unique_holding_sets": 31,
+    "total_added_constituents_excluding_first_day": 30,
+    "mean_daily_constituent_replacement_fraction_excluding_first_day": 0.0012386457473162675,
+    "test_returns_read": false,
+    "used_to_fit_preprocessing_or_select_parameters": false
+  },
+  "delivery_files_sha256": {
+    "code.zip": "106332782f1bb8ce3b0b594315f371ca7391c2b56c2289cc1d16571149954990",
+    "submission.csv": "b0e6049b2dc327dc7c1576a13fe47a039792f68d43ab8aadf8bbdf0d655d8a1f",
+    "技术题报告.pptx": "d51434dc6bb64e5ddcdb458b8bb575f5b3232327fe201d30155c1c12c0970488"
+  },
+  "delivery_code_note": "Delivery code.zip refreshes README documentation after review. Original immutable final/receipt.json binds the earlier archived code.zip. Generating model/code unchanged; new delivered zip independently reproduced."
+}

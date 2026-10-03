@@ -1,6 +1,6 @@
 # 统一技术题：本地可复现基线
 
-与Claim2Value作品估值模块独立。依据Drive中的FEL-MARKET-2026-LOCAL-v1.2.1说明实现。本轮完成代码、合成数据集成检查和防泄漏回归，尚未完成真实训练、真实测试名单或真实验证Sharpe。
+与Claim2Value作品估值模块独立，依据FEL-MARKET-2026-LOCAL-v1.2.1说明实现。三阶段流程及真实运行记录分别见执行指南和`docs/semifinal/evidence/official_technical_run_20261003.json`。实际完成状态以各阶段receipt为准。测试收益不公开，格式有效不代表成绩高。
 
 ## 2026-10-03新增：可执行的完整实验流程
 
@@ -54,7 +54,7 @@ python -m competition.baseline predict --tools C:\FEL_MARKET\tools.py --test C:\
 
 这里alpha/hold_bonus为演示值，必须换成开发折选定并冻结的值，不代表已找到最优组合。predict逐日生成submission.csv并调用官方check；失败不得标完整提交。run_summary.json的test_sharpe始终null，因为测试收益不公开。
 
-再到另一个新目录重复predict，比较CSV的SHA-256。复现包保留实际模型JSON、代码、依赖、冻结参数、种子和所用AI工具。最终07_技术题还须有code.zip与20页以内技术题报告.pptx；本轮没有生成最终三件套，也没有向赛事平台提交。
+再到另一个新目录重复predict，比较CSV的SHA-256。复现包保留实际模型JSON、代码、依赖、冻结参数、种子和所用AI工具。最终07_技术题须有submission.csv、code.zip与20页以内技术题报告.pptx；完整状态以对应运行receipt和报告交付记录为准。没有通过这些命令向赛事平台提交。
 
 ## Review与复跑
 
@@ -67,9 +67,9 @@ smoke用确定性模拟数据，真实官方工具验收CSV解析、初始买费
 
 ## 当前数据落地限制
 
-Drive训练文件622965149字节，大于连接器268435456字节单文件上限，返回413。测试文件144652201字节的较早落地下载返回403；本轮重试已成功下载并通过官方SHA-256、schema、1212日历、每日400公司与asof日期核验，记录见docs/semifinal/evidence/test_acquisition_20261003.json。测试数据不含收益，尚未执行真实训练/持仓预测。
+两份官方数据均已取得并核验。训练文件622965149字节经用户运行Colab分段后，由云端逐字节还原，完整SHA-256与官方一致，5089交易日、2035600行、每天400公司及信息日期通过核验。测试文件144652201字节经重试下载并核验1212交易日。记录见`docs/semifinal/evidence/train_acquisition_20261003.json`和`test_acquisition_20261003.json`。测试数据不含收益。
 
-云端接续可用[原始字节分段传输](../docs/semifinal/cloud_data_transfer_guide.md)：本机仅下载并将train.parquet分成3段上传私人Drive，云端拼回官方原文件后训练。也可直接在本机按前述完整流程执行，回传真实运行记录。两种方式均不要求公开上传赛事原数据。
+大文件可用[Colab原始字节分段传输](../docs/semifinal/cloud_data_transfer_guide.md)，不用本机下载。也可直接在本机按前述完整流程执行。原始数据保留私人Drive，不公开上传赛事Parquet。
 
 复杂模型、因子筛选、滚动重训等后置，先获得真实基线再判断增量。当前代码只是一个可测量起点，不保证技术题加分或收益。
 
