@@ -1,0 +1,5 @@
+﻿case_id,claim,source,source_url,source_locator
+synthetic_unit,产品额定扭矩为172Nm,合成产品手册：产品额定扭矩为0.172kNm,,合成示例，不是真实原件
+synthetic_model,X型号额定扭矩为172Nm,合成产品手册：Y型号额定扭矩为180Nm；X型号额定扭矩为172Nm,,合成示例，不是真实原件
+synthetic_conflict,X型号额定扭矩为172Nm,合成产品手册：X型号额定扭矩为180Nm,,合成示例，不是真实原件
+synthetic_missing,公司产品适用于机器人。,,,缺证处理演示

@@ -145,16 +145,20 @@ class CsvEndToEndTests(unittest.TestCase):
         self.assertEqual(p.comparability, Comparability.NOT_COMPARABLE)
         self.assertIn("weight_kg", p.missing_fields)
 
-    def test_nabtesco_row_downgraded_after_column_mismatch(self):
-        """纳博 RV-20E 行因 PDF 抽取列错位（SH_003 caliber）整体降级。
-
-        该行不再携带 rated==peak 的"疑似"警告（数值已置为待补充），
-        而是直接评为 not_comparable 并被 filter_comparable 排除出基准池——
-        证据质量不足以参与可比性判断时，宁可缺样本也不污染基准。
-        """
+    def test_nabtesco_official_spec_is_rated_not_start_stop_torque(self):
+        """Official table restores explicit values; density stays derived."""
         p = self.by_model["RV-20E"]
-        self.assertEqual(p.comparability, Comparability.NOT_COMPARABLE)
-        self.assertNotIn(p.model, [q.model for q in filter_comparable(self.params)])
+        self.assertEqual(p.torque_nm, 167)
+        self.assertEqual(p.torque_density_nm_kg, 35.53)  # four significant digits
+        self.assertEqual(p.comparability, Comparability.APPROXIMATE)
+        self.assertTrue(p.provenance['torque_density_nm_kg'].startswith('推算'))
+        self.assertFalse(any('额定扭矩(167.0)≈峰值' in w for w in p.warnings))
+
+    def test_shpr_speed_range_is_not_peak_torque(self):
+        p = self.by_model['SHPR-20E']
+        self.assertEqual(p.torque_nm, 167)
+        self.assertEqual(p.torque_density_nm_kg, 35.53)
+        self.assertIn('15r/min', p.notes)
 
     def test_rows_with_pending_fields_do_not_raise(self):
         p = self.by_model["Y系列（三次谐波）"]

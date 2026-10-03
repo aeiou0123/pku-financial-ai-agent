@@ -90,9 +90,8 @@ class MappingProvenanceTests(unittest.TestCase):
         self.assertAlmostEqual(assumption.elasticity, 0.30)
         self.assertAlmostEqual(
             assumption.delta_pct,
-            # 同业中位数 31.0：纳博特斯克 RV-20E 行因 PDF 抽取列错位
-            # （SH_003 caliber）已降级为 not_comparable，不再进入基准池
-            (20.4 / 31.0 - 1.0) * 0.30, places=6,
+            # RV/SHPR 不得混入谐波结构基准；仍只是开发情景的参数比较。
+            (20.4 / 31.2 - 1.0) * 0.30, places=6,
         )
         # 依据链四段齐全：工程参数 / ontology 规则 / 同业基准 / 行业数据
         chain = "\n".join(assumption.provenance_chain)
@@ -101,6 +100,30 @@ class MappingProvenanceTests(unittest.TestCase):
         self.assertIn("同业基准", chain)
         self.assertIn("行业数据", chain)
         self.assertIn("绿的谐波", chain)
+
+    def test_other_architecture_cannot_change_harmonic_baseline(self):
+        target = _param("测试公司", "X-1", 20, Comparability.COMPARABLE)
+        peer = _param("同业甲", "Y-1", 30, Comparability.COMPARABLE)
+        rv = _param("同业乙", "RV-20E", 999, Comparability.COMPARABLE)
+        rv.product_series = "RV"
+        unknown = _param("同业丙", "Z", 888, Comparability.COMPARABLE)
+        unknown.product_series = "UNREGISTERED"
+        result = map_engineering_to_economics([target, peer, rv, unknown],
+            ontology=self.ontology, aux_rows=[], target_company="测试公司",
+            industry_data=self.industry)
+        torque = [a for a in result.quantitative() if a.rule_id == "torque_density_to_share"][0]
+        self.assertEqual(torque.peer_median, 30)
+        self.assertTrue(any("结构口径" in w for w in result.warnings))
+
+    def test_mixed_target_architectures_abstain_from_gear_baseline(self):
+        target = _param("测试公司", "X-1", 20, Comparability.COMPARABLE)
+        rv = _param("测试公司", "RV-20E", 100, Comparability.COMPARABLE)
+        rv.product_series = "RV"
+        peer = _param("同业甲", "Y-1", 30, Comparability.COMPARABLE)
+        result = map_engineering_to_economics([target, rv, peer],
+            ontology=self.ontology, aux_rows=[], target_company="测试公司",
+            industry_data=self.industry)
+        self.assertFalse(any(a.rule_id == "torque_density_to_share" for a in result.quantitative()))
 
     def test_not_comparable_is_hard_excluded_from_quantitative(self):
         # 目标公司唯一的扭矩密度样本标 not_comparable：必须只出定性说明

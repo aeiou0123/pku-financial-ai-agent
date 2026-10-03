@@ -1,15 +1,15 @@
 company,product_series,model,rated_torque_nm,peak_torque_nm,weight_kg,torque_density_nm_kg,efficiency_pct,backlash_arcsec,lifetime_h,max_input_speed_rpm,source_url,notes
-绿的谐波,LHS,LHS-32,51,130,2.5,20.4,80,60,15000,6500,https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf,国金证券行业研报对比表；额定扭矩取范围下限；齿隙精度≤1 arcmin
+绿的谐波,LHS,LHS-32,51,待补充,2.5,20.4,80,60,15000,6500,https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf,国金证券行业研报对比表；额定扭矩取范围下限；齿隙精度≤1 arcmin；2026-10-03：130为旧研报额定范围上限，未证明峰值，移除错误峰值；旧51Nm/2.5kg保留历史研报标记，官网现版54-137Nm与旧版不同，未混版替换
 绿的谐波,LCS,LCS-20-100-C-I,38,140,待补充,待补充,待补充,待补充,15000,6000,https://m.chinabaogao.com/detail/631742.html,观研报告网：绿的谐波与哈默纳科同级产品对比
 绿的谐波,Y系列,Y系列（三次谐波）,待补充,待补充,待补充,待补充,待补充,待补充,待补充,待补充,,年报提及：扭转刚度提升1倍以上，单向传动精度提升2倍以上
 绿的谐波,KAS,KAS系列旋转执行器,待补充,待补充,待补充,待补充,待补充,待补充,待补充,待补充,,2024/2025年报：高转矩密度旋转执行器
 步科股份,FMK,FMK02509-0004-5511-7DP02,0.063,待补充,待补充,待补充,待补充,待补充,待补充,5500,https://www.kinco.cn/productdetail/wkljdj30.html,WebSearch公开参数；重量/扭矩密度官网未披露
 步科股份,FMK,FMK06018-0020-2028N-10DP02,1.0,待补充,待补充,待补充,待补充,待补充,待补充,2000,https://www.kinco.cn/productdetail/wkljdj30.html,WebSearch公开参数
 步科股份,FMK,FMK11525-0117-3260N-10DP02,3.5,待补充,待补充,待补充,待补充,待补充,待补充,3200,https://www.kinco.cn/productdetail/wkljdj30.html,WebSearch公开参数
-步科股份,FMK（第四代）,FMK系列（25-115mm外径）,待补充,待补充,待补充,待补充,待补充,待补充,待补充,待补充,https://www.aibangbots.com/a/2212,2025年7月发布；同尺寸扭矩输出提升约22%；噪音<55dB
-双环传动/环动科技,SHPR,SHPR-20E,110,231,4.7,23.4,80,60,待补充,待补充,https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf,国金证券行业研报：RV-20E同型号参数对比
+步科股份,FMK（第四代）,FMK系列（25-115mm外径）,待补充,待补充,待补充,待补充,待补充,待补充,待补充,待补充,https://www.aibangbots.com/a/2212,2025年官方发布材料可确认第四代FMK产品发布；同尺寸22%仍未找到该官方页数字及可比工况，不作已验证性能
+双环传动/环动科技,SHPR,SHPR-20E,167,待补充,4.7,待补充,待补充,60,待补充,待补充,https://www.finemotion.com.cn/home/Index/product?id=34,2026-10-02复核环动官方额定值表；15r/min对应167Nm，重量4.7kg；110-231Nm对应输出转速60-5r/min，不是额定/峰值或减速比上下限；启停容许412Nm与瞬时最大容许833Nm分别记录于审计，未混填峰值；效率原80%无该页依据，移除。网页无版本日期，历史时期适用性未认证
 环动科技,RV,RV减速器（6-1000kg机器人覆盖）,待补充,待补充,待补充,待补充,待补充,待补充,待补充,待补充,,招股书：实现6-1000kg工业机器人所需精密减速器全覆盖
 Harmonic Drive,CSG,CSG-32,99,178,3.2,31.0,80,60,10000,6500,https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf,国金证券行业研报对比表；额定扭矩取范围下限
 Harmonic Drive,CSF,CSF-20-100-2UH,40,147,待补充,待补充,待补充,待补充,10000,6000,https://m.chinabaogao.com/detail/631742.html,观研报告网：与绿的谐波LCS-20对比
 来福谐波,LHT,LHT-32,99,178,3.15,31.4,80,60,待补充,待补充,https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf,国金证券行业研报对比表
-纳博特斯克,RV,RV-20E,待补充,待补充,待补充,待补充,待补充,待补充,待补充,待补充,https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf,国金研报图表65 PDF抽取列错位待复核（同SH_003 caliber）：原表412Nm/2.5kg/164.8Nm/kg疑串行，不参与可比性基准；以原始研报PDF复核后回填
+纳博特斯克,RV,RV-20E,167,待补充,4.7,待补充,待补充,待补充,6000,待补充,https://precision.nabtesco.com/tw/products/detail/RV-E,2026-10-02复核纳博特斯克RV-E官网；RV-20E额定167Nm、输出15r/min、重量4.7kg；412Nm为启停容许转矩，不是额定值，2.5kg对应RV-6E而非RV-20E；仅回填明确栏目，峰值与效率未填。网页无版本日期，不认证历史规格

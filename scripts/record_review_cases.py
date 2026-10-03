@@ -39,7 +39,7 @@ def main():
     inputs += [str(Path(p).resolve().relative_to(ROOT)) for p in (
         DEFAULT_PARAMETER_CSV, DEFAULT_ONTOLOGY_PATH, DEFAULT_INDUSTRY_SUMMARY, DEFAULT_SHARE_CSV, DEFAULT_INPUT_PATH)]
     inputs += ["app.py", "src/review_session.py", "src/workflow.py", "src/state_verifier.py",
-               "src/engineering_analyzer.py", "src/economic_mapper.py", "src/causal_critic.py", "src/financial_model.py"]
+               "src/quantity_text.py", "src/engineering_analyzer.py", "src/economic_mapper.py", "src/causal_critic.py", "src/financial_model.py"]
     manifest = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in sorted(set(inputs))}
     (args.out / "run_index.json").write_text(json.dumps({
         "python": sys.version, "platform": platform.platform(),

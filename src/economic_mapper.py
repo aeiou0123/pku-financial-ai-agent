@@ -361,6 +361,16 @@ def _raw_metric(row: Dict[str, str], metric: str) -> Optional[float]:
     return parse_numeric(row.get(metric))
 
 
+def _gear_family(series: str) -> Optional[str]:
+    """Registered architectures only; names are not evidence of matched operating conditions."""
+    key = series.strip().upper()
+    if key in {"LHS", "LCS", "CSG", "CSF", "LHT", "Y系列"}:
+        return "strain_wave"
+    if key in {"RV", "SHPR"}:
+        return "rv"
+    return None
+
+
 def _collect_pool(
     rule: Dict,
     params: List[NormalizedParameter],
@@ -377,6 +387,19 @@ def _collect_pool(
     scopes = set(rule.get("applicable_scopes", []))
     pool: List[Tuple[float, Comparability, str]] = []
     excluded: List[str] = []
+    target_families = {_gear_family(p.product_series) for p in params
+                       if p.company.startswith(target_company)
+                       and p.scope == AssemblyScope.GEAR_UNIT}
+
+    def architecture_allowed(company: str, scope: AssemblyScope, series: str) -> bool:
+        if scope != AssemblyScope.GEAR_UNIT:
+            return True
+        family = _gear_family(series)
+        # Mixed or unknown target architecture cannot define one quantitative baseline.
+        if len(target_families) != 1 or None in target_families or family not in target_families:
+            excluded.append(f"结构口径不匹配或未知，排除减速器样本：{company} {series}")
+            return False
+        return True
 
     if rule.get("metric_source") == "normalized":
         for p in params:
@@ -384,6 +407,8 @@ def _collect_pool(
                 continue
             value = _normalized_metric(p, metric)
             if value is None:
+                continue
+            if not architecture_allowed(p.company, p.scope, p.product_series):
                 continue
             desc = f"{p.company} {p.model or p.product_series} = {value}（{p.comparability.value}）"
             if p.comparability == Comparability.NOT_COMPARABLE:
@@ -402,6 +427,8 @@ def _collect_pool(
                 continue
             value = _raw_metric(row, metric)
             if value is None:
+                continue
+            if not architecture_allowed(company, scope, str(row.get("product_series", ""))):
                 continue
             desc = f"{company} {row.get('model', '')} = {value}（raw，未归一，按 approximate 处理）"
             pool.append((value, Comparability.APPROXIMATE, desc))

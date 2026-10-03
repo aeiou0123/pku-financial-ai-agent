@@ -6,9 +6,9 @@
 
 本轮新增可交互的本地核查页面：自定义声明与证据、两家公司示例情景、来源定位、JSON/Markdown报告导出。自定义声明尚未绑定公司参数，暂不自动生成估值；示例情景采用固定数据与假设。本地模式不调用大模型或实时检索。
 
-Windows 双击 `start_demo.bat`，Linux 执行 `bash start_demo.sh`；首次依赖安装需要联网。打开 http://127.0.0.1:8501 ，无账号、无需模型密钥。操作、限制、运行证据与验收状态见[评委操作导览](docs/semifinal/reviewer_quickstart.md)。完整代码176项测试通过，Windows真实电脑与真人试用仍待验收。
+Windows 双击 `start_demo.bat`，Linux 执行 `bash start_demo.sh`；首次依赖安装需要联网。打开 http://127.0.0.1:8501 ，无账号、无需模型密钥。操作、限制、运行证据与验收状态见[评委操作导览](docs/semifinal/reviewer_quickstart.md)。2026-10-03完整代码212项测试通过，Windows真实电脑与真人试用仍待验收。
 
-本地规则复测为87/98，来自19个开发声明家族，不能视为样本外业务准确率。完整输入输出、15条失败及计时边界见[开发评测记录](docs/semifinal/evidence/local_development_20261002/report.md)。信息表、项目说明与展示稿草稿的构建、Review和未完成项见[材料说明](docs/semifinal/materials_build_and_review.md)。
+本地规则复测为87/98，来自19个开发声明家族，不能视为样本外业务准确率。完整输入输出、11条未命中及计时边界见[开发评测记录](docs/semifinal/evidence/local_development_20261003/report.md)。新增[批量证据核查](docs/semifinal/batch_evidence_guide.md)及[官方规格复核](docs/semifinal/evidence/primary_source_review_20261003/review.md)。信息表、项目说明与展示稿草稿的构建、Review和未完成项见[材料说明](docs/semifinal/materials_build_and_review.md)。
 
 部署包生成、材料预检和技术题复现打包见[交付工具说明](docs/semifinal/delivery_tools.md)，材料与证据对应见[评分证据清单](docs/semifinal/materials_evidence_map.md)。
 
@@ -249,3 +249,4 @@ API key、`.env`、`*.pdf`（研究报告类）、第三方仓库代码、Python
 - 本仓库仅用于比赛协作学习，不构成投资建议。
 - 第三方代码请遵守各自 LICENSE。
 - 所有外部数据需标注来源，避免使用未公开内部信息。
+
