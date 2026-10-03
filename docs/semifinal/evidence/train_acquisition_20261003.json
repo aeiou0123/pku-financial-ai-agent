@@ -1,0 +1,23 @@
+{
+  "status": "OFFICIAL_BYTES_AND_STRUCTURE_VERIFIED",
+  "acquired_via": "user_completed_colab_and_drive_parts",
+  "source_folder_id": "1u5jlP6wQlEjxJ_LLNJbb-vDLjV82hHtK",
+  "bytes": 622965149,
+  "sha256": "482d4c0387e9da2facd77f722fa465b2d69ec7f119d96933c57761790f4d9519",
+  "rows": 2035600,
+  "days": 5089,
+  "stocks_per_day": 400,
+  "first_date": "2000-01-04",
+  "last_date": "2020-12-31",
+  "unique_date_stock": true,
+  "asof_before_return_date": true,
+  "one_asof_per_day": true,
+  "calendar_sha256": "def1fdd8ca6805b2f9e65a0d92ab4a91bddb6d17698747844e8fd0279324abe4",
+  "quality_review_read_columns": [
+    "date",
+    "asof_date",
+    "stock_id"
+  ],
+  "labels_read_for_quality_review": false,
+  "model_training_at_record_creation": false
+}
