@@ -1,0 +1,24 @@
+{
+  "status": "BLOCKED",
+  "errors": [
+    "缺失或空文件：04_运行视频.mp4",
+    "缺失或空文件：07_技术题/submission.csv",
+    "缺失或空文件：07_技术题/code.zip",
+    "缺失或空文件：07_技术题/技术题报告.pptx"
+  ],
+  "manual_review": [
+    "本地部署实际启动与人工环节需按说明验收",
+    "信息表五栏限字、必填字段及真实性需按附件一人工核对",
+    "PDF书签是否覆盖各部分及内容一致性需人工核对"
+  ],
+  "checks": {
+    "03_展示稿.pptx": {
+      "slides": 9
+    },
+    "pdf": {
+      "pages": 6,
+      "has_outline": true
+    }
+  },
+  "scope": "Structure/media inspection only; no verification of claims, performance or actual user experience."
+}
