@@ -1,0 +1,21 @@
+{
+  "scope": "REAL_OFFICIAL_TEST_FILE_ACQUISITION_AND_SCHEMA_ONLY",
+  "date": "2026-10-03",
+  "status": "PASS",
+  "bytes": 144652201,
+  "official_sha256": "015ce29eade2ddd199e23b68bb4c829b004750e2d02e13f1b4a2550024887171",
+  "official_schema_check": true,
+  "rows": 484800,
+  "trading_days": 1212,
+  "stocks_each_day": 400,
+  "calendar_sha256": "bda296fe3c1812defa6a164bd8be288fb9d66ae44f99e08635420faae2737dcf",
+  "first_date": "2021-01-04",
+  "last_date": "2025-12-31",
+  "asof_before_return_date": true,
+  "duplicate_date_stock_rows": false,
+  "test_return_access": false,
+  "test_factor_preprocessing_fit": false,
+  "model_training_run": false,
+  "train_file_obtained": false,
+  "earlier_test_http_403_resolved_on_retry": true
+}
