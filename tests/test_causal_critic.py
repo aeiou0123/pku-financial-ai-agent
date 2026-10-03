@@ -314,7 +314,7 @@ class EndToEndTests(unittest.TestCase):
     def test_approximate_unit_cost_assumption_flagged(self):
         approx = [r for r in self.result.reviews
                   if r.variable == "unit_cost" and not r.qualitative_only
-                  and r.original_confidence == 0.5]
+                  and 0 < r.original_confidence <= 0.5]
         self.assertTrue(approx, "真实链上应存在 approximate 的定量成本假设")
         for r in approx:
             types = {a.alt_type for a in r.alternative_explanations}

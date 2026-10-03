@@ -1,0 +1,26 @@
+{
+  "scope": "LINUX_INDEPENDENT_UNZIP_ACCEPTANCE",
+  "archive_sha256": "c8189d435ca0404c201262e371383bdf6380999553adf2063739ff97d2dcdf7d",
+  "archive_file": "Claim2Value_本地部署_20261003_v4.zip",
+  "files": 37,
+  "manifest_verified": true,
+  "runs": [
+    {
+      "attempt": 1,
+      "startup_seconds": 43.237,
+      "health": "ok",
+      "ui_test": "PASS"
+    },
+    {
+      "attempt": 2,
+      "startup_seconds": 0.708,
+      "health": "ok",
+      "ui_test": "PASS"
+    }
+  ],
+  "repeat_start_skipped_pip": true,
+  "batch_cli": "4 synthetic inputs reviewed; all custom valuations skipped",
+  "python": "3.12",
+  "windows_verified": false,
+  "human_browser_review": false
+}

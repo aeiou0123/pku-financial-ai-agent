@@ -31,6 +31,7 @@ state_verifier.py — Claim2Value 定义一致性验证器
 
 from __future__ import annotations
 import re
+from src.quantity_text import normalize_quantities, model_numeric_scope, QUANTITY
 from dataclasses import dataclass, field
 from typing import List, Optional, Dict, Set, Tuple
 
@@ -340,6 +341,12 @@ class StateVerifier:
 
         for qualifier, reason in self.qualifier_library.items():
             if qualifier in source and qualifier not in claim:
+                if qualifier == '国内':
+                    domestic = [c for c in re.split(r'[。；;\n]', source) if '国内' in c]
+                    # Exempt only this explicit business-location background,
+                    # not 国内市占率 or arbitrary geographic qualifiers.
+                    if domestic and all(re.fullmatch(r'\s*公司在国内开展业务[，,]?\s*', c) for c in domestic):
+                        continue
                 # 口径对豁免：claim 已包含对立口径词时，口径是明确的，不报
                 counterpart = self._QUALIFIER_PAIR_EXEMPTION.get(qualifier)
                 if counterpart and counterpart in claim:
@@ -372,17 +379,18 @@ class StateVerifier:
         if not source or not source.strip():
             return []
 
-        # 提取数值（排除年份）
-        claim_nums = set(re.findall(r'(?<!\d)(\d+\.?\d*)(?!\d)', claim))
-        source_nums = set(re.findall(r'(?<!\d)(\d+\.?\d*)(?!\d)', source))
-
-        # 排除年份
-        claim_nums = {n for n in claim_nums if not re.fullmatch(r'(?:19|20)\d{2}', n)}
-        source_nums = {n for n in source_nums if not re.fullmatch(r'(?:19|20)\d{2}', n)}
-
-        # 排除单字符数值（易歧义）
-        claim_nums = {n for n in claim_nums if len(n) >= 2}
-        source_nums = {n for n in source_nums if len(n) >= 2}
+        source = model_numeric_scope(claim, source)
+        def quantities(text):
+            pairs = {}
+            for m in QUANTITY.finditer(text):
+                pairs.setdefault(m['number'], set()).add(m['unit'])
+            return pairs
+        claim_units, source_units = quantities(claim), quantities(source)
+        def numbers(text, units):
+            values = set(re.findall(r'(?<![\d.])([+-]?\d+(?:\.\d+)?)(?![\d.])', text))
+            return {n for n in values if n in units or
+                    (len(n) >= 2 and not re.fullmatch(r'(?:19|20)\d{2}', n))}
+        claim_nums, source_nums = numbers(claim, claim_units), numbers(source, source_units)
 
         if not claim_nums or not source_nums:
             return []
@@ -394,16 +402,14 @@ class StateVerifier:
         #   扭矩密度 164.8），杀掉真正的矛盾信号。
         # - 约数数值（"超过100%"）→ ±10% 容差。约数与精确值的差异
         #   是表述粒度（"超过100%" vs 101.30%），不是篡改（SH_005_QUAL）。
-        source_floats = set()
-        for s in source_nums:
-            try:
-                source_floats.add(float(s))
-            except ValueError:
-                continue
-
         contradictions = []
         for num in claim_nums:
-            if num in source_nums:
+            candidates = source_nums
+            if num in claim_units:
+                candidates = {s for s, units in source_units.items() if units & claim_units[num]}
+                if not candidates:
+                    continue  # No registered dimension available for comparison.
+            if num in candidates:
                 continue
             try:
                 val = float(num)
@@ -414,15 +420,15 @@ class StateVerifier:
                 # 约数：±10% 容差内存在 source 值即视为匹配
                 matched = any(
                     abs(float(s) - val) / max(val, 0.01) < 0.1
-                    for s in source_nums
+                    for s in candidates
                 )
             else:
-                matched = val in source_floats
+                matched = val in {float(s) for s in candidates}
 
             if not matched:
                 contradictions.append({
                     "claim_value": num,
-                    "source_values": sorted(source_nums),
+                    "source_values": sorted(candidates),
                     "note": f"claim 中的 {num} 在 source 中未找到匹配值",
                 })
 
@@ -512,6 +518,8 @@ class StateVerifier:
         # Callers retain the original source text and its fingerprint.
         claim = claim.replace("扣非后净利润", "扣非净利润")
         source = source.replace("扣非后净利润", "扣非净利润")
+        claim = normalize_quantities(claim)
+        source = normalize_quantities(source)
 
         # ── 检测顺序即优先级（高 → 低）──
         # 口径偷换 > 数值矛盾 > 时间错位 > 来源降级 > 限定词缺失

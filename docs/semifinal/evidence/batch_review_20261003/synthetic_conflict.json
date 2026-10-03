@@ -1,0 +1,46 @@
+{
+  "claim": "X型号额定扭矩为172Nm",
+  "source": "合成产品手册：X型号额定扭矩为180Nm",
+  "verification": {
+    "verdict": "refuted",
+    "confidence": 0.09999999999999998,
+    "verdict_source": "rule_only_fallback",
+    "rule_flags": [
+      "数值矛盾：claim 中的 172 在 source 中未找到"
+    ],
+    "trust_score": 0.9,
+    "reasoning": "数值矛盾：claim 中的 172 在 source 中未找到",
+    "report": "============================================================\n  Claim2Value 验证报告\n============================================================\n\n  Claim: X型号额定扭矩为172Nm...\n  判定: 不成立\n  置信度: 0.10\n  判定来源: rule_only_fallback\n  证据可信度: 0.90\n\n  规则层检出:\n    - 数值矛盾：claim 中的 172 在 source 中未找到\n\n\n============================================================"
+  },
+  "gate": {
+    "passed": false,
+    "reason": "自定义输入尚未绑定经核对的公司参数和财务假设，仅输出规则核查，不生成估值"
+  },
+  "engineering": null,
+  "economics": null,
+  "causal": null,
+  "financial": {
+    "status": "skipped",
+    "reason": "自定义输入尚未绑定经核对的公司参数和财务假设，仅输出规则核查，不生成估值",
+    "scenarios": {}
+  },
+  "errors": [],
+  "report_markdown": "============================================================\n  Claim2Value 验证报告\n============================================================\n\n  Claim: X型号额定扭矩为172Nm...\n  判定: 不成立\n  置信度: 0.10\n  判定来源: rule_only_fallback\n  证据可信度: 0.90\n\n  规则层检出:\n    - 数值矛盾：claim 中的 172 在 source 中未找到\n\n\n============================================================",
+  "review_session": {
+    "mode": "custom_rule_review",
+    "case_id": null,
+    "company": null,
+    "created_at_utc": "2026-10-03T03:28:16.684239+00:00",
+    "elapsed_ms": 0.085,
+    "external_api_calls": 0,
+    "source_url": "",
+    "source_locator": "合成示例，不是真实原件",
+    "source_sha256": "2f2286e31b0e1ccff7272890d9588ca1efddd66fdc74bb382ab05bd62b6d61df",
+    "evidence_status": "用户输入，未核对原件",
+    "financial_scope": "未生成",
+    "limitations": [
+      "本地规则未发现异常不代表声明成立；此模式不调用大模型或实时检索",
+      "来源等级由文本规则推断，不代表原件已认证；链接与页码仅记录，不自动核验"
+    ]
+  }
+}

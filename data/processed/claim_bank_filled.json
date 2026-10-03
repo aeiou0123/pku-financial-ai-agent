@@ -215,7 +215,12 @@
         "fingerprint": "56f34fe225dafbcc"
       }
     ],
-    "notes": "降级：唯一证据为国金2022-09行业深度研报图表46（源自公司官网口径），本地缺官方datasheet，待补充后复核。 原注： torque density 约 20.4-52 Nm/kg；需与官网 datasheet 核对"
+    "notes": "降级：唯一证据为国金2022-09行业深度研报图表46（源自公司官网口径），本地缺官方datasheet，待补充后复核。 原注： torque density 约 20.4-52 Nm/kg；需与官网 datasheet 核对",
+    "review_20261003": {
+      "status": "官方产品页和手册URL已定位；历史版本未匹配",
+      "note": "官网现版32号额定54-137Nm，旧研报51-130Nm和2.5kg不能直接拼接；active parameter peak130已移除",
+      "evidence_record": "docs/semifinal/evidence/primary_source_review_20261003/review.json"
+    }
   },
   {
     "claim_id": "BK_001",
@@ -414,15 +419,15 @@
     "product": "SHPR-20E RV减速器",
     "metric": "额定扭矩/重量",
     "value": "110-231 Nm / 4.7 kg",
-    "baseline": "纳博特斯克RV-20E（412 Nm / 2.5 kg）",
+    "baseline": "纳博特斯克RV-20E（官网現版：167Nm、4.7kg、额定输出15r/min；历史规格版本未核实）",
     "source_text": "国金证券研报：RV减速器国内外主要品牌同型号参数对比表",
     "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf",
     "claim_type": "技术性能",
     "verification_status": "待验证",
     "confidence": 0.65,
     "definition_issues": [
-      "额定扭矩范围对应不同减速比",
-      "扭矩密度约23.4-49.1 Nm/kg，与180 Nm/kg目标差距大"
+      "110-231Nm对应输出转速60-5r/min，不能把范围上下限当额定与峰值",
+      "需记录规格版本与输出转速；额定15r/min对应167Nm；官方网页核对不代表实测性能"
     ],
     "evidence_list": [
       {
@@ -436,7 +441,12 @@
         "fingerprint": "2bbac0ecc324a46d"
       }
     ],
-    "notes": "降级：唯一证据为国金2022-09行业深度研报图表65参数对比表（且PDF抽取有列错位风险，需回看原始PDF），本地缺官方datasheet。 原注：需与官网/ datasheet 核对；注意180 Nm/kg可能是不同型号或测试条件"
+    "notes": "降级：唯一证据为国金2022-09行业深度研报图表65参数对比表（且PDF抽取有列错位风险，需回看原始PDF），本地缺官方datasheet。 原注：需与官网/ datasheet 核对；注意180 Nm/kg可能是不同型号或测试条件",
+    "review_20261003": {
+      "status": "官方网页部分补证，完整历史版本及工况仍待核实",
+      "evidence_record": "docs/semifinal/evidence/primary_source_review_20261003/review.json",
+      "note": "纠正先前按减速比解释110-231及竞品412Nm/2.5kg；保留历史证据摘录，不自动升级验证状态"
+    }
   },
   {
     "claim_id": "SH_003",

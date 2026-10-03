@@ -1,0 +1,46 @@
+{
+  "claim": "公司产品适用于机器人。",
+  "source": "",
+  "verification": {
+    "verdict": "abstain",
+    "confidence": 0.1,
+    "verdict_source": "rule_only_fallback",
+    "rule_flags": [
+      "无证据，规则层跳过"
+    ],
+    "trust_score": 0.0,
+    "reasoning": "规则层未发现确定性异常，但本地模式未调用 LLM，拒绝推断语义结论",
+    "report": "============================================================\n  Claim2Value 验证报告\n============================================================\n\n  Claim: 公司产品适用于机器人。...\n  判定: 拒答\n  置信度: 0.10\n  判定来源: rule_only_fallback\n  证据可信度: 0.00\n\n  规则层检出:\n    - 无证据，规则层跳过\n\n\n============================================================"
+  },
+  "gate": {
+    "passed": false,
+    "reason": "自定义输入尚未绑定经核对的公司参数和财务假设，仅输出规则核查，不生成估值"
+  },
+  "engineering": null,
+  "economics": null,
+  "causal": null,
+  "financial": {
+    "status": "skipped",
+    "reason": "自定义输入尚未绑定经核对的公司参数和财务假设，仅输出规则核查，不生成估值",
+    "scenarios": {}
+  },
+  "errors": [],
+  "report_markdown": "============================================================\n  Claim2Value 验证报告\n============================================================\n\n  Claim: 公司产品适用于机器人。...\n  判定: 拒答\n  置信度: 0.10\n  判定来源: rule_only_fallback\n  证据可信度: 0.00\n\n  规则层检出:\n    - 无证据，规则层跳过\n\n\n============================================================",
+  "review_session": {
+    "mode": "custom_rule_review",
+    "case_id": null,
+    "company": null,
+    "created_at_utc": "2026-10-03T03:25:57.033878+00:00",
+    "elapsed_ms": 0.026,
+    "external_api_calls": 0,
+    "source_url": "",
+    "source_locator": "",
+    "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence_status": "用户输入，未核对原件",
+    "financial_scope": "未生成",
+    "limitations": [
+      "本地规则未发现异常不代表声明成立；此模式不调用大模型或实时检索",
+      "来源等级由文本规则推断，不代表原件已认证；链接与页码仅记录，不自动核验"
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "scope": "USER_SUPPLIED_TEXT_OFFLINE_RULE_REVIEW_NOT_SOURCE_AUTHENTICATION",
+  "input_sha256": "1488a8b72256008cf1770de5506f1d3d56e083933bebd910abb40eab0efd356f",
+  "code_sha256": {
+    "src/evidence_batch.py": "46676a9397d487805990798fe5f6d5d14804ae871b2f0a28e2d17ba421bbda01",
+    "src/quantity_text.py": "01b71b22fbb0d4213e41d17be12402401da0da9b28c518200ab03eebef285f58",
+    "src/state_verifier.py": "6b3d426dfdc61ac26b4e3dcc204b147ab32c294efc171329952b83be57f2e866",
+    "src/review_session.py": "7c543ac5f8cffeed143fa4be1f68946dfc18ff56e57bd433c4cc7dca30030596",
+    "src/workflow.py": "942be5ae06f1b36294170833af2e831109b56c5460e3ee63520e49df642b313f",
+    "src/evidence_ledger.py": "d2f72ffde730d582a6b0f3d751a486136c56a095a97dc706fb78b4116c82b85a"
+  },
+  "total": 4,
+  "reviewed": 4,
+  "invalid_input": 0,
+  "external_api_calls": 0,
+  "financial_scope": "No valuations for custom evidence",
+  "records": [
+    {
+      "case_id": "synthetic_unit",
+      "status": "reviewed",
+      "verdict": "abstain",
+      "source_sha256": "390a9005fccbd8f7a8cb80d6ecfa1db75831bd40117c9ade581544a02b68ee3c",
+      "json_file": "synthetic_unit.json",
+      "markdown_file": "synthetic_unit.md"
+    },
+    {
+      "case_id": "synthetic_model",
+      "status": "reviewed",
+      "verdict": "abstain",
+      "source_sha256": "c77f661bbac4872e8b6adbfae26efadc420cea09f957ea53aaca458a02bff037",
+      "json_file": "synthetic_model.json",
+      "markdown_file": "synthetic_model.md"
+    },
+    {
+      "case_id": "synthetic_conflict",
+      "status": "reviewed",
+      "verdict": "refuted",
+      "source_sha256": "2f2286e31b0e1ccff7272890d9588ca1efddd66fdc74bb382ab05bd62b6d61df",
+      "json_file": "synthetic_conflict.json",
+      "markdown_file": "synthetic_conflict.md"
+    },
+    {
+      "case_id": "synthetic_missing",
+      "status": "reviewed",
+      "verdict": "abstain",
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "json_file": "synthetic_missing.json",
+      "markdown_file": "synthetic_missing.md"
+    }
+  ]
+}

@@ -27,13 +27,19 @@ data/processed是已有公开来源整理与示例假设，不含校园账号、
 如端口8501占用，请关闭占用程序，或使用.venv-demo的Python手动启动并改--server.port。
 首次pip下载失败请检查网络后重试；此包不含离线依赖安装轮子。
 Windows真实电脑与非开发成员试用仍待验收。详细说明见docs/semifinal/reviewer_quickstart.md。
+
+批量核查：启动后使用.venv-demo/bin/python（Windows为.venv-demo\\Scripts\\python.exe）运行
+scripts/review_evidence_batch.py --input docs/semifinal/templates/evidence_batch.csv --out batch_result。
+模板为明确标注的合成案例；新证据按docs/semifinal/batch_evidence_guide.md填写。
+结果目录必须不存在；批量核查不认证原件、不修改Claim Bank、不计算估值。
 """
 
 
 def build(output):
     output = Path(output)
     files = ["app.py", "requirements-demo.txt", "start_demo.bat", "start_demo.sh", "scripts/launch_demo.py",
-             "docs/semifinal/reviewer_quickstart.md"]
+             "docs/semifinal/reviewer_quickstart.md", "scripts/review_evidence_batch.py",
+             "docs/semifinal/batch_evidence_guide.md", "docs/semifinal/templates/evidence_batch.csv"]
     files += [str(p.relative_to(ROOT)) for p in sorted((ROOT / "src").rglob("*.py"))]
     files += ["data/processed/" + name for name in DATA]
     contents = {name: (ROOT / name).read_bytes() for name in files}
