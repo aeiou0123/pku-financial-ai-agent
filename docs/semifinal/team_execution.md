@@ -1,3 +1,5 @@
+> 2026-10-09最新调整：Codex独立推进；Kimi/Qwen不作为执行依赖。负责人只提供需要校园账号的原始导出，见[csmar_first_export.md](csmar_first_export.md)。下文旧分工保留为历史计划。
+
 > 2026-10-09当前安排：西交仅用Kimi补公开原件，详见[执行单](agent_tasks/xjtu_kimi.md)。以下10月3日记录保留历史背景。
 
 # 上交与西交：具体分工及本地Agent操作

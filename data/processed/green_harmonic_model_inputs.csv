@@ -1,6 +1,6 @@
 metric,year,value,unit,input_type,source,source_locator,notes
-historical_revenue_bn,2024,3.87,bn_cny,historical,green_harmonic_2024_annual_report.pdf,data/raw/company_filings/green_harmonic_2024_annual_report.pdf.meta.json,年报元数据记录的2024年收入；模型不直接用作预测输入
-historical_net_profit_bn,2024,0.561681,bn_cny,historical,green_harmonic_2024_annual_report.pdf,data/raw/company_filings/green_harmonic_2024_annual_report.pdf.meta.json,年报元数据记录的2024年净利润；模型不直接用作预测输入
+historical_revenue_bn,2024,0.38741130384,bn_cny,historical,green_harmonic_2024_annual_report.pdf,data/raw/company_filings/green_harmonic_2024_annual_report.pdf#page=7,2024年合并营业收入387411303.84元÷10^9；核对原页；历史参考不直接用于预测
+historical_net_profit_bn,2024,0.05616814988,bn_cny,historical,green_harmonic_2024_annual_report.pdf,data/raw/company_filings/green_harmonic_2024_annual_report.pdf#page=7,2024年归属于上市公司股东的净利润56168149.88元÷10^9；并非合并总净利润；历史参考不直接用于预测
 harmonic_units_wan,2025,130,wan_units,assumption,project_scenario_template,data/processed/financial_model_inputs_template.csv,原模板估计值；待财务成员核对年报/业务口径
 harmonic_units_wan,2026,180,wan_units,assumption,project_scenario_template,data/processed/financial_model_inputs_template.csv,情景输入，不是公司指导或事实预测
 harmonic_units_wan,2027,250,wan_units,assumption,project_scenario_template,data/processed/financial_model_inputs_template.csv,情景输入，不是公司指导或事实预测

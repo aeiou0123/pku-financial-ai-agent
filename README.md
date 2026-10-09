@@ -1,3 +1,5 @@
+> 当前执行（2026-10-09）：Codex 独立推进，先接财务小样本。负责人只需按 [CSMAR 下载清单](docs/semifinal/csmar_first_export.md)导出 688017 的 2024 年合并三张报表和字段说明；[最新工作入口](WORK_START_HERE.md)。
+
 > 2026年10月9日复赛更新：[执行成果与Review](docs/semifinal/execution_update_20261009.md)。技术题保留通过校验且再次独立复现的原名单，12候选未达到替换标准；材料、132秒实际运行视频及部署包已整合。
 
 # Claim2Value — 北大金融 AI 智能体创新大赛

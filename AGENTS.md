@@ -4,7 +4,7 @@
 
 ## 开始与交接
 
-1. 先读 README.md、KIMI_START_HERE.md 与当前任务说明；从最新 origin/main 开始。后续暂不安排 Qwen。
+1. 先读 README.md、WORK_START_HERE.md 与当前任务说明；从最新 origin/main 开始。后续暂不安排 Qwen。
 2. 每个执行者使用独立分支，工作区有未提交修改时先保留；可新建worktree，不覆盖队友的修改。禁止强推共享main、回退队友提交或清理未知文件。
 3. 通过PR交付，说明实际完成项、验证、原件与剩余缺口。审查通过后可在已有授权范围内合并；合并前核对PR最新head和main，解决并发变更后重做受影响检查。
 4. 无需为文档链接或轻量排版变更添加测试；代码变更运行相应测试，结果如实记录。资料补充要核对原页、来源、版本、单位和限定词。
@@ -12,7 +12,7 @@
 
 ## 当前任务和真实性
 
-Kimi按docs/semifinal/agent_tasks/xjtu_kimi.md补GH_007、BK_003、SH_002、BK_001公开证据。回传格式见docs/semifinal/templates/kimi_return_template.json，接入工具为scripts/prepare_kimi_evidence.py。
+2026-10-09负责人最新要求：Codex独立推进，不分派或等待其他agent；Kimi暂不启用。仅有校园权限的数据库导出由负责人/有权限同学提供。当前先按docs/semifinal/csmar_first_export.md接收小样本，再由Codex映射、核查与接入。历史Kimi任务和回传工具保留，只有负责人以后明确启用时才恢复。
 
 原文已读取、来源已认证和声明得到支持是不同状态；模型摘录不是原件。接入器只检查本地文件指纹与格式，不认证PDF页码或摘录。未人工确认的候选不自动升级Claim Bank。自定义证据规则输出不直接生成公司估值。
 

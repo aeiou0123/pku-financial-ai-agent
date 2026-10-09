@@ -107,3 +107,8 @@ deliverables/latex/v3-*.png
 deliverables/beamer/page-*.png
 deliverables/beamer/fix-*.png
 deliverables/beamer/pptx_pages/
+
+# Private licensed financial originals and isolated local environments
+financial_private/
+Claim2Value-workspace/
+.venv-oct9/
