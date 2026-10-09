@@ -1,0 +1,98 @@
+{
+  "recorded_at": "2026-10-09",
+  "scope": "HANDOFF_LOCAL_ORIGINAL_PAGE_REVIEW_NOT_FULL_CLAIM_CERTIFICATION",
+  "documents": [
+    {
+      "file_name": "originals/humanoid_robot_joint_reducer_202209.pdf",
+      "title": "从人形机器人关节设计看待减速器投资机会",
+      "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202209081578142140_1.pdf",
+      "metadata_date_hint": "2022-09-08",
+      "sha256": "681f143465ca0539bc12b84061421ddd81cb06ada210b20a24d1a567d519c1a8",
+      "size_bytes": 5139386,
+      "pdf_pages": 45,
+      "related_pdf_pages": [
+        24,
+        33
+      ],
+      "status": "本轮确认原PDF可读取、选页已视觉核对；未重新联网认证发布来源或所有页"
+    },
+    {
+      "file_name": "originals/buke_2025_halfyear_report.pdf",
+      "title": "上海步科自动化股份有限公司2025年半年度报告",
+      "source_url": "http://file.finance.sina.com.cn/211.154.219.97:9494/MRGG/CNSESH_STOCK/2025/2025-8/2025-08-29/11403146.PDF",
+      "metadata_date_hint": "2025-08-29",
+      "sha256": "92be6ec943c24f7aaf3f97e5ae04bfbf985c92f1455988adee92aa8e9a6298f7",
+      "size_bytes": 1592882,
+      "pdf_pages": 207,
+      "related_pdf_pages": [
+        16
+      ],
+      "status": "本轮确认原PDF可读取、选页已视觉核对；未重新联网认证发布来源或所有页"
+    },
+    {
+      "file_name": "originals/buke_2025q2_review.pdf",
+      "title": "步科股份2025年二季度研报",
+      "source_url": "https://pdf.dfcfw.com/pdf/H3_AP202507171710594249_1.pdf",
+      "metadata_date_hint": "2025-07-17",
+      "sha256": "92df4de100c0c03e9253af2664f37eb8444c56e1c69e367e50ea08c9ffe8c765",
+      "size_bytes": 529582,
+      "pdf_pages": 4,
+      "related_pdf_pages": [
+        1
+      ],
+      "status": "本轮确认原PDF可读取、选页已视觉核对；未重新联网认证发布来源或所有页"
+    }
+  ],
+  "visual_review": [
+    {
+      "claim_id": "GH_007",
+      "pdf_page": 24,
+      "printed_page": "24",
+      "note": "图表46对应绿的LHS-32列51-130、重量2.5。仅证实旧研报写法，非官网规格认证。"
+    },
+    {
+      "claim_id": "SH_002",
+      "pdf_page": 33,
+      "printed_page": "33",
+      "note": "图表65原页纳博特斯克列确实列412、2.5；不能仅归因于PDF抽取错列。与10月3日官网复核记录不同，须保留来源/版本/扭矩定义冲突。"
+    },
+    {
+      "claim_id": "BK_003",
+      "pdf_page": 16,
+      "printed_page": "16 / 207",
+      "note": "该页披露第四代FMK发布，所选页没有22%数值；不据局部缺字判定该声明虚假。"
+    },
+    {
+      "claim_id": "BK_001",
+      "pdf_page": 1,
+      "printed_page": "1",
+      "note": "群益研报将5万台与国产TOP2归于蓝皮书引用；蓝皮书原本和统计定义仍待取得。"
+    }
+  ],
+  "metadata_issue": "2022研报meta注释写18页，实际原PDF45页。日期元数据与报告正文须分别确认；未改写历史metadata。",
+  "claims_auto_upgraded": false,
+  "kimi_executed_by_this_assistant": false,
+  "planned_model": "Kimi only; no Qwen task",
+  "implementation_review": {
+    "tests": "264 passed in 11.98s",
+    "new_tests": 14,
+    "test_environment": "Python 3.12.14 / Streamlit 1.64.0",
+    "template_rehearsal": "四条not_started，0条进入文字核查；未编造Kimi结果",
+    "changes": [
+      "拒绝声明被改写、缺失或重复ID",
+      "校验本地原件哈希、禁止路径越界及含凭据/控制字符URL",
+      "输出另存，人工复核待定，不更新Claim Bank或估值"
+    ],
+    "limitations": [
+      "文件头检查不等于完整PDF解析",
+      "未调用Kimi、未实测Kimi成本或准确率",
+      "仅四条急件的第一轮接入，其他声明需独立批次"
+    ]
+  },
+  "code_sha256": {
+    "src/kimi_intake.py": "27359c8ff960d4231e246220c4177a67d827336f5ed3e6e55f0c52fc3c46adaf",
+    "scripts/prepare_kimi_evidence.py": "086bcd667034114da532367a9523af48a06c332b6914d76b171fe754230a6c9f",
+    "tests/test_kimi_intake.py": "ca5799e83c2466413c3ad1aa3464f9d2eb7c6c01eb73ecdd5d6c3e35a6c87466",
+    "docs/semifinal/templates/kimi_return_template.json": "b6ced9ba16f7c306413e163a2cb5b5554c0853475f7dba0d0600da2df88c20f3"
+  }
+}

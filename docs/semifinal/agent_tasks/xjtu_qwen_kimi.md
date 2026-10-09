@@ -1,3 +1,5 @@
+> 2026-10-09：本文保留历史安排；当前执行请用[xjtu_kimi.md](xjtu_kimi.md)，暂不安排Qwen。
+
 # 西交：Qwen 与 Kimi 执行单
 
 适用：Claim2Value 复赛公开证据收集，2026-10-02。西交本轮不负责 CSMAR/CEIC。
