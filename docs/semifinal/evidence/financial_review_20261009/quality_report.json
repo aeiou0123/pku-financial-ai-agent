@@ -1,0 +1,64 @@
+{
+  "schema": "financial_quality_v1",
+  "as_of": "2026-10-09",
+  "input_sha256": "2720ccf477461da8d9e50467ffb4812451a41718947fb251838ed5f79f33b203",
+  "input_rows": 34,
+  "normalized_rows": 34,
+  "errors": [],
+  "warnings": [],
+  "checks": [
+    {
+      "stock_code": "688017",
+      "report_period": "2025-12-31",
+      "statement_scope": "consolidated",
+      "published_at": "2026-04-23",
+      "revision_flag": "as_reported_in_2025_annual",
+      "source_database": "public_cninfo",
+      "check": "balance_sheet",
+      "status": "passed",
+      "residual_cny": "0.00",
+      "tolerance_cny": "1"
+    },
+    {
+      "stock_code": "688017",
+      "report_period": "2025-12-31",
+      "statement_scope": "consolidated",
+      "published_at": "2026-04-23",
+      "revision_flag": "as_reported_in_2025_annual",
+      "source_database": "public_cninfo",
+      "check": "gross_margin",
+      "period_type": "annual",
+      "status": "calculated",
+      "value": "0.3690515316388914776956606521",
+      "interpretation": "historical_ratio_only"
+    },
+    {
+      "stock_code": "688017",
+      "report_period": "2024-12-31",
+      "statement_scope": "consolidated",
+      "published_at": "2026-04-23",
+      "revision_flag": "as_reported_in_2025_annual",
+      "source_database": "public_cninfo",
+      "check": "balance_sheet",
+      "status": "passed",
+      "residual_cny": "0.00",
+      "tolerance_cny": "1"
+    },
+    {
+      "stock_code": "688017",
+      "report_period": "2024-12-31",
+      "statement_scope": "consolidated",
+      "published_at": "2026-04-23",
+      "revision_flag": "as_reported_in_2025_annual",
+      "source_database": "public_cninfo",
+      "check": "gross_margin",
+      "period_type": "annual",
+      "status": "calculated",
+      "value": "0.3754005989202217388763531748",
+      "interpretation": "historical_ratio_only"
+    }
+  ],
+  "status": "checked",
+  "source_authentication": "hash_matches_local_bytes_only; provenance_and_locator_require_human_review",
+  "forecast_updated": false
+}

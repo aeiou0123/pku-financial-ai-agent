@@ -1,0 +1,60 @@
+{
+  "review_date": "2026-10-09",
+  "reviewer": "Codex, manual page-image and text comparison",
+  "sample_rows": 34,
+  "periods": [
+    "2024-12-31",
+    "2025-12-31"
+  ],
+  "scope": "consolidated",
+  "sample_source": {
+    "path": "data/raw/company_filings/green_harmonic_2025_annual_report.pdf",
+    "sha256": "36926dedb389b5b084f856bccd2547b3c44a79599c0b0351d6073f2266a045ce",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-04-23/1225149955.PDF",
+    "published_at": "2026-04-23",
+    "pdf_pages": 233,
+    "reviewed_pages": [
+      6,
+      7,
+      90,
+      91,
+      92,
+      94,
+      95,
+      96,
+      98,
+      99
+    ]
+  },
+  "anchor_source": {
+    "path": "data/raw/company_filings/green_harmonic_2024_annual_report.pdf",
+    "sha256": "403637cba865c5aa1f39965d9e8b5a2df503314f6a6ce189009ed8748717fb48",
+    "url": "https://static.cninfo.com.cn/finalpage/2025-04-30/1223423684.PDF",
+    "published_at": "2025-04-30",
+    "pdf_pages": 262,
+    "reviewed_pages": [
+      7
+    ]
+  },
+  "corrections": [
+    {
+      "metric": "historical_revenue_bn",
+      "old": "3.87",
+      "corrected": "0.38741130384",
+      "source_cny": "387411303.84"
+    },
+    {
+      "metric": "historical_net_profit_bn",
+      "old": "0.561681",
+      "corrected": "0.05616814988",
+      "source_cny": "56168149.88",
+      "definition": "profit_attributable_to_parent"
+    }
+  ],
+  "all_scenario_results_unchanged": true,
+  "limits": [
+    "2024 comparative observations use the 2025 report publication date; not a point-in-time 2024 dataset.",
+    "No CSMAR exports received or vendor API connected.",
+    "Sample is historical reference, not automatic forecast calibration."
+  ]
+}
