@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "package_sha256": "29c9ab7fdfd05664c0ae241d1e8cc2cb962182141dfaa997039b897bf530438b",
+  "independent_unzip": true,
+  "launcher": "bash start.sh",
+  "fresh_environment_created": true,
+  "startup_seconds_including_dependency_install": 37.05535459399971,
+  "health": "ok",
+  "streamlit": "1.64.0",
+  "AppTest": "1.64.0 two-company AppTest passed",
+  "windows_runtime_verified": false,
+  "human_trial": false
+}

@@ -1,0 +1,53 @@
+{
+  "status": "PASS",
+  "duration_seconds": 132.08,
+  "dimensions": [
+    1280,
+    900
+  ],
+  "chapters": 4,
+  "codec": "h264",
+  "full_decode_passed": true,
+  "continuous_uncut_source_sha256": "7e0d00edd9ecc7c796af109a19cbba83d8b6b08cee5c08ca8af4a6b588f8a2da",
+  "final_mp4_sha256": "973c140eb4daebd9242c9953d7bd1f94993dee03431e811535432a0a095d4311",
+  "recording_environment": {
+    "streamlit": "1.64.0",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "playwright": "1.63.0"
+  },
+  "app_sha256": "f1773677387ab87f3372be0841aeedcbe421b4cbb93838e4815abb3fc778115e",
+  "recorder_sha256": "1b7a28ed57d8a571172bc921852d5ecfe362654d621f03de134e72ae32c1d2ee",
+  "human_trial": false,
+  "speedup": false,
+  "subtitles": true,
+  "visual_review_frames": [
+    1,
+    3,
+    4,
+    6,
+    7,
+    8,
+    10
+  ],
+  "actual_downloads": {
+    "green_actual_download.json": {
+      "verdict": "partially_supported",
+      "financial_status": "ok",
+      "mode": "preset_scenario_demo",
+      "sha256": "2882982059964f49bc3c03101442d5eaf6ebb66c7cc70d5f85b08029f5ac3042"
+    },
+    "shuanghuan_actual_download.json": {
+      "verdict": "partially_supported",
+      "financial_status": "ok",
+      "mode": "preset_scenario_demo",
+      "sha256": "033c88a0fd58f8cdcec5c336ffc260004604bd98e267eefd87689fbee99da082"
+    },
+    "missing_actual_download.json": {
+      "verdict": "abstain",
+      "financial_status": "skipped",
+      "mode": "custom_rule_review",
+      "sha256": "ea74d40bc895f1b485bbf059d88ee3e1c68ea095b1bd12f1946d1ef8ea200a85"
+    }
+  }
+}

@@ -5,8 +5,8 @@ import {Presentation, PresentationFile} from '@oai/artifact-tool';
 
 const root=process.env.PROJECT_ROOT;
 const workspaceDir=path.join(root,'work');
-const buildDir=path.join(workspaceDir,'slide_build_20261003_sources');
-const finalPath=path.join(workspaceDir,'materials_sources_20261003','03_展示稿_复赛草稿.pptx');
+const buildDir=path.join(workspaceDir,'slide_final_build_20261009');
+const finalPath=path.join(workspaceDir,'materials_final_20261009','03_展示稿_复赛草稿.pptx');
 const skill='/root/.codex/skills/builtins/presentations';
 const {finalizePresentation}=await import(pathToFileURL(path.join(skill,'container_tools/artifact_tool_utils.mjs')).href);
 const font='WenQuanYi Micro Hei';
@@ -31,9 +31,9 @@ function table(s,values,y=190,height=340,widths=[380,300,464]){
  }
  return t;
 }
-let s=slide('Claim2Value','版本日期2026-10-03。团队名称、成员和联系信息待负责人在统一信息表补齐。依据附件二，事实与项目说明相同。');
+let s=slide('Claim2Value','版本日期2026-10-09。团队名称、成员和联系信息待负责人在统一信息表补齐。依据附件二，事实与项目说明相同。');
 text(s,'机器人产业链声明核查\n与财务情景分析',68,205,1120,180,54,'#102E42',true);
-text(s,'北京大学金融AI智能体创新大赛复赛\n2026年10月3日',68,475,1100,105,30);
+text(s,'北京大学金融AI智能体创新大赛复赛\n2026年10月9日',68,475,1100,105,30);
 text(s,'当前演示为本地规则模式　团队资料见统一信息表',68,622,1100,45,23,'#667782');
 
 s=slide('产业叙述中的口径与机制','依据仓库案例GH_001及SH_004，见docs/semifinal/evidence/offline_review_20261003。案例展示风险，不代表行业风险发生率。');
@@ -71,19 +71,24 @@ text(s,'“扣非净利润”和“扣非后净利润”同义误判已修复。
 table(s,[['已修复边界','当前处理','人工核对'],['注册等价单位','Nm/kNm、g/kg、人民币换算','未知单位'],['合法千分位','只转换三位分组','错误格式'],['明确X型号标记','保留该型号全部分段','无标记表格'],['特定公司背景句','不当作指标限定条件','其他语义范围']],275,270,[285,559,300]);
 text(s,'10/10属于修复用开发题，不能称独立验证提升。\n既有98题还有11条标签未命中，失败记录全部保留。',68,580,1140,80,24,'#566A78');
 
-s=slide('操作路径与运行成本','来源：deployment_review_20261003.json、local_development_20261003/results.json以及212项pytest实际通过记录。没有真人试用反馈或Windows真机验收。');
-text(s,'启动本地页面，选择示例或粘贴证据，查看提示并导出。\n默认无需登录和模型密钥，212项软件回归通过。',68,150,1140,100,28);
+s=slide('操作路径与运行成本','来源：deployment_review_20261003.json、local_development_20261003/results.json以及250项pytest实际通过记录。没有真人试用反馈或Windows真机验收。');
+text(s,'启动本地页面，选择示例或粘贴证据，查看提示并导出。\n默认无需登录和模型密钥，250项软件回归通过。',68,150,1140,100,28);
 table(s,[['实测指标','结果','范围'],['独立首次启动',`${deployment.runs[0].startup_seconds.toFixed(3)}秒`,'含依赖安装'],['再次启动',`${deployment.runs[1].startup_seconds.toFixed(3)}秒`,'跳过pip安装'],['本地核查p50 / p95',`${evaluation.runtime.p50_case_median_ms.toFixed(3)} / ${evaluation.runtime.p95_case_median_ms.toFixed(3)}ms`,'各题5次中位数，暖启动'],['外部API费用','0','当前本地路径，算力未计量']],275,280,[430,275,439]);
 text(s,'毫秒数不含阅读、浏览器、联网或模型。\nLinux已验收，Windows真机与非开发成员试用待完成。',68,586,1140,80,24,'#566A78');
 
 s=slide('参数复核与剩余证据','官方来源：https://www.finemotion.com.cn/home/Index/product?id=34；https://precision.nabtesco.com/tw/products/detail/RV-E；https://www.leaderdrive.com/product/4.html。获取2026-10-02，记录2026-10-03。页版本日期未明，未认证历史原件。完整修改前后见primary_source_review_20261003/review.json。截止按公告北京时间10月13日00:00。');
 table(s,[['复核项目','结论与使用条件'],['SHPR-20E与RV-20E','167 Nm、4.7 kg（15 rpm）\n推算密度35.53 Nm/kg'],['LHS旧版与官网现版','未混版计算，移除错误峰值130 Nm'],['同业结构比较','谐波与RV分开，未知或混合结构拒绝量化'],['仍需取得的证据','历史原件、真实财务样本、独立标签及真人试用']],170,340,[420,724]);
-text(s,'网页历史版本未认证，四条急件状态未升级。\n真实技术题、团队资料与运行视频仍待完成。',68,559,1140,95,26,'#566A78');
+text(s,'网页历史版本未认证，四条急件状态未升级。\n技术题三件套与运行视频已补齐。\n团队资料、签名与真人试用仍需成员完成。',68,559,1140,95,26,'#566A78');
+
+s=slide('技术题结果与本轮比较','来源：首轮官方不可变运行记录与work/refinement_20261009/selection_lock.json。开发期最低Sharpe决定是否替换。2020年已被检验，测试收益未公开。');
+text(s,'首轮三件套完成并通过官方校验。\n1212个交易日，每日20家公司等权持仓。',68,150,1140,96,28);
+table(s,[['扣费Sharpe','原版本','10月9日最好候选'],['2016—2017开发期','−0.102','−0.338'],['2018—2019开发期','0.789','0.840'],['2020年首轮检验','−0.091','未再次评测']],290,230,[464,340,340]);
+text(s,'12个候选均未达到替换标准，保留原名单。\n测试期收益与比赛排名未知，开发比较不代表泛化。',68,575,1140,86,25,'#566A78');
 
 await fs.mkdir(buildDir,{recursive:true});await fs.mkdir(path.dirname(finalPath),{recursive:true});
 const candidatePath=path.join(buildDir,'candidate.pptx');
 await(await PresentationFile.exportPptx(p)).save(candidatePath);
-const owners=[3,4,5,6,7,8,9];
+const owners=[3,4,5,6,7,8,9,10];
 const result=await finalizePresentation({workspaceDir,candidatePath,finalPath,
  pythonExecutable:process.env.CODEX_PRIMARY_RUNTIME_PYTHON,
  integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),

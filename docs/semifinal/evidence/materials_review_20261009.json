@@ -1,0 +1,45 @@
+{
+  "status": "VISUAL_REVIEW_PASSED",
+  "date": "2026-10-09",
+  "main_ppt": {
+    "slides": 10,
+    "native_tables": 8,
+    "sha256": "ea3ab60eca72aa588ea856a5f6519d38fb683e54b6e07475cf66739baecde49f",
+    "all_slides_inspected": true,
+    "revised_slides": [
+      1,
+      10
+    ],
+    "unchanged_slides_2_to_9_render_bytes_match": true,
+    "powerpoint_native_app_opened": false
+  },
+  "pdf": {
+    "pages": 6,
+    "bookmarks": true,
+    "all_pages_inspected": true,
+    "revised_pages": [
+      1,
+      5
+    ],
+    "sha256": "666f51e349dc7247d152b524f8bbb3265465b63c9936ce789d579884ae3165ce"
+  },
+  "docx": {
+    "pages": 3,
+    "all_pages_inspected": true,
+    "sha256": "d6cfaf23727ea766aecd9041a43f24cd3ff86bd749e05f12149a4cb982982fa5",
+    "pending_fields": [
+      "team",
+      "members",
+      "contact",
+      "signature",
+      "date"
+    ],
+    "review_output_directory": "work/docx_final_review_20261009"
+  },
+  "known_limits": [
+    "No independent real-world business evaluation",
+    "2020 already inspected",
+    "No contest test returns",
+    "Windows and human trial pending"
+  ]
+}

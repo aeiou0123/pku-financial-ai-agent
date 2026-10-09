@@ -1,0 +1,9 @@
+{
+  "status": "REPRODUCED",
+  "code_zip_sha256": "106332782f1bb8ce3b0b594315f371ca7391c2b56c2289cc1d16571149954990",
+  "submission_csv_sha256": "b0e6049b2dc327dc7c1576a13fe47a039792f68d43ab8aadf8bbdf0d655d8a1f",
+  "official_check": "VALID",
+  "actual_rows": 24240,
+  "test_return_access": false,
+  "readme_reproduce_command_executed": true
+}

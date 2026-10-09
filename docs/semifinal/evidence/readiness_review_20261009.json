@@ -1,0 +1,38 @@
+{
+  "status": "STRUCTURE_VALID_MANUAL_REVIEW_REQUIRED",
+  "errors": [],
+  "manual_review": [
+    "本地部署实际启动与人工环节需按说明验收",
+    "信息表五栏限字、必填字段及真实性需按附件一人工核对",
+    "PDF书签是否覆盖各部分及内容一致性需人工核对",
+    "技术题代码与名单生成记录对应、依赖及实际复现需验收"
+  ],
+  "checks": {
+    "03_展示稿.pptx": {
+      "slides": 10
+    },
+    "07_技术题/技术题报告.pptx": {
+      "slides": 13
+    },
+    "pdf": {
+      "pages": 6,
+      "has_outline": true
+    },
+    "video": {
+      "duration_seconds": 132.08,
+      "embedded_chapters": 4
+    },
+    "holdings_structure": {
+      "days": 1212,
+      "rows": 24240
+    },
+    "official_submission_check": {
+      "status": "VALID",
+      "problem_id": "FEL-MARKET-2026-LOCAL-v1.2.1",
+      "days": 1212,
+      "rows": 24240,
+      "same_as_template": false
+    }
+  },
+  "scope": "Structure/media inspection only; no verification of claims, performance or actual user experience."
+}

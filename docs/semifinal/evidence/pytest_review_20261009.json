@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "passed": 250,
+  "elapsed_seconds": 10.58,
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "pyarrow": "20.0.0",
+    "streamlit": "1.64.0"
+  },
+  "includes_refinement_focused_tests": 8,
+  "scope": "Software regression, not business accuracy or human trial"
+}
