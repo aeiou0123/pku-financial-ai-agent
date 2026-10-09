@@ -254,3 +254,5 @@ API key、`.env`、`*.pdf`（研究报告类）、第三方仓库代码、Python
 
 
 2026-10-09后续证据任务：西交暂仅使用Kimi，已备好[任务执行单](docs/semifinal/agent_tasks/xjtu_kimi.md)、[可直接复制的提示词](docs/semifinal/agent_tasks/kimi_prompt_20261009.md)和[回传JSON模板](docs/semifinal/templates/kimi_return_template.json)。通过`scripts/prepare_kimi_evidence.py`核对本地PDF指纹后进入现有文字核查，不自动认证原件、升级Claim或更新估值。
+
+后续GitHub协作统一入口：[KIMI_START_HERE.md](KIMI_START_HERE.md)。Kimi使用GitHub CLI读取已有PDF、提示词及模板，并在独立分支提交PR；Codex在同一仓库接续审查。项目级授权与协作约定见[AGENTS.md](AGENTS.md)。
