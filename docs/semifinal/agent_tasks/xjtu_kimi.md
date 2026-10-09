@@ -48,3 +48,8 @@ python scripts/review_evidence_batch.py --input /path/intake_run_01/evidence_bat
 ```
 
 接入器核对四条ID、声明未被改写、路径边界、PDF文件头和原件SHA-256；它不解析PDF页数、不认证网址主体、不核对摘录真伪或表格列。现有核查器只检查所给文字，保留abstain，不更新Claim Bank，也不从新文字直接生成估值。人工确定原件、来源与可比性后，再单独审查状态修订。
+
+
+## 2026-10-09 GitHub CLI协作更新
+
+当前优先按根目录[KIMI_START_HERE.md](../../../KIMI_START_HERE.md)执行。三份原PDF、提示词和模板已在main，可直接克隆读取。本轮可公开结果提交到docs/semifinal/evidence/kimi_runs/独立目录，以独立分支和PR交付并返回链接；Codex接续审查。日常项目读写、提交和推送已有授权，无需重复询问。许可不明的新增原件、商业导出和凭据放私有Drive/本人授权目录。后续暂不安排Qwen。
