@@ -1,0 +1,35 @@
+{
+  "status": "NO_PROMOTION",
+  "candidate_count": 12,
+  "official_accounting_runs": 24,
+  "best_candidate": {
+    "years": 5,
+    "kind": "linear",
+    "policy": "fixed_8bp",
+    "fold_sharpes": [
+      -0.33834124646295394,
+      0.839887383719544
+    ]
+  },
+  "incumbent": {
+    "alpha": 1e-05,
+    "hold_bonus": 0.0008,
+    "fold_sharpes": [
+      -0.10166514307510185,
+      0.7885331846721062
+    ]
+  },
+  "elapsed_seconds": 93.807790436,
+  "test_sharpe": null,
+  "selection_is_development_only": true,
+  "2020_pristine": false,
+  "plan_sha256": "2d2ee0021fe49441d91333d182dd50d6ec20ccf93c92ace5ff9cc91117092017",
+  "review_notes": [
+    "Full public-file hashes and date-only calendar may include 2020 bytes/dates. The plan flags 2020_access_this_run=false and test_access_this_run=false mean no 2020 factor/return modeling/backtesting and no test rows were fed to this refinement experiment.",
+    "Official train hash and incumbent metrics match immutable original archive.",
+    "All 8 model hashes and 24 accounting/holding receipts verified.",
+    "8 focused chronology, nonlinear signal and missing-return tests passed.",
+    "Complete test suite passed 250 tests under deployment-pinned Streamlit 1.64.0."
+  ],
+  "public_data_policy": "No factor rows, return labels, fitted coefficient files or holding lists uploaded to public repository."
+}

@@ -138,7 +138,7 @@ def make_pdf(output, content, font_path):
         if i:story.append(PageBreak())
         if i == 0:
             story.append(Paragraph('Claim2Value 复赛项目说明',h1))
-            story.append(Paragraph('北京大学金融AI智能体创新大赛　版本日期 2026年10月3日',small))
+            story.append(Paragraph('北京大学金融AI智能体创新大赛　版本日期 2026年10月9日',small))
             story.append(Spacer(1,10))
         p = Paragraph(escape(page['heading']),h1)
         if i in (1,3):p._bookmark=('detail'+str(i),1)
@@ -169,7 +169,7 @@ def make_pdf(output, content, font_path):
                 story.append(Paragraph(escape(text),normal))
     def footer(canvas, doc):
         canvas.saveState();canvas.setFont('CJK',8.5);canvas.setFillColor(colors.HexColor('#58626A'))
-        canvas.drawString(44,24,'Claim2Value　2026年10月3日');canvas.drawRightString(A4[0]-44,24,str(doc.page));canvas.restoreState()
+        canvas.drawString(44,24,'Claim2Value　2026年10月9日');canvas.drawRightString(A4[0]-44,24,str(doc.page));canvas.restoreState()
     doc.build(story,onFirstPage=footer,onLaterPages=footer)
 
 
