@@ -11,7 +11,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     paths = [ROOT / name for name in ("harness_app.py", "start_harness.bat", "start_harness.sh", "requirements-harness.txt",
-                                      "src/review_ui.py", "src/financial_intake.py", "scripts/launch_harness.py")]
+                                      "src/review_ui.py", "src/financial_intake.py", "src/state_verifier.py",
+                                      "src/quantity_text.py", "scripts/launch_harness.py")]
     paths += sorted((ROOT / "src/harness").glob("*.py"))
     paths += sorted(p for p in (ROOT / "docs/harness").rglob("*") if p.is_file() and "__pycache__" not in p.parts)
     manifest = {str(p.relative_to(ROOT)).replace("\\", "/"): {"bytes": p.stat().st_size,

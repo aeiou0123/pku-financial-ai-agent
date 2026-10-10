@@ -409,10 +409,10 @@ def test_ui_kimi_preset_probe_without_upload_and_secret_change_invalidate(local_
     assert app.text_input(key="api_base").value == "https://api.kimi.com/coding/v1"
     assert app.text_input(key="api_model").value == "kimi-for-coding"
     app.text_input(key="api_base").set_value(url)
-    app.text_input(key="api_secret").set_value("credential_32_chars_for_test_only")
+    app.text_input(key="api_secret_widget").set_value("credential_32_chars_for_test_only")
     app.run()
     next(b for b in app.button if b.label == "测试连接").click().run()
     assert not app.exception and any("连接成功" in s.value for s in app.success)
     assert len(handler.requests) == 1
-    app.text_input(key="api_secret").set_value("different_fake_secret_for_test_only").run()
+    app.text_input(key="api_secret_widget").set_value("different_fake_secret_for_test_only").run()
     assert not app.exception and not any("连接成功" in s.value for s in app.success)

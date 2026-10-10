@@ -5,11 +5,23 @@ import csv
 import io
 import json
 import os
+import importlib
+import hashlib
 from datetime import date
 from pathlib import Path
 
 import pandas as pd
 import streamlit as st
+
+# Streamlit can rerun this entrypoint while retaining imported modules. Refresh only
+# changed local tool files, in dependency order; no process restart or credential reset.
+for module_name in ('documents', 'store', 'api', 'exports', 'financial', 'diagnostics', 'research',
+                    'conditions', 'quant', 'strategy_diagnostics', 'research_ui', 'engine'):
+    module = importlib.import_module('src.harness.' + module_name)
+    source_hash = hashlib.sha256(Path(module.__file__).read_bytes()).hexdigest()
+    if getattr(module, '_c2v_loaded_source_hash', None) != source_hash:
+        importlib.reload(module)
+        module._c2v_loaded_source_hash = source_hash
 
 from src.financial_intake import FIELDS
 from src.harness.api import ModelClient
@@ -18,6 +30,8 @@ from src.harness.engine import propose_quant, draft_commentary
 from src.harness.financial import extract, check_financial, dcf, save_dcf
 from src.harness.diagnostics import comparison_groups, earnings_bridge, save_diagnostics
 from src.harness.quant import prepare, backtest, save
+from src.harness.research_ui import render as render_research
+from src.harness.strategy_diagnostics import diagnose
 from src.harness.store import Run
 from src.review_ui import STYLE, page_heading, section_heading
 
@@ -27,6 +41,10 @@ st.markdown(STYLE, unsafe_allow_html=True)
 
 
 def client() -> ModelClient:
+    if not st.session_state.get('api_model', '').strip():
+        raise ValueError('模型名称尚未保存，请填写后按Enter或离开输入框。')
+    if not st.session_state.get('api_secret', '').strip():
+        raise ValueError('API Key尚未保存，请填写后按Enter或离开输入框。')
     return ModelClient(st.session_state["api_base"], st.session_state["api_model"],
                        st.session_state["api_secret"], max_calls=int(st.session_state["api_budget"]),
                        protocol=st.session_state.get("api_protocol", "openai"),
@@ -47,11 +65,18 @@ def current_run(uploads, workflow) -> Run:
 
 def clear_key():
     st.session_state["api_secret"] = ""
+    st.session_state['api_secret_widget'] = ''
     st.session_state.pop("connection_result", None)
 
 
 def invalidate_connection():
     st.session_state.pop("connection_result", None)
+
+
+def save_session_key():
+    # Keep the in-memory credential separate from the UI widget's lifecycle.
+    st.session_state['api_secret'] = st.session_state.get('api_secret_widget', '')
+    invalidate_connection()
 
 
 def apply_connection_preset():
@@ -72,7 +97,9 @@ with st.sidebar:
                      format_func=lambda value: "OpenAI · Chat Completions" if value == "openai" else "Anthropic · Messages")
         st.text_input("API Base URL", value=os.environ.get("C2V_API_BASE", "https://api.openai.com/v1"), key="api_base", on_change=invalidate_connection)
         st.text_input("模型名称", value=os.environ.get("C2V_MODEL", ""), key="api_model", placeholder="填服务商提供的模型 ID", on_change=invalidate_connection)
-        st.text_input("API Key", value=os.environ.get("C2V_API_KEY", ""), type="password", key="api_secret", on_change=invalidate_connection)
+        # Explicit assignment also preserves credentials when migrating the old widget key.
+        st.session_state['api_secret'] = st.session_state.get('api_secret', os.environ.get('C2V_API_KEY', ''))
+        st.text_input("API Key", value=st.session_state['api_secret'], type="password", key="api_secret_widget", on_change=save_session_key)
         st.number_input("每次操作最多请求数", min_value=1, max_value=40, value=12, key="api_budget")
         st.number_input("每次响应输出 token 上限", min_value=256, max_value=32768, value=8192, step=256, key="api_output_limit")
         st.caption("密钥仅在本次会话中使用，不写入文件。测试只发一条小请求，不包含上传材料，会使用少量额度。")
@@ -102,14 +129,15 @@ with st.sidebar:
     st.button("清除本次会话的密钥", on_click=clear_key)
 
 page_heading(st, workflow, "上传自己的材料，核对输入，执行任务，下载结果。", code="RESEARCH")
+research_mode = st.radio('财务研究任务', ['论点审查与兑现条件', '财务整理与盈利解释'], horizontal=True) if workflow.startswith('财务') else ''
 uploaded = st.file_uploader("研究文件", type=["pdf", "docx", "txt", "md", "csv", "xlsx"], accept_multiple_files=True,
-                            help="单个 20 MB；合计 60 MB；每次最多 10 个文件。")
+                            help="单个 20 MB；合计 60 MB；每次最多 10 个文件。", key='research_uploads')
 uploads = [(file.name, file.getvalue()) for file in uploaded]
-task = st.text_area("研究要求", placeholder="例如：核对 2024 年合并报表的收入、成本和归母净利润，列出来源和缺口。" if workflow.startswith("财务") else
+task = st.text_area("研究要求", placeholder="例如：扩产能否支持未来两年的收入增长？请检查投产、订单、售价和成本。" if research_mode == '论点审查与兑现条件' else "例如：核对 2024 年合并报表的收入、成本和归母净利润，列出来源和缺口。" if workflow.startswith("财务") else
                     "例如：用复权收盘价计算 20 日动量，每日选 10 只等权持有，单边费用 10 bps。", height=90)
-binding = digest(json.dumps({"files": [(n, digest(b)) for n, b in uploads], "workflow": workflow, "task": task}, ensure_ascii=False).encode())
+binding = digest(json.dumps({"files": [(n, digest(b)) for n, b in uploads], "workflow": workflow, "mode": research_mode, "task": task}, ensure_ascii=False).encode())
 if st.session_state.get("binding") != binding:
-    for key in ("run", "extraction_run", "candidates", "parsed", "result", "financial_result", "proposal", "draft", "extraction_done", "dcf_result", "diagnostic_result", "diagnostic_binding"):
+    for key in ("run", "extraction_run", "candidates", "parsed", "result", "financial_result", "proposal", "draft", "extraction_done", "dcf_result", "diagnostic_result", "diagnostic_binding", 'research_run', 'research_plan', 'research_review', 'research_context_binding', 'research_review_binding', 'research_confirmed_parameters', 'conditions_result', 'conditions_binding', 'strategy_diagnostic_result', 'strategy_diagnostic_binding'):
         st.session_state.pop(key, None)
     st.session_state["binding"] = binding
 
@@ -133,13 +161,20 @@ def show_outputs():
 if not uploads:
     st.info("先上传研究文件。下方示例都是合成数据，用于熟悉操作。")
     examples = ROOT / "docs" / "harness" / "examples"
-    for name in (["synthetic_financial.txt", "synthetic_financial.csv"] if workflow.startswith("财务") else ["synthetic_prices.csv"]):
+    for name in (["synthetic_industry.txt", "synthetic_industry_counterevidence.txt"] if research_mode == '论点审查与兑现条件' else ["synthetic_financial.txt", "synthetic_financial.csv"] if workflow.startswith("财务") else ["synthetic_prices.csv"]):
         path = examples / name
         if path.exists():
             st.download_button("下载示例 · " + name, path.read_bytes(), file_name=name)
     st.stop()
 
 if workflow.startswith("财务"):
+    if research_mode == '论点审查与兑现条件':
+        try:
+            render_research(ROOT, uploads, task, client)
+        except Exception as exc:
+            st.error(str(exc))
+        show_outputs()
+        st.stop()
     mode = st.radio("输入方式", ["从文件提取候选", "导入已整理财务长表"], horizontal=True)
     section_heading(st, "01　整理证据", "模型候选须人工核对")
     if mode == "从文件提取候选":
@@ -387,6 +422,8 @@ else:
     if st.session_state.get("result_binding") != result_binding:
         st.session_state.pop("result", None)
         st.session_state.pop("draft", None)
+        st.session_state.pop('strategy_diagnostic_result', None)
+        st.session_state.pop('run', None)
     if st.button("校验数据并运行回测", type="primary"):
         st.session_state.pop("result", None)
         try:
@@ -420,6 +457,43 @@ else:
         st.line_chart(result["daily"][["nav", "benchmark_nav"]])
         st.dataframe(result["positions"], hide_index=True)
         st.json(result["metrics"])
+        section_heading(st, '策略诊断', '共同区间、费用、年度分段与预先声明的参数扰动')
+        st.caption('先编辑并确认参数组，再运行。全部尝试都会登记，失败组也保留；不自动选收益最好的一组。')
+        default_grid = [{'lookback': int(lookback), 'top_n': int(top_n), 'fee_bps': float(fee), 'direction': direction}]
+        if strategy == 'momentum' and lookback < 252:
+            default_grid.append({**default_grid[0], 'lookback': min(252, int(lookback) + 5)})
+        if fee < 1000:
+            default_grid.append({**default_grid[0], 'fee_bps': min(1000., float(fee) + 10)})
+        grid = st.data_editor(pd.DataFrame(default_grid), num_rows='dynamic', hide_index=True, key='diagnostic_grid_' + result_binding,
+                              column_config={'direction': st.column_config.SelectboxColumn('排序方向', options=['high', 'low'])}).to_dict('records')
+        grid_binding = digest(json.dumps([result_binding, grid], sort_keys=True).encode())
+        if st.session_state.get('strategy_diagnostic_binding') != grid_binding:
+            st.session_state.pop('strategy_diagnostic_result', None)
+            st.session_state['strategy_diagnostic_binding'] = grid_binding
+            # Keep the completed base run available, but never expose a previous diagnostic as current.
+            if st.session_state.get('run') and st.session_state['run'].metadata['workflow'] == 'strategy_diagnostics':
+                st.session_state.pop('run', None)
+        declared = st.checkbox('我预先声明这些参数；本次是已查看样本的研究，不称未触碰留出集。', key='grid_confirm_' + grid_binding)
+        if st.button('运行策略诊断', disabled=not declared):
+            try:
+                diagnostic_run = Run(ROOT / 'work' / 'harness_runs', 'strategy_diagnostics', uploads)
+                st.session_state['run'] = diagnostic_run
+                write_sources(diagnostic_run, uploads)
+                diagnostic_run.write('task_settings.json', settings)
+                report, navs = diagnose(diagnostic_run, prepare(frame, mapping, strategy), strategy, grid,
+                                        ROOT / 'work' / 'harness_runs' / 'experiment_registry.jsonl')
+                st.session_state['strategy_diagnostic_result'] = (report, navs)
+            except Exception as exc:
+                st.error(str(exc))
+        if 'strategy_diagnostic_result' in st.session_state:
+            report, navs = st.session_state['strategy_diagnostic_result']
+            st.json(report['common_interval'])
+            st.dataframe(pd.DataFrame(report['comparisons']), hide_index=True)
+            st.dataframe(pd.DataFrame(report['year_segments']), hide_index=True)
+            st.line_chart(navs)
+            st.json({'timing': report['timing'], 'failed_parameters': report['failures'], 'history': report['declaration']})
+            for note in report['limitations']:
+                st.caption(note)
         if st.button("让模型解读本次数字"):
             try:
                 st.session_state["draft"] = draft_commentary(st.session_state["run"], client(), result["metrics"])["draft"]

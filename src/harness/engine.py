@@ -1,6 +1,9 @@
 """Bounded model proposals -> user confirmation -> deterministic tool execution."""
 from __future__ import annotations
 
+from .module_stamp import source_stamp
+_c2v_loaded_source_hash = source_stamp(__file__)
+
 import json
 
 from .api import ModelClient

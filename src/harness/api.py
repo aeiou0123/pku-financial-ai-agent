@@ -1,5 +1,8 @@
 """OpenAI/Anthropic adapters with safe diagnostics and a connection probe."""
 from __future__ import annotations
+
+from .module_stamp import source_stamp
+_c2v_loaded_source_hash = source_stamp(__file__)
 import json
 import re
 import time
@@ -152,6 +155,8 @@ class ModelClient:
         if result["finish"] in {"length", "max_tokens"}:
             raise APIError("模型输出达到 token 上限，未采纳本批次。请增加输出上限或减少单批内容。")
         content = result["content"]
+        if self.api_key and self.api_key in content:
+            raise APIError('模型响应意外包含本次密钥，未采纳或写入成果。')
         if not content:
             raise APIError("API 已响应，但模型未返回文本；请检查模型思考设置和输出 token 上限。")
         fence = chr(96) * 3

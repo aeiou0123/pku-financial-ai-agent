@@ -1,4 +1,4 @@
-> 2026-10-10 研究工作台：接自己的模型 API、上传材料，分别执行财务／估值研究和量化处理／回测。Windows 双击 `start_harness.bat`，打开 http://127.0.0.1:8510 。[操作与范围](docs/harness/README.md)；[本次检查记录](docs/harness/review.md)。真实模型服务商调用和真人试用仍待验证。以下日期较早的进展保留为历史记录。
+> 2026-10-10 研究工作台：接自己的模型API、上传材料，执行论点证据审查、产能／投产约束下的盈利与估值条件，以及独立策略诊断。Windows双击 `start_harness.bat`，打开 http://127.0.0.1:8510 。[产业研究操作](docs/harness/industry_workflow.md)；[本次检查记录](docs/harness/industry_review_20261010.md)。原财务校验与盈利桥保留；真实模型质量和真人业务效果仍待验证。以下旧进展保留为历史记录，旧正式提交包未覆盖。
 
 > 当前执行（2026-10-09）：Codex 独立推进，先接财务小样本。负责人只需按 [CSMAR 下载清单](docs/semifinal/csmar_first_export.md)导出 688017 的 2024 年合并三张报表和字段说明；[最新工作入口](WORK_START_HERE.md)。
 

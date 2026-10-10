@@ -1,6 +1,9 @@
 """Bounded document parsing with explicit page/line coverage and byte provenance."""
 from __future__ import annotations
 
+from .module_stamp import source_stamp
+_c2v_loaded_source_hash = source_stamp(__file__)
+
 import hashlib
 import csv
 import io

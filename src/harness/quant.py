@@ -1,6 +1,9 @@
 """Daily long-only research with explicit next-close execution and paid turnover."""
 from __future__ import annotations
 
+from .module_stamp import source_stamp
+_c2v_loaded_source_hash = source_stamp(__file__)
+
 import math
 import re
 
@@ -95,6 +98,7 @@ def backtest(data: pd.DataFrame, *, strategy: str = "momentum", lookback: int = 
     benchmark_turnover.iloc[0] = 1
     benchmark_net = (1 + benchmark_gross) * (1 - benchmark_turnover * fee_bps / 10000) - 1
     daily["benchmark_nav"] = (1 + benchmark_net).cumprod()
+    daily["benchmark_net_return"] = benchmark_net
     if not np.isfinite(daily.to_numpy()).all() or (daily["nav"] <= 0).any():
         raise ValueError("净值计算溢出或下溢，请核对数据和样本范围。")
     std = daily["net_return"].std(ddof=1)

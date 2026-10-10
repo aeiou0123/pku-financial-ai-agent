@@ -1,6 +1,9 @@
 """Anchored candidates, strict financial intake and explicit-assumption DCF."""
 from __future__ import annotations
 
+from .module_stamp import source_stamp
+_c2v_loaded_source_hash = source_stamp(__file__)
+
 import csv
 import io
 import json
