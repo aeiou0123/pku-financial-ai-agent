@@ -22,7 +22,11 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--chromium", required=True)
     p.add_argument("--out", required=True, type=Path)
+    p.add_argument("--verification", required=True, type=Path)
     a = p.parse_args()
+    verification = json.loads(a.verification.read_text(encoding="utf-8"))
+    if verification.get("technical_reproduction") != "PASS" or not verification.get("software_tests_passed"):
+        raise ValueError("Actual test and technical reproduction evidence is required before recording")
     a.out.mkdir(parents=True, exist_ok=False)
     log = (a.out / "app.log").open("w")
     server = subprocess.Popen([sys.executable, "-m", "streamlit", "run", "app.py",
@@ -68,7 +72,7 @@ def main():
                 print(json.dumps({"event": len(events), "title": title}), flush=True)
                 page.wait_for_timeout(seconds * 1000)
 
-            caption("第一章 项目与功能", "Claim2Value 机器人产业链声明核查。以下为2026年10月9日本地页面的连续真实操作，字幕用于说明。", 12, True)
+            caption("第一章 项目与功能", "Claim2Value 机器人产业链声明核查。以下为2026年10月10日Windows页面的连续实际操作；浏览器自动操作，字幕用于说明。", 12, True)
             page.get_by_text("当前能力与适用范围", exact=True).click()
             caption("项目范围", "自研规则、证据记录、经济映射与财务原型。页面使用Streamlit，不调用Qwen、Kimi或其他外部模型。", 10)
             page.get_by_role("button", name="运行示例", exact=True).click()
@@ -98,6 +102,18 @@ def main():
             with page.expect_download() as download:
                 page.get_by_role("button", name="下载结构化记录 JSON", exact=True).click()
             download.value.save_as(str(a.out / "shuanghuan_actual_download.json"))
+            page.get_by_text("历史财务核验", exact=True).first.click()
+            page.get_by_text("选择财务公司", exact=True).wait_for()
+            caption("历史财务核验", "34条绿的谐波合并年度财务样本已核对年报原页。2024比较数披露于2026年4月23日，不能当作2024实时样本。", 12)
+            with page.expect_download() as download:
+                page.get_by_role("button", name="下载历史财务核验 JSON", exact=True).click()
+            download.value.save_as(str(a.out / "financial_actual_download.json"))
+            page.get_by_role("combobox", name="选择财务公司").click()
+            page.get_by_role("combobox", name="选择财务公司").press("ArrowDown")
+            page.get_by_role("combobox", name="选择财务公司").press("ArrowDown")
+            page.get_by_role("combobox", name="选择财务公司").press("Enter")
+            page.get_by_text("这家公司尚无完成原页核对的公开财务样本；不把待核数据当作已核事实。", exact=True).wait_for()
+            caption("步科覆盖与缺证", "步科列入公司覆盖状态，尚无完成原页核对的公开财务样本。系统保留缺口，不自动生成估值。", 10)
             page.get_by_text("自定义核查", exact=True).click()
             page.get_by_role("textbox", name="待核查声明", exact=True).fill("公司产品适用于机器人")
             page.get_by_role("button", name="核查声明", exact=True).click()
@@ -107,14 +123,14 @@ def main():
             page.get_by_text("证据不足或规则无法判断", exact=True).wait_for()
             caption("自定义输入与缺证处理", "本次确实修改输入，并留空证据。系统拒答，不为此输入生成财务估值。", 12)
             page.get_by_role("tab", name="分析与情景", exact=True).click()
-            caption("第三章 效果与技术依据", "既有开发库87/98标签命中，来自19个家族，非独立业务准确率。250项软件测试通过，失败记录保留。", 12, True)
+            caption("第三章 效果与技术依据", f"既有开发库87/98标签命中，来自19个家族，非独立业务准确率。本次{verification['software_tests_passed']}项软件检查通过，失败案例保留。", 12, True)
             page.get_by_role("tab", name="导出记录", exact=True).click()
             with page.expect_download() as download:
                 page.get_by_role("button", name="下载结构化记录 JSON", exact=True).click()
             download.value.save_as(str(a.out / "missing_actual_download.json"))
-            caption("技术题证据", "首轮2020年扣费Sharpe为−0.091。12个新候选未达到开发期替换标准，保留原名单；比赛测试收益未知。", 12)
+            caption("技术题证据", "2020已查看，扣费Sharpe为−0.091。原名单保留；Windows独立复现与官方检查通过，比赛测试收益未知。", 12)
             page.get_by_text("当前能力与适用范围", exact=True).scroll_into_view_if_needed()
-            caption("第四章 局限与适用范围", "适合研究者辅助核查文本。无实时检索、PDF上传或在线语义模型；真人试用、真实财务样本与Windows验收待完成。", 15, True)
+            caption("第四章 局限与适用范围", "适合研究者辅助核查文本。历史财务与假设情景分开。无实时检索、PDF上传或在线语义模型；CSMAR完整定义及真人试用仍待完成。", 15, True)
             duration = time.monotonic() - video_start
             video_path = page.video.path()
             context.close()
@@ -130,7 +146,7 @@ def main():
             "app_sha256": hashlib.sha256((ROOT / "app.py").read_bytes()).hexdigest(),
             "recorder_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
             "elapsed_seconds_including_startup": time.monotonic() - started}
-        (a.out / "recording_receipt.json").write_text(json.dumps(receipt, ensure_ascii=False, indent=2))
+        (a.out / "recording_receipt.json").write_text(json.dumps(receipt, ensure_ascii=False, indent=2), encoding="utf-8")
     finally:
         server.terminate()
         server.wait(timeout=15)

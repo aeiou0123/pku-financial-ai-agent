@@ -189,13 +189,19 @@ def render_streamlit() -> None:
     st.caption("先核查证据，再查看适用的情景分析。当前为本地规则模式，无外部 API 调用。")
     with st.expander("当前能力与适用范围"):
         st.write("可用：自定义声明与原文核查、证据出处记录、两家公司示例情景、报告导出。")
-        st.write("待接入：实时检索、完整语义验证、新财务数据。自定义声明暂不自动生成估值。")
-    mode = st.radio("操作方式", ["示例情景", "自定义核查"], horizontal=True, key="review_mode")
+        st.write("历史财务：34条公开年报原页核对样本；三公司可查看覆盖状态。实时检索和完整语义验证待接入。")
+    mode = st.radio("操作方式", ["示例情景", "自定义核查", "历史财务核验"], horizontal=True, key="review_mode")
+    if mode == "历史财务核验":
+        from src.financial_evidence import render_history
+        pending_root = REPO_ROOT / "work/csmar_handoff/20261009"
+        render_history(st, pending_root if pending_root.is_dir() else None)
+        return
     if mode == "示例情景":
         name = st.selectbox("选择案例", list(demo_cases()), key="demo_name")
         case = demo_cases()[name]
         st.write(case["claim"])
         st.warning("示例的工程参数和财务假设来自仓库固定数据，输出是敏感性情景，不能作为本条声明的已识别因果效应。")
+        st.caption("其中2025期是既有假设情景，不作为当前年度预测；2024—2025历史财务原页核验请切换至历史财务核验。")
         if st.button("运行示例", key="run_demo"):
             st.session_state.pop("review_result", None)
             try:

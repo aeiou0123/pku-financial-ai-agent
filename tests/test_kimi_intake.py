@@ -73,7 +73,12 @@ def test_duplicate_id_and_missing_search_scope(tmp_path):
 def test_symlink_cannot_escape_original_directory(tmp_path):
     source = tmp_path / 'sources'; source.mkdir()
     data = original(tmp_path)
-    (source / 'original.pdf').symlink_to(tmp_path / 'original.pdf')
+    try:
+        (source / 'original.pdf').symlink_to(tmp_path / 'original.pdf')
+    except OSError as exc:
+        if getattr(exc, 'winerror', None) == 1314:
+            pytest.skip('Windows account lacks symbolic-link privilege; escape cases remain tested separately')
+        raise
     f = tmp_path / 'input.json'; f.write_text(json.dumps(data))
     with pytest.raises(ValueError):
         prepare_candidates(f, source, tmp_path / 'out')
