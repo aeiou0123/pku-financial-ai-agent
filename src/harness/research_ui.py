@@ -29,17 +29,29 @@ def render(root, uploads, question, make_client):
     documents = st.session_state['research_parsed_files']
     st.caption('填写真实披露日期并核对公司／产品范围。未知日期保留空白；只在截止日内的已确认材料中检索。')
     metadata = []
-    metadata_key = digest(json.dumps([st.session_state['binding'], company, product], ensure_ascii=False).encode())
+    # File declarations belong to the uploaded bytes, not the editable research question.
+    # Migrate the previous widget keys without asking an existing session to re-enter them.
+    legacy_metadata_key = digest(json.dumps([st.session_state['binding'], company, product], ensure_ascii=False).encode())
     for doc in documents:
-        with st.expander('来源范围 · ' + doc['name']):
-            suffix = metadata_key + doc['source_file']
+        suffix = digest(json.dumps([doc['name'], doc['sha256']], ensure_ascii=False).encode()) + doc['source_file']
+        legacy_suffix = legacy_metadata_key + doc['source_file']
+        for prefix in ('published_', 'kind_', 'source_company_', 'source_product_', 'source_confirm_'):
+            if prefix + suffix not in st.session_state and prefix + legacy_suffix in st.session_state:
+                st.session_state[prefix + suffix] = st.session_state[prefix + legacy_suffix]
+        st.session_state.setdefault('source_company_' + suffix, company)
+        st.session_state.setdefault('source_product_' + suffix, product)
+        with st.expander('来源范围 · ' + doc['name'], expanded=not st.session_state.get('source_confirm_' + suffix, False)):
             metadata.append({'name': doc['name'],
                 'published_at': st.text_input('披露日期 · ' + doc['name'], placeholder='YYYY-MM-DD；未知则留空', key='published_' + suffix),
                 'source_kind': st.selectbox('来源类型 · ' + doc['name'], ['未声明', '公司公告／年报', '技术手册', '研究报告', '其他', '合成测试'], key='kind_' + suffix),
-                'company': st.text_input('材料公司 · ' + doc['name'], value=company, key='source_company_' + suffix),
-                'product': st.text_input('材料产品 · ' + doc['name'], value=product, key='source_product_' + suffix),
+                'company': st.text_input('材料公司 · ' + doc['name'], key='source_company_' + suffix),
+                'product': st.text_input('材料产品 · ' + doc['name'], key='source_product_' + suffix),
                 'confirmed': st.checkbox('已核对日期和适用范围 · ' + doc['name'], key='source_confirm_' + suffix)})
     scope = document_scope(documents, metadata, cutoff)
+    st.caption(f"可用于本次审查的材料：{len(scope['eligible'])}／{len(documents)} 份。研究计划确认和文件来源确认是两个步骤。")
+    if scope['excluded']:
+        st.warning('以下材料尚不能用于审查，请在上方对应的“来源范围”中处理：\n\n' + '\n\n'.join(
+            f"- {item['name']}：{item['reason']}。" for item in scope['excluded']))
     with st.expander('信息范围与文字覆盖', expanded=bool(scope['excluded'])):
         st.json(scope)
         st.caption('元数据由操作人声明；日期确认不等于原件出处已认证。扫描版无文字的PDF需要另行提供可核对文本。')
@@ -84,7 +96,18 @@ def render(root, uploads, question, make_client):
             st.session_state.pop(key, None)
         st.session_state['research_review_binding'] = review_binding
     plan_confirmed = st.checkbox('我确认这些条件及检索词，并会核对模型返回的支持材料和反证。', key='plan_confirm_' + binding + review_binding)
-    if st.button('审查证据／继续', disabled=not plan_confirmed or not scope['eligible'] or not company.strip() or not question.strip()):
+    blockers = []
+    if not question.strip():
+        blockers.append('填写上方“研究要求”')
+    if not company.strip():
+        blockers.append('填写“研究公司”')
+    if not scope['eligible']:
+        blockers.append('至少一份材料须填写有效披露日期、不晚于信息截止日，并勾选该文件的“已核对日期和适用范围”')
+    if not plan_confirmed:
+        blockers.append('勾选上方研究计划确认框')
+    if blockers:
+        st.info('“审查证据／继续”尚未启用，需要：\n\n' + '\n\n'.join(f'- {item}。' for item in blockers))
+    if st.button('审查证据／继续', disabled=bool(blockers)):
         try:
             validate_plan(plan)
             get_run().write('operator_confirmed_thesis_plan.json', plan)
