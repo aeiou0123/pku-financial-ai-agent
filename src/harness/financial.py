@@ -66,7 +66,8 @@ def extract(run: Run, documents: list[dict], task: str, client: ModelClient) -> 
     try:
         for index, pieces in enumerate(batches, 1):
             fingerprint = digest(json.dumps({"system": EXTRACT_SYSTEM, "pieces": pieces, "task": task,
-                                              "model": client.model, "base_url": client.base_url},
+                                              "model": client.model, "base_url": client.base_url,
+                                              "protocol": client.protocol, "max_output_tokens": client.max_output_tokens},
                                              sort_keys=True, ensure_ascii=False).encode())
             path = cache / (fingerprint + ".json")
             if path.exists():

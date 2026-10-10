@@ -217,18 +217,22 @@ def local_api():
         status = 200
         content = {"records": []}
         requests = []
+        envelope = None
 
         def log_message(self, *args):
             pass
 
         def do_POST(self):
             body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
-            type(self).requests.append({"path": self.path, "auth": self.headers.get("Authorization"), "body": body})
+            type(self).requests.append({"path": self.path, "auth": self.headers.get("Authorization"), "body": body,
+                                        "api_key": self.headers.get("x-api-key"), "version": self.headers.get("anthropic-version"),
+                                        "user_agent": self.headers.get("User-Agent")})
             self.send_response(type(self).status)
             self.send_header("Content-Type", "application/json")
             self.end_headers()
-            self.wfile.write(json.dumps({"choices": [{"finish_reason": "stop", "message": {"content": json.dumps(type(self).content)}}],
-                                        "usage": {"total_tokens": 5}}).encode())
+            envelope = type(self).envelope or {"choices": [{"finish_reason": "stop", "message": {"content": json.dumps(type(self).content)}}],
+                                              "usage": {"total_tokens": 5}}
+            self.wfile.write(json.dumps(envelope).encode())
 
     server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
@@ -311,3 +315,104 @@ def test_app_initial_render():
     app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "harness_app.py"), default_timeout=20).run()
     assert not app.exception
     assert len(app.get("file_uploader")) == 1
+
+
+def test_connection_probe_plain_text_no_files_no_sampling_override(local_api):
+    url, handler = local_api
+    handler.envelope = {"choices": [{"finish_reason": "stop", "message": {"content": "OK"}}], "usage": {"total_tokens": 8}}
+    client = ModelClient(url, "mock", "credential_32_chars_for_test_only")
+    result = client.test_connection()
+    assert result["http_status"] == 200 and result["response_preview"] == "OK"
+    request = handler.requests[0]
+    assert request["body"]["max_tokens"] == 256
+    assert "temperature" not in request["body"] and "top_p" not in request["body"]
+    assert "pieces" not in str(request["body"]) and "columns" not in str(request["body"])
+    assert request["user_agent"] == "Claim2Value-Harness/0.2"
+    assert "credential_" not in str(result)
+
+
+def test_anthropic_native_headers_text_only_usage_and_probe(local_api):
+    url, handler = local_api
+    handler.envelope = {"content": [{"type": "thinking", "thinking": "not evidence"}, {"type": "text", "text": '{"records": []}'}],
+                        "stop_reason": "end_turn", "usage": {"input_tokens": 8, "output_tokens": 12}}
+    client = ModelClient(url, "mock", "credential_32_chars_for_test_only", protocol="anthropic")
+    assert client.json("schema", {}) == {"records": []}
+    request = handler.requests[0]
+    assert request["path"] == "/v1/messages" and request["auth"] is None
+    assert request["api_key"] == client.api_key and request["version"] == "2023-06-01"
+    assert request["body"]["system"] == "schema" and request["body"]["messages"][0]["role"] == "user"
+    assert client.usage == [{"input_tokens": 8, "output_tokens": 12}]
+    assert client.test_connection()["protocol"] == "anthropic"
+
+
+@pytest.mark.parametrize("protocol,url,endpoint", [
+    ("openai", "https://api.kimi.com/coding/", "https://api.kimi.com/coding/v1/chat/completions"),
+    ("openai", "https://api.kimi.ai/coding/v1/chat/completions", "https://api.kimi.ai/coding/v1/chat/completions"),
+    ("anthropic", "https://api.kimi.com/coding/", "https://api.kimi.com/coding/v1/messages"),
+    ("anthropic", "https://api.kimi.com/coding/v1/messages", "https://api.kimi.com/coding/v1/messages")])
+def test_kimi_endpoint_normalization_without_network(protocol, url, endpoint):
+    client = ModelClient(url, "kimi-for-coding", "credential_32_chars_for_test_only", protocol=protocol)
+    assert client.endpoint == endpoint and client.is_kimi_code
+
+
+@pytest.mark.parametrize("status,message", [
+    (400, "invalid temperature: only 1 is allowed for this model"),
+    (401, "Your model id does not exist"), (403, "You've reached your 5-hour usage limit"),
+    (429, "Too many requests"), (403, "Kimi Code is only available for Coding Agents")])
+def test_service_error_details_visible_without_retry(local_api, status, message):
+    url, handler = local_api
+    handler.status = status
+    handler.envelope = {"error": {"message": message, "type": "invalid_request_error"}}
+    with pytest.raises(APIError) as error:
+        ModelClient(url, "mock", "credential_32_chars_for_test_only").test_connection()
+    assert message in str(error.value) and error.value.status_code == status
+    assert len(handler.requests) == 1
+    if "Coding Agents" in message:
+        assert "Claim2Value-Harness" in str(error.value)
+
+
+def test_http_error_redacts_echoed_credentials(local_api):
+    url, handler = local_api
+    secret = "credential_32_chars_for_test_only"
+    handler.status = 400
+    handler.envelope = {"error": {"message": "bad token " + secret + " Bearer " + secret + " sk-other-private-token"}}
+    with pytest.raises(APIError) as error:
+        ModelClient(url, "mock", secret).test_connection()
+    assert secret not in str(error.value) and "sk-other-private-token" not in str(error.value)
+
+
+def test_connection_http_success_but_empty_generation_is_distinct(local_api):
+    url, handler = local_api
+    handler.envelope = {"choices": [{"finish_reason": "length", "message": {"content": None, "reasoning_content": "thinking only"}}]}
+    client = ModelClient(url, "mock", "credential_32_chars_for_test_only")
+    assert client.test_connection()["text_response_received"] is False
+    with pytest.raises(APIError, match="token 上限"):
+        client.json("schema", {})
+
+
+def test_json_validation_distinct_from_connection(local_api):
+    url, handler = local_api
+    handler.envelope = {"choices": [{"finish_reason": "stop", "message": {"content": "OK"}}]}
+    client = ModelClient(url, "mock", "credential_32_chars_for_test_only")
+    assert client.test_connection()["text_response_received"]
+    with pytest.raises(APIError, match="JSON"):
+        client.json("schema", {})
+
+
+def test_ui_kimi_preset_probe_without_upload_and_secret_change_invalidate(local_api):
+    from streamlit.testing.v1 import AppTest
+    url, handler = local_api
+    handler.envelope = {"choices": [{"finish_reason": "stop", "message": {"content": "OK"}}]}
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "harness_app.py"), default_timeout=20).run()
+    app.selectbox(key="api_preset").select("Kimi Code 订阅").run()
+    assert not app.exception
+    assert app.text_input(key="api_base").value == "https://api.kimi.com/coding/v1"
+    assert app.text_input(key="api_model").value == "kimi-for-coding"
+    app.text_input(key="api_base").set_value(url)
+    app.text_input(key="api_secret").set_value("credential_32_chars_for_test_only")
+    app.run()
+    next(b for b in app.button if b.label == "测试连接").click().run()
+    assert not app.exception and any("连接成功" in s.value for s in app.success)
+    assert len(handler.requests) == 1
+    app.text_input(key="api_secret").set_value("different_fake_secret_for_test_only").run()
+    assert not app.exception and not any("连接成功" in s.value for s in app.success)

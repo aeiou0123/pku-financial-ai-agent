@@ -29,7 +29,8 @@ def main():
         assert all(hashlib.sha256(archive.read(name)).hexdigest() == meta["sha256"] for name, meta in saved.items())
     receipt = {"path": str(archive_path), "members": len(manifest) + 1, "bytes": archive_path.stat().st_size,
                "sha256": hashlib.sha256(archive_path.read_bytes()).hexdigest(), "member_hashes": "passed",
-               "original_uploads_included": False, "real_api_verified": False}
+               "original_uploads_included": False, "real_api_verified_by_automated_checks": False,
+               "provider_validation_record": "docs/harness/connection_review_20261010.md"}
     (destination / "package_receipt.json").write_text(json.dumps(receipt, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(receipt, ensure_ascii=False))
 

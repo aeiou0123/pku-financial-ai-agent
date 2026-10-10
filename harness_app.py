@@ -27,7 +27,9 @@ st.markdown(STYLE, unsafe_allow_html=True)
 
 def client() -> ModelClient:
     return ModelClient(st.session_state["api_base"], st.session_state["api_model"],
-                       st.session_state["api_secret"], max_calls=int(st.session_state["api_budget"]))
+                       st.session_state["api_secret"], max_calls=int(st.session_state["api_budget"]),
+                       protocol=st.session_state.get("api_protocol", "openai"),
+                       max_output_tokens=int(st.session_state.get("api_output_limit", 8192)))
 
 
 def write_sources(run: Run, uploads: list[tuple[str, bytes]]):
@@ -44,17 +46,57 @@ def current_run(uploads, workflow) -> Run:
 
 def clear_key():
     st.session_state["api_secret"] = ""
+    st.session_state.pop("connection_result", None)
+
+
+def invalidate_connection():
+    st.session_state.pop("connection_result", None)
+
+
+def apply_connection_preset():
+    preset = st.session_state["api_preset"]
+    if preset == "Kimi Code 订阅":
+        st.session_state.update(api_base="https://api.kimi.com/coding/v1", api_model="kimi-for-coding", api_protocol="openai")
+    elif preset == "OpenAI":
+        st.session_state.update(api_base="https://api.openai.com/v1", api_model="", api_protocol="openai")
+    invalidate_connection()
 
 
 with st.sidebar:
     st.markdown('<div class="c2v-brand"><div class="c2v-brand-name">Claim2Value</div><div class="c2v-brand-sub">研究工作台</div></div>', unsafe_allow_html=True)
     workflow = st.radio("研究方向", ["财务／估值研究", "量化处理与回测"])
     with st.expander("模型连接", expanded=False):
-        st.text_input("API Base URL", value=os.environ.get("C2V_API_BASE", "https://api.openai.com/v1"), key="api_base")
-        st.text_input("模型名称", value=os.environ.get("C2V_MODEL", ""), key="api_model", placeholder="填服务商提供的模型 ID")
-        st.text_input("API Key", value=os.environ.get("C2V_API_KEY", ""), type="password", key="api_secret")
+        st.selectbox("配置预设", ["自定义", "Kimi Code 订阅", "OpenAI"], key="api_preset", on_change=apply_connection_preset)
+        st.selectbox("接口协议", ["openai", "anthropic"], key="api_protocol", on_change=invalidate_connection,
+                     format_func=lambda value: "OpenAI · Chat Completions" if value == "openai" else "Anthropic · Messages")
+        st.text_input("API Base URL", value=os.environ.get("C2V_API_BASE", "https://api.openai.com/v1"), key="api_base", on_change=invalidate_connection)
+        st.text_input("模型名称", value=os.environ.get("C2V_MODEL", ""), key="api_model", placeholder="填服务商提供的模型 ID", on_change=invalidate_connection)
+        st.text_input("API Key", value=os.environ.get("C2V_API_KEY", ""), type="password", key="api_secret", on_change=invalidate_connection)
         st.number_input("每次操作最多请求数", min_value=1, max_value=40, value=12, key="api_budget")
-        st.caption("兼容 Chat Completions。密钥仅在本次会话中使用，不写入文件。")
+        st.number_input("每次响应输出 token 上限", min_value=256, max_value=32768, value=8192, step=256, key="api_output_limit")
+        st.caption("密钥仅在本次会话中使用，不写入文件。测试只发一条小请求，不包含上传材料，会使用少量额度。")
+        if st.button("测试连接", type="primary"):
+            invalidate_connection()
+            try:
+                with st.spinner("正在测试接口…"):
+                    result = client().test_connection()
+                st.session_state["connection_result"] = {"ok": True, "details": result}
+            except (ValueError, RuntimeError) as exc:
+                st.session_state["connection_result"] = {"ok": False, "message": str(exc)}
+        connection = st.session_state.get("connection_result")
+        if connection:
+            if connection["ok"]:
+                details = connection["details"]
+                if details["text_response_received"]:
+                    st.success(f"连接成功 · HTTP 200 · {details['elapsed_seconds']} 秒")
+                else:
+                    st.warning("接口已响应 HTTP 200，但没有生成文本。请检查思考设置或输出上限。")
+                st.json(details)
+            else:
+                st.error(connection["message"])
+        if st.session_state["api_preset"] == "Kimi Code 订阅":
+            st.caption("使用 Kimi Code 控制台的密钥，不能与 Moonshot 开放平台密钥混用。")
+            st.markdown("[Kimi Code 官方配置与使用范围](https://www.kimi.com/code/docs/)")
     st.caption("模型只在点击相应按钮后调用。计算由本地工具执行；上传原件留在本机。")
     st.button("清除本次会话的密钥", on_click=clear_key)
 
