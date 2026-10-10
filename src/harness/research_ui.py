@@ -12,8 +12,8 @@ import pandas as pd
 import streamlit as st
 
 from .conditions import confirm_parameter, forward, reverse, sensitivity, save_conditions, market_cap_to_ev
-from .documents import parse, digest
-from .research import document_scope, plan_thesis, review_thesis, validate_plan
+from .documents import parse, digest, MAX_CHARS, MAX_PAGES
+from .research import document_scope, plan_thesis, review_thesis, validate_plan, local_plan
 from .store import Run
 
 
@@ -22,12 +22,13 @@ def render(root, uploads, question, make_client):
     company = left.text_input('研究公司', placeholder='与来源元数据中的公司名称一致')
     product = right.text_input('产品／业务范围', placeholder='例如：谐波减速器')
     cutoff = st.date_input('研究信息截止日', value=date.today(), key='research_cutoff')
-    file_binding = digest(json.dumps([(name, digest(data)) for name, data in uploads]).encode())
+    file_binding = digest(json.dumps({'files': [(name, digest(data)) for name, data in uploads], 'parse_limits': [MAX_CHARS, MAX_PAGES]}).encode())
     if st.session_state.get('research_parsed_files_binding') != file_binding:
         st.session_state['research_parsed_files'] = [parse(data, name) for name, data in uploads]
         st.session_state['research_parsed_files_binding'] = file_binding
     documents = st.session_state['research_parsed_files']
-    st.caption('填写真实披露日期并核对公司／产品范围。未知日期保留空白；只在截止日内的已确认材料中检索。')
+    st.subheader('文件来源登记')
+    st.caption('文件可读取不等于日期已确认。实际披露日期是报告公开的日期，例如半年报的2026-06-30通常是报告期，不是披露日。未知日期留空；下方填写日期和范围并确认后，才进入按截止日审查。')
     metadata = []
     # File declarations belong to the uploaded bytes, not the editable research question.
     # Migrate the previous widget keys without asking an existing session to re-enter them.
@@ -40,7 +41,13 @@ def render(root, uploads, question, make_client):
                 st.session_state[prefix + suffix] = st.session_state[prefix + legacy_suffix]
         st.session_state.setdefault('source_company_' + suffix, company)
         st.session_state.setdefault('source_product_' + suffix, product)
-        with st.expander('来源范围 · ' + doc['name'], expanded=not st.session_state.get('source_confirm_' + suffix, False)):
+        if not st.session_state.get('source_confirm_' + suffix, False):
+            if not st.session_state.get('source_company_' + suffix):
+                st.session_state['source_company_' + suffix] = company
+            if not st.session_state.get('source_product_' + suffix):
+                st.session_state['source_product_' + suffix] = product
+        with st.container(border=True):
+            st.write(doc['name'])
             metadata.append({'name': doc['name'],
                 'published_at': st.text_input('披露日期 · ' + doc['name'], placeholder='YYYY-MM-DD；未知则留空', key='published_' + suffix),
                 'source_kind': st.selectbox('来源类型 · ' + doc['name'], ['未声明', '公司公告／年报', '技术手册', '研究报告', '其他', '合成测试'], key='kind_' + suffix),
@@ -50,7 +57,7 @@ def render(root, uploads, question, make_client):
     scope = document_scope(documents, metadata, cutoff)
     st.caption(f"可用于本次审查的材料：{len(scope['eligible'])}／{len(documents)} 份。研究计划确认和文件来源确认是两个步骤。")
     if scope['excluded']:
-        st.warning('以下材料尚不能用于审查，请在上方对应的“来源范围”中处理：\n\n' + '\n\n'.join(
+        st.warning('以下文件尚未通过日期／来源登记，不能进入按截止日审查；这不表示文件损坏。请在上方“文件来源登记”中处理：\n\n' + '\n\n'.join(
             f"- {item['name']}：{item['reason']}。" for item in scope['excluded']))
     with st.expander('信息范围与文字覆盖', expanded=bool(scope['excluded'])):
         st.json(scope)
@@ -79,10 +86,12 @@ def render(root, uploads, question, make_client):
             st.session_state['research_plan'] = plan_thesis(get_run(), make_client(), question, company, product, scope)
         except Exception as exc:
             st.error(str(exc))
-    initial = st.session_state.get('research_plan', {'conditions': [
-        {'id': 'C1', 'type': 'capacity', 'label': '扩产是否按期投产，产能是否支持假设销量？', 'query_terms': ['产能', '投产', '延期']},
-        {'id': 'C2', 'type': 'demand', 'label': '客户叙述是否有订单或需求依据？', 'query_terms': ['订单', '客户', '取消']},
-        {'id': 'C3', 'type': 'price', 'label': '销量增长是否受到降价及成本变化抵消？', 'query_terms': ['售价', '毛利率', '降价', '成本']}], 'notes': ''})
+            st.info('模型拟定计划没有成功。仍可使用下方本地模板，编辑并确认后继续；模板不代表模型已经完成研究。')
+    if st.button('使用本地研究模板（不调用模型）'):
+        st.session_state['research_plan'] = local_plan(question, product)
+    initial = st.session_state.get('research_plan', local_plan(question, product))
+    if initial.get('notes'):
+        st.caption(initial['notes'])
     plan_rows = [{'id': c['id'], 'type': c['type'], 'label': c['label'], 'query_terms': '，'.join(c['query_terms'])} for c in initial['conditions']]
     edited = st.data_editor(pd.DataFrame(plan_rows), num_rows='dynamic', hide_index=True,
                             key='thesis_conditions_' + binding + digest(json.dumps(initial, ensure_ascii=False).encode()),
@@ -116,10 +125,15 @@ def render(root, uploads, question, make_client):
                 st.session_state['research_review'] = review_thesis(get_run(), make_client(), plan, documents, scope, context)
         except Exception as exc:
             st.error(str(exc))
-            st.warning('本次尚未完成。已有条件结果保留在运行记录，下次点击可继续。')
+            st.warning('本次尚未全部完成。下方已完成条件可核对和导出，下次点击将继续未完成条件。')
+            partial_path = get_run().path / 'outputs' / 'thesis_partial.json'
+            if partial_path.exists():
+                st.session_state['research_review'] = json.loads(partial_path.read_text(encoding='utf-8'))
     reviewed = st.session_state.get('research_review')
     parameters, evidence = [], {}
     if reviewed:
+        if not reviewed.get('complete', False):
+            st.warning('这里只展示已完成条件，不能将结果称为完整论点审查。')
         st.subheader('2　核对支持材料、反证与参数候选')
         for assessment in reviewed['assessments']:
             with st.expander(assessment['condition']['label'] + ' · ' + assessment['status'], expanded=True):

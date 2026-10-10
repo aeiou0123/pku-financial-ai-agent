@@ -1,3 +1,5 @@
+> 2026-10-11 同学反馈更新：长报告分批、研究请求等待与有限重试、部分成果下载与失败续取、可见来源日期、本地研究模板和中文DCF输入提示。[本次核验](docs/harness/peer_feedback_review_20261011.md)，[同学更新与试用](docs/harness/teammate_trial.md)。464项测试和8组本机模拟浏览器流程通过，实际服务商长任务仍需复测。
+
 > 2026-10-10 研究工作台：接自己的模型API、上传材料，执行论点证据审查、产能／投产约束下的盈利与估值条件，以及独立策略诊断。Windows双击 `start_harness.bat`，打开 http://127.0.0.1:8510 。[产业研究操作](docs/harness/industry_workflow.md)；[本次检查记录](docs/harness/industry_review_20261010.md)。原财务校验与盈利桥保留；真实模型质量和真人业务效果仍待验证。以下旧进展保留为历史记录，旧正式提交包未覆盖。
 
 > 当前执行（2026-10-09）：Codex 独立推进，先接财务小样本。负责人只需按 [CSMAR 下载清单](docs/semifinal/csmar_first_export.md)导出 688017 的 2024 年合并三张报表和字段说明；[最新工作入口](WORK_START_HERE.md)。

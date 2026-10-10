@@ -123,7 +123,7 @@ def test_empty_pdf_requires_ocr():
 
 
 def test_text_limit_explicit_not_full_read():
-    doc = parse(("aa\n" * 70000).encode(), "large.txt")
+    doc = parse(("aa\n" * 70000).encode(), "large.txt", max_chars=120000)
     assert doc["parsed_units"] < doc["total_units"]
     assert doc["warnings"] and doc["coverage"] == "partial"
 
@@ -340,7 +340,8 @@ def test_anthropic_native_headers_text_only_usage_and_probe(local_api):
     request = handler.requests[0]
     assert request["path"] == "/v1/messages" and request["auth"] is None
     assert request["api_key"] == client.api_key and request["version"] == "2023-06-01"
-    assert request["body"]["system"] == "schema" and request["body"]["messages"][0]["role"] == "user"
+    assert request["body"]["system"].startswith("schema\n") and 'JSON' in request['body']['system']
+    assert request["body"]["messages"][0]["role"] == "user"
     assert client.usage == [{"input_tokens": 8, "output_tokens": 12}]
     assert client.test_connection()["protocol"] == "anthropic"
 

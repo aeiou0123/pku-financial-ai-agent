@@ -25,9 +25,9 @@ for module_name in ('documents', 'store', 'api', 'exports', 'financial', 'diagno
 
 from src.financial_intake import FIELDS
 from src.harness.api import ModelClient, api_endpoints, redact
-from src.harness.documents import parse, table, digest, safe_name
+from src.harness.documents import parse, table, digest, safe_name, chunks
 from src.harness.engine import propose_quant, draft_commentary
-from src.harness.financial import extract, check_financial, dcf, save_dcf
+from src.harness.financial import extract, check_financial, dcf, save_dcf, parse_forecasts
 from src.harness.diagnostics import comparison_groups, earnings_bridge, save_diagnostics
 from src.harness.quant import prepare, backtest, save
 from src.harness.research_ui import render as render_research
@@ -45,10 +45,24 @@ def client(*, require_model: bool = True) -> ModelClient:
         raise ValueError('请先获取模型列表并选择，或手动填写模型名称后按Enter。')
     if not st.session_state.get('api_secret', '').strip():
         raise ValueError('API Key尚未保存，请填写后按Enter或离开输入框。')
+    request_status = st.empty()
+    def show_status(event):
+        if event['stage'] == 'request_started':
+            request_status.info(f"正在等待模型：第{event['attempt']}次尝试，单次最多等待{event['timeout_seconds']}秒；已发请求{event['calls']}次。")
+        elif event['stage'] == 'retry_wait':
+            request_status.warning(f"本次未成功，{event['delay_seconds']}秒后自动进行第{event['attempt']}次尝试；重试计入请求预算。")
+        elif event['stage'] == 'batch_split':
+            request_status.info('当前批次超过模型上下文或输出上限，已拆成更小片段继续。')
+        elif event['stage'] == 'request_completed':
+            request_status.caption(f"该次请求已完成，用时{event['elapsed_seconds']}秒。")
     return ModelClient(st.session_state["api_base"], st.session_state.get("api_model", ''),
-                       st.session_state["api_secret"], max_calls=int(st.session_state.get("api_budget", 12)),
+                       st.session_state["api_secret"], max_calls=int(st.session_state.get("api_budget", 40)),
                        protocol=st.session_state.get("api_protocol", "openai"),
-                       max_output_tokens=int(st.session_state.get("api_output_limit", 8192)))
+                       max_output_tokens=int(st.session_state.get("api_output_limit", 8192)),
+                       request_timeout=int(st.session_state.get('api_timeout', 240)),
+                       max_retries=int(st.session_state.get('api_retries', 2)),
+                       batch_chars=int(st.session_state.get('api_batch_chars', 6000)),
+                       json_mode=st.session_state.get('api_json_mode', 'auto'), on_status=show_status)
 
 
 def write_sources(run: Run, uploads: list[tuple[str, bytes]]):
@@ -157,8 +171,15 @@ with st.sidebar:
             st.warning('获取模型列表失败，仍可手动填写模型名称。 ' + st.session_state['model_catalog_error'])
         st.text_input("模型名称", value=os.environ.get("C2V_MODEL", ""), key="api_model", placeholder="先获取并选择，或手动填写模型 ID", on_change=manual_model_changed)
         st.caption('获取列表仅在点击时请求一次，不发送研究材料、不调用文本生成。改地址、协议或密钥后需重新获取。')
-        st.number_input("每次操作最多请求数", min_value=1, max_value=40, value=12, key="api_budget")
+        st.number_input("每次操作最多请求数", min_value=1, max_value=40, value=40, key="api_budget")
         st.number_input("每次响应输出 token 上限", min_value=256, max_value=32768, value=8192, step=256, key="api_output_limit")
+        with st.expander('研究请求与分批设置'):
+            st.number_input('研究请求超时（秒）', min_value=30, max_value=600, value=240, step=30, key='api_timeout')
+            st.number_input('失败后最多自动重试次数', min_value=0, max_value=3, value=2, key='api_retries')
+            st.number_input('单批原文字符上限', min_value=1000, max_value=16000, value=6000, step=1000, key='api_batch_chars')
+            st.selectbox('JSON输出方式', ['auto', 'prompt'], key='api_json_mode',
+                         format_func=lambda mode: '自动JSON约束（不支持时降级）' if mode == 'auto' else '仅提示词约束')
+            st.caption('网络中断、临时服务错误和无法解析的正文有限重试；认证、硬额度和预算耗尽停止。超时重试可能重复耗用服务商额度，重试也计入本轮请求上限；设0可关闭。连接测试仍只发一次小请求，最多30秒。')
         st.caption("密钥仅在本次会话中使用，不写入文件。测试只发一条小请求，不包含上传材料，会使用少量额度。")
         if st.button("测试连接", type="primary"):
             invalidate_connection()
@@ -194,7 +215,7 @@ task = st.text_area("研究要求", placeholder="例如：扩产能否支持未�
                     "例如：用复权收盘价计算 20 日动量，每日选 10 只等权持有，单边费用 10 bps。", height=90)
 binding = digest(json.dumps({"files": [(n, digest(b)) for n, b in uploads], "workflow": workflow, "mode": research_mode, "task": task}, ensure_ascii=False).encode())
 if st.session_state.get("binding") != binding:
-    for key in ("run", "extraction_run", "candidates", "parsed", "result", "financial_result", "proposal", "draft", "extraction_done", "dcf_result", "diagnostic_result", "diagnostic_binding", 'research_run', 'research_plan', 'research_review', 'research_context_binding', 'research_review_binding', 'research_confirmed_parameters', 'conditions_result', 'conditions_binding', 'strategy_diagnostic_result', 'strategy_diagnostic_binding'):
+    for key in ("run", "extraction_run", "candidates", "parsed", "result", "financial_result", "proposal", "draft", "extraction_done", 'partial_extraction_confirmed', 'partial_approval_binding', "dcf_result", "diagnostic_result", "diagnostic_binding", 'research_run', 'research_plan', 'research_review', 'research_context_binding', 'research_review_binding', 'research_confirmed_parameters', 'conditions_result', 'conditions_binding', 'strategy_diagnostic_result', 'strategy_diagnostic_binding'):
         st.session_state.pop(key, None)
     st.session_state["binding"] = binding
 
@@ -257,7 +278,11 @@ if workflow.startswith("财务"):
                     # A bounded UI preview; extraction itself uses all parsed pieces.
                     st.json(doc["parts"][:8])
                 st.caption("界面预览各文件前 8 个片段；模型按解析覆盖范围分批读取。")
-            st.caption("点击下一按钮，会把已解析的文字和研究要求发给所配置的模型服务商。已完成批次会缓存，失败后可继续。")
+            planned_batches = chunks(parsed, limit=int(st.session_state.get('api_batch_chars', 6000)))
+            st.info(f"本机已解析{sum(doc['parsed_units'] for doc in parsed)}个页／段，共{sum(doc['characters'] for doc in parsed):,}字符；将分{len(planned_batches)}批发送。单批原文上限{st.session_state.get('api_batch_chars', 6000):,}字符，原文之外还有提示词与定位信息。")
+            if len(planned_batches) > st.session_state.get('api_budget', 40):
+                st.warning('全部批次至少需要的请求数超过本轮预算。已成功批次缓存；用完后再次继续，只请求未完成部分。重试或自动拆分也占预算。')
+            st.caption("点击下一按钮会将解析范围内的文字分批发给模型。单批失败会记录并尝试后续批次；认证、额度或预算问题会停止。")
             if st.button("提取／继续财务候选", disabled=not task.strip()):
                 try:
                     st.session_state.pop("financial_result", None)
@@ -265,17 +290,37 @@ if workflow.startswith("财务"):
                     run = st.session_state.get("extraction_run") or current_run(uploads, "financial")
                     st.session_state["extraction_run"] = run
                     st.session_state["run"] = run
+                    batch_status = st.empty()
+                    def batch_progress(event):
+                        batch_status.info(f"批次{event['batch']}／{event['total']}：{event['state']}；已完成{event['completed']}批。")
                     with st.spinner("分批提取并检查原文定位…"):
-                        st.session_state["candidates"] = extract(run, parsed, task, client())
-                    st.session_state["extraction_done"] = True
-                    st.success("提取结束。原文匹配只能证明摘录存在，字段、日期与单位仍需核对。")
+                        st.session_state["candidates"] = extract(run, parsed, task, client(), progress=batch_progress)
+                    coverage = json.loads((run.path / 'outputs' / 'extraction_progress.json').read_text(encoding='utf-8'))
+                    st.session_state["extraction_done"] = coverage['complete']
+                    if coverage['complete']:
+                        st.success("各批次处理结束。原文匹配只能证明摘录存在，字段、日期与单位仍需核对。")
+                    else:
+                        st.warning('部分批次没有成功。已完成候选可核对和下载；再次继续会跳过成功批次。')
                 except Exception as exc:
                     st.error(str(exc))
                     if "run" in st.session_state:
                         path = st.session_state["run"].path / "outputs" / "candidates.json"
                         if path.exists():
                             st.session_state["candidates"] = json.loads(path.read_text(encoding="utf-8"))
-                    st.warning("本次提取没有全部完成；已完成候选可查看，继续提取后再完成研究。")
+                    st.warning("本次提取没有全部完成；已完成候选可核对和下载，也可再次继续。若只使用部分成果，须在下方明确确认其覆盖缺口。")
+            extraction_run = st.session_state.get('extraction_run')
+            progress_path = extraction_run.path / 'outputs' / 'extraction_progress.json' if extraction_run else None
+            if progress_path and progress_path.exists():
+                coverage = json.loads(progress_path.read_text(encoding='utf-8'))
+                st.caption(f"已完成{coverage['completed_batches']}／{coverage['total_batches']}批，候选{coverage['candidate_count']}条。完成不等于字段已核实。")
+                with st.expander('逐批状态与未完成范围', expanded=not coverage['complete']):
+                    st.dataframe(pd.DataFrame(coverage['batches']), hide_index=True)
+                if not coverage['complete'] and st.session_state.get('candidates'):
+                    partial_binding = digest(json.dumps({'batches': coverage['batches'], 'candidates': st.session_state['candidates']}, sort_keys=True, ensure_ascii=False).encode())
+                    if st.session_state.get('partial_approval_binding') != partial_binding:
+                        st.session_state['partial_approval_binding'] = partial_binding
+                        st.session_state.pop('partial_extraction_confirmed', None)
+                    st.session_state['partial_extraction_confirmed'] = st.checkbox('我只使用已完成批次的候选，已核对未完成范围，不把本次结果当成全文审查。', key='partial_' + partial_binding)
     else:
         csvs = [name for name, _ in uploads if name.lower().endswith(".csv")]
         if csvs:
@@ -309,7 +354,7 @@ if workflow.startswith("财务"):
                                     column_config={key: st.column_config.TextColumn(key) for key in FIELDS})
             cutoff = st.date_input("信息截止日", value=date.today())
             confirm = st.checkbox("我已对照原件核对字段、披露日期、单位、报表口径和更正版本。")
-            submitted = st.form_submit_button("校验并生成财务成果", disabled=not st.session_state.get("extraction_done", False))
+            submitted = st.form_submit_button("校验并生成财务成果", disabled=not (st.session_state.get("extraction_done", False) or st.session_state.get('partial_extraction_confirmed', False)))
         if submitted:
             st.session_state.pop("financial_result", None)
             st.session_state.pop("diagnostic_result", None)
@@ -327,6 +372,13 @@ if workflow.startswith("财务"):
                                   "events": [json.loads(line) for line in (old_run.path / "events.jsonl").read_text(encoding="utf-8").splitlines()]})
                     if st.session_state.get("parsed"):
                         run.write("source_index.json", [{k: v for k, v in doc.items() if k != "parts"} for doc in st.session_state["parsed"]])
+                    extraction_source = st.session_state.get('extraction_run')
+                    if mode == '从文件提取候选' and extraction_source:
+                        coverage_source = extraction_source.path / 'outputs' / 'extraction_progress.json'
+                        if coverage_source.exists():
+                            extraction_coverage = json.loads(coverage_source.read_text(encoding='utf-8'))
+                            extraction_coverage['partial_scope_operator_confirmed'] = bool(st.session_state.get('partial_extraction_confirmed', False))
+                            run.write('extraction_progress.json', extraction_coverage)
                     run.event("human_fields_confirmed", note="operator_attestation_not_independent_review")
                     normalized, quality = check_financial(run, editor.fillna("").astype(str).to_dict("records"), cutoff)
                     st.session_state["financial_result"] = (normalized, quality)
@@ -387,7 +439,8 @@ if workflow.startswith("财务"):
         st.info("未得到符合原文定位要求的候选，请查看拒绝记录或调整研究要求。")
     section_heading(st, "03　可选估值", "五年 FCFF 必须由你明确输入")
     with st.form("valuation"):
-        forecasts = st.text_input("未来五年企业自由现金流，单位：元，逗号分隔", placeholder="不从历史表自动推断预测")
+        forecasts = st.text_input("未来五年企业自由现金流，单位：元，逗号分隔", placeholder="例如：1000000，1100000，1200000，1300000，1400000",
+                                  help='需要你自行确认五年假设，可用中文或英文逗号分隔。不要加金额内部的千位逗号，不从历史表自动推断。')
         left, right = st.columns(2)
         rate = left.number_input("折现率（%）", min_value=0.1, max_value=99.0, value=10.0)
         growth = right.number_input("永续增长率（%）", min_value=-20.0, max_value=50.0, value=2.0)
@@ -399,8 +452,8 @@ if workflow.startswith("财务"):
         try:
             if not assumed:
                 raise ValueError("请先确认估值假设。")
-            result = dcf([float(v.strip()) for v in forecasts.split(",")], rate / 100, growth / 100,
-                         None if not debt.strip() else float(debt))
+            fcf_values, debt_value = parse_forecasts(forecasts, debt)
+            result = dcf(fcf_values, rate / 100, growth / 100, debt_value)
             previous_run = st.session_state.get("run")
             run = Run(ROOT / "work" / "harness_runs", "valuation", uploads)
             st.session_state["run"] = run

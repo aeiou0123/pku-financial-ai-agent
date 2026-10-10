@@ -20,6 +20,22 @@ PARAMETER_KEYS = {"annual_capacity", "commissioning_date", "asp_yuan", "unit_cos
 PARAMETER_UNITS = {"台/年", "万台/年", "台", "万台", "元/台", "日期"}
 
 
+def local_plan(question: str, product: str) -> dict:
+    """An editable starting outline, without reading documents or claiming model results."""
+    if any(word in question for word in ('扩产', '产能', '投产')):
+        conditions = [
+            {'id': 'C1', 'type': 'capacity', 'label': '扩产是否按期投产，产能是否支持假设销量？', 'query_terms': ['产能', '投产', '延期']},
+            {'id': 'C2', 'type': 'demand', 'label': '客户叙述是否有订单或需求依据？', 'query_terms': ['订单', '客户', '取消']},
+            {'id': 'C3', 'type': 'price', 'label': '销量增长是否受到降价及成本变化抵消？', 'query_terms': ['售价', '毛利率', '降价', '成本']}]
+    else:
+        terms = [product[:40]] if product.strip() else []
+        conditions = [
+            {'id': 'C1', 'type': 'technical', 'label': '产品与业务路线有哪些明确变化，材料如何支持？', 'query_terms': terms + ['产品', '业务', '研发', '技术', '风险']},
+            {'id': 'C2', 'type': 'demand', 'label': '客户、需求与竞争的支持和限制依据是什么？', 'query_terms': ['客户', '订单', '需求', '竞争', '下降']},
+            {'id': 'C3', 'type': 'financial', 'label': '收入、成本和利润变化能否支持业务叙述？', 'query_terms': ['收入', '成本', '利润', '毛利率', '现金流']}]
+    return {'conditions': conditions, 'notes': '本地模板，未调用模型、未审阅材料；请按研究问题编辑并确认。'}
+
+
 def document_scope(documents: list[dict], metadata: list[dict], cutoff: date) -> dict:
     by_name = {m.get("name"): m for m in metadata}
     if len(by_name) != len(metadata) or len({d["name"] for d in documents}) != len(documents):
@@ -218,7 +234,7 @@ def review_thesis(run: Run, client, plan: dict, documents: list[dict], scope: di
     results = []
     try:
         for condition in plan["conditions"]:
-            pieces, coverage = retrieve(documents, scope, condition["query_terms"])
+            pieces, coverage = retrieve(documents, scope, condition["query_terms"], limit=getattr(client, 'batch_chars', 6000))
             payload = {"context": context, "condition": condition, "pieces": pieces}
             if client.api_key and client.api_key in json.dumps(payload, ensure_ascii=False):
                 raise ValueError("研究材料中包含密钥，请移除。")
