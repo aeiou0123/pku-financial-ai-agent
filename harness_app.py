@@ -16,6 +16,7 @@ from src.harness.api import ModelClient
 from src.harness.documents import parse, table, digest, safe_name
 from src.harness.engine import propose_quant, draft_commentary
 from src.harness.financial import extract, check_financial, dcf, save_dcf
+from src.harness.diagnostics import comparison_groups, earnings_bridge, save_diagnostics
 from src.harness.quant import prepare, backtest, save
 from src.harness.store import Run
 from src.review_ui import STYLE, page_heading, section_heading
@@ -108,7 +109,7 @@ task = st.text_area("研究要求", placeholder="例如：核对 2024 年合并�
                     "例如：用复权收盘价计算 20 日动量，每日选 10 只等权持有，单边费用 10 bps。", height=90)
 binding = digest(json.dumps({"files": [(n, digest(b)) for n, b in uploads], "workflow": workflow, "task": task}, ensure_ascii=False).encode())
 if st.session_state.get("binding") != binding:
-    for key in ("run", "extraction_run", "candidates", "parsed", "result", "financial_result", "proposal", "draft", "extraction_done", "dcf_result"):
+    for key in ("run", "extraction_run", "candidates", "parsed", "result", "financial_result", "proposal", "draft", "extraction_done", "dcf_result", "diagnostic_result", "diagnostic_binding"):
         st.session_state.pop(key, None)
     st.session_state["binding"] = binding
 
@@ -219,6 +220,7 @@ if workflow.startswith("财务"):
             submitted = st.form_submit_button("校验并生成财务成果", disabled=not st.session_state.get("extraction_done", False))
         if submitted:
             st.session_state.pop("financial_result", None)
+            st.session_state.pop("diagnostic_result", None)
             if not confirm:
                 st.error("请先完成原件核对，并勾选确认。")
             else:
@@ -247,6 +249,48 @@ if workflow.startswith("财务"):
                 st.success(f"已生成 {len(normalized)} 条标准化记录。来源真实性仍以原件核对为准。")
                 st.dataframe(pd.DataFrame(normalized), hide_index=True)
                 st.json(quality["checks"])
+                section_heading(st, "解释盈利变化", "收入、毛利率与其余项目分别贡献了多少")
+                groups = [g for g in comparison_groups(normalized) if len(g["periods"]) >= 2]
+                if not groups:
+                    st.info("需要同公司、同披露日、同报表口径和同修订版本的两期年度数据。单期或中期数据不能生成年度变化解释。")
+                else:
+                    group_index = st.selectbox("财务比较口径", range(len(groups)), format_func=lambda i:
+                        " · ".join(str(groups[i]["identity"][key]) for key in ("stock_code", "company", "statement_scope", "published_at", "revision_flag", "source_database")))
+                    group = groups[group_index]
+                    left, right = st.columns(2)
+                    earlier = left.selectbox("比较前期", group["periods"], index=len(group["periods"]) - 2)
+                    later = right.selectbox("比较本期", group["periods"], index=len(group["periods"]) - 1)
+                    diagnostic_binding = digest(json.dumps({"records": group["records"], "earlier": earlier, "later": later}, sort_keys=True).encode())
+                    if st.session_state.get("diagnostic_binding") != diagnostic_binding:
+                        st.session_state.pop("diagnostic_result", None)
+                        st.session_state["diagnostic_binding"] = diagnostic_binding
+                    st.caption("解释已确认的报表变化，并列出待查问题。会计贡献不代表技术进步的因果贡献；合并范围等可比性仍须查看附注。")
+                    if st.button("生成盈利变化研究底稿"):
+                        try:
+                            diagnosis = earnings_bridge(group["records"], earlier, later)
+                            previous_run = st.session_state.get("run")
+                            run = Run(ROOT / "work" / "harness_runs", "earnings_diagnostics", uploads)
+                            write_sources(run, uploads)
+                            run.write("confirmed_financial_input.json", group["records"])
+                            if previous_run:
+                                run.write("related_run.json", {"id": previous_run.path.name, "relationship": "confirmed_financial_data"})
+                            save_diagnostics(run, diagnosis)
+                            st.session_state["run"] = run
+                            st.session_state["diagnostic_result"] = diagnosis
+                        except Exception as exc:
+                            st.session_state.pop("diagnostic_result", None)
+                            st.error(str(exc))
+                    if "diagnostic_result" in st.session_state:
+                        diagnosis = st.session_state["diagnostic_result"]
+                        st.metric(diagnosis["bridge_target"] + "变化（元）", f"{float(diagnosis['target_change_cny']):,.2f}")
+                        st.dataframe(pd.DataFrame([{k: v for k, v in row.items() if k != "sources"} for row in diagnosis["indicators"]]), hide_index=True)
+                        st.dataframe(pd.DataFrame([{k: v for k, v in row.items() if k != "sources"} for row in diagnosis["bridge"]]), hide_index=True)
+                        for finding in diagnosis["findings"]:
+                            st.write(finding)
+                        for warning in diagnosis["warnings"]:
+                            st.warning(warning)
+                        with st.expander("原件定位、未取得字段与分解边界"):
+                            st.json(diagnosis)
     elif candidates == []:
         st.info("未得到符合原文定位要求的候选，请查看拒绝记录或调整研究要求。")
     section_heading(st, "03　可选估值", "五年 FCFF 必须由你明确输入")

@@ -6,7 +6,7 @@ import json
 from .api import ModelClient
 from .store import Run
 
-TOOLS = {"financial": ["extract_financial_candidates", "validate_financial", "historical_ratios", "dcf_fcff"],
+TOOLS = {"financial": ["extract_financial_candidates", "validate_financial", "historical_ratios", "earnings_bridge", "dcf_fcff"],
          "quant": ["profile_table", "momentum_rank", "factor_rank", "next_close_backtest", "rank_ic"]}
 
 
