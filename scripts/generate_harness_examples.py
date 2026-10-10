@@ -25,11 +25,11 @@ def main():
         rows.append(dict(zip(FIELDS, ["000000", "合成示例公司（非真实公司）", "2024-12-31", "2025-03-01", "consolidated",
                      "point_in_time" if metric.startswith("total_") else "annual", label, metric, value, "元", "CNY", "original",
                      "synthetic_example", "synthetic_financial.txt", "line:3" if metric.startswith("total_") else "line:4", digest(raw)])))
-    (ROOT / "synthetic_financial.csv").write_bytes(csv_bytes(rows))
+    (ROOT / "synthetic_financial.csv").write_bytes(csv_bytes(rows).replace(b"\r\n", b"\n"))
     dates = pd.bdate_range("2025-01-01", periods=80)
     prices = [{"date": dt.date().isoformat(), "stock": f"{stock:06d}", "close": round(20 + stock + i * (.04 + stock * .01) + ((i + stock) % 7) * .03, 6)}
               for i, dt in enumerate(dates) for stock in range(1, 5)]
-    (ROOT / "synthetic_prices.csv").write_bytes(pd.DataFrame(prices).to_csv(index=False).encode("utf-8-sig"))
+    (ROOT / "synthetic_prices.csv").write_bytes(pd.DataFrame(prices).to_csv(index=False, lineterminator="\n").encode("utf-8-sig"))
 
 
 if __name__ == "__main__":
