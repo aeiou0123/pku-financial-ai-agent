@@ -19,8 +19,8 @@ from .store import Run
 
 def render(root, uploads, question, make_client):
     left, right = st.columns(2)
-    company = left.text_input('研究公司', placeholder='与来源元数据中的公司名称一致')
-    product = right.text_input('产品／业务范围', placeholder='例如：谐波减速器')
+    company = left.text_input('研究公司', placeholder='例如：某公司；与原件名称一致', key='research_company')
+    product = right.text_input('产品／业务范围', placeholder='例如：耳机、减速器', key='research_product')
     cutoff = st.date_input('研究信息截止日', value=date.today(), key='research_cutoff')
     file_binding = digest(json.dumps({'files': [(name, digest(data)) for name, data in uploads], 'parse_limits': [MAX_CHARS, MAX_PAGES]}).encode())
     if st.session_state.get('research_parsed_files_binding') != file_binding:
@@ -29,6 +29,8 @@ def render(root, uploads, question, make_client):
     documents = st.session_state['research_parsed_files']
     st.subheader('文件来源登记')
     st.caption('文件可读取不等于日期已确认。实际披露日期是报告公开的日期，例如半年报的2026-06-30通常是报告期，不是披露日。未知日期留空；下方填写日期和范围并确认后，才进入按截止日审查。')
+    if st.session_state.get('desk_example') == 'industry':
+        st.info('这组样例的登记信息：公司甲／减速器；第一份披露日2026-01-01，counterevidence文件披露日2026-02-01；来源选“合成测试”。请读过两份材料后分别确认。')
     metadata = []
     # File declarations belong to the uploaded bytes, not the editable research question.
     # Migrate the previous widget keys without asking an existing session to re-enter them.
@@ -48,18 +50,22 @@ def render(root, uploads, question, make_client):
                 st.session_state['source_product_' + suffix] = product
         with st.container(border=True):
             st.write(doc['name'])
-            metadata.append({'name': doc['name'],
-                'published_at': st.text_input('披露日期 · ' + doc['name'], placeholder='YYYY-MM-DD；未知则留空', key='published_' + suffix),
-                'source_kind': st.selectbox('来源类型 · ' + doc['name'], ['未声明', '公司公告／年报', '技术手册', '研究报告', '其他', '合成测试'], key='kind_' + suffix),
-                'company': st.text_input('材料公司 · ' + doc['name'], key='source_company_' + suffix),
-                'product': st.text_input('材料产品 · ' + doc['name'], key='source_product_' + suffix),
-                'confirmed': st.checkbox('已核对日期和适用范围 · ' + doc['name'], key='source_confirm_' + suffix)})
+            date_column, kind_column = st.columns(2)
+            published = date_column.text_input('披露日期 · ' + doc['name'], placeholder='YYYY-MM-DD；未知则留空', key='published_' + suffix)
+            kind = kind_column.selectbox('来源类型 · ' + doc['name'], ['未声明', '公司公告／年报', '技术手册', '研究报告', '其他', '合成测试'], key='kind_' + suffix)
+            with st.expander('材料适用范围 · ' + doc['name']):
+                st.caption('默认沿用上面的研究公司和产品。同行资料或全公司资料，请按原件调整，避免错误绑定参数。')
+                source_company = st.text_input('材料公司 · ' + doc['name'], key='source_company_' + suffix)
+                source_product = st.text_input('材料产品 · ' + doc['name'], key='source_product_' + suffix)
+            confirmed = st.checkbox('已核对日期和适用范围 · ' + doc['name'], key='source_confirm_' + suffix)
+            metadata.append({'name':doc['name'],'published_at':published,'source_kind':kind,'company':source_company,
+                             'product':source_product,'confirmed':confirmed})
     scope = document_scope(documents, metadata, cutoff)
     st.caption(f"可用于本次审查的材料：{len(scope['eligible'])}／{len(documents)} 份。研究计划确认和文件来源确认是两个步骤。")
     if scope['excluded']:
         st.warning('以下文件尚未通过日期／来源登记，不能进入按截止日审查；这不表示文件损坏。请在上方“文件来源登记”中处理：\n\n' + '\n\n'.join(
             f"- {item['name']}：{item['reason']}。" for item in scope['excluded']))
-    with st.expander('信息范围与文字覆盖', expanded=bool(scope['excluded'])):
+    with st.expander('信息范围与文字覆盖'):
         st.json(scope)
         st.caption('元数据由操作人声明；日期确认不等于原件出处已认证。扫描版无文字的PDF需要另行提供可核对文本。')
     context = {'question': question, 'company': company, 'product': product, 'cutoff': cutoff.isoformat()}
@@ -79,7 +85,8 @@ def render(root, uploads, question, make_client):
         st.session_state['run'] = st.session_state['research_run']
         return st.session_state['research_run']
 
-    st.subheader('1　列出论点成立的条件')
+    st.subheader('检查清单')
+    st.caption('先看下面的条件是否覆盖你的问题。可以直接用本地清单，也可以让模型起草；确认后再检查材料。')
     st.caption('点击模型按钮会把研究问题、元数据或检索片段发给所配置的服务商。可以自行编辑计划；模型意见均待核。')
     if st.button('拟定研究计划', disabled=not company.strip() or not question.strip()):
         try:
@@ -92,11 +99,14 @@ def render(root, uploads, question, make_client):
     initial = st.session_state.get('research_plan', local_plan(question, product))
     if initial.get('notes'):
         st.caption(initial['notes'])
+    for condition in initial['conditions']:
+        st.write('· ' + condition['label'])
     plan_rows = [{'id': c['id'], 'type': c['type'], 'label': c['label'], 'query_terms': '，'.join(c['query_terms'])} for c in initial['conditions']]
-    edited = st.data_editor(pd.DataFrame(plan_rows), num_rows='dynamic', hide_index=True,
-                            key='thesis_conditions_' + binding + digest(json.dumps(initial, ensure_ascii=False).encode()),
-                            column_config={'type': st.column_config.SelectboxColumn('条件类型', options=['technical', 'capacity', 'demand', 'price', 'cost', 'financial']),
-                                           'label': st.column_config.TextColumn('待检查条件'), 'query_terms': st.column_config.TextColumn('检索词（中文逗号分隔）')})
+    with st.expander('编辑检查清单与检索词'):
+        edited = st.data_editor(pd.DataFrame(plan_rows), num_rows='dynamic', hide_index=True,
+                                key='thesis_conditions_' + binding + digest(json.dumps(initial, ensure_ascii=False).encode()),
+                                column_config={'type': st.column_config.SelectboxColumn('条件类型', options=['technical', 'capacity', 'demand', 'price', 'cost', 'financial']),
+                                               'label': st.column_config.TextColumn('待检查条件'), 'query_terms': st.column_config.TextColumn('检索词（中文逗号分隔）')})
     plan = {'conditions': [{**r, 'query_terms': [s.strip() for s in str(r['query_terms']).replace(',', '，').split('，') if s.strip()]}
                            for r in edited.fillna('').to_dict('records')], 'notes': initial.get('notes', '')}
     review_binding = digest(json.dumps(plan, sort_keys=True, ensure_ascii=False).encode())
@@ -186,7 +196,17 @@ def render(root, uploads, question, make_client):
                 except Exception as exc:
                     st.error(str(exc))
 
-    st.subheader('3　检查盈利与估值兑现条件')
+    if reviewed:
+        counts = [row.get('evidence', []) for row in reviewed['assessments']]
+        support = sum(e.get('stance') == 'supports' for rows in counts for e in rows)
+        counter = sum(e.get('stance') == 'contradicts' for rows in counts for e in rows)
+        st.caption(f'本次整理：支持候选{support}条，反证候选{counter}条。它们需要原件核对，不代表论点成立概率。')
+    if not st.toggle('继续做盈利与估值情景（可选）', key='enable_conditions'):
+        st.caption('只检查观点时，在下方下载研究记录即可。需要计算时再开启；未来参数仍需由你确认。')
+        if reviewed and 'run' not in st.session_state:
+            get_run()
+        return
+    st.subheader('盈利与估值情景')
     st.caption('下方默认数值均为合成假设，须替换为你的模型。完整预测年度从截止日下一年开始；此模型不从技术指标自动推导财务增长。')
     default_rows = [{'year': cutoff.year + i, 'units': 60000.0 * 1.1 ** (i - 1), 'asp_yuan': 2000.0,
                      'unit_cost_yuan': 1200.0, 'existing_capacity': 100000.0, 'incremental_capacity': 0.0,
