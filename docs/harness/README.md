@@ -1,5 +1,7 @@
 # Claim2Value 研究工作台
 
+同学首次测试请按[同学测试入口](teammate_trial.md)拉取指定分支、启动，并用仓库中的两份合成材料走完研究与产能冲突检查。
+
 这一入口接受自己的文件和模型 API，分别执行财务／估值研究和量化处理／回测。Windows 双击工作区根目录的 `start_harness.bat`，打开 http://127.0.0.1:8510。原有 `start_demo.bat` 保留固定案例；冻结技术题没有改动。
 
 需要 Python 3.12、约 500 MB 环境空间；首次安装联网，后续本地计算无需模型 API。首次使用打开侧栏“模型连接”，选择配置预设和协议，填写服务商的模型 ID 与 API Key，点击“测试连接”。支持 OpenAI Chat Completions 与 Anthropic Messages 文本接口，未验证所有服务商兼容性。也可使用 `C2V_API_BASE`、`C2V_MODEL`、`C2V_API_KEY` 环境变量。密钥不保存到运行目录；关闭浏览器会话或点击清除即可移除会话中的值。
