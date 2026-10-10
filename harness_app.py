@@ -24,7 +24,7 @@ for module_name in ('documents', 'store', 'api', 'exports', 'financial', 'diagno
         module._c2v_loaded_source_hash = source_hash
 
 from src.financial_intake import FIELDS
-from src.harness.api import ModelClient
+from src.harness.api import ModelClient, api_endpoints, redact
 from src.harness.documents import parse, table, digest, safe_name
 from src.harness.engine import propose_quant, draft_commentary
 from src.harness.financial import extract, check_financial, dcf, save_dcf
@@ -40,13 +40,13 @@ st.set_page_config(page_title="Claim2Value · 研究工作台", layout="wide")
 st.markdown(STYLE, unsafe_allow_html=True)
 
 
-def client() -> ModelClient:
-    if not st.session_state.get('api_model', '').strip():
-        raise ValueError('模型名称尚未保存，请填写后按Enter或离开输入框。')
+def client(*, require_model: bool = True) -> ModelClient:
+    if require_model and not st.session_state.get('api_model', '').strip():
+        raise ValueError('请先获取模型列表并选择，或手动填写模型名称后按Enter。')
     if not st.session_state.get('api_secret', '').strip():
         raise ValueError('API Key尚未保存，请填写后按Enter或离开输入框。')
-    return ModelClient(st.session_state["api_base"], st.session_state["api_model"],
-                       st.session_state["api_secret"], max_calls=int(st.session_state["api_budget"]),
+    return ModelClient(st.session_state["api_base"], st.session_state.get("api_model", ''),
+                       st.session_state["api_secret"], max_calls=int(st.session_state.get("api_budget", 12)),
                        protocol=st.session_state.get("api_protocol", "openai"),
                        max_output_tokens=int(st.session_state.get("api_output_limit", 8192)))
 
@@ -66,17 +66,35 @@ def current_run(uploads, workflow) -> Run:
 def clear_key():
     st.session_state["api_secret"] = ""
     st.session_state['api_secret_widget'] = ''
-    st.session_state.pop("connection_result", None)
+    invalidate_catalog()
 
 
 def invalidate_connection():
     st.session_state.pop("connection_result", None)
 
 
+def invalidate_catalog():
+    invalidate_connection()
+    for key in ('model_catalog', 'model_catalog_error', 'api_model_choice'):
+        st.session_state.pop(key, None)
+
+
+def choose_model():
+    selected = st.session_state.get('api_model_choice')
+    if selected:
+        st.session_state['api_model'] = selected
+        invalidate_connection()
+
+
+def manual_model_changed():
+    invalidate_connection()
+    st.session_state.pop('api_model_choice', None)
+
+
 def save_session_key():
     # Keep the in-memory credential separate from the UI widget's lifecycle.
     st.session_state['api_secret'] = st.session_state.get('api_secret_widget', '')
-    invalidate_connection()
+    invalidate_catalog()
 
 
 def apply_connection_preset():
@@ -85,7 +103,7 @@ def apply_connection_preset():
         st.session_state.update(api_base="https://api.kimi.com/coding/v1", api_model="kimi-for-coding", api_protocol="openai")
     elif preset == "OpenAI":
         st.session_state.update(api_base="https://api.openai.com/v1", api_model="", api_protocol="openai")
-    invalidate_connection()
+    invalidate_catalog()
 
 
 with st.sidebar:
@@ -93,13 +111,52 @@ with st.sidebar:
     workflow = st.radio("研究方向", ["财务／估值研究", "量化处理与回测"])
     with st.expander("模型连接", expanded=False):
         st.selectbox("配置预设", ["自定义", "Kimi Code 订阅", "OpenAI"], key="api_preset", on_change=apply_connection_preset)
-        st.selectbox("接口协议", ["openai", "anthropic"], key="api_protocol", on_change=invalidate_connection,
+        st.selectbox("接口协议", ["openai", "anthropic"], key="api_protocol", on_change=invalidate_catalog,
                      format_func=lambda value: "OpenAI · Chat Completions" if value == "openai" else "Anthropic · Messages")
-        st.text_input("API Base URL", value=os.environ.get("C2V_API_BASE", "https://api.openai.com/v1"), key="api_base", on_change=invalidate_connection)
-        st.text_input("模型名称", value=os.environ.get("C2V_MODEL", ""), key="api_model", placeholder="填服务商提供的模型 ID", on_change=invalidate_connection)
+        st.text_input("API Base URL", value=os.environ.get("C2V_API_BASE", "https://api.openai.com/v1"), key="api_base", on_change=invalidate_catalog,
+                      help='可填服务根地址、以 /v1 结尾的基础地址，或完整接口地址；末尾 / 可保留。')
+        with st.expander('地址填写示例'):
+            st.caption('OpenAI 协议：以下写法都会使用同一个 Chat Completions 地址。')
+            st.code('https://api.openai.com\nhttps://api.openai.com/\nhttps://api.openai.com/v1\nhttps://api.openai.com/v1/\nhttps://api.openai.com/v1/chat/completions\nhttps://api.openai.com/v1/completions', language=None)
+            st.caption('末尾 /completions 仅作为地址输入兼容，实际使用 /chat/completions。服务须支持所选协议。')
+            st.caption('Kimi Code 订阅：')
+            st.code('https://api.kimi.com/coding/v1\nhttps://api.kimi.com/coding/v1/chat/completions', language=None)
+            st.caption('Anthropic 协议：')
+            st.code('https://api.anthropic.com\nhttps://api.anthropic.com/v1\nhttps://api.anthropic.com/v1/messages', language=None)
+            st.caption('其他服务请替换为服务商给出的域名和路径；自定义路径会保留。')
         # Explicit assignment also preserves credentials when migrating the old widget key.
         st.session_state['api_secret'] = st.session_state.get('api_secret', os.environ.get('C2V_API_KEY', ''))
         st.text_input("API Key", value=st.session_state['api_secret'], type="password", key="api_secret_widget", on_change=save_session_key)
+        try:
+            endpoints = api_endpoints(st.session_state['api_base'], st.session_state['api_protocol'])
+            st.caption('实际请求地址：')
+            preview = '生成：' + endpoints['completion'] + '\n模型列表：' + endpoints['models']
+            st.code(redact(preview, st.session_state['api_secret']) if st.session_state['api_secret'] else preview, language=None)
+        except ValueError as exc:
+            st.warning(str(exc))
+        if st.button('获取模型列表'):
+            invalidate_catalog()
+            try:
+                with st.spinner('正在获取模型列表…'):
+                    st.session_state['model_catalog'] = client(require_model=False).list_models()
+            except (ValueError, RuntimeError) as exc:
+                st.session_state['model_catalog_error'] = str(exc)
+        catalog = st.session_state.get('model_catalog')
+        if catalog:
+            models = catalog['models']
+            st.success(f"已获取 {len(models)} 个模型名称。请选择后测试连接。")
+            if catalog['partial']:
+                st.caption('服务返回的列表尚有后续页或超过显示上限；未列出的模型可手动填写。')
+            current = st.session_state.get('api_model', '')
+            options = [None] + models
+            st.selectbox('从列表选择模型', options, index=options.index(current) if current in models else 0,
+                         format_func=lambda value: '请选择模型' if value is None else value,
+                         key='api_model_choice', on_change=choose_model)
+            st.caption('列表可能包含音频、嵌入等模型；请选择支持当前文本协议的模型，再测试连接。')
+        if st.session_state.get('model_catalog_error'):
+            st.warning('获取模型列表失败，仍可手动填写模型名称。 ' + st.session_state['model_catalog_error'])
+        st.text_input("模型名称", value=os.environ.get("C2V_MODEL", ""), key="api_model", placeholder="先获取并选择，或手动填写模型 ID", on_change=manual_model_changed)
+        st.caption('获取列表仅在点击时请求一次，不发送研究材料、不调用文本生成。改地址、协议或密钥后需重新获取。')
         st.number_input("每次操作最多请求数", min_value=1, max_value=40, value=12, key="api_budget")
         st.number_input("每次响应输出 token 上限", min_value=256, max_value=32768, value=8192, step=256, key="api_output_limit")
         st.caption("密钥仅在本次会话中使用，不写入文件。测试只发一条小请求，不包含上传材料，会使用少量额度。")

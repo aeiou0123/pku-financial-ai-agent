@@ -32,6 +32,39 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
         return None  # Never forward credentials after a redirect.
 
 
+def normalize_base_url(base_url: str, protocol: str = 'openai') -> str:
+    base_url = base_url.strip().rstrip('/')
+    url = urllib.parse.urlsplit(base_url)
+    local = url.hostname in {'127.0.0.1', 'localhost', '::1'}
+    if (url.scheme != 'https' and not (url.scheme == 'http' and local)) or not url.hostname:
+        raise ValueError('API 地址须使用 HTTPS；本机测试可使用 HTTP。')
+    if url.username or url.password or url.query or url.fragment:
+        raise ValueError('API 地址不得含账号、查询参数或片段。')
+    if protocol not in {'openai', 'anthropic'}:
+        raise ValueError('请选择 OpenAI 或 Anthropic 协议。')
+    suffixes = ('/chat/completions', '/completions', '/models') if protocol == 'openai' else ('/messages', '/models')
+    for suffix in suffixes:
+        if base_url.endswith(suffix):
+            base_url = base_url[:-len(suffix)].rstrip('/')
+            break
+    else:
+        if base_url.endswith(('/messages', '/chat/completions', '/completions', '/responses')):
+            raise ValueError('请求地址与所选协议不一致，请选择对应协议或填写 Base URL。')
+    path = urllib.parse.urlsplit(base_url).path
+    if not path or (url.hostname in {'api.kimi.com', 'api.kimi.ai'} and path == '/coding'):
+        base_url += '/v1'
+    return base_url
+
+
+def api_endpoints(base_url: str, protocol: str = 'openai') -> dict:
+    base = normalize_base_url(base_url, protocol)
+    if protocol == 'anthropic' and not base.endswith('/v1'):
+        base += '/v1'
+    return {'base_url': normalize_base_url(base_url, protocol),
+            'completion': base + ('/chat/completions' if protocol == 'openai' else '/messages'),
+            'models': base + '/models'}
+
+
 @dataclass
 class ModelClient:
     base_url: str
@@ -44,28 +77,16 @@ class ModelClient:
     max_output_tokens: int = 8192
 
     def __post_init__(self):
-        self.base_url, self.model, self.api_key = self.base_url.strip().rstrip("/"), self.model.strip(), self.api_key.strip()
-        url = urllib.parse.urlsplit(self.base_url)
-        local = url.hostname in {"127.0.0.1", "localhost", "::1"}
-        if (url.scheme != "https" and not (url.scheme == "http" and local)) or not url.hostname:
-            raise ValueError("API 地址须使用 HTTPS；本机测试可使用 HTTP。")
-        if url.username or url.password or url.query or url.fragment:
-            raise ValueError("API 地址不得含账号、查询参数或片段。")
-        if not self.model or not self.api_key:
-            raise ValueError("请填写模型名称和 API Key。")
+        self.base_url = normalize_base_url(self.base_url, self.protocol)
+        self.model, self.api_key = self.model.strip(), self.api_key.strip()
+        if not self.api_key:
+            raise ValueError("请填写 API Key。")
         if any(c in self.api_key for c in "\r\n"):
             raise ValueError("API Key 含换行，请检查复制内容。")
         if self.protocol not in {"openai", "anthropic"}:
             raise ValueError("请选择 OpenAI 或 Anthropic 协议。")
         if not 1 <= self.max_calls <= 40 or not 256 <= self.max_output_tokens <= 32768:
             raise ValueError("请求上限须为 1—40，输出 token 上限须为 256—32768。")
-        suffix = "/chat/completions" if self.protocol == "openai" else "/messages"
-        if self.base_url.endswith(suffix):
-            self.base_url = self.base_url[:-len(suffix)]
-        elif self.base_url.endswith(("/messages", "/chat/completions", "/responses")):
-            raise ValueError("请求地址与所选协议不一致，请选择对应协议或填写 Base URL。")
-        if self.is_kimi_code and self.base_url.endswith("/coding"):
-            self.base_url += "/v1"
 
     @property
     def is_kimi_code(self) -> bool:
@@ -74,9 +95,52 @@ class ModelClient:
 
     @property
     def endpoint(self) -> str:
-        if self.protocol == "openai":
-            return self.base_url + "/chat/completions"
-        return self.base_url + ("/messages" if self.base_url.endswith("/v1") else "/v1/messages")
+        return api_endpoints(self.base_url, self.protocol)['completion']
+
+    def list_models(self) -> dict:
+        """One explicit GET, with no prompt, model requirement, retries or redirects."""
+        if self.calls >= self.max_calls:
+            raise APIError('本次操作已达到请求上限。')
+        self.calls += 1
+        endpoint = api_endpoints(self.base_url, self.protocol)['models']
+        headers = {'Accept': 'application/json', 'User-Agent': USER_AGENT}
+        if self.protocol == 'openai':
+            headers['Authorization'] = 'Bearer ' + self.api_key
+        else:
+            headers.update({'x-api-key': self.api_key, 'anthropic-version': '2023-06-01'})
+        request = urllib.request.Request(endpoint, headers=headers, method='GET')
+        started = time.monotonic()
+        try:
+            with urllib.request.build_opener(NoRedirect()).open(request, timeout=30) as response:
+                raw = response.read(2 * 1024 * 1024 + 1)
+            if len(raw) > 2 * 1024 * 1024:
+                raise APIError('模型列表响应过大，请手动填写模型名称。')
+            envelope = json.loads(raw)
+            if not isinstance(envelope, dict) or not isinstance(envelope.get('data'), list):
+                raise APIError('服务未返回标准模型列表，请手动填写模型名称。')
+            models, seen = [], set()
+            for row in envelope['data']:
+                if not isinstance(row, dict) or not isinstance(row.get('id'), str):
+                    raise APIError('模型列表格式无法解析，请手动填写模型名称。')
+                name = row['id'].strip()
+                if self.api_key in name:
+                    raise APIError('模型列表包含凭据，已拒绝显示。')
+                if not name or len(name) > 300 or any(ord(c) < 32 or ord(c) == 127 for c in name):
+                    raise APIError('模型列表包含无效名称，请手动填写模型名称。')
+                if name not in seen:
+                    models.append(name)
+                    seen.add(name)
+            if not models:
+                raise APIError('服务返回空模型列表，请手动填写模型名称。')
+            return {'models': sorted(models)[:1000], 'endpoint': endpoint,
+                    'partial': bool(envelope.get('has_more')) or len(models) > 1000,
+                    'elapsed_seconds': round(time.monotonic() - started, 2)}
+        except urllib.error.HTTPError as exc:
+            raise self._http_error(exc) from None
+        except (urllib.error.URLError, TimeoutError, OSError):
+            raise APIError('获取模型列表失败或超时；未自动重试。仍可手动填写模型名称。') from None
+        except (ValueError, TypeError, AttributeError):
+            raise APIError('模型列表响应格式无法解析，请手动填写模型名称。') from None
 
     def _http_error(self, exc: urllib.error.HTTPError) -> APIError:
         detail = ""
@@ -102,6 +166,8 @@ class ModelClient:
         return APIError(message, status_code=exc.code)
 
     def _complete(self, system: str, prompt: str, *, limit: int, timeout: int, probe: bool = False) -> dict:
+        if not self.model:
+            raise ValueError('请先选择或填写模型名称。')
         if self.calls >= self.max_calls:
             raise APIError("本次任务已达到请求上限；已完成批次保留，可继续处理。")
         self.calls += 1
