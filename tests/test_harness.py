@@ -123,7 +123,7 @@ def test_empty_pdf_requires_ocr():
 
 
 def test_text_limit_explicit_not_full_read():
-    doc = parse(("aa\n" * 70000).encode(), "large.txt")
+    doc = parse(("aa\n" * 70000).encode(), "large.txt", max_chars=120000)
     assert doc["parsed_units"] < doc["total_units"]
     assert doc["warnings"] and doc["coverage"] == "partial"
 
@@ -314,6 +314,9 @@ def test_app_initial_render():
     from streamlit.testing.v1 import AppTest
     app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "harness_app.py"), default_timeout=20).run()
     assert not app.exception
+    assert any(title.value == '研究工作台' for title in app.title)
+    next(button for button in app.button if button.label == '检查研究观点').click().run()
+    assert not app.exception
     assert len(app.get("file_uploader")) == 1
 
 
@@ -340,7 +343,8 @@ def test_anthropic_native_headers_text_only_usage_and_probe(local_api):
     request = handler.requests[0]
     assert request["path"] == "/v1/messages" and request["auth"] is None
     assert request["api_key"] == client.api_key and request["version"] == "2023-06-01"
-    assert request["body"]["system"] == "schema" and request["body"]["messages"][0]["role"] == "user"
+    assert request["body"]["system"].startswith("schema\n") and 'JSON' in request['body']['system']
+    assert request["body"]["messages"][0]["role"] == "user"
     assert client.usage == [{"input_tokens": 8, "output_tokens": 12}]
     assert client.test_connection()["protocol"] == "anthropic"
 
@@ -409,10 +413,10 @@ def test_ui_kimi_preset_probe_without_upload_and_secret_change_invalidate(local_
     assert app.text_input(key="api_base").value == "https://api.kimi.com/coding/v1"
     assert app.text_input(key="api_model").value == "kimi-for-coding"
     app.text_input(key="api_base").set_value(url)
-    app.text_input(key="api_secret").set_value("credential_32_chars_for_test_only")
+    app.text_input(key="api_secret_widget").set_value("credential_32_chars_for_test_only")
     app.run()
     next(b for b in app.button if b.label == "测试连接").click().run()
     assert not app.exception and any("连接成功" in s.value for s in app.success)
     assert len(handler.requests) == 1
-    app.text_input(key="api_secret").set_value("different_fake_secret_for_test_only").run()
+    app.text_input(key="api_secret_widget").set_value("different_fake_secret_for_test_only").run()
     assert not app.exception and not any("连接成功" in s.value for s in app.success)
