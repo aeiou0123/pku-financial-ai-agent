@@ -59,38 +59,61 @@ def historical_markdown(report: dict) -> str:
 
 
 def render_history(st, pending_root: Path | None = None) -> None:
-    st.subheader("历史财务核验")
-    st.caption("公开年报原页核对与文件校验分别记录；历史事实不自动改变固定情景。")
+    from src.review_ui import page_heading, section_heading, note, facts, financial_comparison
     try:
         snapshot = load_snapshot()
     except (OSError, ValueError, KeyError):
-        st.error("历史财务样本缺失或格式不符；未展示财务结论。")
+        st.error("财务记录无法读取。请检查样本文件。")
         return
-    company = st.selectbox("选择财务公司", list(COMPANIES.values()), key="history_company")
+    company_column, period_column = st.columns([2, 1])
+    with company_column:
+        company = st.selectbox("公司", list(COMPANIES.values()), key="history_company")
     code = next(k for k, v in COMPANIES.items() if v == company)
     all_rows = company_records(snapshot, code)
-    period = st.selectbox("选择报告期间", ["全部期间"] + sorted({r["report_period"] for r in all_rows}), key="history_period")
+    with period_column:
+        period = st.selectbox("报告期间", ["全部期间"] + sorted({r["report_period"] for r in all_rows}, reverse=True), key="history_period")
     rows = company_records(snapshot, code, period)
+    page_heading(st, company, "2025年报 · 年度合并报表 · 披露于2026-04-23" if rows else "还没有完成原页核对的财务数据。", code=code, section="财务记录 / 年度报告")
     if rows:
-        st.table(presentation_rows(rows))
+        latest = max(r['report_period'] for r in rows)
+        highlights = []
+        for metric, label in [('revenue', '营业收入'), ('net_profit_parent', '归母净利润'), ('operating_cash_flow', '经营净现金流')]:
+            item = next((r for r in rows if r['report_period'] == latest and r['canonical_metric'] == metric), None)
+            if item:
+                value = '—' if item['value_status'] == 'missing' else f"{Decimal(item['value_cny']) / Decimal(1000000):,.2f}"
+                highlights.append((latest[:4] + ' ' + label, value, '百万元'))
+        facts(st, highlights)
+        section_heading(st, "年度财务", f"{len(rows)}项原始记录 · 合并报表")
+        st.table(financial_comparison(rows))
+        note(st, "2024比较数来自2025年报，披露日为2026-04-23。这些数据不能当作2024年当时已经可得的信息。")
+        st.caption("单位：百万元，表格保留三位小数。下载文件保留元单位原值。历史记录不自动改动情景假设。")
     else:
-        st.info("这家公司尚无完成原页核对的公开财务样本；不把待核数据当作已核事实。")
-    for limit in snapshot["limits"]:
-        st.write("• " + limit)
+        st.info("尚未收录已核对的公开财务记录。")
+        st.write("可以查看公司的覆盖状态。待核数据尚不作为财务事实，也不用于测算。")
     report = historical_report(snapshot, code, rows)
-    st.download_button("下载历史财务核验 JSON", json.dumps(report, ensure_ascii=False, indent=2),
-                       f"{code}_historical_reference.json", "application/json")
-    st.download_button("下载历史财务报告 Markdown", historical_markdown(report),
-                       f"{code}_historical_reference.md", "text/markdown")
-    with st.expander("本包公开样本的年报来源与核验记录"):
-        for source in snapshot["source_review"].values():
-            if isinstance(source, dict) and source.get("url"):
-                st.link_button("打开年报：" + source["published_at"], source["url"])
-        st.json(snapshot["validation_summary"])
+    section_heading(st, "原件与下载" if rows else "保存覆盖记录")
+    if rows:
+        source = snapshot['source_review']['sample_source']
+        st.write("本表取自绿的谐波2025年报，包括其中列示的2024比较数。")
+        st.caption(f"披露于{source['published_at']}。原页定位和文件指纹见下载记录。")
+        st.link_button("查看2025年报", source['url'])
+    left, right = st.columns(2)
+    with left:
+        st.download_button("下载记录 · JSON", json.dumps(report, ensure_ascii=False, indent=2),
+                           f"{code}_historical_reference.json", "application/json", key="history_json")
+    with right:
+        st.download_button("下载报告 · Markdown", historical_markdown(report),
+                           f"{code}_historical_reference.md", "text/markdown", key="history_md")
+    with st.expander("口径与核验明细"):
+        for limit in snapshot['limits']:
+            st.write("• " + limit)
+        if rows:
+            st.table(presentation_rows(rows))
+            st.json(snapshot['validation_summary'])
     if pending_root:
         pending = pending_vendor_records(pending_root, code)
         if pending:
-            with st.expander("本机 CSMAR 待核原值（未进入已核财务样本）"):
-                st.warning("当前正式定义与披露日不完整。原值无单位认证，不计算比率、不年化，不用于预测。")
+            with st.expander("本机待核资料 · CSMAR"):
+                note(st, "字段定义和披露日期还不完整。这里只保留原值，不计算比率、不年化、不用于预测。", attention=True)
                 st.table([{k: r[k] for k in ("report_period", "field_code", "field_name", "value_original", "source_locator")} for r in pending])
-                st.caption("本区仅读取本机授权目录，部署包不包含商业数据库原始导出。")
+                st.caption("这部分资料只在授权的本机目录中保存，交付包不含商业数据库原始导出。")

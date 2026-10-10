@@ -53,7 +53,8 @@ def main():
             page = context.new_page()
             video_start = time.monotonic()
             page.goto("http://127.0.0.1:8507")
-            page.get_by_role("button", name="运行示例", exact=True).wait_for()
+            page.get_by_role("heading", name="绿的谐波", exact=True).wait_for()
+            page.get_by_text("购建固定资产、无形资产和其他长期资产支付的现金", exact=True).first.wait_for()
 
             def caption(title, text, seconds=8, chapter=False):
                 when = time.monotonic() - video_start
@@ -62,7 +63,7 @@ def main():
                 page.evaluate("""({title,text}) => {
                     let el=document.getElementById('recording-explanation');
                     if(!el){el=document.createElement('div');el.id='recording-explanation';
-                      el.style.cssText='position:fixed;top:0;left:0;right:0;z-index:999999;background:#102e42;color:white;padding:12px 24px;font:19px sans-serif;line-height:1.5;pointer-events:none';
+                      el.style.cssText='position:fixed;bottom:20px;left:320px;right:20px;z-index:999999;background:#29493d;color:#fafbf5;padding:12px 20px;font:15px Microsoft YaHei,sans-serif;line-height:1.65;pointer-events:none';
                       document.body.appendChild(el);}
                     el.replaceChildren();const b=document.createElement('strong');b.textContent=title;
                     const t=document.createElement('div');t.textContent=text;el.append(b,t);
@@ -72,65 +73,59 @@ def main():
                 print(json.dumps({"event": len(events), "title": title}), flush=True)
                 page.wait_for_timeout(seconds * 1000)
 
-            caption("第一章 项目与功能", "Claim2Value 机器人产业链声明核查。以下为2026年10月10日Windows页面的连续实际操作；浏览器自动操作，字幕用于说明。", 12, True)
-            page.get_by_text("当前能力与适用范围", exact=True).click()
-            caption("项目范围", "自研规则、证据记录、经济映射与财务原型。页面使用Streamlit，不调用Qwen、Kimi或其他外部模型。", 10)
-            page.get_by_role("button", name="运行示例", exact=True).click()
-            page.get_by_text("已完成的核查记录", exact=True).wait_for()
-            caption("第二章 真实运行演示", "绿的谐波示例：实际核查结果提示测试条件缺失。来源和定位仍需人工核原文。", 12, True)
-            page.get_by_role("tab", name="分析与情景", exact=True).click()
-            page.get_by_text("财务三情景（单位：十亿元人民币）", exact=True).scroll_into_view_if_needed()
-            caption("绿的谐波财务情景", "表格来自本次运行。固定参数用于敏感性分析，不表示已识别技术声明对收入或估值的因果效应。", 12)
-            page.get_by_role("tab", name="导出记录", exact=True).click()
+            caption("01 / 项目简介", "Claim2Value把机器人产业链的财务记录、企业声明和测算假设放在一个工作台里。这是连续实际录屏，由浏览器自动操作。", 10, True)
+            page.get_by_text("2024比较数来自2025年报，披露日为2026-04-23。这些数据不能当作2024年当时已经可得的信息。", exact=True).scroll_into_view_if_needed()
+            caption("年度财务与原件", "两年数据按指标并排。34条原值取自年报，2024比较数实际披露于2026年4月23日，不能当作2024实时样本。", 8)
             with page.expect_download() as download:
-                page.get_by_role("button", name="下载结构化记录 JSON", exact=True).click()
+                page.get_by_role("button", name="下载记录 · JSON", exact=True).click()
+            download.value.save_as(str(a.out / "financial_actual_download.json"))
+            page.get_by_test_id("stSidebar").get_by_text("情景测算", exact=True).click()
+            page.get_by_role("button", name="计算情景", exact=True).click()
+            page.get_by_role("heading", name="遗漏限定条件", exact=True).wait_for()
+            caption("02 / 实际操作", "绿的谐波的减重声明没有保留原文中的同等出力条件。页面显示原文、出处和仍需核实的内容。", 10, True)
+            page.get_by_role("tab", name="测算与假设", exact=True).click()
+            page.get_by_text("企业价值（亿元）", exact=True).scroll_into_view_if_needed()
+            caption("固定假设测算", "企业价值统一用亿元。这里比较基准、上行和下行假设；不是股价或已经证实的技术收益。", 8)
+            page.get_by_role("tab", name="下载报告", exact=True).click()
+            with page.expect_download() as download:
+                page.get_by_role("button", name="下载记录 · JSON", exact=True).click()
             download.value.save_as(str(a.out / "green_actual_download.json"))
-            caption("报告导出", "已通过页面下载本次JSON，记录输入、判断与中间状态。当前函数耗时不含浏览器交互或人工阅读。", 8)
-            combo = page.get_by_role("combobox")
+            combo = page.get_by_role("combobox", name="研究案例")
             combo.scroll_into_view_if_needed()
             combo.click()
             # Keyboard selection also works with the newer React Aria wrapper.
             combo.press("ArrowDown")
             combo.press("Enter")
             page.get_by_text("环动科技下游客户已覆盖埃斯顿、埃夫特、卡诺普、爱仕达旗下钱江机器人等知名机器人制造商", exact=True).wait_for()
-            page.get_by_role("button", name="运行示例", exact=True).click()
-            page.get_by_text("记录模式：preset_scenario_demo · 双环传动/环动科技", exact=False).wait_for()
-            page.get_by_role("tab", name="分析与情景", exact=True).click()
-            page.get_by_text("财务三情景（单位：十亿元人民币）", exact=True).scroll_into_view_if_needed()
-            caption("双环传动切换与重算", "公司输入与情景参数随切换变化。客户覆盖需要进一步核实订单、收入及统计口径。", 12)
-            page.get_by_role("tab", name="导出记录", exact=True).click()
+            page.get_by_role("button", name="计算情景", exact=True).click()
+            page.get_by_role("tab", name="测算与假设", exact=True).click()
+            page.get_by_text("企业价值（亿元）", exact=True).scroll_into_view_if_needed()
+            caption("切换公司", "双环传动按自己的固定参数重算。客户覆盖不直接证明订单、收入或利润兑现。", 8)
+            page.get_by_role("tab", name="下载报告", exact=True).click()
             with page.expect_download() as download:
-                page.get_by_role("button", name="下载结构化记录 JSON", exact=True).click()
+                page.get_by_role("button", name="下载记录 · JSON", exact=True).click()
             download.value.save_as(str(a.out / "shuanghuan_actual_download.json"))
-            page.get_by_text("历史财务核验", exact=True).first.click()
-            page.get_by_text("选择财务公司", exact=True).wait_for()
-            caption("历史财务核验", "34条绿的谐波合并年度财务样本已核对年报原页。2024比较数披露于2026年4月23日，不能当作2024实时样本。", 12)
-            with page.expect_download() as download:
-                page.get_by_role("button", name="下载历史财务核验 JSON", exact=True).click()
-            download.value.save_as(str(a.out / "financial_actual_download.json"))
-            page.get_by_role("combobox", name="选择财务公司").click()
-            page.get_by_role("combobox", name="选择财务公司").press("ArrowDown")
-            page.get_by_role("combobox", name="选择财务公司").press("ArrowDown")
-            page.get_by_role("combobox", name="选择财务公司").press("Enter")
-            page.get_by_text("这家公司尚无完成原页核对的公开财务样本；不把待核数据当作已核事实。", exact=True).wait_for()
-            caption("步科覆盖与缺证", "步科列入公司覆盖状态，尚无完成原页核对的公开财务样本。系统保留缺口，不自动生成估值。", 10)
-            page.get_by_text("自定义核查", exact=True).click()
-            page.get_by_role("textbox", name="待核查声明", exact=True).fill("公司产品适用于机器人")
+            page.get_by_test_id("stSidebar").get_by_text("财务记录", exact=True).click()
+            company = page.get_by_role("combobox", name="公司", exact=True)
+            company.click(); company.press("ArrowDown"); company.press("ArrowDown"); company.press("Enter")
+            page.get_by_text("尚未收录已核对的公开财务记录。", exact=True).wait_for()
+            caption("资料缺口", "步科尚没有完成原页核对的公开财务样本。页面明确保留缺口，不填入猜测的数值。", 8)
+            page.get_by_test_id("stSidebar").get_by_text("声明核查", exact=True).click()
+            page.get_by_role("textbox", name="企业声明", exact=True).fill("公司产品适用于机器人")
             page.get_by_role("button", name="核查声明", exact=True).click()
             # A previous record can still exist while Streamlit reruns the form.
             # Wait for this newly submitted claim, not the unchanged heading.
             page.get_by_text("公司产品适用于机器人", exact=True).wait_for()
-            page.get_by_text("证据不足或规则无法判断", exact=True).wait_for()
-            caption("自定义输入与缺证处理", "本次确实修改输入，并留空证据。系统拒答，不为此输入生成财务估值。", 12)
-            page.get_by_role("tab", name="分析与情景", exact=True).click()
-            caption("第三章 效果与技术依据", f"既有开发库87/98标签命中，来自19个家族，非独立业务准确率。本次{verification['software_tests_passed']}项软件检查通过，失败案例保留。", 12, True)
-            page.get_by_role("tab", name="导出记录", exact=True).click()
+            page.get_by_role("heading", name="缺少证据", exact=True).wait_for()
+            caption("缺少引用原文", "输入一条声明，证据留空，系统不作判断，也不为这条输入生成估值。", 8)
+            page.get_by_role("tab", name="下载报告", exact=True).click()
             with page.expect_download() as download:
-                page.get_by_role("button", name="下载结构化记录 JSON", exact=True).click()
+                page.get_by_role("button", name="下载记录 · JSON", exact=True).click()
             download.value.save_as(str(a.out / "missing_actual_download.json"))
-            caption("技术题证据", "2020已查看，扣费Sharpe为−0.091。原名单保留；Windows独立复现与官方检查通过，比赛测试收益未知。", 12)
-            page.get_by_text("当前能力与适用范围", exact=True).scroll_into_view_if_needed()
-            caption("第四章 局限与适用范围", "适合研究者辅助核查文本。历史财务与假设情景分开。无实时检索、PDF上传或在线语义模型；CSMAR完整定义及真人试用仍待完成。", 15, True)
+            caption("03 / 效果依据", f"开发题87/98命中，11条失败保留；这不是独立业务准确率。本次{verification['software_tests_passed']}项软件检查通过。", 10, True)
+            caption("技术题复现", "冻结名单24,240行，Windows独立复现哈希一致。2020扣费Sharpe为负；比赛测试收益未知。", 8)
+            page.get_by_test_id("stSidebar").get_by_text("使用说明", exact=True).click()
+            caption("04 / 使用范围", "当前只检查已有规则，不做联网检索或完整语义判断。CSMAR字段定义、四条技术声明和真人试用仍需补齐。", 10, True)
             duration = time.monotonic() - video_start
             video_path = page.video.path()
             context.close()
@@ -144,6 +139,8 @@ def main():
             "environment": {name: importlib.metadata.version(name)
                             for name in ("streamlit", "numpy", "pandas", "playwright")},
             "app_sha256": hashlib.sha256((ROOT / "app.py").read_bytes()).hexdigest(),
+            "presentation_sha256": {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
+                for name in ("src/review_ui.py", "src/financial_evidence.py")},
             "recorder_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
             "elapsed_seconds_including_startup": time.monotonic() - started}
         (a.out / "recording_receipt.json").write_text(json.dumps(receipt, ensure_ascii=False, indent=2), encoding="utf-8")

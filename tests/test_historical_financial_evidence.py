@@ -41,8 +41,8 @@ def test_history_page_without_vendor_data_is_usable():
     app = AppTest.from_file(str(root / "app.py")).run()
     app.radio(key="review_mode").set_value("历史财务核验").run()
     assert not app.exception
-    assert len(app.table[0].value) == 34
+    assert len(app.table[0].value) == 17  # 34 raw values, displayed as two year columns.
     app.selectbox(key="history_company").set_value("步科股份").run()
     assert not app.exception
-    assert any("尚无完成原页核对" in i.value for i in app.info)
+    assert any("尚未收录已核对" in i.value for i in app.info)
     assert not any("财务三情景" in i.value for i in app.subheader)
