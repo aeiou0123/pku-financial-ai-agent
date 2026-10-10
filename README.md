@@ -1,3 +1,5 @@
+> 2026-10-10 研究工作台：接自己的模型 API、上传材料，分别执行财务／估值研究和量化处理／回测。Windows 双击 `start_harness.bat`，打开 http://127.0.0.1:8510 。[操作与范围](docs/harness/README.md)；[本次检查记录](docs/harness/review.md)。真实模型服务商调用和真人试用仍待验证。以下日期较早的进展保留为历史记录。
+
 > 当前执行（2026-10-09）：Codex 独立推进，先接财务小样本。负责人只需按 [CSMAR 下载清单](docs/semifinal/csmar_first_export.md)导出 688017 的 2024 年合并三张报表和字段说明；[最新工作入口](WORK_START_HERE.md)。
 
 > 2026年10月9日复赛更新：[执行成果与Review](docs/semifinal/execution_update_20261009.md)。技术题保留通过校验且再次独立复现的原名单，12候选未达到替换标准；材料、132秒实际运行视频及部署包已整合。

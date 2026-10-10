@@ -1,0 +1,7 @@
+﻿stock_code,company,report_period,published_at,statement_scope,period_type,metric_original,canonical_metric,value_original,unit,currency,revision_flag,source_database,source_file,source_locator,source_sha256
+000000,合成示例公司（非真实公司）,2024-12-31,2025-03-01,consolidated,point_in_time,总资产,total_assets,1000,元,CNY,original,synthetic_example,synthetic_financial.txt,line:3,fd38b80e7b2d2c77dc76f78365a5378bf540c11d9b5a9da8aa72ea4e0dfe4980
+000000,合成示例公司（非真实公司）,2024-12-31,2025-03-01,consolidated,point_in_time,总负债,total_liabilities,400,元,CNY,original,synthetic_example,synthetic_financial.txt,line:3,fd38b80e7b2d2c77dc76f78365a5378bf540c11d9b5a9da8aa72ea4e0dfe4980
+000000,合成示例公司（非真实公司）,2024-12-31,2025-03-01,consolidated,point_in_time,所有者权益,total_equity,600,元,CNY,original,synthetic_example,synthetic_financial.txt,line:3,fd38b80e7b2d2c77dc76f78365a5378bf540c11d9b5a9da8aa72ea4e0dfe4980
+000000,合成示例公司（非真实公司）,2024-12-31,2025-03-01,consolidated,annual,营业收入,revenue,500,元,CNY,original,synthetic_example,synthetic_financial.txt,line:4,fd38b80e7b2d2c77dc76f78365a5378bf540c11d9b5a9da8aa72ea4e0dfe4980
+000000,合成示例公司（非真实公司）,2024-12-31,2025-03-01,consolidated,annual,营业成本,cost_of_revenue,300,元,CNY,original,synthetic_example,synthetic_financial.txt,line:4,fd38b80e7b2d2c77dc76f78365a5378bf540c11d9b5a9da8aa72ea4e0dfe4980
+000000,合成示例公司（非真实公司）,2024-12-31,2025-03-01,consolidated,annual,归母净利润,net_profit_parent,50,元,CNY,original,synthetic_example,synthetic_financial.txt,line:4,fd38b80e7b2d2c77dc76f78365a5378bf540c11d9b5a9da8aa72ea4e0dfe4980
