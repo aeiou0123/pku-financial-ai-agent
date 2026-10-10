@@ -33,12 +33,11 @@ from src.harness.quant import prepare, backtest, save
 from src.harness.research_ui import render as render_research
 from src.harness.strategy_diagnostics import diagnose
 from src.harness.store import Run
-from src.review_ui import STYLE, page_heading, section_heading
+from src.review_ui import page_heading, section_heading
 from src.harness import experience
 
 ROOT = Path(__file__).resolve().parent
 st.set_page_config(page_title="Claim2Value · 研究工作台", layout="wide")
-st.markdown(STYLE, unsafe_allow_html=True)
 st.markdown(experience.STYLE, unsafe_allow_html=True)
 
 
@@ -124,8 +123,8 @@ def apply_connection_preset():
 
 with st.sidebar:
     st.markdown('<div class="c2v-brand"><div class="c2v-brand-name">Claim2Value</div><div class="c2v-brand-sub">研究工作台</div></div>', unsafe_allow_html=True)
-    desk_page = st.radio('页面', ['开始', '工作区', '教程与示例', '成果记录'], key='desk_page')
-    workflow = st.radio("研究方向", ["财务／估值研究", "量化处理与回测"], key='desk_direction',
+    desk_page = st.radio('页面', ['开始', '工作区', '教程与示例', '成果记录'], key='desk_page', width='stretch')
+    workflow = st.radio("研究方向", ["财务／估值研究", "量化处理与回测"], key='desk_direction', width='stretch',
                         on_change=lambda: st.session_state.update(desk_page='工作区', desk_example=None))
     connection = st.session_state.get('connection_result')
     st.caption('模型：连接已测试' if connection and connection.get('ok') else '模型：尚未测试；本地计算仍可用')

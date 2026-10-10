@@ -314,7 +314,7 @@ def test_app_initial_render():
     from streamlit.testing.v1 import AppTest
     app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "harness_app.py"), default_timeout=20).run()
     assert not app.exception
-    assert any(title.value == '从一个研究问题开始' for title in app.title)
+    assert any(title.value == '研究工作台' for title in app.title)
     next(button for button in app.button if button.label == '检查研究观点').click().run()
     assert not app.exception
     assert len(app.get("file_uploader")) == 1

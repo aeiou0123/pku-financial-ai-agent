@@ -28,7 +28,7 @@ def example_root(tmp_path):
 
 def test_first_use_starts_with_customer_tasks_and_sample_never_confirms_evidence():
     app = AppTest.from_file(str(ROOT/'harness_app.py'), default_timeout=25).run()
-    assert any(title.value == '从一个研究问题开始' for title in app.title)
+    assert any(title.value == '研究工作台' for title in app.title)
     item(app.button, '检查研究观点').click().run()
     assert app.session_state['desk_page'] == '工作区'
     item(app.button, '载入这项任务的样例').click().run()

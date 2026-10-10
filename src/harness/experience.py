@@ -54,33 +54,81 @@ STATUS = {'created':'已建立记录','documents_parsed':'材料已读取','extr
     'realization_conditions_computed':'情景计算已完成'}
 
 STYLE = '''<style>
-:root { --paper:#f7f8fa; --ink:#182a3a; --muted:#596a79; --line:#dce3ea; --pine:#245b87; }
-.stApp { background:#f7f8fa; }
-[data-testid="stSidebar"] { background:#fff; }
-[data-testid="stMainBlockContainer"] { max-width:1220px; padding:2.4rem 3rem 4rem; }
-.c2v-page-title h1 { font:600 30px/1.4 'Microsoft YaHei','PingFang SC',sans-serif; letter-spacing:0; }
-.c2v-brand-name { font:600 24px/1.4 'Microsoft YaHei',sans-serif; letter-spacing:-.5px; }
-.c2v-brand-sub { letter-spacing:0; font-size:13px; }
-.stMain h1 { font:600 30px/1.45 'Microsoft YaHei','PingFang SC',sans-serif; }
-.stCaption, [data-testid="stCaptionContainer"] { color:#526575 !important; }
-.desk-delivery { min-height:50px; font-size:14px; line-height:1.8; margin:4px 0 10px; }
-.c2v-page-code { display:none; }
-[data-testid="stSidebar"] [data-testid="stVerticalBlock"] { gap:.8rem; }
-[data-testid="stSidebar"] [data-testid="stRadioOption"]:has(input:checked) { background:#eaf1f8; }
-[data-testid="stWidgetLabel"] p { font-size:13px; color:#31485a; }
-[data-testid="stVerticalBlockBorderWrapper"] { background:#fff; border-radius:9px; }
-[data-testid="stBaseButton-primary"], [data-testid="stBaseButton-primaryFormSubmit"] { background:#245b87; border-color:#245b87; border-radius:6px; }
-[data-testid="stBaseButton-primary"]:hover { background:#194567; border-color:#194567; }
-[data-testid="stForm"] { background:#fff; border-radius:8px; }
-[data-testid="stExpander"] { background:#fff; border-radius:7px; }
-.desk-task h3 { font-size:19px; margin:8px 0 14px; }
-.desk-task .audience { color:#596a79; font-size:12px; }
-.desk-task p { font-size:14px; line-height:1.8; }
-.desk-steps { display:flex; margin:12px 0 22px; gap:8px; }
-.desk-step { flex:1; border-top:3px solid #dce3ea; padding:10px 4px; color:#596a79; font-size:13px; }
-.desk-step.current { border-color:#245b87; color:#193d59; font-weight:600; }
-.desk-step.done { border-color:#91b2a2; }
-@media(max-width:800px) { [data-testid="stMainBlockContainer"] { padding:2rem 1rem; } .desk-steps { flex-wrap:wrap; } .desk-step { min-width:40%; } }
+:root { --paper:#fff; --ink:#25272b; --muted:#62666b; --line:#dededb; --accent:#763b32; }
+.stApp { background:var(--paper); color:var(--ink); }
+html, body, [data-testid="stAppViewContainer"] { font-family:'Microsoft YaHei','PingFang SC',sans-serif; }
+[data-testid="stHeader"] { background:rgba(255,255,255,.96); }
+[data-testid="stAppDeployButton"], #MainMenu { display:none; }
+[data-testid="stMainBlockContainer"] { max-width:1140px; padding:2.5rem 3.2rem 4rem; }
+[data-testid="stMain"] [data-testid="stVerticalBlock"] { gap:.8rem; }
+[data-testid="stMarkdownContainer"] p { font-size:14px; line-height:1.8; }
+[data-testid="stMarkdownContainer"], input, textarea, [data-baseweb="select"] { font-family:'Microsoft YaHei','PingFang SC',sans-serif; }
+.stMain h1, .c2v-page-title h1 { font:600 28px/1.5 'SimSun','Songti SC',serif; letter-spacing:.5px; color:var(--ink); padding:0 0 10px; }
+.stMain h2 { font-size:20px; font-weight:600; }
+.stMain h3 { font-size:17px; font-weight:600; }
+.c2v-description { color:var(--muted); font-size:14px; margin:0 0 8px; }
+.c2v-kicker:empty, .c2v-page-code { display:none; }
+.c2v-section { display:flex; align-items:baseline; justify-content:space-between; gap:12px; border-bottom:1px solid var(--line); margin:16px 0 10px; padding-bottom:9px; }
+.c2v-section h2 { font-size:17px; margin:0; padding:0; }
+.c2v-section span { color:var(--muted); font-size:12px; }
+[data-testid="stSidebar"] { background:#f3f3f0; border-right:1px solid var(--line); }
+[data-testid="stSidebarContent"] { padding-top:1rem; }
+[data-testid="stSidebar"] [data-testid="stVerticalBlock"] { gap:1rem; }
+.c2v-brand { padding:8px 0 20px; border-bottom:2px solid var(--ink); }
+.c2v-brand-name { font:27px/1.3 Georgia,serif; letter-spacing:-.8px; color:var(--ink); }
+.c2v-brand-sub { margin-top:6px; font-size:12px; color:var(--muted); }
+[data-testid="stSidebar"] [role="radiogroup"] { gap:3px; }
+[data-testid="stSidebar"] [data-testid="stRadio"], [data-testid="stSidebar"] [data-testid="stRadioGroup"] { width:100%; align-items:stretch; }
+[data-testid="stSidebar"] [data-testid="stRadioGroup"] > div { min-width:100%; }
+[data-testid="stSidebar"] [data-testid="stRadioOption"] { padding:6px 8px; border-left:2px solid transparent; min-width:100%; border-radius:0; }
+[data-testid="stSidebar"] .st-key-desk_page [data-testid="stRadioOption"] > div > div:first-child { display:none; }
+[data-testid="stSidebar"] .st-key-desk_page [data-testid="stRadioOption"] { padding:8px 12px; }
+[data-testid="stRadioOption"][data-selected="true"] > div > div:first-child { background:var(--accent); }
+[data-testid="stSidebar"] [data-testid="stRadioOption"]:has(input:checked) { background:#e7e7e2; border-left-color:var(--accent); }
+[data-testid="stSidebar"] [data-testid="stRadioOption"]:focus-within { outline:2px solid var(--accent); outline-offset:2px; }
+[data-testid="stWidgetLabel"] p { font-size:13px; color:var(--ink); }
+[data-testid="stCaptionContainer"], .desk-meta { color:var(--muted); font-size:12px; }
+[data-baseweb="select"] > div, [data-baseweb="input"], [data-baseweb="textarea"] { background:#fafaf8; border-color:#c9cbc7; border-radius:3px; }
+[data-baseweb="input"] > div, [data-baseweb="textarea"] > div { background:#fafaf8; }
+[data-baseweb="textarea"] textarea { font-size:14px; line-height:1.7; }
+[data-testid="stBaseButton-primary"], [data-testid="stBaseButton-primaryFormSubmit"] { background:var(--ink); color:#fff; border-color:var(--ink); border-radius:3px; }
+[data-testid="stBaseButton-primary"]:hover, [data-testid="stBaseButton-primaryFormSubmit"]:hover { background:#45474a; color:#fff; border-color:#45474a; }
+[data-testid="stBaseButton-secondary"], [data-testid="stBaseButton-secondaryFormSubmit"] { background:transparent; border-color:#bfc1be; border-radius:3px; color:var(--ink); }
+[data-testid^="stBaseButton"]:focus-visible { outline:2px solid var(--accent); outline-offset:3px; box-shadow:none; }
+[data-testid="stBaseButton-primary"] [data-testid="stMarkdownContainer"], [data-testid="stBaseButton-primaryFormSubmit"] [data-testid="stMarkdownContainer"] { color:inherit; }
+[data-testid="stForm"], [data-testid="stExpander"], [data-testid="stVerticalBlockBorderWrapper"] { border-radius:3px; border-color:var(--line); box-shadow:none; }
+[data-testid="stForm"] { padding:18px; }
+[data-testid="stFileUploaderDropzone"] { border-radius:3px; background:#fafaf8; border:1px dashed #bec1bb; }
+[data-testid="stAlert"] { border-radius:3px; }
+[data-testid="stMetricValue"] { font-variant-numeric:tabular-nums; font-size:28px; }
+.desk-home-rule { border-top:2px solid var(--ink); margin:12px 0 0; }
+.desk-list-label { color:var(--muted); font-size:12px; padding:9px 0; border-bottom:1px solid var(--line); }
+.desk-row-index { color:var(--accent); font:12px/1.6 Consolas,'Microsoft YaHei',sans-serif; margin-bottom:8px; }
+.desk-row-question { color:var(--muted); font-size:13px; line-height:1.8; margin:8px 0 0; }
+.desk-row-label { color:var(--muted); font-size:12px; margin:1px 0 8px; }
+.desk-row-value { font-size:14px; line-height:1.8; }
+[class*="st-key-task_row_"] { padding:18px 0; border-bottom:1px solid var(--line); }
+[class*="st-key-start_"] button { border:none; padding:0; min-height:28px; background:transparent; border-radius:0; text-align:left; justify-content:flex-start; }
+[class*="st-key-start_"] button p { font-size:18px; font-weight:600; text-decoration:underline; text-decoration-color:#b1b3ae; text-underline-offset:6px; }
+[class*="st-key-start_"] button:hover { background:transparent; color:var(--accent); }
+.desk-steps { display:flex; margin:8px 0 16px; gap:12px; }
+.desk-step { flex:1; border-bottom:1px solid var(--line); padding:8px 0; color:var(--muted); font-size:12px; }
+.desk-step.current { border-color:var(--ink); color:var(--ink); font-weight:600; }
+.desk-step.done { color:#414b41; }
+.st-key-first_use { padding:18px 0 8px; }
+.st-key-tutorial_steps, .st-key-tutorial_calculation { padding:12px 0 20px; border-top:1px solid var(--line); }
+.desk-intro-title { font-size:15px; font-weight:600; margin-bottom:6px; }
+.desk-intro-copy { font-size:13px; color:var(--muted); line-height:1.8; }
+@media(max-width:800px) {
+ [data-testid="stMainBlockContainer"] { padding:2rem 1.2rem 3rem; }
+ .stMain h1, .c2v-page-title h1 { font-size:26px; }
+ .desk-steps { flex-wrap:wrap; gap:4px 16px; }
+ .desk-step { min-width:40%; }
+ [class*="st-key-task_row_"] [data-testid="stHorizontalBlock"] { gap:16px; }
+ .desk-row-label { margin-bottom:3px; }
+ .c2v-section { flex-wrap:wrap; }
+}
+@media(prefers-reduced-motion:reduce) { *, *::before, *::after { transition:none !important; animation:none !important; } }
 </style>'''
 
 
@@ -108,21 +156,27 @@ def stage(state, uploads, question):
 
 
 def home():
-    st.title('从一个研究问题开始')
-    st.write('为产业投研、财务分析和量化学习整理可追溯的研究底稿。选择任务后，页面会告诉你需要什么材料、下一步做什么。')
-    for column, (key, item) in zip(st.columns(3), TASKS.items()):
-        with column.container(border=True):
-            st.markdown(f'<div class="desk-task"><div class="audience">{escape(item["audience"])}</div><h3>{escape(item["title"])}</h3><p>{escape(item["question"])}</p></div>', unsafe_allow_html=True)
-            st.caption('你提供')
-            st.markdown('<div class="desk-delivery">' + escape(item['input']) + '</div>', unsafe_allow_html=True)
-            st.caption('你得到')
-            st.markdown('<div class="desk-delivery">' + escape(item['output']) + '</div>', unsafe_allow_html=True)
-            st.button(item['title'], key='start_' + key, type='primary', width='stretch', on_click=select_task, args=(key,))
-    with st.container(border=True):
-        st.subheader('第一次使用')
-        st.write('先做一次无需API的样例计算，理解输入、输出和限制；再把自己的材料带进工作区。')
-        st.button('打开教程与样例', on_click=lambda: st.session_state.update(desk_page='教程与示例'))
-    st.caption('本地计算无需模型。自动整理和证据检查需要你配置的模型服务；点击调用时，相关文字会发送给该服务。当前不含在线数据库查询和自动交易。')
+    st.title('研究工作台')
+    st.write('上传资料，核对出处，保存研究底稿。')
+    st.markdown('<div class="desk-home-rule"></div><div class="desk-list-label">新建研究 · 选择一项任务</div>', unsafe_allow_html=True)
+    for index, (key, item) in enumerate(TASKS.items(), 1):
+        with st.container(key='task_row_' + key):
+            task, materials, outputs = st.columns([1.2, 1.2, 1.4], gap='large')
+            with task:
+                st.markdown(f'<div class="desk-row-index">0{index} / {escape(item["audience"].split("、")[0])}</div>', unsafe_allow_html=True)
+                st.button(item['title'], key='start_' + key, on_click=select_task, args=(key,))
+                st.markdown('<div class="desk-row-question">' + escape(item['question']) + '</div>', unsafe_allow_html=True)
+            for column, label, text in [(materials, '所需材料', item['input']), (outputs, '输出内容', item['output'])]:
+                with column:
+                    st.markdown(f'<div class="desk-row-label">{label}</div><div class="desk-row-value">{escape(text)}</div>', unsafe_allow_html=True)
+    with st.container(key='first_use'):
+        text, action = st.columns([3, 1.4], vertical_alignment='center')
+        with text:
+            st.markdown('<div class="desk-intro-title">第一次使用</div><div class="desk-intro-copy">用合成材料走一遍流程。教程包含样例文件、可复制的提问和无需 API 的计算。</div>', unsafe_allow_html=True)
+        with action:
+            st.button('打开教程与样例', on_click=lambda: st.session_state.update(desk_page='教程与示例'))
+    with st.expander('使用范围与数据去向'):
+        st.write('本地核验和回测无需模型。自动整理和证据检查使用你配置的模型；点击调用时，相关文字会发送给该服务。上传原件保存在本机。当前不含在线数据库查询和自动交易。')
 
 
 def guide(root):
@@ -131,7 +185,7 @@ def guide(root):
     selected = st.selectbox('我想学习的任务', list(TASKS), format_func=lambda k: TASKS[k]['title'])
     item = TASKS[selected]
     steps(0)
-    with st.container(border=True):
+    with st.container(key='tutorial_steps'):
         st.subheader(item['title'])
         st.write('1. 准备：' + item['input'] + '。')
         st.write('2. 写清公司、期间或策略规则，按提示核对来源和字段。')
@@ -142,7 +196,7 @@ def guide(root):
         for name in item['files']:
             st.download_button('下载样例 · ' + name, (root/'docs/harness/examples'/name).read_bytes(), file_name=name)
     if selected in {'industry', 'quant'}:
-        with st.container(border=True):
+        with st.container(key='tutorial_calculation'):
             st.subheader('无需API，先做一次实际计算')
             st.caption('使用现有本地计算工具，不产生模型证据；点击后保留合成输入、参数和结果。')
             if selected == 'industry':
