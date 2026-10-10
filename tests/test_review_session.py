@@ -48,10 +48,12 @@ def test_streamlit_submit_switch_and_validation():
 
     at = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app.py"), default_timeout=15).run()
     assert not at.exception
+    at.radio(key="review_mode").set_value("示例情景").run()
     at.button(key="run_demo").click().run()
     assert not at.exception
     assert at.session_state["review_result"]["financial"]["status"] == "ok"
     at.selectbox(key="demo_name").select("双环传动/环动科技 · 客户覆盖").run()
+    assert not at.get("download_button")  # Different case must not show the old company's result.
     at.button(key="run_demo").click().run()
     assert at.session_state["review_result"]["review_session"]["company"] == "双环传动/环动科技"
     at.radio(key="review_mode").set_value("自定义核查").run()

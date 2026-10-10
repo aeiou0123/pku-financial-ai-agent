@@ -105,7 +105,12 @@ def test_symlink_escape_rejected(evidence, tmp_path_factory):
     root, row = evidence
     outside = tmp_path_factory.mktemp("outside") / "raw.csv"
     outside.write_text("outside")
-    (root / "link.csv").symlink_to(outside)
+    try:
+        (root / "link.csv").symlink_to(outside)
+    except OSError as exc:
+        if getattr(exc, "winerror", None) == 1314:
+            pytest.skip("Windows account cannot create symlinks; path traversal checks still run")
+        raise
     _, report = check(evidence, [{**row, "source_file": "link.csv", "source_sha256": sha256(outside)}])
     assert report["errors"][0]["issue"] == "source_file_outside_root"
 

@@ -25,7 +25,10 @@ def make_information(template, output, content):
     counts = [len(''.join(text.split())) for text in content['information']]
     if len(counts) != 5 or any(n > limit for n, limit in zip(counts, limits)) or sum(counts) > 2500:
         raise ValueError("Information fields exceed conservative character bounds")
-    values = ['待负责人填写', 'Claim2Value', '待负责人逐人填写姓名、单位或年级、分工', '待负责人填写联系人、电话、邮箱']
+    identity = content.get('team_information', {})
+    values = [identity.get('team_name', '待负责人填写'), 'Claim2Value',
+              identity.get('members_text', '待负责人逐人填写姓名、单位或年级、分工'),
+              identity.get('contact_text', '待负责人填写联系人、电话、邮箱')]
     for row, value in zip(document.tables[0].rows, values):
         row.cells[1].text = value
     for table, text in zip(document.tables[1:6], content['information']):
@@ -82,11 +85,16 @@ def make_information(template, output, content):
                     for k, v in {'val':'single', 'sz':'4', 'color':'D9D9D9'}.items():e.set(qn('w:' + k), v)
                     borders.append(e)
     document.save(output)
+    pending = ['member roles', 'contact', 'signature', 'date', 'Word word-count review']
+    if not identity.get('team_name'):pending.insert(0, 'team')
+    if not identity.get('members_text'):pending.insert(0, 'member identities')
     return {'character_count_upper_bound': counts, 'limits': limits, 'total': sum(counts),
-            'needs_human_completion': ['team', 'members', 'contact', 'signature', 'date', 'Word word-count review']}
+            'needs_human_completion': pending}
 
 
 def make_pdf(output, content, font_path):
+    # The installed SimHei font lacks the Unicode minus; retain its meaning with ASCII.
+    content = json.loads(json.dumps(content, ensure_ascii=False).replace('\u2212', '-'))
     from reportlab.pdfbase import pdfmetrics
     from reportlab.pdfbase.ttfonts import TTFont
     from reportlab.lib import colors
@@ -100,7 +108,7 @@ def make_pdf(output, content, font_path):
     h2 = ParagraphStyle('h2', parent=normal, fontSize=12, leading=18, spaceBefore=8, spaceAfter=6, keepWithNext=True)
     small = ParagraphStyle('small', parent=normal, fontSize=9, leading=13, spaceAfter=4)
     cell_style = ParagraphStyle('cell', parent=normal, fontSize=9.6, leading=14.6, spaceAfter=0)
-    summary = json.loads((ROOT/content['evidence_paths']['evaluation']).read_text())['summary']
+    summary = json.loads((ROOT/content['evidence_paths']['evaluation']).read_text(encoding='utf-8'))['summary']
     class BookmarkedDoc(SimpleDocTemplate):
         def afterFlowable(self, flowable):
             if hasattr(flowable, '_bookmark'):
@@ -138,11 +146,10 @@ def make_pdf(output, content, font_path):
         if i:story.append(PageBreak())
         if i == 0:
             story.append(Paragraph('Claim2Value 复赛项目说明',h1))
-            story.append(Paragraph('北京大学金融AI智能体创新大赛　版本日期 2026年10月9日',small))
+            story.append(Paragraph('北京大学金融AI智能体创新大赛　版本日期 '+content['date'],small))
             story.append(Spacer(1,10))
         p = Paragraph(escape(page['heading']),h1)
-        if i in (1,3):p._bookmark=('detail'+str(i),1)
-        else:p._bookmark=({0:'section1',2:'section2',4:'section3',5:'section5'}[i],0)
+        p._bookmark=('page'+str(i),0)
         story.append(p)
         for item in page['items']:
             kind = item['kind']
@@ -155,21 +162,22 @@ def make_pdf(output, content, font_path):
             elif kind=='metrics_table':
                 rows=[['开发扰动类别','严格标签命中','比例']]
                 for k,v in summary['mutations']['by_type'].items():rows.append([labels[k],f"{v['hits']}/{v['n']}",f"{v['rate']:.1%}"])
-                rows.append(['合计 19个原家族','87/98','88.8%'])
+                m=summary['mutations']
+                rows.append([f"合计 {m['families']}个原家族",f"{m['exact_hits']}/{m['cases']}",f"{m['exact_rate']:.1%}"])
                 story.extend([table(rows,[0.5,0.25,0.25]),Spacer(1,9)])
             elif kind=='scenario_table':
                 rows=[['固定示例 EV 亿元','base','upside','downside']]
                 for stem,label in [('green_demo','绿的谐波'),('shuanghuan_demo','双环传动')]:
-                    f=json.loads((ROOT/content['evidence_paths']['cases']/f'{stem}.json').read_text())['financial']['scenarios']
+                    f=json.loads((ROOT/content['evidence_paths']['cases']/f'{stem}.json').read_text(encoding='utf-8'))['financial']['scenarios']
                     rows.append([label]+[f"{f[k]['enterprise_value_bn']*10:.2f}" for k in ['base','upside','downside']])
                 story.extend([table(rows,[0.43,0.19,0.19,0.19]),Spacer(1,9)])
             elif kind=='runtime':
                 r=summary['runtime'];env=summary['environment']
-                text=f"本轮环境为Linux x86_64、Python {env['python']}，运行环境报告{env['cpu_logical_count']}个逻辑CPU。每条扰动重复{r['repeats_per_mutation']}次，先取各题中位耗时，再对98个中位数汇总：p50为{r['p50_case_median_ms']:.3f}ms，p95为{r['p95_case_median_ms']:.3f}ms。所有重复的判断标签一致。"
+                text=f"本轮环境为{env.get('platform', '见运行记录')}、Python {env['python']}，运行环境报告{env['cpu_logical_count']}个逻辑CPU。每条扰动重复{r['repeats_per_mutation']}次，先取各题中位耗时，再对98个中位数汇总：p50为{r['p50_case_median_ms']:.3f}ms，p95为{r['p95_case_median_ms']:.3f}ms。所有重复的判断标签一致。"
                 story.append(Paragraph(escape(text),normal))
     def footer(canvas, doc):
         canvas.saveState();canvas.setFont('CJK',8.5);canvas.setFillColor(colors.HexColor('#58626A'))
-        canvas.drawString(44,24,'Claim2Value　2026年10月9日');canvas.drawRightString(A4[0]-44,24,str(doc.page));canvas.restoreState()
+        canvas.drawString(44,24,'Claim2Value　'+content['date']);canvas.drawRightString(A4[0]-44,24,str(doc.page));canvas.restoreState()
     doc.build(story,onFirstPage=footer,onLaterPages=footer)
 
 
@@ -179,7 +187,7 @@ def main():
     parser.add_argument('--font',type=Path,required=True)
     parser.add_argument('--out',type=Path,required=True)
     args=parser.parse_args();args.out.mkdir(parents=True,exist_ok=False)
-    content=json.loads((ROOT/'docs/semifinal/materials_content.json').read_text())
+    content=json.loads((ROOT/'docs/semifinal/materials_content.json').read_text(encoding='utf-8'))
     counts=make_information(args.information_template,args.out/'01_统一信息表_草稿.docx',content)
     make_pdf(args.out/'02_项目说明_复赛草稿.pdf',content,args.font)
     (args.out/'草稿说明.json').write_text(json.dumps({'status':'DRAFT_NOT_FINAL_SUBMISSION','information':counts,'next':['new-source verification','independent validation','team fields/signature','trial feedback','presentation/video','actual technical results']},ensure_ascii=False,indent=2))

@@ -65,8 +65,8 @@ def evaluate(output, repeats=5):
     output.mkdir(parents=True, exist_ok=False)
     bench = ROOT / "benchmarks/claim_verification_v2.json"
     probes_path = ROOT / "benchmarks/local_boundary_probes.json"
-    cases = json.loads(bench.read_text())["cases"]
-    probes = json.loads(probes_path.read_text())["cases"]
+    cases = json.loads(bench.read_text(encoding="utf-8"))["cases"]
+    probes = json.loads(probes_path.read_text(encoding="utf-8"))["cases"]
     # Keep one original reference per family; its source is not re-authenticated.
     references = {}
     for c in cases:

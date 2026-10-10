@@ -183,32 +183,49 @@ def print_demo(result: Dict[str, Any]) -> None:
 def render_streamlit() -> None:
     import streamlit as st
     from src.review_session import demo_cases, run_review, review_markdown
+    from src.review_ui import STYLE, NAV_LABELS, page_heading, section_heading, note, verdict_html, scenario_rows, assumption_rows
 
-    st.set_page_config(page_title="Claim2Value 证据核查", layout="wide")
-    st.title("Claim2Value：从技术声明到证据与财务情景")
-    st.caption("先核查证据，再查看适用的情景分析。当前为本地规则模式，无外部 API 调用。")
-    with st.expander("当前能力与适用范围"):
-        st.write("可用：自定义声明与原文核查、证据出处记录、两家公司示例情景、报告导出。")
-        st.write("待接入：实时检索、完整语义验证、新财务数据。自定义声明暂不自动生成估值。")
-    mode = st.radio("操作方式", ["示例情景", "自定义核查"], horizontal=True, key="review_mode")
+    st.set_page_config(page_title="Claim2Value · 研究工作台", layout="wide")
+    st.markdown(STYLE, unsafe_allow_html=True)
+    with st.sidebar:
+        st.markdown('<div class="c2v-brand"><div class="c2v-brand-name">Claim2Value</div>'
+                    '<div class="c2v-brand-sub">产业研究工作台</div></div>', unsafe_allow_html=True)
+        mode = st.radio("工作区", ["历史财务核验", "自定义核查", "示例情景"],
+                        format_func=NAV_LABELS.get, key="review_mode")
+        st.markdown('<div class="c2v-side-note">机器人产业链<br>绿的谐波 / 双环传动 / 步科股份<br><br>资料、判断与假设分别记录。</div>', unsafe_allow_html=True)
+        with st.expander("使用说明"):
+            st.write("财务记录可查看原值和年报出处。声明核查对照你提供的原文。情景测算使用两家公司的固定参数。")
+            st.caption("本地运行，不联网检索。声明核查只覆盖已有规则；原件和统计口径仍需人工确认。")
+    if mode == "历史财务核验":
+        from src.financial_evidence import render_history
+        pending_root = REPO_ROOT / "work/csmar_handoff/20261009"
+        render_history(st, pending_root if pending_root.is_dir() else None)
+        return
     if mode == "示例情景":
-        name = st.selectbox("选择案例", list(demo_cases()), key="demo_name")
-        case = demo_cases()[name]
+        page_heading(st, "情景测算", "选用已保存的公司参数，查看不同假设下的计算结果。", section="情景测算 / 固定假设")
+        cases = demo_cases()
+        name = st.selectbox("研究案例", list(cases), key="demo_name")
+        case = cases[name]
+        section_heading(st, case["company"], "固定参数示例")
         st.write(case["claim"])
-        st.warning("示例的工程参数和财务假设来自仓库固定数据，输出是敏感性情景，不能作为本条声明的已识别因果效应。")
-        if st.button("运行示例", key="run_demo"):
+        note(st, "这组结果用于比较假设。2025期是原有模型设定；不是当前预测，也不证明技术改进带来了收入或价值增长。")
+        if st.button("计算情景", key="run_demo", type="primary"):
             st.session_state.pop("review_result", None)
             try:
                 st.session_state["review_result"] = run_review(demo_name=name)
             except Exception:
-                st.error("示例运行失败，请检查本地数据文件；本次未生成报告。")
+                st.error("计算失败。请检查公司数据文件后重试。")
     else:
+        page_heading(st, "声明核查", "把企业表述与引用原文放在一起，检查数值、指标和限定条件。", section="声明核查 / 原文对照")
         with st.form("custom_review"):
-            claim = st.text_area("待核查声明", max_chars=4000, key="custom_claim")
-            source = st.text_area("证据原文（可留空，观察缺证处理）", max_chars=60000, key="custom_source")
-            url = st.text_input("来源链接（选填）", key="custom_url")
-            locator = st.text_input("文档标题与页码（选填）", key="custom_locator")
-            submitted = st.form_submit_button("核查声明")
+            claim = st.text_area("企业声明", placeholder="例如：新一代关节模组减重30%以上。", max_chars=4000, height=95, key="custom_claim")
+            source = st.text_area("引用原文", placeholder="粘贴公告、年报或技术资料中的相关段落。", max_chars=60000, height=170, key="custom_source")
+            left, right = st.columns(2)
+            with left:
+                url = st.text_input("来源链接（选填）", placeholder="https://…", key="custom_url")
+            with right:
+                locator = st.text_input("文档与页码（选填）", placeholder="例如：2025年报，第7页", key="custom_locator")
+            submitted = st.form_submit_button("核查声明", type="primary")
         if submitted:
             st.session_state.pop("review_result", None)
             try:
@@ -216,59 +233,73 @@ def render_streamlit() -> None:
             except ValueError as exc:
                 st.error(str(exc))
             except Exception:
-                st.error("核查运行失败，本次未生成报告。请检查本地文件与运行环境。")
+                st.error("核查失败，未生成报告。请检查运行环境后重试。")
     result = st.session_state.get("review_result")
+    expected_mode = "preset_scenario_demo" if mode == "示例情景" else "custom_rule_review"
+    if result and (result["review_session"]["mode"] != expected_mode or (
+            mode == "示例情景" and result["review_session"]["case_id"] != case["case_id"])):
+        result = None
     if not result:
-        st.info("选择示例后点击运行，或粘贴声明与证据原文开始核查。")
+        st.caption("填写后提交，结果会显示在下方。" if mode == "自定义核查" else "计算后可查看情景、参数依据和报告。")
         return
     session = result["review_session"]
-    st.divider()
-    st.subheader("已完成的核查记录")
-    st.caption("以下结果属于上一次提交的输入；修改表单或切换案例后需重新点击运行。")
+    section_heading(st, "本次记录", session['company'] or "自定义输入")
     st.write(result["claim"])
-    st.caption(f"记录模式：{session['mode']} · {session['company'] or '自定义输入'} · UTC {session['created_at_utc']}")
+    st.caption("结果对应上方这条已提交的声明。编辑输入后，请重新提交。")
     v = result["verification"]
-    verdict_names = {"abstain": "证据不足或规则无法判断", "partially_supported": "发现限定条件缺失", "refuted": "规则检出矛盾", "definition_mismatch": "口径不符", "low_confidence": "来源可靠性不足"}
-    st.metric("规则结论", verdict_names.get(v["verdict"], v["verdict"]))
-    st.write(v["reasoning"])
-    st.caption("规则置信度是规则输出的内部数值，尚未校准为声明成立概率。")
-    for flag in v.get("rule_flags", []):
-        st.warning(flag)
-    evidence_tab, analysis_tab, export_tab = st.tabs(["证据与出处", "分析与情景", "导出记录"])
+    verdict_names = {"abstain": "缺少证据" if not result['source'] else "暂不能判断",
+                     "partially_supported": "遗漏限定条件", "refuted": "原文与声明有矛盾",
+                     "definition_mismatch": "指标口径不同", "low_confidence": "来源尚需核实", "supported": "未检出规则问题"}
+    detail = "；".join(v.get('rule_flags') or []) or v['reasoning']
+    detail = detail.replace('在 source 中存在但 claim 中缺失', '出现在引用原文中，但声明没有保留')
+    st.markdown(verdict_html(verdict_names.get(v['verdict'], v['verdict']), detail), unsafe_allow_html=True)
+    st.caption("这里只检查已有规则。未检出问题，不代表声明已经得到证实。")
+    evidence_tab, analysis_tab, export_tab = st.tabs(["原文与出处", "测算与假设", "下载报告"])
     with evidence_tab:
-        st.write(f"证据状态：{session['evidence_status']}")
-        if session["source_url"]:
-            st.link_button("打开记录的来源链接", session["source_url"])
-        st.write(f"定位：{session['source_locator'] or '未提供'}")
-        st.text(result["source"] or "未提供证据原文")
-        st.caption(f"原文 SHA-256：{session['source_sha256']}")
-        for limitation in session["limitations"]:
-            st.write("• " + limitation)
+        section_heading(st, "引用原文", "用户提供" if expected_mode == 'custom_rule_review' else "已有资料摘录")
+        st.write(result["source"] or "没有提供引用原文。补充出处后可重新核查。")
+        st.caption("出处：" + (session['source_locator'] or '未填写'))
+        if session['source_url']:
+            st.link_button("查看来源", session['source_url'])
+        with st.expander("出处核验与记录明细"):
+            status = session['evidence_status']
+            st.write("摘录尚待原件核对。" if status == 'candidate_evidence_not_finally_verified' else status)
+            for limitation in session['limitations']:
+                st.write("• " + limitation)
+            st.caption("原文指纹：" + session['source_sha256'])
+            st.caption("记录时间（UTC）：" + session['created_at_utc'])
     with analysis_tab:
-        st.write(result["gate"]["reason"])
         financial = result["financial"]
         if financial.get("status") == "ok":
-            st.warning(session["financial_scope"])
-            st.subheader("经济假设")
-            for line in _assumption_lines(result.get("economics")):
-                st.text(line)
-            st.subheader("因果批判与未解决问题")
-            st.json(financial.get("critic_annotation", {}))
-            st.subheader("财务三情景（单位：十亿元人民币）")
-            st.table(_scenario_summary(financial.get("scenarios", {})))
+            section_heading(st, "情景结果", "人民币 · 亿元")
+            st.table(scenario_rows(financial.get('scenarios', {})))
+            st.caption("企业价值不是股价。下表是这组固定模型中的假设，历史财务更新不会自动改动它们。")
+            section_heading(st, "采用的假设")
+            st.table(assumption_rows(result.get('economics')))
+            with st.expander("仍需补充的证据"):
+                for review in (result.get('causal') or {}).get('reviews', []):
+                    st.write(review['variable_label'])
+                    for requirement in review.get('counterfactual_requirements', []):
+                        if not requirement['satisfied']:
+                            st.write("• " + requirement['requirement'])
+                st.caption("模型中的归因折扣属于假设设定，没有经过独立因果检验。")
         else:
-            st.info(financial.get("reason", "未生成财务情景"))
+            note(st, "这条输入只做声明核查。没有绑定公司参数，不计算估值。")
         for error in result.get("errors", []):
             st.error(f"{error['stage']}: {error['error']}")
-        with st.expander("完整流水线输出"):
+        with st.expander("查看完整计算记录"):
             st.text(result.get("report_markdown", ""))
     with export_tab:
-        st.caption(f"本次计算耗时 {session['elapsed_ms']} ms（不含页面交互），外部 API 调用 0。")
-        st.download_button("下载结构化记录 JSON", json.dumps(result, ensure_ascii=False, indent=2),
-                           "claim2value_review.json", "application/json")
-        st.download_button("下载核查报告 Markdown", review_markdown(result),
-                           "claim2value_review.md", "text/markdown")
-        st.caption("下载文件包含你输入的声明和证据原文，分享前请自行确认其使用范围。")
+        section_heading(st, "保存本次记录")
+        st.write("报告包括已提交的声明、引用原文、出处和核查结果。")
+        left, right = st.columns(2)
+        with left:
+            st.download_button("下载记录 · JSON", json.dumps(result, ensure_ascii=False, indent=2),
+                               "claim2value_review.json", "application/json", key="review_json")
+        with right:
+            st.download_button("下载报告 · Markdown", review_markdown(result),
+                               "claim2value_review.md", "text/markdown", key="review_md")
+        st.caption(f"记录时间（UTC）：{session['created_at_utc']}。本次计算{session['elapsed_ms']}毫秒，不含页面操作；没有外部模型调用。")
 
 
 def main() -> None:
