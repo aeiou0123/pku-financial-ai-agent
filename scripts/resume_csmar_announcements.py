@@ -12,6 +12,14 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from src.source_checkpoint import verify_checkpoint
 
+# Collector working records change when another authorized intake round arrives.
+# Keep the original checkpoint and report their changes; never exempt raw sources.
+WORKING_METADATA = {
+    "metadata/announcement_info_pending_ids.json", "metadata/download_manifest.csv",
+    "metadata/field_diff.csv", "metadata/gaps.csv", "metadata/query_receipts.jsonl",
+    "metadata/query_receipts_supplementary.jsonl", "metadata/verification.json",
+}
+
 
 def read_json(path):
     return json.loads(path.read_text(encoding="utf-8"))
@@ -38,7 +46,9 @@ def received_ids(root):
 def preview(root):
     original = read_json(root / "reports/CODEX_RECEIVED_SOURCE_CHECKPOINT.json")["files"]
     integrity = verify_checkpoint(root, original)
-    if not integrity["originals_unchanged"]:
+    raw_integrity = verify_checkpoint(root, [r for r in original if r["path"].startswith("raw/")], directories=("raw",))
+    unexpected_changes = set(integrity["changed"]) - WORKING_METADATA
+    if integrity["missing"] or unexpected_changes or not raw_integrity["originals_unchanged"]:
         raise ValueError("Original source missing or changed")
     done = received_ids(root)
     target_dates = {}
@@ -46,7 +56,7 @@ def preview(root):
         for row in read_json(path).get("rows", []):
             if row.get("SecurityTypeID") == "P50100":
                 target_dates[str(row["AnnouncementID"])] = row["DeclareDate"]
-    with (root / "derived/codex_review/announcement_resume_jobs.csv").open(encoding="utf-8-sig", newline="") as handle:
+    with (root / "derived/source_review/announcement_resume_jobs.csv").open(encoding="utf-8-sig", newline="") as handle:
         jobs = list(csv.DictReader(handle))
     requests, seen = [], set()
     for job in jobs:
@@ -63,7 +73,9 @@ def preview(root):
             requests.append({"job_id": job["job_id"], "table": job["platform_table"],
                              "startTime": job["startTime"], "endTime": job["endTime"], "ids": remaining})
     return {"mode": "OFFLINE_PREVIEW_NO_LOGIN", "jobs": requests, "pending_ids": sum(len(j["ids"]) for j in requests),
-            "integrity": integrity, "quota_restore_time": "UNKNOWN", "old_manual_is_current_dictionary": False}
+            "integrity": integrity, "raw_integrity": raw_integrity,
+            "working_metadata_changed": integrity["changed"],
+            "quota_restore_time": "UNKNOWN", "old_manual_is_current_dictionary": False}
 
 
 def execute(root, plan):

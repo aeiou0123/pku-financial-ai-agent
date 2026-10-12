@@ -1,6 +1,10 @@
 """Daily long-only research with explicit next-close execution and paid turnover."""
 from __future__ import annotations
 
+from .module_stamp import source_stamp
+_c2v_loaded_source_hash = source_stamp(__file__)
+from .reports import quant_report
+
 import math
 import re
 
@@ -95,6 +99,7 @@ def backtest(data: pd.DataFrame, *, strategy: str = "momentum", lookback: int = 
     benchmark_turnover.iloc[0] = 1
     benchmark_net = (1 + benchmark_gross) * (1 - benchmark_turnover * fee_bps / 10000) - 1
     daily["benchmark_nav"] = (1 + benchmark_net).cumprod()
+    daily["benchmark_net_return"] = benchmark_net
     if not np.isfinite(daily.to_numpy()).all() or (daily["nav"] <= 0).any():
         raise ValueError("净值计算溢出或下溢，请核对数据和样本范围。")
     std = daily["net_return"].std(ddof=1)
@@ -138,10 +143,5 @@ def save(run: Run, data: pd.DataFrame, result: dict) -> None:
     run.write("rank_ic.csv", result["ic"].to_csv(index=False).encode("utf-8-sig"))
     run.write("metrics.json", result["metrics"])
     metrics = result["metrics"]
-    run.write("quant_report.md", "# 量化研究记录\n\n" +
-              f"样本收益：{metrics['total_return']:.2%}；最大回撤：{metrics['max_drawdown']:.2%}。"
-              "这两个数字仅对应上传样本和所选参数，不是比赛测试成绩。\n\n"
-              "信号在 T 日收盘后确定，T+1 日收盘成交，T+2 日计入第一笔持仓收益。费用按双向换手和单边 bps 扣除。"
-              "买入费用在首次成交日计入；样本末尾不强制清仓。\n\n" +
-              "\n".join("- " + text for text in metrics["limitations"]) + "\n")
+    run.write('quant_report.md',quant_report(result))
     run.event("quant_completed", observations=len(data), evaluation_days=metrics["days"])

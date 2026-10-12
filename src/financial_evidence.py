@@ -32,7 +32,7 @@ def presentation_rows(records: list[dict]) -> list[dict]:
 
 def pending_vendor_records(root: Path, stock_code: str) -> list[dict]:
     """Only read the explicitly supplied local ledger; never include it in deployment."""
-    path = root / "derived/codex_review/historical_evidence_ledger.csv"
+    path = root / "derived/source_review/historical_evidence_ledger.csv"
     if not path.is_file():
         return []
     with path.open(encoding="utf-8-sig", newline="") as handle:

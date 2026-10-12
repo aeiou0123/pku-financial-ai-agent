@@ -123,7 +123,7 @@ def test_empty_pdf_requires_ocr():
 
 
 def test_text_limit_explicit_not_full_read():
-    doc = parse(("aa\n" * 70000).encode(), "large.txt")
+    doc = parse(("aa\n" * 70000).encode(), "large.txt", max_chars=120000)
     assert doc["parsed_units"] < doc["total_units"]
     assert doc["warnings"] and doc["coverage"] == "partial"
 
@@ -300,6 +300,26 @@ def test_failed_multibatch_run_resumes_after_budget_without_repaying_completed_b
     assert run.metadata["status"] == "awaiting_review"
 
 
+def test_rejected_financial_proposal_retained_privately_without_repaying(tmp_path, local_api):
+    url, handler = local_api
+    doc = parse(b"revenue 100", "x.txt")
+    proposal = {"records": [{"source_file": doc["source_file"], "source_locator": "line:1",
+                             "quote": "revenue 999", "value_original": "999"}], "notes": []}
+    handler.content = proposal
+    run = Run(tmp_path, "financial", [("x.txt", b"revenue 100")])
+    key = "credential_32_chars_for_test_only"
+    assert extract(run, [doc], "revenue", ModelClient(url, "mock", key)) == []
+    raw = list((run.path / 'cache/raw_responses').glob('*.json'))
+    assert len(raw) == 1 and json.loads(raw[0].read_text(encoding='utf-8')) == proposal
+    rejected = json.loads((run.path / 'outputs/rejected_candidates.json').read_text(encoding='utf-8'))
+    assert rejected[0]['reason'] == 'quote_or_locator_not_in_input'
+    assert extract(run, [doc], "revenue", ModelClient(url, "mock", key)) == []
+    assert len(handler.requests) == 1
+    with zipfile.ZipFile(io.BytesIO(run.bundle())) as archive:
+        assert not any('raw_responses' in name or name.startswith('cache/') for name in archive.namelist())
+    assert all(key.encode() not in p.read_bytes() for p in run.path.rglob('*') if p.is_file())
+
+
 def test_unsupported_model_code_plan_rejected(tmp_path, local_api):
     url, handler = local_api
     handler.content = {"mapping": {}, "strategy": "momentum", "lookback": 20, "top_n": 1, "fee_bps": 10,
@@ -313,6 +333,9 @@ def test_unsupported_model_code_plan_rejected(tmp_path, local_api):
 def test_app_initial_render():
     from streamlit.testing.v1 import AppTest
     app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "harness_app.py"), default_timeout=20).run()
+    assert not app.exception
+    assert any(title.value == '研究工作台' for title in app.title)
+    next(button for button in app.button if button.label == '检查研究观点').click().run()
     assert not app.exception
     assert len(app.get("file_uploader")) == 1
 
@@ -340,7 +363,8 @@ def test_anthropic_native_headers_text_only_usage_and_probe(local_api):
     request = handler.requests[0]
     assert request["path"] == "/v1/messages" and request["auth"] is None
     assert request["api_key"] == client.api_key and request["version"] == "2023-06-01"
-    assert request["body"]["system"] == "schema" and request["body"]["messages"][0]["role"] == "user"
+    assert request["body"]["system"].startswith("schema\n") and 'JSON' in request['body']['system']
+    assert request["body"]["messages"][0]["role"] == "user"
     assert client.usage == [{"input_tokens": 8, "output_tokens": 12}]
     assert client.test_connection()["protocol"] == "anthropic"
 
@@ -409,10 +433,10 @@ def test_ui_kimi_preset_probe_without_upload_and_secret_change_invalidate(local_
     assert app.text_input(key="api_base").value == "https://api.kimi.com/coding/v1"
     assert app.text_input(key="api_model").value == "kimi-for-coding"
     app.text_input(key="api_base").set_value(url)
-    app.text_input(key="api_secret").set_value("credential_32_chars_for_test_only")
+    app.text_input(key="api_secret_widget").set_value("credential_32_chars_for_test_only")
     app.run()
     next(b for b in app.button if b.label == "测试连接").click().run()
     assert not app.exception and any("连接成功" in s.value for s in app.success)
     assert len(handler.requests) == 1
-    app.text_input(key="api_secret").set_value("different_fake_secret_for_test_only").run()
+    app.text_input(key="api_secret_widget").set_value("different_fake_secret_for_test_only").run()
     assert not app.exception and not any("连接成功" in s.value for s in app.success)

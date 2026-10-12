@@ -1,6 +1,9 @@
 """Annual earnings bridges from confirmed facts; accounting is not causality."""
 from __future__ import annotations
 
+from .module_stamp import source_stamp
+_c2v_loaded_source_hash = source_stamp(__file__)
+
 from collections import defaultdict
 from decimal import Decimal, localcontext
 import io

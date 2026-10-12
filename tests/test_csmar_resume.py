@@ -7,7 +7,7 @@ from scripts.resume_csmar_announcements import execute, preview, received_ids
 
 
 def fixture(root, security_type="P50100", declaration="2025-04-23"):
-    for directory in ["raw/C_announcements", "metadata", "reports", "derived/codex_review", "scripts"]:
+    for directory in ["raw/C_announcements", "metadata", "reports", "derived/source_review", "scripts"]:
         (root / directory).mkdir(parents=True)
     source = root / "raw/C_announcements/ANN_Security_original.business.json"
     source.write_text(json.dumps({"rows": [{"AnnouncementID": 123, "DeclareDate": declaration,
@@ -16,7 +16,7 @@ def fixture(root, security_type="P50100", declaration="2025-04-23"):
                    "sha256": hashlib.sha256(source.read_bytes()).hexdigest()}]
     (root / "reports/CODEX_RECEIVED_SOURCE_CHECKPOINT.json").write_text(json.dumps({"files": checkpoint}), encoding="utf-8")
     (root / "scripts/csmar_client.py").write_text("raise RuntimeError('preview must never load client')", encoding="utf-8")
-    with (root / "derived/codex_review/announcement_resume_jobs.csv").open("w", encoding="utf-8", newline="") as f:
+    with (root / "derived/source_review/announcement_resume_jobs.csv").open("w", encoding="utf-8", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["job_id", "platform_table", "startTime", "endTime", "id_count", "ids_json"])
         w.writeheader(); w.writerow(dict(job_id="J1", platform_table="ANN_AnnouncementInfo", startTime="2025-01-01",
                                         endTime="2025-12-31", id_count=1, ids_json='["123"]'))
@@ -34,6 +34,32 @@ def test_preview_is_offline_and_partial_return_resume_uses_actual_ids(tmp_path):
     response["response"]["code"] = -2404
     (tmp_path / "raw/C_announcements/ANN_INFO_2025_001.response.redacted.json").write_text(json.dumps(response), encoding="utf-8")
     assert received_ids(tmp_path) == set() and preview(tmp_path)["pending_ids"] == 1
+
+
+@pytest.mark.parametrize("name,allowed", [("metadata/verification.json", True),
+                                         ("metadata/current_dictionary.json", False)])
+def test_working_metadata_update_is_reported_without_exempting_sources(tmp_path, name, allowed):
+    fixture(tmp_path)
+    path = tmp_path / name
+    path.write_text('{"round":1}', encoding="utf-8")
+    checkpoint_path = tmp_path / "reports/CODEX_RECEIVED_SOURCE_CHECKPOINT.json"
+    checkpoint = json.loads(checkpoint_path.read_text())
+    checkpoint["files"].append({"path": name, "bytes": path.stat().st_size,
+                                "sha256": hashlib.sha256(path.read_bytes()).hexdigest()})
+    checkpoint_path.write_text(json.dumps(checkpoint), encoding="utf-8")
+    frozen_checkpoint = checkpoint_path.read_bytes()
+    path.write_text('{"round":2}', encoding="utf-8")
+    if allowed:
+        result = preview(tmp_path)
+        assert not result["integrity"]["originals_unchanged"]
+        assert result["raw_integrity"]["originals_unchanged"]
+        assert result["working_metadata_changed"] == [name]
+        assert result["pending_ids"] == 1
+        # A legitimate metadata update never authorizes changing an old raw file.
+        (tmp_path / checkpoint["files"][0]["path"]).write_text('{}', encoding="utf-8")
+    with pytest.raises(ValueError, match="Original source missing or changed"):
+        preview(tmp_path)
+    assert checkpoint_path.read_bytes() == frozen_checkpoint
 
 
 @pytest.mark.parametrize("security,date", [("P50302", "2025-04-23"), ("P50100", "2026-04-23")])

@@ -108,8 +108,13 @@ deliverables/beamer/page-*.png
 deliverables/beamer/fix-*.png
 deliverables/beamer/pptx_pages/
 
+# Licensed broker research reports: index files (.meta.json) are tracked, PDFs are not redistributed
+data/raw/analyst_reports/*.pdf
+
 # Private licensed financial originals and isolated local environments
 financial_private/
+**/csmar*/
+**/*_handoff/
 Claim2Value-workspace/
 .venv-oct9/
 .venv-semifinal/

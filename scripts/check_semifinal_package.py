@@ -13,7 +13,7 @@ from urllib.parse import urlsplit
 import xml.etree.ElementTree as ET
 import zipfile
 
-REQUIRED = ["01_统一信息表.docx", "02_项目说明.pdf", "03_展示稿.pptx", "04_运行视频.mp4",
+REQUIRED = ["01_统一信息表.docx", "02_项目说明.pdf", "03_展示稿.pdf", "04_运行视频.mp4",
             "07_技术题/submission.csv", "07_技术题/code.zip", "07_技术题/技术题报告.pptx"]
 CALENDAR_SHA = "bda296fe3c1812defa6a164bd8be288fb9d66ae44f99e08635420faae2737dcf"
 
@@ -70,12 +70,24 @@ def check(root, online_url="", tools=None, test=None):
         warnings.append("在线可访问性、账号和有效期需实际验收；此脚本不登录页面")
     else:
         deployment = root / "06_本地部署"
-        launchers = ["start.sh", "start_demo.sh", "start_demo.bat", "docker-compose.yml"]
+        launchers = ["start_harness.sh", "start_harness.bat", "start.sh", "start_demo.sh", "start_demo.bat", "docker-compose.yml"]
         if not deployment.is_dir() or not any((deployment / name).is_file() for name in launchers):
             errors.append("未提供在线地址，06_本地部署须有启动文件")
         if not (deployment / "部署说明.md").is_file():
             errors.append("本地部署缺少部署说明.md")
         warnings.append("本地部署实际启动与人工环节需按说明验收")
+    deck_pdf = root / "03_展示稿.pdf"
+    if deck_pdf.is_file():
+        try:
+            from pypdf import PdfReader
+            reader = PdfReader(deck_pdf)
+            checks["03_展示稿.pdf"] = {"pages": len(reader.pages)}
+            if not len(reader.pages):
+                errors.append("展示稿PDF无页面")
+        except ImportError:
+            warnings.append("未安装pypdf，展示稿PDF页数未验证")
+        except Exception as exc:
+            errors.append(f"展示稿PDF无法解析（{type(exc).__name__}）")
     for name in ["03_展示稿.pptx", "07_技术题/技术题报告.pptx"]:
         if (root / name).is_file():
             try:
@@ -111,9 +123,10 @@ def check(root, online_url="", tools=None, test=None):
             errors.append(f"PDF无法解析（{type(exc).__name__}）")
     video = root / "04_运行视频.mp4"
     if video.is_file():
-        if shutil.which("ffprobe"):
+        probe = shutil.which("ffprobe")
+        if probe:
             try:
-                result = subprocess.run(["ffprobe", "-v", "error", "-show_streams", "-show_format", "-show_chapters", "-of", "json", str(video)], capture_output=True, text=True, check=True, timeout=30)
+                result = subprocess.run([probe, "-v", "error", "-show_streams", "-show_format", "-show_chapters", "-of", "json", str(video)], capture_output=True, text=True, check=True, timeout=30)
                 metadata = json.loads(result.stdout)
                 streams = [s for s in metadata["streams"] if s.get("codec_type") == "video"]
                 if not any(s.get("width", 0) >= 1280 and s.get("height", 0) >= 720 for s in streams):
@@ -129,7 +142,36 @@ def check(root, online_url="", tools=None, test=None):
             except Exception as exc:
                 errors.append(f"视频无法解析（{type(exc).__name__}）")
         else:
-            warnings.append("未安装ffprobe，视频分辨率、时长、章节尚未验证")
+            # No ffprobe: read the header with ffmpeg, which ships with the same toolchain.
+            ffmpeg = shutil.which("ffmpeg")
+            if not ffmpeg:
+                warnings.append("未安装ffprobe/ffmpeg，视频分辨率、时长、章节尚未验证")
+            else:
+                try:
+                    result = subprocess.run([ffmpeg, "-hide_banner", "-i", str(video)], capture_output=True, text=True, timeout=60)
+                    probe_text = result.stderr
+                    size = re.search(r"(\d{2,5})x(\d{2,5})", probe_text)
+                    clock = re.search(r"Duration: (\d+):(\d{2}):(\d{2})\.(\d+)", probe_text)
+                    chapter_marks = len(re.findall(r"^\s+Chapter #0:\d+: start", probe_text, re.M))
+                    if not size or int(size.group(1)) < 1280 or int(size.group(2)) < 720:
+                        errors.append("视频无有效画面或低于1280×720")
+                    duration = 0.0
+                    if clock:
+                        hours, minutes, seconds, fraction = clock.groups()
+                        duration = int(hours) * 3600 + int(minutes) * 60 + int(seconds) + float("0." + fraction)
+                    checks["video"] = {"width": int(size.group(1)) if size else None,
+                                       "height": int(size.group(2)) if size else None,
+                                       "duration_seconds": round(duration, 2),
+                                       "embedded_chapters": chapter_marks,
+                                       "probe": "ffmpeg header (ffprobe unavailable)"}
+                    if duration <= 0:
+                        errors.append("视频时长无效")
+                    elif duration > 300:
+                        warnings.append("视频超过建议5分钟，请确认必要性")
+                    if not chapter_marks:
+                        warnings.append("未发现容器章节；请人工确认画面中有章节标记")
+                except Exception as exc:
+                    errors.append(f"视频无法解析（{type(exc).__name__}）")
     code = root / "07_技术题/code.zip"
     if code.is_file():
         try:

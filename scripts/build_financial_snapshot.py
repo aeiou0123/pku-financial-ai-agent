@@ -35,7 +35,7 @@ def build(public_root, csmar_root, out, as_of):
                 "source_review": {k: review[k] for k in ("sample_source", "anchor_source")},
                 "validation_summary": quality, "limits": limits, "forecast_updated": False}
     (out / "historical_public_financial.json").write_text(json.dumps(snapshot, ensure_ascii=False, indent=2), encoding="utf-8")
-    with (csmar_root / "derived/codex_review/historical_evidence_ledger.csv").open(encoding="utf-8-sig", newline="") as f:
+    with (csmar_root / "derived/source_review/historical_evidence_ledger.csv").open(encoding="utf-8-sig", newline="") as f:
         ledger = list(csv.DictReader(f))
     pending, status = [], []
     for index, row in enumerate(ledger):

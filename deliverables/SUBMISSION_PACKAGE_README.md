@@ -1,42 +1,50 @@
-# Claim2Value 提交包说明
+# 提交包说明
 
 ## 这是什么
 
-这是“北大金融 AI 智能体创新大赛”的首版提交快照：项目表单素材、封面、路演 PPT、项目 PDF 说明文档、离线 Demo、核心代码、结构化数据、测试和答辩资料均已放入包内。
+"北大金融 AI 智能体创新大赛"复赛提交材料的说明。**正式提交物是 `deliverables/semifinal_20261012/饮水思源_Claim2Value/` 下的 01–07 目录**，按赛事通知的 `队名_项目名.zip` 结构组织。
 
 项目仓库：[https://github.com/aeiou0123/pku-financial-ai-agent](https://github.com/aeiou0123/pku-financial-ai-agent)
 
-## 推荐提交文件
+## 正式提交内容（01–07）
 
-- `deliverables/cover_16x9.png`：16:9 项目封面
-- `deliverables/Claim2Value_pitch.pptx`：12 页路演 PPT
-- `deliverables/Claim2Value_项目说明文档.pdf`：项目说明 PDF
-- `deliverables/submission_form.md`：网页表单可复制素材
-- `app.py`、`src/`：离线 Demo 与核心实现
-- `data/processed/`：可复现所需的结构化数据与本地 fixture
-- `tests/`：回归测试
-- `docs/proposal/`：项目书、答辩问答与演示脚本
-- `team_and_sources.md`：团队成员与公开资料索引
+| 目录 | 内容 |
+|---|---|
+| `01_统一信息表.docx` | 统一信息表（五栏限字，需负责人补签名与联系信息） |
+| `02_项目说明.pdf` | 项目说明，按评分项设置书签 |
+| `03_展示稿.pptx` | 展示稿 |
+| `04_运行视频.mp4` | 运行视频（含四部分章节） |
+| `05_技术证据/` | 复跑收据、离线复放、部署与复现记录 |
+| `06_本地部署/` | 当前工作台部署包：入口 `start_harness.bat` / `start_harness.sh`，端口 8510 |
+| `07_技术题/` | 技术题三件套（`submission.csv`、`code.zip`、技术题报告），本轮冻结未改动 |
 
-## 本地运行
+## 运行当前工作台
 
-在解压后的项目根目录执行：
-
-```text
-python app.py
-python -m pytest tests -q
-python scripts/audit_proposal.py
+```bash
+# Windows
+start_harness.bat
 ```
 
-Demo 默认不需要 API key；如未配置 LLM，系统保守降级到规则层/`abstain` 路径。估值结果是原型情景，不构成投资建议。
+```bash
+# Linux / macOS
+bash start_harness.sh
+```
+
+浏览器打开 http://127.0.0.1:8510 。财务核验、数据体检与回测均为本地规则，**不需要模型密钥**；只有候选整理与观点检索要连接自备模型接口。
+
+回归测试：
+
+```bash
+python -m pytest tests -q
+```
 
 ## 口径与边界
 
-- Claim Bank：51 条结构化 Claim，47 条已验证、4 条保留待验证，并附显式疑点与后续核验路径。
-- 2025H1 的双环传动收入数据按半年累计口径处理；不把研报误标的“Q2 单季”当成官方口径。
-- 提交包有意排除 `data/raw/**/*.pdf`、`research_materials/papers/`、`research_materials/github_repos/`、`.git/`、缓存和临时文件，以控制体积、减少第三方资料再分发风险；原始资料索引和来源说明仍保留在项目文档中。
-- 2026-09-09 本地快照可能比 GitHub `main` 多出尚未推送的文档/交付文件；提交时以本 ZIP 为准，后续再同步 GitHub。
+- 财务提取要求每条候选附逐字原文摘录，且摘录能在其标注页找到，否则拒收并留档。
+- 报表口径按原件页序识别"合并／母公司"标题并跨页继承；声明与所在表标题冲突的候选拒收，标题不明时不判定。
+- 技术题沿用原 `submission.csv` 与 `code.zip`，未重训、未换名单。
+- 提交包有意排除上传原件、密钥、校园账号与商业数据库原始导出；公开原件保留来源索引与指纹，不重新分发 PDF。
 
-## 赛后可继续完善
+## 仍需负责人完成
 
-优先补齐 4 条待验证 Claim 的厂商 datasheet/蓝皮书原文、录制真人 Demo 视频，并将本地交付快照同步回 GitHub。
+成员分工、联系人信息、签名与日期；一次真人试用；以及通过赛事指定渠道上传并保存回执。

@@ -1,6 +1,9 @@
 """Private run snapshots and output-only packages with manifests."""
 from __future__ import annotations
 
+from .module_stamp import source_stamp
+_c2v_loaded_source_hash = source_stamp(__file__)
+
 import io
 import json
 import zipfile

@@ -1,262 +1,77 @@
-> 2026-10-10 研究工作台：接自己的模型 API、上传材料，分别执行财务／估值研究和量化处理／回测。Windows 双击 `start_harness.bat`，打开 http://127.0.0.1:8510 。[操作与范围](docs/harness/README.md)；[本次检查记录](docs/harness/review.md)。真实模型服务商调用和真人试用仍待验证。以下日期较早的进展保留为历史记录。
+# Claim2Value · 研究工作台
 
-> 当前执行（2026-10-09）：Codex 独立推进，先接财务小样本。负责人只需按 [CSMAR 下载清单](docs/semifinal/csmar_first_export.md)导出 688017 的 2024 年合并三张报表和字段说明；[最新工作入口](WORK_START_HERE.md)。
+面向机器人产业链研究的本地工作台。把企业技术表述、公告原文、口径检查和工程到财务的假设放在同一处，让每一步都能回到原始出处。
 
-> 2026年10月9日复赛更新：[执行成果与Review](docs/semifinal/execution_update_20261009.md)。技术题保留通过校验且再次独立复现的原名单，12候选未达到替换标准；材料、132秒实际运行视频及部署包已整合。
+**快速开始**：Windows 双击 `start_harness.bat`，浏览器打开 http://127.0.0.1:8510
 
-# Claim2Value — 北大金融 AI 智能体创新大赛
+## 这个工具解决什么
 
-> 工业技术 Claim → 工程证据 → 经济机制 → 金融价值的可信映射 Agent
+投研底稿整理中的三类工作：
 
-## 复赛更新（2026-10-02）
+- **观点审查**：把公司叙述拆成待检查条件，在上传的公告年报中找支持与反证，列出缺口与原文位置
+- **财务整理**：从年报提取财务候选，保留单位、报表范围、披露日和原文定位，核验后解释两期盈利变化
+- **策略回测**：先用本地规则体检行情数据，再按明确参数计算净值、回撤、费用与同费率基准
 
-本轮新增可交互的本地核查页面：自定义声明与证据、两家公司示例情景、来源定位、JSON/Markdown报告导出。自定义声明尚未绑定公司参数，暂不自动生成估值；示例情景采用固定数据与假设。本地模式不调用大模型或实时检索。
+## 核心机制
 
-Windows 双击 `start_demo.bat`，Linux 执行 `bash start_demo.sh`；首次依赖安装需要联网。打开 http://127.0.0.1:8501 ，无账号、无需模型密钥。操作、限制、运行证据与验收状态见[评委操作导览](docs/semifinal/reviewer_quickstart.md)。2026-10-03完整代码212项测试通过，Windows真实电脑与真人试用仍待验收。
+**引用锚定**：每条财务候选必须给出逐字原文摘录，且摘录要能在其标注的文件页中找到；找不到即拒收，原因留档。
+**口径校验**：按原件页序识别「合并／母公司」报表标题并跨页继承，候选声明的报表范围与所在表标题冲突时拒收。
+**单位相邻校验**：数值与单位须在原文中明确相连，避免把「台」误读成「万台」。
+**无前视回测**：按信号次日执行，因子按可得时间屏蔽当日收盘后才可得的行，运行前把声明参数写入实验登记。
+**本地计算**：财务核验、盈利桥、数据体检与回测均由本地规则执行，不需要模型密钥；模型只在点击时用于候选整理。
+**失败可恢复**：网络中断或输出截断后，已完成批次缓存复用，再次继续只请求未完成部分。
 
-本地规则复测为87/98，来自19个开发声明家族，不能视为样本外业务准确率。完整输入输出、11条未命中及计时边界见[开发评测记录](docs/semifinal/evidence/local_development_20261003/report.md)。新增[批量证据核查](docs/semifinal/batch_evidence_guide.md)及[官方规格复核](docs/semifinal/evidence/primary_source_review_20261003/review.md)。信息表、项目说明与展示稿草稿的构建、Review和未完成项见[材料说明](docs/semifinal/materials_build_and_review.md)。
+## 真实运行结果（2024 年年度报告，688017）
 
-部署包生成、材料预检和技术题复现打包见[交付工具说明](docs/semifinal/delivery_tools.md)，材料与证据对应见[评分证据清单](docs/semifinal/materials_evidence_map.md)。
+原件：绿的谐波 2024 年年度报告，262 页；本次读取其中 13 页（1、6-7、107-116）。全部数据取自原件页文本，不是派生汇总。
 
-统一技术题已有[本地训练、验证与推理基线](competition/README.md)，包含官方扣费回测适配与防泄漏测试；真实数据训练尚未完成，暂无真实Sharpe或测试名单。团队时间安排、分工与本轮复核见[复赛推进安排](docs/semifinal/execution_plan_20261002.md)。
-
-以下“当前进展”保留为初赛阶段历史记录；其中延迟、准确率及验证标注须按各自数据范围解读，不代表本轮新增真实场景评测。
-
-## 项目定位
-
-Claim2Value（Evidence-Grounded Engineering-to-Finance Agent）面向产业链技术突破的金融价值评估：把企业关于技术升级、产能扩张、供应链重构的**宣称（Claim）**，通过多源证据进行**验证与追溯**，输出**可审计、可量化、可复盘**的财务影响分析。
-
-**本次 Demo 聚焦**：机器人关节模组产业链  
-**主案例**：绿的谐波（谐波减速器）  
-**辅助案例**：步科股份（无框力矩电机）、双环传动（RV 减速器）
-
-> 产品不是专用工具，而是通用 Agent。三个案例分别验证**技术性能、产能需求、客户订单**三类典型 claim。
-
-## 当前进展（2026-09-08，Phase 3D 完成 / 答辩待命）
-
-代码、数据与文档已收口至交付前状态，质量线：**140 个回归测试全过 + 提案审校脚本 0 issue**（`python -m pytest tests -q`、`python scripts/audit_proposal.py`）。PR #2–#26 全部合并到 `main`，当前能力全景：
-
-**1. 多公司证据网络（PR #15/#21/#29）**：Claim Bank 扩展至 **11 家机器人产业链公司 51 条结构化 claim**——47 条已验证（公告原文级，附页码与内容指纹，BK_004 双源逐字、GH_002 双源互证；含 2026-09-09 机器预检+人工确认升级的 11 条），4 条待验证（带显式定义疑点，核对清单 `docs/proposal/appendix_pending_review.md`）；另有 1 条行业市场数据（IND_001）。
-
-**2. 双环传动全链路估值链（PR #20）**：financial_model 泛化到多产品线（rv/gear 自动识别），economic_mapper 支持规则级 `product_line_scope`，ontology 变体 `tech_to_economics_ontology_shuanghuan.json` + `data/processed/shuanghuan_model_inputs.csv`，端到端输出三情景 EV **72.66 / 122.89 / 19.04 亿元**（base/upside/downside；PR #28 按环动招股书实际均价校准 RV 参数后），回归覆盖 `tests/test_shuanghuan_chain.py`。
-
-**3. 反向 DCF 视角（PR #19）**：以 2026-09-04 市值 512.96 亿元反推，绿的谐波现价隐含销量倍数 **16.66×**；三情景下市价与内在价值 gap 为 **-94.00% / -88.60% / -99.82%**（PR #28 参数复核后口径）——"以价换量"放量逻辑与 365 倍 PE 期权定价并存的现象被量化呈现。
-
-**4. 工程性能（PR #18）**：规则链延迟基准 N=30 实测 **p50 4.3ms / p95 5.0ms**（同日三次复测 3.7–4.3ms）（`scripts/benchmark_latency.py`，报告 `benchmarks/latency_report.md`）。
-
-**5. 演示与答辩材料**：`docs/proposal/` 01–09 章成稿（产品、案例、商业论证、路线图、合规、答辩问答预案）；演示脚本（10 章）与路演 PPT 大纲（11 章）在 Phase 3D 补齐。
-
-> 历史里程碑：PR #2 时代 98 个 benchmark 用例规则层 + LLM pipeline 判别准确率 Claude 83.7% / GPT 82.7%（测试集准确率，非业务最终准确率）。实时检索、专利核验全覆盖属赛后增强方向。完整状态见 [`TODO.md`](TODO.md)、[`SYNC_LOG.md`](SYNC_LOG.md) 与 [`docs/KIMICODE_PROGRESS.md`](docs/KIMICODE_PROGRESS.md)。
-
-## 参赛方向
-
-- **赛道一（金融智能体创新应用）**：Claim2Value Agent 的工作流创新
-- **赛道二（量化策略与智能体）**：技术事件驱动的基本面分析
-- **赛道三（金融行业场景落地）**：聚焦机器人关节产业链场景
-
-## 目录结构
-
-```
-.
-├── README.md
-├── requirements.txt                  # 模型与可选 Streamlit 依赖
-├── app.py                            # 本地 Demo（默认无 API）
-├── src/                              # 核心代码
-│   ├── case.py                       # 通用案例抽象层
-│   ├── evidence_ledger.py            # 证据账本
-│   ├── claim_verifier.py             # Claim 验证
-│   ├── state_verifier.py             # 状态/口径验证
-│   ├── financial_model.py            # 可追溯简化财务模型（含反向 DCF）
-│   ├── economic_mapper.py            # 工程指标→经济机制映射
-│   ├── engineering_analyzer.py       # 工程语义分析
-│   ├── causal_critic.py              # 因果批判
-│   ├── claim_bank_writer.py          # Claim Bank 结构化写入
-│   ├── workflow.py                   # 串联验证工作流（四模块函数链）
-│   └── data_tools/                   # PDF/文本候选提取脚本
-├── scripts/                          # 工具脚本
-│   ├── audit_proposal.py             # 提案文档审校（当前 0 issue）
-│   └── benchmark_latency.py          # 规则链延迟基准
-├── data/                             # 数据资料
-│   ├── README.md                     # 数据目录说明
-│   ├── collection_checklist.md       # 数据收集总清单
-│   ├── search_guide.md               # 案例搜索方案
-│   ├── raw/                          # 原始 PDF/资料
-│   └── processed/                    # 结构化数据
-├── benchmarks/                       # Claim benchmark、pipeline 报告与结果
-├── tests/                            # unittest 回归测试
-├── research_materials/               # 研究资料
-│   ├── papers/                       # arXiv 论文（gitignored）
-│   ├── github_repos/                 # 参考仓库（gitignored）
-│   └── notes/                        # 研究笔记
-├── setup_research_env.bat            # 一键下载论文+参考仓库
-└── 北大金融AI智能体大赛_*.md        # 团队讨论记录
-```
-
-## 团队快速开始
-
-### 1. Clone 仓库
-
-```bash
-git clone https://github.com/aeiou0123/pku-financial-ai-agent.git
-cd pku-financial-ai-agent
-```
-
-### 2. 下载研究资料
-
-双击运行 `setup_research_env.bat`，自动下载：
-- 12 篇 arXiv 论文 → `research_materials/papers/`
-- 12 个参考 GitHub 仓库 → `research_materials/github_repos/`
-
-### 3. 阅读核心文档
-
-1. `docs/KIMICODE_PROGRESS.md` —— 30 秒项目进度入口
-2. `data/collection_checklist.md` —— 数据收集清单
-3. `data/search_report.md` —— 已完成资料与人工补充清单
-4. `src/workflow.py` —— 验证到财务影响的串联链路
-
-### 4. 运行当前验证 MVP
-
-规则层和无证据路径不需要 API key：
-
-```bash
-python -m compileall -q src benchmarks
-python -m src.workflow --single --claim "绿的谐波新一代谐波减速器关节模组减重30%以上"
-python -m src.claim_verifier --no-llm --limit 98
-```
-
-完整 LLM 验证需要工作区外部的 Prism 配置或 `~/.workbuddy/models.json`，配置文件和 API key 不得提交。
-
-### 5. 运行财务模型与本地 Demo
-
-安装依赖后，财务模型使用带来源标签的本地输入，输出三种情景：
-
-```bash
-python -m pip install -r requirements.txt
-python -m src.financial_model
-python app.py --json-out data/processed/local_demo_result.json
-python -m pytest tests -q
-```
-
-模型输出：
-
-- `data/processed/green_harmonic_model.xlsx`：Inputs 溯源表、Summary 和 base/upside/downside 情景；
-- `data/processed/green_harmonic_model_results.json`：同一结果的机器可读版本；
-- `data/processed/local_demo_result.json`：本地 Demo 的证据、规则结论、限制和财务影响。
-
-可选 Streamlit 界面：
-
-```bash
-streamlit run app.py
-```
-
-本地 Demo 不调用外部 API。规则层发现确定性问题时才输出对应结论；否则返回 `abstain`，避免把没有 LLM 语义判断的路径误报为“成立”。财务模型目前是情景原型，Inputs 表会明确区分 `historical`、`assumption` 和运行时 `calculated` 结果，不构成投资建议。
-
-## 案例设计
-
-| 公司 | 代码 | 细分 | Claim 数（已验证/待验证） | 代表 Claim |
-|---|---|---|---|---|
-| 绿的谐波 | 688017 | 谐波减速器 | 7（6/1） | 新一代关节模组扭矩密度提升 30%；市值 512.96 亿锚点 |
-| 步科股份 | 688160 | 无框力矩电机 | 5（3/2） | 第四代 FMK 功率密度提升 20%，出货 8.3 万台（+247%） |
-| 双环传动 | 002472 | RV 减速器 | 6（4/2，含子公司环动科技 3 条） | RV 扭矩密度 180 N·m/kg；环动市占率 10.11%→提升；产能利用率 >100% |
-| 中大力德 | 002896 | 减速器+电机 | 4（4/0） | 技术性能类 claim 全验证 |
-| 鸣志电器 | 603728 | 步进/伺服电机 | 4（4/0） | 产能需求类 claim 全验证 |
-| 柯力传感 | 603662 | 力矩传感器 | 4（4/0） | 技术性能类 claim 全验证 |
-| 五洲新春 | 603667 | 丝杠/轴承 | 4（1/3） | 行星滚柱丝杠进展（3 条待终验） |
-| 贝斯特 | 300580 | 丝杠/精密零部件 | 4（2/2） | 线性执行器产能扩张 |
-| 恒立液压 | 601100 | 液压/丝杠 | 4（1/3） | 电动缸业务进展（3 条待终验） |
-| 国茂股份 | 603915 | 减速器 | 4（3/1） | 产能/需求类 claim |
-| 秦川机床 | 000837 | 齿轮磨床/减速器 | 4（3/1） | 产能/需求类 claim |
-
-另有行业市场数据 1 条（IND_001，工业机器人市场）。51 条结构化明细见 `data/processed/claim_bank_filled.json`，原文摘录与核验指纹见 `docs/proposal/appendix_pending_review.md` 与 04 章。
-
-## 协作规范
-
-### 团队成员
-
-| GitHub 账号 | 姓名 | 角色 |
+| 项目 | 2026-10-11 运行 | 2026-10-12 重跑（加入口径校验后） |
 |---|---|---|
-| `aeiou0123` | （仓库所有者） | 项目主导、数据收集、Agent 开发 |
-| `shushuyang231` | Sun Shengyao | 协作者（write 权限） |
-| `FeishengLuo` | Feisheng Luo | 协作者（write 权限） |
+| 收下候选 | 32 条 | 30 条 |
+| 数值与参考表相符 | 26 条 | 30 条 |
+| 覆盖的不同目标 | 20 / 24 | 24 / 24 |
+| 口径错标（母公司数字标为合并） | 6 条 | 0 条 |
 
-### 首次加入（新协作者请按此操作）
+- 10-11 的错误用原件复核过：合并利润总额 2024 年为 **60,764,068.46**（仅第 112 页），运行取到的 **64,572,784.68** 只出现在第 114 页母公司利润表。成因是第 114 页自身没有报表标题、标题印在第 113 页，单页拆分后标题丢失。
+- 12 日重跑调用 3 次、348.5 秒、返回 17,932 token；30 条数值全部与参考表一致。
+- 口径拦截规则另用**离线复放**验证：把 10-11 的 32 条候选逐条重放，恰好标出 23–28 号这 6 条错标，未误伤其它 26 条。
+- 重跑未触发拆批，因此它本身不能单独证明拦截规则有效；该规则的效果由上述离线复放证明。
 
-1. **接受邀请**：打开 https://github.com/aeiou0123/pku-financial-ai-agent/invitations ，点击 Accept
-   （邀请邮件也可能发到你的 GitHub 注册邮箱，主题含 "You've been invited to collaborate"）
-2. **配置 Git 身份**（如果还没配置过）：
-   ```bash
-   git config --global user.name "你的名字"
-   git config --global user.email "你的GitHub注册邮箱"
-   ```
-3. **克隆仓库**：
-   ```bash
-   git clone https://github.com/aeiou0123/pku-financial-ai-agent.git
-   cd pku-financial-ai-agent
-   ```
-4. 开始工作前，养成习惯先拉取最新代码：
-   ```bash
-   git pull origin main
-   ```
+**边界**：本轮是单案例、单模型、换密钥后的重跑，不是受控对照实验，不能推广为准确率结论；仍未取得披露日、更正标记与股票代码的字段分别有 14、30、16 条，6 组重复候选需人工择一。
 
-### 日常协作流程（小团队实用版）
+## 当前边界
 
-我们团队人少，采用**轻量流程**：文档/数据更新可直接推 main，代码功能建议走分支。
+- ✗ 无自动 OCR、无在线商业数据库取数、无实盘交易、无跨会话继续模型任务
+- ✗ 未做真人试用、独立需求访谈与对外效果评测；软件测试数不等于研究质量
+- ✗ 业务分部（主营构成）仍缺正式字段定义，未进入估值
+- Linux 仅提供启动脚本，未在真机验证
+- 冻结的技术题交付（`submission.csv`／`code.zip`）本轮未改动
 
-**场景 A：改文档、补数据（直接推 main）**
-```bash
-git pull origin main          # 先同步
-# ... 修改文件 ...
-git add .
-git commit -m "docs: 修改说明"
-git push origin main
-```
-
-**场景 B：开发代码功能（走分支 + PR）**
-```bash
-git checkout -b feat/功能名    # 从 main 切分支
-# ... 写代码，多次小提交 ...
-git push -u origin feat/功能名
-gh pr create                  # 发起 Pull Request（可选）
-```
-
-**冲突避免铁律**：每次开工前 `git pull`，推不上去时先 pull 再推。
-
-### Commit Message 规范
+## 仓库结构
 
 ```
-type: 简短说明
-
-type 取值：
-- feat   新功能
-- fix    修复 bug
-- docs   文档
-- data   数据文件
-- test   测试
-- refactor 重构
+harness_app.py                工作台主入口（Streamlit）
+src/harness/                  观点审查、财务整理、策略回测与页面
+src/financial_intake.py       财务长表接收与校验（16 列口径）
+src/state_verifier.py         数值与单位校验规则
+scripts/                      启动、打包、材料生成与检查工具
+tests/                        回归测试
+docs/harness/                 操作说明
+docs/report/                  项目说明与展示稿的 LaTeX 源文件
+docs/CHANGELOG.md             历次开发记录
+deliverables/                 提交材料与部署包
+app.py                        初赛版本地 Demo（保留，非当前入口）
 ```
 
-### 不提交的内容
+## 文档
 
-API key、`.env`、`*.pdf`（研究报告类）、第三方仓库代码、Python 缓存（`__pycache__/`）
+- [入门教程](docs/harness/getting_started.md) — 第一次怎么用
+- [产业研究工作流](docs/harness/industry_workflow.md) — 完整操作路径
+- [模型连接](docs/harness/model-connections.md) — 接口配置与地址示例
+- [资料目录](docs/harness/announcement_catalog.md) — 检索与原件准备
+- [真实案例](docs/harness/real-cases/README.md) — 公开案例的核对记录
+- [开发记录](docs/CHANGELOG.md)
 
-> 注意：公司公告/研报 PDF 在 `data/raw/` 下是**要提交**的，它们有 `.meta.json` 记录来源。
+## 协作
 
-## 当前任务（Phase 3D 完成后的交付准备）
-
-1. ~~15 条待验证 Claim 人工终验~~ **已完成（2026-09-09，47 已验证 / 4 待验证附驳回路径）**；
-2. ~~经济金融组复核模型输入~~ **已完成（2026-09-09，PR #28 参数修正落地）**；
-3. 演示彩排：按 `docs/proposal/10_demo_script.md` 走一遍 3 分钟版 + fallback 版；
-4. 赛后增强（非阻塞）：实时检索、专利核验全覆盖、更多产业链公司接入。
-
-首版 Demo 已覆盖绿的谐波本地单案例流程与双环传动全链路估值链；不以实时检索、全行业覆盖或全部 Claim 核验为阻塞条件。
-
-## 注意事项
-
-- 本仓库仅用于比赛协作学习，不构成投资建议。
-- 第三方代码请遵守各自 LICENSE。
-- 所有外部数据需标注来源，避免使用未公开内部信息。
-
-
-2026-10-09后续证据任务：西交暂仅使用Kimi，已备好[任务执行单](docs/semifinal/agent_tasks/xjtu_kimi.md)、[可直接复制的提示词](docs/semifinal/agent_tasks/kimi_prompt_20261009.md)和[回传JSON模板](docs/semifinal/templates/kimi_return_template.json)。通过`scripts/prepare_kimi_evidence.py`核对本地PDF指纹后进入现有文字核查，不自动认证原件、升级Claim或更新估值。
-
-后续GitHub协作统一入口：[KIMI_START_HERE.md](KIMI_START_HERE.md)。Kimi使用GitHub CLI读取已有PDF、提示词及模板，并在独立分支提交PR；Codex在同一仓库接续审查。项目级授权与协作约定见[AGENTS.md](AGENTS.md)。
+见 [CONTRIBUTING.md](CONTRIBUTING.md)。第三方代码与数据请遵守各自许可；本仓库仅用于比赛协作与学习，不构成投资建议。
