@@ -161,8 +161,8 @@ def develop(train, tools_path, out):
                "promote": min(selected["fold_sharpes"]) > min(plan["incumbent"]["fold_sharpes"]),
                "elapsed_seconds": perf_counter() - started, "test_sharpe": None,
                "note": "Development comparison only. 2020 was inspected in the first round; no new pristine holdout exists.",
-               "artifact_receipts_sha256": {str(p.relative_to(out)): b.sha256(p) for p in sorted(out.glob("*/*/receipt.json"))},
-               "model_files_sha256": {str(p.relative_to(out)): b.sha256(p) for p in sorted(out.glob("*/model.json"))}}
+               "artifact_receipts_sha256": {p.relative_to(out).as_posix(): b.sha256(p) for p in sorted(out.glob("*/*/receipt.json"))},
+               "model_files_sha256": {p.relative_to(out).as_posix(): b.sha256(p) for p in sorted(out.glob("*/model.json"))}}
     write_new(out / "selection_lock.json", summary)
     return summary
 

@@ -40,7 +40,7 @@ def build(output):
     files = ["app.py", "requirements-demo.txt", "start_demo.bat", "start_demo.sh", "scripts/launch_demo.py",
              "docs/semifinal/reviewer_quickstart.md", "scripts/review_evidence_batch.py",
              "docs/semifinal/batch_evidence_guide.md", "docs/semifinal/templates/evidence_batch.csv"]
-    files += [str(p.relative_to(ROOT)) for p in sorted((ROOT / "src").rglob("*.py"))]
+    files += [p.relative_to(ROOT).as_posix() for p in sorted((ROOT / "src").rglob("*.py"))]
     files += ["data/processed/" + name for name in DATA]
     contents = {name: (ROOT / name).read_bytes() for name in files}
     contents["start.sh"] = contents["start_demo.sh"]

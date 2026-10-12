@@ -201,7 +201,7 @@ def develop(out, train, tools, resume=False):
         fixed_control(out, train, tools, fold, resume)
     # Bind every completed model, prediction/accounting and control receipt.
     for path in sorted(out.glob("*/*/receipt.json")):
-        artifacts[str(path.relative_to(out))] = b.sha256(path)
+        artifacts[path.relative_to(out).as_posix()] = b.sha256(path)
     selected = select_candidate(candidates)
     frozen = {"format": "frozen_selection_v1", "plan_sha256": b.sha256(out / "plan.json"),
               "selection_rule": RULE, "candidates": candidates, "selected": selected,
@@ -226,13 +226,13 @@ def checked_lock(out):
     for ai, alpha in enumerate(ALPHAS):
         for fold in FOLDS:
             directory = out / "models" / f"{fold['id']}_a{ai:02d}"
-            expected_paths.add(str((directory / "receipt.json").relative_to(out)))
+            expected_paths.add((directory / "receipt.json").relative_to(out).as_posix())
             checked_receipt(directory, context_for(out, fold, alpha))
         for bi, bonus in enumerate(BONUSES):
             scores = []
             for fold in FOLDS:
                 directory = out / "development" / f"{fold['id']}_a{ai:02d}_b{bi:02d}"
-                expected_paths.add(str((directory / "receipt.json").relative_to(out)))
+                expected_paths.add((directory / "receipt.json").relative_to(out).as_posix())
                 evidence = checked_receipt(directory, context_for(out, fold, alpha, bonus))
                 result = read_json(directory / "result.json")
                 accounting = read_json(directory / "accounting.json")
@@ -242,7 +242,7 @@ def checked_lock(out):
             reconstructed.append({"alpha": alpha, "hold_bonus": bonus, "fold_sharpes": scores})
     for fold in FOLDS:
         directory = out / "controls" / fold["id"]
-        expected_paths.add(str((directory / "receipt.json").relative_to(out)))
+        expected_paths.add((directory / "receipt.json").relative_to(out).as_posix())
         checked_receipt(directory, {"plan_sha256": b.sha256(out / "plan.json"), "fold": fold, "control": "fixed_first20"})
     if set(locked.get("artifact_receipts_sha256", {})) != expected_paths or locked["candidates"] != reconstructed:
         raise ValueError("Development candidates/receipt set changed")
@@ -271,7 +271,7 @@ def run_holdout(out, train, tools):
     summary = {"status": "COMPLETE", "selection_lock_sha256": b.sha256(out / "selection_lock.json"),
                "holdout_started_sha256": b.sha256(out / "holdout_started.json"),
                "selected": selected, "result": result["result"], "fixed20": control["result"],
-               "receipts_sha256": {str(p.relative_to(out)): b.sha256(p) for p in (
+               "receipts_sha256": {p.relative_to(out).as_posix(): b.sha256(p) for p in (
                    out / "models/2020_a00/receipt.json", out / "holdout/2020_a00_b00/receipt.json",
                    out / "controls/2020/receipt.json")},
                "used_for_selection": False, "test_sharpe": None}
